@@ -16,6 +16,13 @@
 		D953959F1BB273DA00CB6746 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D953959E1BB273DA00CB6746 /* Security.framework */; };
 		D95395A11BB273E900CB6746 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D95395A01BB273E800CB6746 /* libz.tbd */; };
 		D95395A31BB2740C00CB6746 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D95395A21BB2740C00CB6746 /* libc++.tbd */; };
+		D96EA9141BB292BB00360ED8 /* HomeMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9121BB292BB00360ED8 /* HomeMenuViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA9151BB292BB00360ED8 /* HomeMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9131BB292BB00360ED8 /* HomeMenuViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EA9191BB2980E00360ED8 /* SendOrderRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9181BB2980E00360ED8 /* SendOrderRootViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA91D1BB298C200360ED8 /* GrabOrderRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA91C1BB298C200360ED8 /* GrabOrderRootViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA9211BB2A26900360ED8 /* IDSegmentedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9201BB2A26900360ED8 /* IDSegmentedRootViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA9241BB2A39300360ED8 /* GrabOrderSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9231BB2A39300360ED8 /* GrabOrderSegmentedViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9261BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6951BB27FA900ED7DDF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AA1BB2838300ED7DDF /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6A11BB2838300ED7DDF /* REFrostedContainerViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -23,7 +30,6 @@
 		D9B2F6AD1BB2838300ED7DDF /* UIImage+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6A51BB2838300ED7DDF /* UIImage+REFrostedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AE1BB2838300ED7DDF /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6A71BB2838300ED7DDF /* UIView+REFrostedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AF1BB2838300ED7DDF /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6A91BB2838300ED7DDF /* UIViewController+REFrostedViewController.m */; settings = {ASSET_TAGS = (); }; };
-		D9B2F6B21BB2844400ED7DDF /* HomeMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6B11BB2844400ED7DDF /* HomeMenuViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6B61BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6B51BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6B71BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6BE1BB28D7A00ED7DDF /* icon_menu_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6BA1BB28D7A00ED7DDF /* icon_menu_mine@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -70,6 +76,19 @@
 		D953959E1BB273DA00CB6746 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D95395A01BB273E800CB6746 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D95395A21BB2740C00CB6746 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		D96EA9111BB292BB00360ED8 /* HomeMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuViewController.h; sourceTree = "<group>"; };
+		D96EA9121BB292BB00360ED8 /* HomeMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuViewController.m; sourceTree = "<group>"; };
+		D96EA9131BB292BB00360ED8 /* HomeMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMenuViewController.xib; sourceTree = "<group>"; };
+		D96EA9171BB2980E00360ED8 /* SendOrderRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderRootViewController.h; sourceTree = "<group>"; };
+		D96EA9181BB2980E00360ED8 /* SendOrderRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderRootViewController.m; sourceTree = "<group>"; };
+		D96EA91B1BB298C200360ED8 /* GrabOrderRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderRootViewController.h; sourceTree = "<group>"; };
+		D96EA91C1BB298C200360ED8 /* GrabOrderRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderRootViewController.m; sourceTree = "<group>"; };
+		D96EA91F1BB2A26900360ED8 /* IDSegmentedRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDSegmentedRootViewController.h; sourceTree = "<group>"; };
+		D96EA9201BB2A26900360ED8 /* IDSegmentedRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDSegmentedRootViewController.m; sourceTree = "<group>"; };
+		D96EA9221BB2A39300360ED8 /* GrabOrderSegmentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderSegmentedViewController.h; sourceTree = "<group>"; };
+		D96EA9231BB2A39300360ED8 /* GrabOrderSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderSegmentedViewController.m; sourceTree = "<group>"; };
+		D96EA9251BB2A5BD00360ED8 /* SendOrderSegmentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderSegmentedViewController.h; sourceTree = "<group>"; };
+		D96EA9261BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderSegmentedViewController.m; sourceTree = "<group>"; };
 		D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D9B2F69E1BB2838300ED7DDF /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
@@ -83,8 +102,6 @@
 		D9B2F6A71BB2838300ED7DDF /* UIView+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+REFrostedViewController.m"; sourceTree = "<group>"; };
 		D9B2F6A81BB2838300ED7DDF /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
 		D9B2F6A91BB2838300ED7DDF /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
-		D9B2F6B01BB2844400ED7DDF /* HomeMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuViewController.h; sourceTree = "<group>"; };
-		D9B2F6B11BB2844400ED7DDF /* HomeMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuViewController.m; sourceTree = "<group>"; };
 		D9B2F6B41BB2882500ED7DDF /* HomeMenuTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuTableViewHeaderView.h; sourceTree = "<group>"; };
 		D9B2F6B51BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuTableViewHeaderView.m; sourceTree = "<group>"; };
 		D9B2F6B71BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMenuTableViewHeaderView.xib; sourceTree = "<group>"; };
@@ -153,6 +170,7 @@
 		D95394E41BB2694900CB6746 /* IDo */ = {
 			isa = PBXGroup;
 			children = (
+				D96EA91E1BB2A1F900360ED8 /* Common */,
 				D9B2F6B91BB28D2E00ED7DDF /* Images */,
 				D9B2F6961BB280AE00ED7DDF /* HomeViewController */,
 				D953951B1BB26D7F00CB6746 /* Libs */,
@@ -199,9 +217,42 @@
 			path = Libs;
 			sourceTree = "<group>";
 		};
+		D96EA9161BB2977200360ED8 /* SendOrder */ = {
+			isa = PBXGroup;
+			children = (
+				D96EA9171BB2980E00360ED8 /* SendOrderRootViewController.h */,
+				D96EA9181BB2980E00360ED8 /* SendOrderRootViewController.m */,
+				D96EA9251BB2A5BD00360ED8 /* SendOrderSegmentedViewController.h */,
+				D96EA9261BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m */,
+			);
+			name = SendOrder;
+			sourceTree = "<group>";
+		};
+		D96EA91A1BB298A000360ED8 /* GrabOrder */ = {
+			isa = PBXGroup;
+			children = (
+				D96EA91B1BB298C200360ED8 /* GrabOrderRootViewController.h */,
+				D96EA91C1BB298C200360ED8 /* GrabOrderRootViewController.m */,
+				D96EA9221BB2A39300360ED8 /* GrabOrderSegmentedViewController.h */,
+				D96EA9231BB2A39300360ED8 /* GrabOrderSegmentedViewController.m */,
+			);
+			name = GrabOrder;
+			sourceTree = "<group>";
+		};
+		D96EA91E1BB2A1F900360ED8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D96EA91F1BB2A26900360ED8 /* IDSegmentedRootViewController.h */,
+				D96EA9201BB2A26900360ED8 /* IDSegmentedRootViewController.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		D9B2F6961BB280AE00ED7DDF /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D96EA91A1BB298A000360ED8 /* GrabOrder */,
+				D96EA9161BB2977200360ED8 /* SendOrder */,
 				D95395181BB26B0200CB6746 /* HomeViewController.h */,
 				D95395191BB26B0200CB6746 /* HomeViewController.m */,
 				D9B2F6B31BB287F900ED7DDF /* HomeMenu */,
@@ -231,14 +282,15 @@
 		D9B2F6B31BB287F900ED7DDF /* HomeMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D9B2F6B01BB2844400ED7DDF /* HomeMenuViewController.h */,
-				D9B2F6B11BB2844400ED7DDF /* HomeMenuViewController.m */,
 				D9B2F6B41BB2882500ED7DDF /* HomeMenuTableViewHeaderView.h */,
 				D9B2F6B51BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m */,
 				D9B2F6B71BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib */,
 				D9B2F6C21BB28E8E00ED7DDF /* HomeMenuTableViewCell.h */,
 				D9B2F6C31BB28E8E00ED7DDF /* HomeMenuTableViewCell.m */,
 				D9B2F6C41BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib */,
+				D96EA9111BB292BB00360ED8 /* HomeMenuViewController.h */,
+				D96EA9121BB292BB00360ED8 /* HomeMenuViewController.m */,
+				D96EA9131BB292BB00360ED8 /* HomeMenuViewController.xib */,
 			);
 			name = HomeMenu;
 			sourceTree = "<group>";
@@ -361,6 +413,7 @@
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@2x.png in Resources */,
 				D9B2F6BF1BB28D7A00ED7DDF /* icon_menu_wallet@2x.png in Resources */,
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,
+				D96EA9151BB292BB00360ED8 /* HomeMenuViewController.xib in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D9B2F6BE1BB28D7A00ED7DDF /* icon_menu_mine@2x.png in Resources */,
 				D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */,
@@ -389,16 +442,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D96EA9241BB2A39300360ED8 /* GrabOrderSegmentedViewController.m in Sources */,
 				D9B2F6AF1BB2838300ED7DDF /* UIViewController+REFrostedViewController.m in Sources */,
 				D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */,
 				D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */,
+				D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */,
 				D9B2F6C51BB28E8E00ED7DDF /* HomeMenuTableViewCell.m in Sources */,
+				D96EA9141BB292BB00360ED8 /* HomeMenuViewController.m in Sources */,
+				D96EA91D1BB298C200360ED8 /* GrabOrderRootViewController.m in Sources */,
 				D9B2F6AA1BB2838300ED7DDF /* RECommonFunctions.m in Sources */,
 				D95394E71BB2694900CB6746 /* main.m in Sources */,
 				D9B2F6B61BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m in Sources */,
 				D953951A1BB26B0200CB6746 /* HomeViewController.m in Sources */,
-				D9B2F6B21BB2844400ED7DDF /* HomeMenuViewController.m in Sources */,
 				D9B2F6AC1BB2838300ED7DDF /* REFrostedViewController.m in Sources */,
+				D96EA9211BB2A26900360ED8 /* IDSegmentedRootViewController.m in Sources */,
+				D96EA9191BB2980E00360ED8 /* SendOrderRootViewController.m in Sources */,
 				D9B2F6AD1BB2838300ED7DDF /* UIImage+REFrostedViewController.m in Sources */,
 				D9B2F6AE1BB2838300ED7DDF /* UIView+REFrostedViewController.m in Sources */,
 			);

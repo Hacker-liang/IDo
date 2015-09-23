@@ -22,22 +22,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     _headerView = [HomeMenuTableViewHeaderView homeMenuTableViewHeaderView];
-    self.tableView.tableHeaderView = _headerView;
+    _headerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 210);
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"homeMenuCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.frostedViewController.navigationController setNavigationBarHidden:YES animated:NO];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.frostedViewController.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,7 +54,17 @@
     return _dataSource;
 }
 
-#pragma mark - TableViewDataSource 
+#pragma mark - TableViewDataSource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 210;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return _headerView;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -70,7 +78,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50; 
+    return 54;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

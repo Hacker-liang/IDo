@@ -16,4 +16,9 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"HomeMenuTableViewHeaderView" owner:nil options:nil] lastObject];
 }
 
+- (void)awakeFromNib
+{
+    self.backgroundColor = [UIColor orangeColor];
+}
+
 @end

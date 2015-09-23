@@ -42,12 +42,12 @@
   
     _homeViewController = [[HomeViewController alloc] init];
     _leftController = [[HomeMenuViewController alloc] init];
-    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:_homeViewController menuViewController:_leftController];
+    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:[[UINavigationController alloc] initWithRootViewController:_homeViewController] menuViewController:_leftController];
     frostedViewController.direction = REFrostedViewControllerDirectionLeft;
     frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
     frostedViewController.liveBlur = YES;
     frostedViewController.limitMenuViewSize = YES;
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:frostedViewController];
+    self.window.rootViewController = frostedViewController;
     [self.window makeKeyAndVisible];
 }
 
