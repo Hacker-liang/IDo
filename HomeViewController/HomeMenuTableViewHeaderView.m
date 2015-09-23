@@ -18,7 +18,7 @@
 
 - (void)awakeFromNib
 {
-    self.backgroundColor = [UIColor orangeColor];
+    self.backgroundColor = APP_THEME_COLOR;
 }
 
 @end

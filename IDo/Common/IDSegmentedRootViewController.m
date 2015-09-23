@@ -8,13 +8,14 @@
 
 #import "IDSegmentedRootViewController.h"
 
-@interface IDSegmentedRootViewController ()
+@interface IDSegmentedRootViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIViewController *currentViewController;
-@property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) UIView *indicatorView;
 //保存 切换按钮
 @property (nonatomic, strong) NSArray *segmentBtns;
+
+@property (nonatomic, strong) UIScrollView *contentView;
 
 @end
 
@@ -23,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSegmentView];
+    [self setupContentView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,8 +74,35 @@
         [segmentPanel addSubview:spaceView];
     }
     _segmentBtns = buttonArray;
+    _currentViewController = [_viewControllers firstObject];
 }
 
+
+/**
+ *  设置具体内容
+ */
+- (void)setupContentView
+{
+    _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 49, self.view.bounds.size.width, self.view.bounds.size.height-49)];
+    _contentView.pagingEnabled = YES;
+    _contentView.delegate = self;
+    _contentView.contentSize = CGSizeMake(self.view.bounds.size.width*_viewControllers.count, _contentView.bounds.size.height);
+    _contentView.scrollEnabled = NO;
+    [self.view addSubview:_contentView];
+    
+    CGFloat offsetX = 0;
+    
+    for (int i = 0; i < _viewControllers.count; i++) {
+        CGFloat width = self.view.bounds.size.width;
+        CGFloat height = _contentView.bounds.size.height;
+        UIViewController *ctl = [_viewControllers objectAtIndex:i];
+        [self addChildViewController:ctl];
+        ctl.view.frame = CGRectMake(offsetX, 0, width, height);
+        [_contentView addSubview:ctl.view];
+        [ctl willMoveToParentViewController:self];
+        offsetX += width;
+    }
+}
 
 - (void)changePageAction:(UIButton *)sender
 {
@@ -103,6 +132,17 @@
             self.currentViewController = oldController;
         }
     }];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:_contentView]) {
+        CGFloat offsetX= scrollView.contentOffset.x;
+        NSUInteger pageIndex = offsetX/scrollView.bounds.size.width;
+        [self changePage:pageIndex];
+    }
 }
 
 @end

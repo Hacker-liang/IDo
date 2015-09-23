@@ -9,10 +9,11 @@
 #import "SendOrderRootViewController.h"
 #import "SendOrderSegmentedViewController.h"
 
-@interface SendOrderRootViewController ()
+@interface SendOrderRootViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIImageView *galleryImageView;
 @property (nonatomic, strong) SendOrderSegmentedViewController *segementedController;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
@@ -21,16 +22,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_galleryImageView];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:_galleryImageView];
 
     [self addChildViewController:self.segementedController];
-    [self.view addSubview:self.segementedController.view];
+    [self.scrollView addSubview:self.segementedController.view];
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height+210);
     [self.segementedController willMoveToParentViewController:self];
     self.segementedController.view.frame = CGRectMake(0, 210, self.view.bounds.size.width, self.view.bounds.size.height-210);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+        _scrollView.delegate = self;
+    }
+    return _scrollView;
 }
 
 - (UIImageView *)galleryImageView
@@ -48,6 +60,16 @@
         _segementedController = [[SendOrderSegmentedViewController alloc] init];
     }
     return _segementedController;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.scrollView]) {
+        if (scrollView.contentOffset.y > (210-64)) {
+            CGPoint point = CGPointMake(0, 210-64);
+            scrollView.contentOffset = point;
+        }
+    }
 }
 
 @end

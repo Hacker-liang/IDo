@@ -1,0 +1,21 @@
+//
+//  PrefixHeader.pch
+//  IDo
+//
+//  Created by liangpengshuai on 9/23/15.
+//  Copyright © 2015 com.Yinengxin.xianne. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#import "Constants.h"
+
+#ifndef __OPTIMIZE__
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) {}
+#endif
+
+#endif /* PrefixHeader_pch */

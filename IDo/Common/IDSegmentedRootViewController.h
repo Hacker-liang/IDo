@@ -33,4 +33,6 @@
 
 @property (nonatomic, strong) UIFont *segmentedTitleFont;
 
+@property (nonatomic, strong) NSArray *viewControllers;
+
 @end

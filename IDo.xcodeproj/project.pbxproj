@@ -23,6 +23,9 @@
 		D96EA9211BB2A26900360ED8 /* IDSegmentedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9201BB2A26900360ED8 /* IDSegmentedRootViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D96EA9241BB2A39300360ED8 /* GrabOrderSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9231BB2A39300360ED8 /* GrabOrderSegmentedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9261BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA92B1BB2D54B00360ED8 /* SenderOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9291BB2D54B00360ED8 /* SenderOrderViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA92C1BB2D54B00360ED8 /* SenderOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA92A1BB2D54B00360ED8 /* SenderOrderViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EA9341BB2DEA400360ED8 /* icon_sendOrder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9331BB2DEA400360ED8 /* icon_sendOrder@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6951BB27FA900ED7DDF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AA1BB2838300ED7DDF /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6A11BB2838300ED7DDF /* REFrostedContainerViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -89,6 +92,12 @@
 		D96EA9231BB2A39300360ED8 /* GrabOrderSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderSegmentedViewController.m; sourceTree = "<group>"; };
 		D96EA9251BB2A5BD00360ED8 /* SendOrderSegmentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderSegmentedViewController.h; sourceTree = "<group>"; };
 		D96EA9261BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderSegmentedViewController.m; sourceTree = "<group>"; };
+		D96EA9281BB2D54B00360ED8 /* SenderOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SenderOrderViewController.h; sourceTree = "<group>"; };
+		D96EA9291BB2D54B00360ED8 /* SenderOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SenderOrderViewController.m; sourceTree = "<group>"; };
+		D96EA92A1BB2D54B00360ED8 /* SenderOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SenderOrderViewController.xib; sourceTree = "<group>"; };
+		D96EA9301BB2DAF100360ED8 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		D96EA9311BB2DB1700360ED8 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		D96EA9331BB2DEA400360ED8 /* icon_sendOrder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sendOrder@2x.png"; sourceTree = "<group>"; };
 		D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D9B2F69E1BB2838300ED7DDF /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
@@ -176,6 +185,8 @@
 				D953951B1BB26D7F00CB6746 /* Libs */,
 				D95394E81BB2694900CB6746 /* AppDelegate.h */,
 				D95394E91BB2694900CB6746 /* AppDelegate.m */,
+				D96EA9301BB2DAF100360ED8 /* Constants.h */,
+				D96EA9311BB2DB1700360ED8 /* PrefixHeader.pch */,
 				D95394F11BB2694900CB6746 /* Assets.xcassets */,
 				D95394F61BB2694900CB6746 /* Info.plist */,
 				D95394E51BB2694900CB6746 /* Supporting Files */,
@@ -224,6 +235,9 @@
 				D96EA9181BB2980E00360ED8 /* SendOrderRootViewController.m */,
 				D96EA9251BB2A5BD00360ED8 /* SendOrderSegmentedViewController.h */,
 				D96EA9261BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m */,
+				D96EA9281BB2D54B00360ED8 /* SenderOrderViewController.h */,
+				D96EA9291BB2D54B00360ED8 /* SenderOrderViewController.m */,
+				D96EA92A1BB2D54B00360ED8 /* SenderOrderViewController.xib */,
 			);
 			name = SendOrder;
 			sourceTree = "<group>";
@@ -246,6 +260,14 @@
 				D96EA9201BB2A26900360ED8 /* IDSegmentedRootViewController.m */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		D96EA9321BB2DE8D00360ED8 /* senderOrder */ = {
+			isa = PBXGroup;
+			children = (
+				D96EA9331BB2DEA400360ED8 /* icon_sendOrder@2x.png */,
+			);
+			name = senderOrder;
 			sourceTree = "<group>";
 		};
 		D9B2F6961BB280AE00ED7DDF /* HomeViewController */ = {
@@ -298,6 +320,7 @@
 		D9B2F6B91BB28D2E00ED7DDF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D96EA9321BB2DE8D00360ED8 /* senderOrder */,
 				D9B2F6BA1BB28D7A00ED7DDF /* icon_menu_mine@2x.png */,
 				D9B2F6BB1BB28D7A00ED7DDF /* icon_menu_wallet@2x.png */,
 				D9B2F6BC1BB28D7A00ED7DDF /* icon_menu_setting@2x.png */,
@@ -413,11 +436,13 @@
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@2x.png in Resources */,
 				D9B2F6BF1BB28D7A00ED7DDF /* icon_menu_wallet@2x.png in Resources */,
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,
+				D96EA92C1BB2D54B00360ED8 /* SenderOrderViewController.xib in Resources */,
 				D96EA9151BB292BB00360ED8 /* HomeMenuViewController.xib in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D9B2F6BE1BB28D7A00ED7DDF /* icon_menu_mine@2x.png in Resources */,
 				D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */,
 				D9B2F6951BB27FA900ED7DDF /* Default-568h@2x.png in Resources */,
+				D96EA9341BB2DEA400360ED8 /* icon_sendOrder@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +471,7 @@
 				D9B2F6AF1BB2838300ED7DDF /* UIViewController+REFrostedViewController.m in Sources */,
 				D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */,
 				D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */,
+				D96EA92B1BB2D54B00360ED8 /* SenderOrderViewController.m in Sources */,
 				D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */,
 				D9B2F6C51BB28E8E00ED7DDF /* HomeMenuTableViewCell.m in Sources */,
 				D96EA9141BB292BB00360ED8 /* HomeMenuViewController.m in Sources */,
@@ -582,6 +608,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IDo/Libs/Pay",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IDo/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/IDo/Libs/Pay";
 				INFOPLIST_FILE = IDo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -603,6 +630,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IDo/Libs/Pay",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IDo/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/IDo/Libs/Pay";
 				INFOPLIST_FILE = IDo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

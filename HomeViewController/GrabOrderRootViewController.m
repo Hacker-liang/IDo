@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UIImageView *galleryImageView;
 @property (nonatomic, strong) GrabOrderSegmentedViewController *segementedController;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 
 @end
@@ -40,6 +41,14 @@
         _galleryImageView.backgroundColor = [UIColor grayColor];
     }
     return _galleryImageView;
+}
+
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    }
+    return _scrollView;
 }
 
 - (GrabOrderSegmentedViewController *)segementedController
