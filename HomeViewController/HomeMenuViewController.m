@@ -10,6 +10,7 @@
 #import "REFrostedViewController.h"
 #import "HomeMenuTableViewHeaderView.h"
 #import "HomeMenuTableViewCell.h"
+#import "MyWalletViewController.h"
 
 @interface HomeMenuViewController ()
 
@@ -54,6 +55,25 @@
     return _dataSource;
 }
 
+#pragma mark - IBAction Methods
+
+- (void)gotoMyWallet
+{
+    [self.frostedViewController hideMenuViewController];
+    MyWalletViewController *ctl = [[MyWalletViewController alloc] init];
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
+}
+
+- (void)gotoMyProfile
+{
+    
+}
+
+- (void)gotoAbout
+{
+    
+}
+
 #pragma mark - TableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -78,7 +98,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    return 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,4 +110,17 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        [self gotoMyWallet];
+    }
+}
+
 @end
+
+
+
+
+

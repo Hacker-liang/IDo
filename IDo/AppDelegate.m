@@ -42,6 +42,7 @@
   
     _homeViewController = [[HomeViewController alloc] init];
     _leftController = [[HomeMenuViewController alloc] init];
+    _leftController.mainViewController = _homeViewController;
     REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:[[UINavigationController alloc] initWithRootViewController:_homeViewController] menuViewController:_leftController];
     frostedViewController.direction = REFrostedViewControllerDirectionLeft;
     frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;

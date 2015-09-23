@@ -1,5 +1,5 @@
 //
-//  HomeMenuViewController.h
+//  MyWalletViewController.h
 //  IDo
 //
 //  Created by liangpengshuai on 9/23/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeMenuViewController : UITableViewController
-
-@property (nonatomic, weak) UIViewController *mainViewController;
+@interface MyWalletViewController : UITableViewController
 
 @end

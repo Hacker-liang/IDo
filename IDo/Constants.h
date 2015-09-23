@@ -32,6 +32,8 @@
 
 
 #define APP_THEME_COLOR                 UIColorFromRGB(0xFB6016)
+#define APP_PAGE_COLOR                 UIColorFromRGB(0xE6E6E6)
+
 
 #endif
 
