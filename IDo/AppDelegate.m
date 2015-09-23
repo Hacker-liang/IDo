@@ -6,15 +6,17 @@
 //  Copyright © 2015 com.Yinengxin.xianne. All rights reserved.
 //
 
+#import <AudioToolbox/AudioToolbox.h>
+
 #import "AppDelegate.h"
 #import "HomeViewController.h"
-#import <AlipaySDK/AlipaySDK.h>
-#import "JSONKit.h"
-#import <AudioToolbox/AudioToolbox.h>
+#import "REFrostedViewController.h"
+#import "HomeMenuViewController.h"
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) HomeViewController *homeViewController;
+@property (nonatomic, strong) HomeMenuViewController *leftController;
 
 @end
 
@@ -25,39 +27,28 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    
-    //如果极简SDK不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
-    if ([url.host isEqualToString:@"safepay"]) {
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result1111 = %@",resultDic);
-            NSLog(@"result3333 = %@",[resultDic JSONString]);
-            if ([[resultDic objectForKey:@"resultStatus"] intValue] == 9000) {
-//                if (self.viewisWhere == PiePayView) {
-//                    [[NSNotificationCenter defaultCenter]postNotificationName:@"paySureNotification" object:nil];
-//                }
-            }else{
-//                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"支付失败" message:@"支付成功" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//                [alert show];
-            }
-        }];
-    }
-    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
-        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-        }];
-    }
-    
     return YES;
 }
 
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    _homeViewController = [[HomeViewController alloc] init];
-    self.window.rootViewController = _homeViewController;
-    [self.window makeKeyAndVisible];
-
+    [self setupHomeView];
     return YES;
+}
+
+- (void)setupHomeView
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+  
+    _homeViewController = [[HomeViewController alloc] init];
+    _leftController = [[HomeMenuViewController alloc] init];
+    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:_homeViewController menuViewController:_leftController];
+    frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+    frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+    frostedViewController.liveBlur = YES;
+    frostedViewController.limitMenuViewSize = YES;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:frostedViewController];
+    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
