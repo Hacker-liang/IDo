@@ -7,16 +7,56 @@
 //
 
 #import "AppDelegate.h"
+#import "HomeViewController.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "JSONKit.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) HomeViewController *homeViewController;
 
 @end
 
 @implementation AppDelegate
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    
+    //如果极简SDK不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result1111 = %@",resultDic);
+            NSLog(@"result3333 = %@",[resultDic JSONString]);
+            if ([[resultDic objectForKey:@"resultStatus"] intValue] == 9000) {
+//                if (self.viewisWhere == PiePayView) {
+//                    [[NSNotificationCenter defaultCenter]postNotificationName:@"paySureNotification" object:nil];
+//                }
+            }else{
+//                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"支付失败" message:@"支付成功" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+//                [alert show];
+            }
+        }];
+    }
+    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+        }];
+    }
+    
+    return YES;
+}
+
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    _homeViewController = [[HomeViewController alloc] init];
+    self.window.rootViewController = _homeViewController;
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
