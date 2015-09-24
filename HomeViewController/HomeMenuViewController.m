@@ -11,6 +11,7 @@
 #import "HomeMenuTableViewHeaderView.h"
 #import "HomeMenuTableViewCell.h"
 #import "MyWalletViewController.h"
+#import "MyProfileTableViewController.h"
 
 @interface HomeMenuViewController ()
 
@@ -27,6 +28,7 @@
     _headerView = [HomeMenuTableViewHeaderView homeMenuTableViewHeaderView];
     _headerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 210);
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"homeMenuCell"];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,7 +68,9 @@
 
 - (void)gotoMyProfile
 {
-    
+    [self.frostedViewController hideMenuViewController];
+    MyProfileTableViewController *ctl = [[MyProfileTableViewController alloc] init];
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
 - (void)gotoAbout
@@ -115,6 +119,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         [self gotoMyWallet];
+        
+    } else if (indexPath.row == 1) {
+        [self gotoMyProfile];
     }
 }
 

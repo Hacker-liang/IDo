@@ -21,9 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
-    [self.scrollView addSubview:_galleryImageView];
+    [self.scrollView addSubview:self.galleryImageView];
 
     [self addChildViewController:self.segementedController];
     [self.scrollView addSubview:self.segementedController.view];
@@ -48,7 +49,7 @@
 - (UIImageView *)galleryImageView
 {
     if (!_galleryImageView) {
-        _galleryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 210)];
+        _galleryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 210-64)];
         _galleryImageView.backgroundColor = [UIColor grayColor];
     }
     return _galleryImageView;
@@ -65,7 +66,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([scrollView isEqual:self.scrollView]) {
-        if (scrollView.contentOffset.y > (210-64)) {
+        if (scrollView.contentOffset.y > (210 - 64)) {
             CGPoint point = CGPointMake(0, 210-64);
             scrollView.contentOffset = point;
         }

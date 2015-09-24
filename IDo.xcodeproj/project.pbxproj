@@ -30,6 +30,13 @@
 		D96EA93E1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA93D1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib */; settings = {ASSET_TAGS = (); }; };
 		D96EA9471BB2EB7300360ED8 /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9451BB2EB7300360ED8 /* MyWalletViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D96EA9481BB2EB7300360ED8 /* MyWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9461BB2EB7300360ED8 /* MyWalletViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EA94D1BB2F01E00360ED8 /* MyProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA94B1BB2F01E00360ED8 /* MyProfileTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA94E1BB2F01E00360ED8 /* MyProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA94C1BB2F01E00360ED8 /* MyProfileTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EA9511BB2F04500360ED8 /* MyProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9501BB2F04500360ED8 /* MyProfileHeaderView.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA9531BB2F05100360ED8 /* MyProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9521BB2F05100360ED8 /* MyProfileHeaderView.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EA9571BB3776200360ED8 /* MyProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9551BB3776200360ED8 /* MyProfileTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		D96EA9581BB3776200360ED8 /* MyProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9561BB3776200360ED8 /* MyProfileTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EA95A1BB37FE300360ED8 /* icon_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9591BB37FE300360ED8 /* icon_menu@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6951BB27FA900ED7DDF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AA1BB2838300ED7DDF /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6A11BB2838300ED7DDF /* REFrostedContainerViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -108,6 +115,16 @@
 		D96EA9441BB2EB7300360ED8 /* MyWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletViewController.h; sourceTree = "<group>"; };
 		D96EA9451BB2EB7300360ED8 /* MyWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletViewController.m; sourceTree = "<group>"; };
 		D96EA9461BB2EB7300360ED8 /* MyWalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWalletViewController.xib; sourceTree = "<group>"; };
+		D96EA94A1BB2F01E00360ED8 /* MyProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileTableViewController.h; sourceTree = "<group>"; };
+		D96EA94B1BB2F01E00360ED8 /* MyProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileTableViewController.m; sourceTree = "<group>"; };
+		D96EA94C1BB2F01E00360ED8 /* MyProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyProfileTableViewController.xib; sourceTree = "<group>"; };
+		D96EA94F1BB2F04500360ED8 /* MyProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileHeaderView.h; sourceTree = "<group>"; };
+		D96EA9501BB2F04500360ED8 /* MyProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileHeaderView.m; sourceTree = "<group>"; };
+		D96EA9521BB2F05100360ED8 /* MyProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyProfileHeaderView.xib; sourceTree = "<group>"; };
+		D96EA9541BB3776200360ED8 /* MyProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileTableViewCell.h; sourceTree = "<group>"; };
+		D96EA9551BB3776200360ED8 /* MyProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileTableViewCell.m; sourceTree = "<group>"; };
+		D96EA9561BB3776200360ED8 /* MyProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyProfileTableViewCell.xib; sourceTree = "<group>"; };
+		D96EA9591BB37FE300360ED8 /* icon_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu@2x.png"; sourceTree = "<group>"; };
 		D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D9B2F69E1BB2838300ED7DDF /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
@@ -189,6 +206,7 @@
 		D95394E41BB2694900CB6746 /* IDo */ = {
 			isa = PBXGroup;
 			children = (
+				D96EA9491BB2EFEC00360ED8 /* Profile */,
 				D96EA91E1BB2A1F900360ED8 /* Common */,
 				D9B2F6B91BB28D2E00ED7DDF /* Images */,
 				D9B2F6961BB280AE00ED7DDF /* HomeViewController */,
@@ -284,6 +302,7 @@
 		D96EA9351BB2E1A500360ED8 /* homeMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D96EA9591BB37FE300360ED8 /* icon_menu@2x.png */,
 				D9B2F6BA1BB28D7A00ED7DDF /* icon_menu_mine@2x.png */,
 				D9B2F6BB1BB28D7A00ED7DDF /* icon_menu_wallet@2x.png */,
 				D9B2F6BC1BB28D7A00ED7DDF /* icon_menu_setting@2x.png */,
@@ -304,6 +323,22 @@
 			);
 			name = MyWallet;
 			path = ../HomeViewController;
+			sourceTree = "<group>";
+		};
+		D96EA9491BB2EFEC00360ED8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D96EA94A1BB2F01E00360ED8 /* MyProfileTableViewController.h */,
+				D96EA94B1BB2F01E00360ED8 /* MyProfileTableViewController.m */,
+				D96EA94C1BB2F01E00360ED8 /* MyProfileTableViewController.xib */,
+				D96EA94F1BB2F04500360ED8 /* MyProfileHeaderView.h */,
+				D96EA9501BB2F04500360ED8 /* MyProfileHeaderView.m */,
+				D96EA9521BB2F05100360ED8 /* MyProfileHeaderView.xib */,
+				D96EA9541BB3776200360ED8 /* MyProfileTableViewCell.h */,
+				D96EA9551BB3776200360ED8 /* MyProfileTableViewCell.m */,
+				D96EA9561BB3776200360ED8 /* MyProfileTableViewCell.xib */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		D9B2F6961BB280AE00ED7DDF /* HomeViewController */ = {
@@ -467,10 +502,14 @@
 			files = (
 				D96EA9481BB2EB7300360ED8 /* MyWalletViewController.xib in Resources */,
 				D9B2F6C01BB28D7A00ED7DDF /* icon_menu_setting@2x.png in Resources */,
+				D96EA95A1BB37FE300360ED8 /* icon_menu@2x.png in Resources */,
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@2x.png in Resources */,
 				D9B2F6BF1BB28D7A00ED7DDF /* icon_menu_wallet@2x.png in Resources */,
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,
+				D96EA9581BB3776200360ED8 /* MyProfileTableViewCell.xib in Resources */,
 				D96EA92C1BB2D54B00360ED8 /* SenderOrderViewController.xib in Resources */,
+				D96EA94E1BB2F01E00360ED8 /* MyProfileTableViewController.xib in Resources */,
+				D96EA9531BB2F05100360ED8 /* MyProfileHeaderView.xib in Resources */,
 				D96EA9151BB292BB00360ED8 /* HomeMenuViewController.xib in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D9B2F6BE1BB28D7A00ED7DDF /* icon_menu_mine@2x.png in Resources */,
@@ -508,6 +547,7 @@
 				D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */,
 				D96EA92B1BB2D54B00360ED8 /* SenderOrderViewController.m in Sources */,
 				D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */,
+				D96EA9571BB3776200360ED8 /* MyProfileTableViewCell.m in Sources */,
 				D9B2F6C51BB28E8E00ED7DDF /* HomeMenuTableViewCell.m in Sources */,
 				D96EA9141BB292BB00360ED8 /* HomeMenuViewController.m in Sources */,
 				D96EA91D1BB298C200360ED8 /* GrabOrderRootViewController.m in Sources */,
@@ -516,10 +556,12 @@
 				D95394E71BB2694900CB6746 /* main.m in Sources */,
 				D9B2F6B61BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m in Sources */,
 				D953951A1BB26B0200CB6746 /* HomeViewController.m in Sources */,
+				D96EA94D1BB2F01E00360ED8 /* MyProfileTableViewController.m in Sources */,
 				D9B2F6AC1BB2838300ED7DDF /* REFrostedViewController.m in Sources */,
 				D96EA9211BB2A26900360ED8 /* IDSegmentedRootViewController.m in Sources */,
 				D96EA9191BB2980E00360ED8 /* SendOrderRootViewController.m in Sources */,
 				D96EA9471BB2EB7300360ED8 /* MyWalletViewController.m in Sources */,
+				D96EA9511BB2F04500360ED8 /* MyProfileHeaderView.m in Sources */,
 				D9B2F6AD1BB2838300ED7DDF /* UIImage+REFrostedViewController.m in Sources */,
 				D9B2F6AE1BB2838300ED7DDF /* UIView+REFrostedViewController.m in Sources */,
 			);

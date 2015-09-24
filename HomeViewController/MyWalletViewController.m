@@ -24,6 +24,8 @@
     _dataSource = @[@"收支明细", @"提现明细"];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"tableViewCell"];
     [self setupTableViewFooterView];
+    
+    self.navigationItem.title = @"我的钱包";
 }
 
 - (void)didReceiveMemoryWarning {

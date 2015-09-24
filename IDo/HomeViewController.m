@@ -27,15 +27,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIButton *menu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 44)];
-    menu.backgroundColor = [UIColor blackColor];
+    [menu setImage:[UIImage imageNamed:@"icon_menu.png"] forState:UIControlStateNormal];
     [menu addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     [menu setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menu];
     
-    _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
-    _titleBtn.backgroundColor = [UIColor grayColor];
+    _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
     [_titleBtn addTarget:self action:@selector(switchPage:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_titleBtn setTitle:@"我干 -- 抢单" forState:UIControlStateNormal];
+    _titleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.titleView = _titleBtn;
     
     [self setupContentViewContrller];
@@ -49,7 +50,7 @@
 {
     GrabOrderRootViewController *grabOrederCtl = [[GrabOrderRootViewController alloc] init];
     SendOrderRootViewController *sendOrderCtl = [[SendOrderRootViewController alloc] init];
-    _viewControllers = @[sendOrderCtl, grabOrederCtl];
+    _viewControllers = @[grabOrederCtl, sendOrderCtl];
     UIViewController *firstCtl = [_viewControllers firstObject];
     _currentViewController = firstCtl;
     [self addChildViewController:firstCtl];
@@ -68,6 +69,12 @@
 {
     NSUInteger index = [_viewControllers indexOfObject:_currentViewController];
     [self changePage:1-index];
+    if (index == 0) {
+        [_titleBtn setTitle:@"我干 -- 派单" forState:UIControlStateNormal];
+        
+    } else {
+        [_titleBtn setTitle:@"我干 -- 抢单" forState:UIControlStateNormal];
+    }
 }
 
 - (void)changePage:(NSInteger)pageIndex
