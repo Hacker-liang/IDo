@@ -12,10 +12,10 @@
 @interface UserInfo : NSObject
 
 @property (nonatomic ,strong) NSString *userid;
-@property (nonatomic ,strong) NSString *nikename;
+@property (nonatomic ,strong) NSString *nickName;
 @property (nonatomic ,strong) NSString *tel;
 @property (nonatomic ,strong) NSString *sex;
-@property (nonatomic ,strong) NSString *img;
+@property (nonatomic ,strong) NSString *avatar;
 @property (nonatomic ,strong) NSString *address;
 
 @property (nonatomic ,strong) NSString *level;

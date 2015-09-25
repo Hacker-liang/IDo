@@ -36,7 +36,7 @@
     [super viewDidLoad];
     _orderDetail = [[OrderDetailModel alloc] init];
     _orderDetail.price = @"5";
-    _orderDetail.price = @"5";
+    _orderDetail.distance = @"5";
     self.navigationItem.title = @"立即派单";
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderContentTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderContentCell"];
@@ -132,11 +132,13 @@
 
 - (void)sendOrder:(id)sender
 {
-//    if (self.orderDetail.content.length < 1) {
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"您所提交信息不完整，请完善后提交" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//        [alert show];
-//        return;
-//    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
+    OrderContentTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    self.orderDetail.content = cell.contentTextView.text;
+    if (self.orderDetail.content.length < 1) {
+        [SVProgressHUD showErrorWithStatus:@"请输入任务要求"];
+        return;
+    }
     
     NSString *url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
@@ -156,7 +158,12 @@
         if (response)
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSLog(@"jsonString = %@",jsonString);
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if([tempStatus integerValue] == 1) {
+                [SVProgressHUD showSuccessWithStatus:@"派单成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }
     }];
 
@@ -174,6 +181,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    self.headerView.orderDetailModel = self.orderDetail;
     return self.headerView;
 }
 

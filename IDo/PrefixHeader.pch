@@ -25,6 +25,7 @@
 #import "UserLocationManager.h"
 #import "NSMutableDictionary+MyDictionary.h"
 #import "UIAlertView+Block.h"
+#import "MJRefresh.h"
 
 #ifndef __OPTIMIZE__
 #define NSLog(...) NSLog(__VA_ARGS__)

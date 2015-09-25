@@ -30,6 +30,9 @@
     [locationManager getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
         self.mapView.showsUserLocation = YES;
+        _orderDetailModel.lat = [NSString stringWithFormat:@"%lf", userLocation.coordinate.latitude];
+        _orderDetailModel.lng = [NSString stringWithFormat:@"%lf", userLocation.coordinate.longitude];
+        _orderDetailModel.address = address;
         [_locationBtn setTitle:address forState:UIControlStateNormal];
     }];
 }

@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserInfo.h"
 
 @interface OrderDetailModel : NSObject
+
+@property(copy, nonatomic) UserInfo *userInfo;
 
 @property(copy, nonatomic) NSString *address; //地址
 @property(copy, nonatomic) NSString *lng;

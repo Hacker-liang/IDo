@@ -14,4 +14,5 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *indicateImageView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+
 @end

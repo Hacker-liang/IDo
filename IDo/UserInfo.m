@@ -14,10 +14,10 @@
 {
     if (self = [super init]) {
         _userid = [dict objectForKey:@"id"];
-        _nikename = [dict objectForKey:@"nikename"];
+        _nickName = [dict objectForKey:@"nikename"];
         _tel = [dict objectForKey:@"tel"];
         _sex = [dict objectForKey:@"sex"];
-        _img = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
+        _avatar = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
         _level = [dict objectForKey:@"level"];
         _lock = [dict objectForKey:@"lock"];
         _zhifubao = [dict objectForKey:@"zhifubao"];

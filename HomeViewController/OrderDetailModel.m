@@ -13,12 +13,6 @@
 - (id)init
 {
     if (self = [super init]) {
-        _address = @"";
-        _sex = @"";
-        _price = @"";
-        _content = @"";
-        _tasktime = @"";
-        _distance = @"";
     }
     return self;
 }

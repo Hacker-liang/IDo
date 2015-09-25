@@ -60,10 +60,10 @@
 {
     if (_userInfo) {
         _userInfo.userid = [dict objectForKey:@"id"];
-        _userInfo.nikename = [dict objectForKey:@"nikename"];
+        _userInfo.nickName = [dict objectForKey:@"nikename"];
         _userInfo.tel = [dict objectForKey:@"tel"];
         _userInfo.sex = [dict objectForKey:@"sex"];
-        _userInfo.img = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
+        _userInfo.avatar = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
         _userInfo.level = [dict objectForKey:@"level"];
         _userInfo.lock = [dict objectForKey:@"lock"];
         _userInfo.zhifubao = [dict objectForKey:@"zhifubao"];
@@ -77,13 +77,13 @@
 
 - (void)saveUserData2Cache
 {
-    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     //存储时，除NSNumber类型使用对应的类型意外，其他的都是使用setObject:forKey:
-    [mDict setObject:_userInfo.userid forKey:@"userid"];
-    [mDict setObject:_userInfo.nikename forKey:@"nikename"];
+    [mDict setObject:_userInfo.userid forKey:@"id"];
+    [mDict setObject:_userInfo.nickName forKey:@"nikename"];
     [mDict setObject:_userInfo.tel forKey:@"tel"];
     [mDict setObject:_userInfo.sex forKey:@"sex"];
-    [mDict setObject:_userInfo.img forKey:@"img"];
+    [mDict setObject:_userInfo.avatar forKey:@"img"];
     [mDict setObject:_userInfo.level forKey:@"level"];
     [mDict setObject:_userInfo.lock forKey:@"lock"];
     [mDict setObject:_userInfo.zhifubao forKey:@"zhifubao"];
