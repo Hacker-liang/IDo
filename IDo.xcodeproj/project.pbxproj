@@ -82,6 +82,24 @@
 		D96EAA0D1BB40EA200360ED8 /* GrabOrderListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA0B1BB40EA200360ED8 /* GrabOrderListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D96EAA0E1BB40EA200360ED8 /* GrabOrderListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA0C1BB40EA200360ED8 /* GrabOrderListTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		D96EAA111BB4D14900360ED8 /* icon_avatar_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA101BB4D14900360ED8 /* icon_avatar_default@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D96EAA2B1BB5230000360ED8 /* SendOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA2A1BB5230000360ED8 /* SendOrderDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA2E1BB523D900360ED8 /* SendOrderDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA2D1BB523D900360ED8 /* SendOrderDetailHeaderView.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA301BB5242A00360ED8 /* SendOrderDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA2F1BB5242A00360ED8 /* SendOrderDetailHeaderView.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EAA321BB5290800360ED8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96EAA311BB5290800360ED8 /* MapKit.framework */; };
+		D96EAA351BB52A8C00360ED8 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA341BB52A8C00360ED8 /* UserLocationManager.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA391BB5337F00360ED8 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA371BB5337F00360ED8 /* CustomTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA3A1BB5337F00360ED8 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA381BB5337F00360ED8 /* CustomTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EAA3F1BB5372100360ED8 /* icon_address@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA3B1BB5372100360ED8 /* icon_address@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D96EAA401BB5372100360ED8 /* icon_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA3C1BB5372100360ED8 /* icon_content@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D96EAA411BB5372100360ED8 /* icon_distance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA3D1BB5372100360ED8 /* icon_distance@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D96EAA421BB5372100360ED8 /* icon_money@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA3E1BB5372100360ED8 /* icon_money@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D96EAA441BB5377100360ED8 /* icon_time@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA431BB5377100360ED8 /* icon_time@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D96EAA481BB53A5400360ED8 /* OrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA471BB53A5400360ED8 /* OrderDetailModel.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA4C1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA4B1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA501BB55DAC00360ED8 /* OrderContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA4E1BB55DAC00360ED8 /* OrderContentTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA511BB55DAC00360ED8 /* OrderContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA4F1BB55DAC00360ED8 /* OrderContentTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D96EAA541BB569BA00360ED8 /* FYTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA531BB569BA00360ED8 /* FYTimeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D96EAA581BB56D9E00360ED8 /* UIAlertView+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA571BB56D9E00360ED8 /* UIAlertView+Block.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6951BB27FA900ED7DDF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AA1BB2838300ED7DDF /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */; settings = {ASSET_TAGS = (); }; };
 		D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6A11BB2838300ED7DDF /* REFrostedContainerViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -257,6 +275,33 @@
 		D96EAA0B1BB40EA200360ED8 /* GrabOrderListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderListTableViewController.m; sourceTree = "<group>"; };
 		D96EAA0C1BB40EA200360ED8 /* GrabOrderListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabOrderListTableViewController.xib; sourceTree = "<group>"; };
 		D96EAA101BB4D14900360ED8 /* icon_avatar_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_avatar_default@2x.png"; sourceTree = "<group>"; };
+		D96EAA291BB5230000360ED8 /* SendOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderDetailViewController.h; sourceTree = "<group>"; };
+		D96EAA2A1BB5230000360ED8 /* SendOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderDetailViewController.m; sourceTree = "<group>"; };
+		D96EAA2C1BB523D900360ED8 /* SendOrderDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderDetailHeaderView.h; sourceTree = "<group>"; };
+		D96EAA2D1BB523D900360ED8 /* SendOrderDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderDetailHeaderView.m; sourceTree = "<group>"; };
+		D96EAA2F1BB5242A00360ED8 /* SendOrderDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendOrderDetailHeaderView.xib; sourceTree = "<group>"; };
+		D96EAA311BB5290800360ED8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D96EAA331BB52A8C00360ED8 /* UserLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationManager.h; sourceTree = "<group>"; };
+		D96EAA341BB52A8C00360ED8 /* UserLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationManager.m; sourceTree = "<group>"; };
+		D96EAA361BB5337F00360ED8 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		D96EAA371BB5337F00360ED8 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		D96EAA381BB5337F00360ED8 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		D96EAA3B1BB5372100360ED8 /* icon_address@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_address@2x.png"; sourceTree = "<group>"; };
+		D96EAA3C1BB5372100360ED8 /* icon_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_content@2x.png"; sourceTree = "<group>"; };
+		D96EAA3D1BB5372100360ED8 /* icon_distance@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_distance@2x.png"; sourceTree = "<group>"; };
+		D96EAA3E1BB5372100360ED8 /* icon_money@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_money@2x.png"; sourceTree = "<group>"; };
+		D96EAA431BB5377100360ED8 /* icon_time@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_time@2x.png"; sourceTree = "<group>"; };
+		D96EAA461BB53A5400360ED8 /* OrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailModel.h; sourceTree = "<group>"; };
+		D96EAA471BB53A5400360ED8 /* OrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailModel.m; sourceTree = "<group>"; };
+		D96EAA4A1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+MyDictionary.h"; sourceTree = "<group>"; };
+		D96EAA4B1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+MyDictionary.m"; sourceTree = "<group>"; };
+		D96EAA4D1BB55DAC00360ED8 /* OrderContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderContentTableViewCell.h; sourceTree = "<group>"; };
+		D96EAA4E1BB55DAC00360ED8 /* OrderContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderContentTableViewCell.m; sourceTree = "<group>"; };
+		D96EAA4F1BB55DAC00360ED8 /* OrderContentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderContentTableViewCell.xib; sourceTree = "<group>"; };
+		D96EAA521BB569BA00360ED8 /* FYTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYTimeViewController.h; sourceTree = "<group>"; };
+		D96EAA531BB569BA00360ED8 /* FYTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYTimeViewController.m; sourceTree = "<group>"; };
+		D96EAA561BB56D9E00360ED8 /* UIAlertView+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Block.h"; sourceTree = "<group>"; };
+		D96EAA571BB56D9E00360ED8 /* UIAlertView+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Block.m"; sourceTree = "<group>"; };
 		D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D9B2F69E1BB2838300ED7DDF /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		D9B2F69F1BB2838300ED7DDF /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
@@ -287,6 +332,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D96EAA321BB5290800360ED8 /* MapKit.framework in Frameworks */,
 				D96EA9F11BB3EF5100360ED8 /* CoreTelephony.framework in Frameworks */,
 				D95395A31BB2740C00CB6746 /* libc++.tbd in Frameworks */,
 				D96EA9EF1BB3EF1E00360ED8 /* libPushSDK-1.8.5.a in Frameworks */,
@@ -315,6 +361,7 @@
 		D95394D91BB2694900CB6746 = {
 			isa = PBXGroup;
 			children = (
+				D96EAA311BB5290800360ED8 /* MapKit.framework */,
 				D96EA9F01BB3EF5100360ED8 /* CoreTelephony.framework */,
 				D9B2F6941BB27FA900ED7DDF /* Default-568h@2x.png */,
 				D95395A21BB2740C00CB6746 /* libc++.tbd */,
@@ -344,12 +391,12 @@
 				D96EA96B1BB3CF4400360ED8 /* Login */,
 				D96EA9491BB2EFEC00360ED8 /* Profile */,
 				D96EA91E1BB2A1F900360ED8 /* Common */,
-				D9B2F6B91BB28D2E00ED7DDF /* Images */,
 				D9B2F6961BB280AE00ED7DDF /* HomeViewController */,
 				D96EA9391BB2E30100360ED8 /* MyWallet */,
 				D953951B1BB26D7F00CB6746 /* Libs */,
 				D95394E81BB2694900CB6746 /* AppDelegate.h */,
 				D95394E91BB2694900CB6746 /* AppDelegate.m */,
+				D9B2F6B91BB28D2E00ED7DDF /* Images */,
 				D96EA9301BB2DAF100360ED8 /* Constants.h */,
 				D96EA9311BB2DB1700360ED8 /* PrefixHeader.pch */,
 				D95394F11BB2694900CB6746 /* Assets.xcassets */,
@@ -402,6 +449,7 @@
 		D96EA9161BB2977200360ED8 /* SendOrder */ = {
 			isa = PBXGroup;
 			children = (
+				D96EAA281BB522B200360ED8 /* SendOrderDetail */,
 				D96EA9171BB2980E00360ED8 /* SendOrderRootViewController.h */,
 				D96EA9181BB2980E00360ED8 /* SendOrderRootViewController.m */,
 				D96EA9251BB2A5BD00360ED8 /* SendOrderSegmentedViewController.h */,
@@ -428,10 +476,18 @@
 		D96EA91E1BB2A1F900360ED8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D96EAA521BB569BA00360ED8 /* FYTimeViewController.h */,
+				D96EAA531BB569BA00360ED8 /* FYTimeViewController.m */,
+				D96EAA491BB53E5800360ED8 /* Category */,
 				D96EA9791BB3D13000360ED8 /* AppTools.h */,
 				D96EA97A1BB3D13000360ED8 /* AppTools.m */,
 				D96EA91F1BB2A26900360ED8 /* IDSegmentedRootViewController.h */,
 				D96EA9201BB2A26900360ED8 /* IDSegmentedRootViewController.m */,
+				D96EAA331BB52A8C00360ED8 /* UserLocationManager.h */,
+				D96EAA341BB52A8C00360ED8 /* UserLocationManager.m */,
+				D96EAA361BB5337F00360ED8 /* CustomTableViewCell.h */,
+				D96EAA371BB5337F00360ED8 /* CustomTableViewCell.m */,
+				D96EAA381BB5337F00360ED8 /* CustomTableViewCell.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -439,6 +495,11 @@
 		D96EA9321BB2DE8D00360ED8 /* senderOrder */ = {
 			isa = PBXGroup;
 			children = (
+				D96EAA431BB5377100360ED8 /* icon_time@2x.png */,
+				D96EAA3B1BB5372100360ED8 /* icon_address@2x.png */,
+				D96EAA3C1BB5372100360ED8 /* icon_content@2x.png */,
+				D96EAA3D1BB5372100360ED8 /* icon_distance@2x.png */,
+				D96EAA3E1BB5372100360ED8 /* icon_money@2x.png */,
 				D96EA9331BB2DEA400360ED8 /* icon_sendOrder@2x.png */,
 			);
 			name = senderOrder;
@@ -656,9 +717,53 @@
 			name = UserInfo;
 			sourceTree = "<group>";
 		};
+		D96EAA281BB522B200360ED8 /* SendOrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D96EAA291BB5230000360ED8 /* SendOrderDetailViewController.h */,
+				D96EAA2A1BB5230000360ED8 /* SendOrderDetailViewController.m */,
+				D96EAA2C1BB523D900360ED8 /* SendOrderDetailHeaderView.h */,
+				D96EAA2D1BB523D900360ED8 /* SendOrderDetailHeaderView.m */,
+				D96EAA2F1BB5242A00360ED8 /* SendOrderDetailHeaderView.xib */,
+				D96EAA4D1BB55DAC00360ED8 /* OrderContentTableViewCell.h */,
+				D96EAA4E1BB55DAC00360ED8 /* OrderContentTableViewCell.m */,
+				D96EAA4F1BB55DAC00360ED8 /* OrderContentTableViewCell.xib */,
+			);
+			name = SendOrderDetail;
+			sourceTree = "<group>";
+		};
+		D96EAA451BB53A3F00360ED8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D96EAA461BB53A5400360ED8 /* OrderDetailModel.h */,
+				D96EAA471BB53A5400360ED8 /* OrderDetailModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D96EAA491BB53E5800360ED8 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D96EAA551BB56D9E00360ED8 /* UIAlertView+Block */,
+				D96EAA4A1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.h */,
+				D96EAA4B1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		D96EAA551BB56D9E00360ED8 /* UIAlertView+Block */ = {
+			isa = PBXGroup;
+			children = (
+				D96EAA561BB56D9E00360ED8 /* UIAlertView+Block.h */,
+				D96EAA571BB56D9E00360ED8 /* UIAlertView+Block.m */,
+			);
+			path = "UIAlertView+Block";
+			sourceTree = "<group>";
+		};
 		D9B2F6961BB280AE00ED7DDF /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D96EAA451BB53A3F00360ED8 /* Model */,
 				D96EA91A1BB298A000360ED8 /* GrabOrder */,
 				D96EA9161BB2977200360ED8 /* SendOrder */,
 				D95395181BB26B0200CB6746 /* HomeViewController.h */,
@@ -823,20 +928,28 @@
 				D96EA95A1BB37FE300360ED8 /* icon_menu@2x.png in Resources */,
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@2x.png in Resources */,
 				D9B2F6BF1BB28D7A00ED7DDF /* icon_menu_wallet@2x.png in Resources */,
+				D96EAA511BB55DAC00360ED8 /* OrderContentTableViewCell.xib in Resources */,
+				D96EAA411BB5372100360ED8 /* icon_distance@2x.png in Resources */,
 				D96EAA111BB4D14900360ED8 /* icon_avatar_default@2x.png in Resources */,
+				D96EAA301BB5242A00360ED8 /* SendOrderDetailHeaderView.xib in Resources */,
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,
+				D96EAA441BB5377100360ED8 /* icon_time@2x.png in Resources */,
 				D96EA9581BB3776200360ED8 /* MyProfileTableViewCell.xib in Resources */,
 				D96EA92C1BB2D54B00360ED8 /* SenderOrderViewController.xib in Resources */,
 				D96EA94E1BB2F01E00360ED8 /* MyProfileTableViewController.xib in Resources */,
 				D96EA9531BB2F05100360ED8 /* MyProfileHeaderView.xib in Resources */,
 				D96EA9861BB3D1FB00360ED8 /* SVProgressHUD.bundle in Resources */,
+				D96EAA3A1BB5337F00360ED8 /* CustomTableViewCell.xib in Resources */,
 				D96EA9151BB292BB00360ED8 /* HomeMenuViewController.xib in Resources */,
+				D96EAA401BB5372100360ED8 /* icon_content@2x.png in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D96EAA0E1BB40EA200360ED8 /* GrabOrderListTableViewController.xib in Resources */,
 				D9B2F6BE1BB28D7A00ED7DDF /* icon_menu_mine@2x.png in Resources */,
 				D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */,
 				D9B2F6951BB27FA900ED7DDF /* Default-568h@2x.png in Resources */,
+				D96EAA3F1BB5372100360ED8 /* icon_address@2x.png in Resources */,
 				D96EA93E1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib in Resources */,
+				D96EAA421BB5372100360ED8 /* icon_money@2x.png in Resources */,
 				D96EA9341BB2DEA400360ED8 /* icon_sendOrder@2x.png in Resources */,
 				D96EAA051BB3FFB500360ED8 /* banner_default@2x.png in Resources */,
 			);
@@ -866,9 +979,11 @@
 				D96EA9241BB2A39300360ED8 /* GrabOrderSegmentedViewController.m in Sources */,
 				D9B2F6AF1BB2838300ED7DDF /* UIViewController+REFrostedViewController.m in Sources */,
 				D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */,
+				D96EAA351BB52A8C00360ED8 /* UserLocationManager.m in Sources */,
 				D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */,
 				D96EA92B1BB2D54B00360ED8 /* SenderOrderViewController.m in Sources */,
 				D96EA9D21BB3D24700360ED8 /* UIImage+GIF.m in Sources */,
+				D96EAA581BB56D9E00360ED8 /* UIAlertView+Block.m in Sources */,
 				D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */,
 				D96EA9CE1BB3D24700360ED8 /* SDWebImageDownloaderOperation.m in Sources */,
 				D96EA9DB1BB3D35A00360ED8 /* UserInfo.m in Sources */,
@@ -882,11 +997,13 @@
 				D9B2F6AA1BB2838300ED7DDF /* RECommonFunctions.m in Sources */,
 				D96EA9D71BB3D24700360ED8 /* UIView+WebCacheOperation.m in Sources */,
 				D96EA99D1BB3D22100360ED8 /* AFHTTPRequestOperation.m in Sources */,
+				D96EAA501BB55DAC00360ED8 /* OrderContentTableViewCell.m in Sources */,
 				D96EA93C1BB2E35D00360ED8 /* MyWalletTableViewHeaderView.m in Sources */,
 				D96EA9A21BB3D22100360ED8 /* AFURLConnectionOperation.m in Sources */,
 				D95394E71BB2694900CB6746 /* main.m in Sources */,
 				D9B2F6B61BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m in Sources */,
 				D96EA9CB1BB3D24700360ED8 /* SDWebImageCompat.m in Sources */,
+				D96EAA481BB53A5400360ED8 /* OrderDetailModel.m in Sources */,
 				D96EA9D31BB3D24700360ED8 /* UIImage+MultiFormat.m in Sources */,
 				D96EA97B1BB3D13000360ED8 /* AppTools.m in Sources */,
 				D953951A1BB26B0200CB6746 /* HomeViewController.m in Sources */,
@@ -900,9 +1017,13 @@
 				D96EA9E81BB3D9E300360ED8 /* LoginViewController.m in Sources */,
 				D96EAA091BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m in Sources */,
 				D96EA99E1BB3D22100360ED8 /* AFHTTPRequestOperationManager.m in Sources */,
+				D96EAA541BB569BA00360ED8 /* FYTimeViewController.m in Sources */,
+				D96EAA391BB5337F00360ED8 /* CustomTableViewCell.m in Sources */,
 				D96EA9C81BB3D24700360ED8 /* MKAnnotationView+WebCache.m in Sources */,
 				D9B2F6AC1BB2838300ED7DDF /* REFrostedViewController.m in Sources */,
 				D96EA9FE1BB3F46C00360ED8 /* SVHTTPClient.m in Sources */,
+				D96EAA2B1BB5230000360ED8 /* SendOrderDetailViewController.m in Sources */,
+				D96EAA2E1BB523D900360ED8 /* SendOrderDetailHeaderView.m in Sources */,
 				D96EA9211BB2A26900360ED8 /* IDSegmentedRootViewController.m in Sources */,
 				D96EA99F1BB3D22100360ED8 /* AFHTTPSessionManager.m in Sources */,
 				D96EA9CC1BB3D24700360ED8 /* SDWebImageDecoder.m in Sources */,
@@ -922,6 +1043,7 @@
 				D96EA9471BB2EB7300360ED8 /* MyWalletViewController.m in Sources */,
 				D96EA9511BB2F04500360ED8 /* MyProfileHeaderView.m in Sources */,
 				D9B2F6AD1BB2838300ED7DDF /* UIImage+REFrostedViewController.m in Sources */,
+				D96EAA4C1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.m in Sources */,
 				D96EA9A01BB3D22100360ED8 /* AFNetworkReachabilityManager.m in Sources */,
 				D9B2F6AE1BB2838300ED7DDF /* UIView+REFrostedViewController.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "SenderOrderViewController.h"
+#import "SendOrderDetailViewController.h"
 
 @interface SenderOrderViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *sendOrderBtn;
@@ -27,5 +28,7 @@
 }
 
 - (IBAction)sendOrder:(id)sender {
+    SendOrderDetailViewController *ctl = [[SendOrderDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 @end

@@ -28,4 +28,6 @@
     _nickNameLabel.text = _userInfo.nikename;
 }
 
+
+
 @end
