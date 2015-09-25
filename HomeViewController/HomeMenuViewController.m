@@ -12,6 +12,7 @@
 #import "HomeMenuTableViewCell.h"
 #import "MyWalletViewController.h"
 #import "MyProfileTableViewController.h"
+#import "LoginViewController.h"
 
 @interface HomeMenuViewController ()
 
@@ -34,6 +35,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -61,21 +63,37 @@
 
 - (void)gotoMyWallet
 {
-    [self.frostedViewController hideMenuViewController];
-    MyWalletViewController *ctl = [[MyWalletViewController alloc] init];
-    [_mainViewController.navigationController pushViewController:ctl animated:YES];
+    if ([[UserManager shareUserManager] isLogin]) {
+        [self.frostedViewController hideMenuViewController];
+        MyWalletViewController *ctl = [[MyWalletViewController alloc] init];
+        [_mainViewController.navigationController pushViewController:ctl animated:YES];
+
+    } else {
+        [self gotoLogin];
+    }
 }
 
 - (void)gotoMyProfile
 {
-    [self.frostedViewController hideMenuViewController];
-    MyProfileTableViewController *ctl = [[MyProfileTableViewController alloc] init];
-    [_mainViewController.navigationController pushViewController:ctl animated:YES];
+    if ([[UserManager shareUserManager] isLogin]) {
+        [self.frostedViewController hideMenuViewController];
+        MyProfileTableViewController *ctl = [[MyProfileTableViewController alloc] init];
+        [_mainViewController.navigationController pushViewController:ctl animated:YES];
+    } else {
+        [self gotoLogin];
+    }
 }
 
 - (void)gotoAbout
 {
     
+}
+
+- (void)gotoLogin
+{
+    [self.frostedViewController hideMenuViewController];
+    LoginViewController *ctl = [[LoginViewController alloc] init];
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
 #pragma mark - TableViewDataSource
@@ -87,6 +105,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    _headerView.userInfo = [UserManager shareUserManager].userInfo;
     return _headerView;
 }
 

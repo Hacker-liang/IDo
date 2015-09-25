@@ -12,14 +12,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ClT-ht-MEf">
-                    <rect key="frame" x="210" y="29" width="70" height="70"/>
+                    <rect key="frame" x="210" y="41" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="J43-0r-XxM"/>
                         <constraint firstAttribute="width" constant="70" id="jxS-3u-V3D"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH7-oX-lGU">
-                    <rect key="frame" x="8" y="123" width="474" height="21"/>
+                    <rect key="frame" x="8" y="136" width="474" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="NuM-xE-AXM"/>
                     </constraints>
@@ -41,9 +41,9 @@
                 <constraint firstItem="ClT-ht-MEf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4Of-vc-nM3"/>
                 <constraint firstAttribute="trailing" secondItem="rH7-oX-lGU" secondAttribute="trailing" constant="8" id="CcH-R9-sq0"/>
                 <constraint firstItem="rH7-oX-lGU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="UE6-Wl-hBN"/>
-                <constraint firstItem="ClT-ht-MEf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="29" id="oCa-rJ-fvV"/>
+                <constraint firstItem="ClT-ht-MEf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="oCa-rJ-fvV"/>
                 <constraint firstItem="o1K-P3-hj7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pNq-dv-ovC"/>
-                <constraint firstItem="rH7-oX-lGU" firstAttribute="top" secondItem="ClT-ht-MEf" secondAttribute="bottom" constant="24" id="t8t-1w-vvZ"/>
+                <constraint firstItem="rH7-oX-lGU" firstAttribute="top" secondItem="ClT-ht-MEf" secondAttribute="bottom" constant="25" id="t8t-1w-vvZ"/>
                 <constraint firstAttribute="bottom" secondItem="o1K-P3-hj7" secondAttribute="bottom" constant="17" id="thC-Lq-Cub"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

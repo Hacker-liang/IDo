@@ -25,12 +25,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.galleryImageView];
+    [self.galleryImageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"banner_default.png"]];
 
     [self addChildViewController:self.segementedController];
     [self.scrollView addSubview:self.segementedController.view];
-    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height+210);
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height+150);
     [self.segementedController willMoveToParentViewController:self];
-    self.segementedController.view.frame = CGRectMake(0, 210, self.view.bounds.size.width, self.view.bounds.size.height-210);
+    self.segementedController.view.frame = CGRectMake(0, 214, self.view.bounds.size.width, self.view.bounds.size.height-214);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,8 +50,7 @@
 - (UIImageView *)galleryImageView
 {
     if (!_galleryImageView) {
-        _galleryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 210-64)];
-        _galleryImageView.backgroundColor = [UIColor grayColor];
+        _galleryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 150)];
     }
     return _galleryImageView;
 }
@@ -66,10 +66,32 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([scrollView isEqual:self.scrollView]) {
-        if (scrollView.contentOffset.y > (210 - 64)) {
-            CGPoint point = CGPointMake(0, 210-64);
+        
+        if (scrollView.contentOffset.y > 150) {
+            CGPoint point = CGPointMake(0, 150);
             scrollView.contentOffset = point;
         }
+    }
+    
+    NSLog(@"scrollView offsetY:%lf", _scrollView.contentOffset.y);
+    NSLog(@"%lf", self.scrollView.bounds.size.height);
+    CGFloat height = (self.scrollView.bounds.size.height - 214) + scrollView.contentOffset.y;
+    _segementedController.view.frame = CGRectMake(0, _segementedController.view.frame.origin.y, _segementedController.view.bounds.size.width, height);
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 100) {
+        CGPoint point = CGPointMake(0, 150);
+        scrollView.contentOffset = point;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 100) {
+        CGPoint point = CGPointMake(0, 150);
+        scrollView.contentOffset = point;
     }
 }
 

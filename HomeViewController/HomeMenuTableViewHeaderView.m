@@ -21,4 +21,11 @@
     self.backgroundColor = APP_THEME_COLOR;
 }
 
+- (void)setUserInfo:(UserInfo *)userInfo
+{
+    _userInfo = userInfo;
+    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_userInfo.img] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    _nickNameLabel.text = _userInfo.nikename;
+}
+
 @end

@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     self.segmentedNormalImages = @[];
     self.segmentedSelectedImages = @[];
-    self.segmentedTitles = @[@"抢单", @"我的订单", @"评价"];
+    self.segmentedTitles = @[@"立即派单", @"我的订单", @"评价"];
     
     _senderOrderCtl = [[SenderOrderViewController alloc] initWithNibName:@"SenderOrderViewController" bundle:nil];
     UIViewController *ctl1 = [[UIViewController alloc] init];
@@ -34,14 +34,5 @@
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

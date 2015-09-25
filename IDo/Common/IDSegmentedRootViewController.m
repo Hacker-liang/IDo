@@ -23,12 +23,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupSegmentView];
     [self setupContentView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    NSLog(@"%lf", self.view.bounds.size.height);
+    _contentView.frame = CGRectMake(0, 49, self.view.bounds.size.width, self.view.bounds.size.height-49);
 }
 
 /**
@@ -46,7 +55,7 @@
     float btnHeight = 49;
     float offsetX = 0;
     
-    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, btnWidth, 2)];
+    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, btnHeight-2, btnWidth, 2)];
     _indicatorView.backgroundColor = [UIColor orangeColor];
     [segmentPanel addSubview:_indicatorView];
     
@@ -116,6 +125,14 @@
     if ([newController isEqual:_currentViewController]) {
         return;
     }
+    
+    UIButton *sender = [_segmentBtns objectAtIndex:pageIndex];
+    for (UIButton *btn in _segmentBtns) {
+        btn.selected = NO;
+    }
+    sender.selected = YES;
+    _indicatorView.center = CGPointMake(sender.center.x, 48);
+
     [self replaceController:_currentViewController newController:newController];
 }
 

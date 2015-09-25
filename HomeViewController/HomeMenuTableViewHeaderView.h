@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *ratingView;
 
+@property (nonatomic, strong) UserInfo *userInfo;
+
 + (id)homeMenuTableViewHeaderView;
 
 @end
