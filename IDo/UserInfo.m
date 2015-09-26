@@ -22,6 +22,7 @@
         _lock = [dict objectForKey:@"lock"];
         _zhifubao = [dict objectForKey:@"zhifubao"];
         _weixin = [dict objectForKey:@"weixin"];
+        _userLabel = [dict objectForKey:@"label"];
     }
     return self;
 }

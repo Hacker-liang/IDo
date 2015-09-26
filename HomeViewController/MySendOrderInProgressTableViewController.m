@@ -1,39 +1,32 @@
 //
-//  GrabOrderListTableViewController.m
+//  MySendOrderInProgressTableViewController.m
 //  IDo
 //
-//  Created by liangpengshuai on 9/24/15.
+//  Created by liangpengshuai on 9/26/15.
 //  Copyright © 2015 com.Yinengxin.xianne. All rights reserved.
 //
 
-#import "GrabOrderListTableViewController.h"
+#import "MySendOrderInProgressTableViewController.h"
 #import "OrderListTableViewCell.h"
-#import "OrderListModel.h"
 #import "OrderDetailViewController.h"
 
-@interface GrabOrderListTableViewController ()
+@interface MySendOrderInProgressTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
-@implementation GrabOrderListTableViewController
+@implementation MySendOrderInProgressTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderListCell"];
     self.tableView.backgroundColor = APP_PAGE_COLOR;
-
+    
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getOrder];
     }];
     
-    [self.tableView.header beginRefreshing];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     [self.tableView.header beginRefreshing];
 }
 
@@ -51,36 +44,31 @@
 
 - (void)getOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
+    NSString *url = [NSString stringWithFormat:@"%@orderfadaning",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
-    [mDict setObject:@"116.343196" forKey:@"lng"];
-    [mDict setObject:@"39.974850" forKey:@"lat"];
-
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [self.tableView.header endRefreshing];
         if (response)
         {
+            [self.dataSource removeAllObjects];
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSArray *tempList = dict[@"data"];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
-                [self.dataSource removeAllObjects];
                 for (NSDictionary *dic in tempList) {
                     OrderListModel *order = [[OrderListModel alloc] initWithJson:dic];
                     [self.dataSource addObject:order];
                 }
             } else {
             }
-            
             [self.tableView reloadData];
         }
     }];
-}
 
+}
 
 #pragma mark - Table view data source
 
@@ -100,12 +88,15 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _dataSource.count;
+
+    return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     return 1;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderListCell" forIndexPath:indexPath];
@@ -117,11 +108,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
     OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
     ctl.orderId = model.orderId;
-    ctl.orderDetailType = OrderIngGrab;
+    ctl.orderDetailType = OrderIngPie;
     [self.navigationController pushViewController:ctl animated:YES];
     
 }

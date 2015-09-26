@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrderDetailModel.h"
+#import "OrderListModel.h"
 
 @interface OrderListTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
@@ -18,7 +18,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *addressBtn;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
 
-@property(nonatomic, strong) OrderDetailModel *orderDetail;
+@property(nonatomic, strong) OrderListModel *orderDetail;
 
 @end

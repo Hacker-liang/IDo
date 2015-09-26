@@ -1,23 +1,15 @@
 //
-//  OrderDetailModel.h
+//  OrderListModel.h
 //  IDo
 //
 //  Created by liangpengshuai on 9/25/15.
 //  Copyright © 2015 com.Yinengxin.xianne. All rights reserved.
 //
 
-typedef enum : NSUInteger {
-    
-    kOrderInProgress = 1,
-    kOrderCancel = 2
-    
-} OrderStatus;
-
-
 #import <Foundation/Foundation.h>
-#import "UserInfo.h"
+#import "OrderDetailModel.h"
 
-@interface OrderDetailModel : NSObject
+@interface OrderListModel : NSObject
 
 @property(copy, nonatomic) UserInfo *userInfo;
 
@@ -31,7 +23,8 @@ typedef enum : NSUInteger {
 @property(copy, nonatomic) NSString *tasktime; //系统传输时间
 @property(copy, nonatomic) NSString *sex;      //性别
 @property(copy, nonatomic) NSString *distance; //范围
-
+@property(copy, nonatomic) NSString *statusDesc;
+@property(nonatomic) OrderStatus orderStatus;
 
 - (id)initWithJson:(id)json;
 

@@ -132,24 +132,10 @@
     }
     sender.selected = YES;
     _indicatorView.center = CGPointMake(sender.center.x, 48);
-
-    [self replaceController:_currentViewController newController:newController];
+    _currentViewController = newController;
+    [_contentView setContentOffset:CGPointMake(_contentView.bounds.size.width*pageIndex, 0) animated:YES];
 }
 
-- (void)replaceController:(UIViewController *)oldController newController:(UIViewController *)newController
-{
-    [self addChildViewController:newController];
-    [self transitionFromViewController:oldController toViewController:newController duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
-        if (finished) {
-            [newController didMoveToParentViewController:self];
-            [oldController willMoveToParentViewController:nil];
-            [oldController removeFromParentViewController];
-            self.currentViewController = newController;
-        }else{
-            self.currentViewController = oldController;
-        }
-    }];
-}
 
 #pragma mark - UIScrollViewDelegate
 

@@ -8,10 +8,12 @@
 
 #import "SendOrderSegmentedViewController.h"
 #import "SenderOrderViewController.h"
+#import "MySendOrderRootViewController.h"
 
 @interface SendOrderSegmentedViewController ()
 
 @property (nonatomic, strong) SenderOrderViewController *senderOrderCtl;
+@property (nonatomic, strong) MySendOrderRootViewController *mySendOrderCtl;
 
 @end
 
@@ -23,9 +25,9 @@
     self.segmentedTitles = @[@"立即派单", @"我的订单", @"评价"];
     
     _senderOrderCtl = [[SenderOrderViewController alloc] initWithNibName:@"SenderOrderViewController" bundle:nil];
-    UIViewController *ctl1 = [[UIViewController alloc] init];
-    UIViewController *ctl2= [[UIViewController alloc] init];
-    self.viewControllers = @[_senderOrderCtl, ctl1, ctl2];
+    _mySendOrderCtl = [[MySendOrderRootViewController alloc] init];
+    UIViewController *ctl = [[UIViewController alloc] init];
+    self.viewControllers = @[_senderOrderCtl, _mySendOrderCtl, ctl];
     [super viewDidLoad];
 
 }
