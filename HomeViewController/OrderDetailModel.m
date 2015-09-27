@@ -69,6 +69,9 @@
             if ([[json objectForKey:@"tomemberid"] intValue] == 0) {
                 _orderStatus = kOrderInProgress;
                 _orderStatusDesc = @"等待活宝抢单";
+                NSInteger shouldGrabTime = [[json objectForKey:@"submittime"] intValue] + 1200;
+                NSTimeInterval timeNow = [NSDate date].timeIntervalSince1970;
+                _grabCountdown = shouldGrabTime - timeNow;
 
             }
         } else if ([[json objectForKey:@"status"] intValue] == 2) {

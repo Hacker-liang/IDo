@@ -12,6 +12,7 @@
 @interface OrderDetailViewController ()
 
 @property (nonatomic, strong) UIView *footerView;
+@property (nonatomic) int countdown;
 
 @end
 
@@ -83,26 +84,37 @@
     [self setupFooterView];
     
     if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
-        int min = _orderDetail.payCountdown/60;
-        int sec = _orderDetail.payCountdown%60;
-        if (sec < 10) {
-            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
-        } else {
-            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
-        }
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateLeftTime:) userInfo:nil repeats:YES];
+        _countdown = _orderDetail.payCountdown;
+        [self startCountdown];
+        
+    } else if (_orderDetail.orderStatus == kOrderInProgress) {
+        _countdown = _orderDetail.grabCountdown;
+        [self startCountdown];
     }
+}
+
+
+- (void)startCountdown
+{
+    int min = _countdown/60;
+    int sec = _countdown%60;
+    if (sec < 10) {
+        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
+    } else {
+        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
+    }
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateLeftTime:) userInfo:nil repeats:YES];
 }
 
 - (void)updateLeftTime:(NSTimer *)timer
 {
-    if (_orderDetail.payCountdown == 0) {
+    if (_countdown == 0) {
         [timer invalidate];
         timer = nil;
     }
-    _orderDetail.payCountdown--;
-    int min = _orderDetail.payCountdown/60;
-    int sec = _orderDetail.payCountdown%60;
+    _countdown--;
+    int min = _countdown/60;
+    int sec = _countdown%60;
     if (sec < 10) {
         _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
     } else {

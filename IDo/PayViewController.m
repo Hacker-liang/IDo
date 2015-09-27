@@ -177,15 +177,16 @@
 {
 
 }
-//-(void)payforSure
-//{
+
+-(void)payforSure
+{
 //    Appdelegate.viewisWhere = PiePayView;
 //    AliPayTool *ali=[[AliPayTool alloc]init];
 //    __weak PayViewController *wSelf = self;
 //    [ali aliPayWithProductName:@"佣金" productDescription:@"给活儿宝的佣金" andAmount:self.price orderId:self.orderid MoneyBao:@"0" AliPayMoney:@"1" shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
 //        [wSelf aliPayCallBackWithSuccessed:success errorString:errorStr];
 //    }];
-//}
+}
 
 // xuebao start
 // 支付宝支付是否成功，服务器记录是否成功回调
