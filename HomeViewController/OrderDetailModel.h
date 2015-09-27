@@ -54,6 +54,7 @@ typedef enum : NSUInteger {
 @property(copy, nonatomic) NSString *tasktime; //系统传输时间
 @property(copy, nonatomic) NSString *sex;      //性
 @property(copy, nonatomic) NSString *distance; //范围
+@property (nonatomic) int payCountdown;  //付款倒计时
 
 @property (nonatomic) BOOL isSendOrder;
 @property (nonatomic) OrderStatus orderStatus;

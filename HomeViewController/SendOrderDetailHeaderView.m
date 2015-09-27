@@ -34,7 +34,16 @@
         _orderDetailModel.lng = [NSString stringWithFormat:@"%lf", userLocation.coordinate.longitude];
         _orderDetailModel.address = address;
         [_locationBtn setTitle:address forState:UIControlStateNormal];
+        [self adjustMapViewWithLocation:userLocation.coordinate];
     }];
+}
+
+- (void)adjustMapViewWithLocation:(CLLocationCoordinate2D)location
+{
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.05, 0.05);
+    MKCoordinateRegion region = MKCoordinateRegionMake(location,span);
+    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:region];
+    [_mapView setRegion:adjustedRegion animated:YES];
 }
 
 

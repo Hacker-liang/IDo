@@ -140,11 +140,17 @@
         return;
     }
     
+    if (_orderDetail.lat == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];
+        return;
+    }
+    
+    [SVProgressHUD showWithStatus:@"正在派单"];
     NSString *url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
     [mDict safeSetObject:_orderDetail.content forKey:@"content"];
-    [mDict safeSetObject:_orderDetail.price forKey:@"money"];
+    [mDict safeSetObject:@"0.01" forKey:@"money"];
     [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
     [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
     [mDict safeSetObject:_orderDetail.sex forKey:@"sex"];
@@ -163,7 +169,11 @@
             if([tempStatus integerValue] == 1) {
                 [SVProgressHUD showSuccessWithStatus:@"派单成功"];
                 [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"派单失败"];
             }
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"派单失败"];
         }
     }];
 

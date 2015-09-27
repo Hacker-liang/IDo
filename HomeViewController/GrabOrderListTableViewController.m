@@ -72,6 +72,7 @@
                     [self.dataSource addObject:order];
                 }
             } else {
+                [self.dataSource removeAllObjects];
             }
             
             [self.tableView reloadData];

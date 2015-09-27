@@ -23,7 +23,7 @@
     _mapview.showsUserLocation = YES;
     
     [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
-        [self adjustMapViewWithLocation:userLocation];
+        [self adjustMapViewWithLocation:userLocation.coordinate];
     }];
     _avatarImageView.layer.cornerRadius = 17.0;
     _avatarImageView.clipsToBounds = YES;
@@ -37,11 +37,10 @@
     [self.view bringSubviewToFront:self.footerView];
 }
 
-- (void)adjustMapViewWithLocation:(CLLocation *)location
+- (void)adjustMapViewWithLocation:(CLLocationCoordinate2D)location
 {
-    CLLocationCoordinate2D centerPoint = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
     MKCoordinateSpan span = MKCoordinateSpanMake(0.05, 0.05);
-    MKCoordinateRegion region = MKCoordinateRegionMake(centerPoint,span);
+    MKCoordinateRegion region = MKCoordinateRegionMake(location,span);
     MKCoordinateRegion adjustedRegion = [_mapview regionThatFits:region];
     [_mapview setRegion:adjustedRegion animated:YES];
 }
@@ -80,7 +79,35 @@
     item.coordinate = location;
     [_mapview addAnnotation:item];
     [_mapview setCenterCoordinate:location animated:YES];
+    [self adjustMapViewWithLocation:location];
     [self setupFooterView];
+    
+    if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
+        int min = _orderDetail.payCountdown/60;
+        int sec = _orderDetail.payCountdown%60;
+        if (sec < 10) {
+            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
+        } else {
+            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
+        }
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateLeftTime:) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)updateLeftTime:(NSTimer *)timer
+{
+    if (_orderDetail.payCountdown == 0) {
+        [timer invalidate];
+        timer = nil;
+    }
+    _orderDetail.payCountdown--;
+    int min = _orderDetail.payCountdown/60;
+    int sec = _orderDetail.payCountdown%60;
+    if (sec < 10) {
+        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
+    } else {
+        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
+    }
 }
 
 - (void)grabOrder:(UIButton *)sender
