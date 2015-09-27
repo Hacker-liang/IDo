@@ -52,9 +52,22 @@
 
 - (void)updateView
 {
-    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_orderDetail.userInfo.avatar]];
-    _nickNameLabel.text = _orderDetail.userInfo.nickName;
-    _userDescLabel.text = _orderDetail.userInfo.userLabel;
+    UserInfo *userInfo;
+    if (_isSendOrder) {
+        userInfo = _orderDetail.grabOrderUser;
+    } else {
+        userInfo = _orderDetail.sendOrderUser;
+    }
+    if (!_isSendOrder && userInfo.userid != 0) {
+        _userDescLabel.text = [NSString stringWithFormat:@"已经发送%@单", userInfo.sendOrderCount];
+    } else if (userInfo.userid != 0 && userInfo.userid != 0) {
+        _userDescLabel.text = [NSString stringWithFormat:@"已经接%@单", userInfo.sendOrderCount];
+    } else {
+        _userDescLabel.text = nil;
+    }
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    _nickNameLabel.text = userInfo.nickName;
+
     _orderTimeLabel.text = _orderDetail.tasktime;
     _orderContentLabel.text = _orderDetail.content;
     _priceLabel.text = [NSString stringWithFormat:@"%@元", _orderDetail.price];
@@ -100,6 +113,9 @@
 - (void)payOrder:(id)sender
 {
     PayViewController *vc = [[PayViewController alloc] init];
+    vc.price = _orderDetail.price;
+    vc.orderid = _orderDetail.orderNumber;
+    vc.huoerbaoID = _orderDetail.grabOrderUser.userid;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

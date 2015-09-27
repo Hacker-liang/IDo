@@ -41,7 +41,8 @@ typedef enum : NSUInteger {
 
 @interface OrderDetailModel : NSObject
 
-@property(copy, nonatomic) UserInfo *userInfo;
+@property(copy, nonatomic) UserInfo *sendOrderUser;
+@property(copy, nonatomic) UserInfo *grabOrderUser;
 
 @property(copy, nonatomic) NSString *orderId;
 @property(copy, nonatomic) NSString *orderNumber;
@@ -51,7 +52,7 @@ typedef enum : NSUInteger {
 @property(copy, nonatomic) NSString *content;  //内容
 @property(copy, nonatomic) NSString *price;    //价格
 @property(copy, nonatomic) NSString *tasktime; //系统传输时间
-@property(copy, nonatomic) NSString *sex;      //性别
+@property(copy, nonatomic) NSString *sex;      //性
 @property(copy, nonatomic) NSString *distance; //范围
 
 @property (nonatomic) BOOL isSendOrder;

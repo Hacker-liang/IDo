@@ -24,9 +24,22 @@
 - (void)setOrderDetail:(OrderListModel *)orderDetail
 {
     _orderDetail = orderDetail;
-    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_orderDetail.userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
-    _titleLabel.text = _orderDetail.userInfo.nickName;
-    _subtitleLabel.text = _orderDetail.userInfo.userLabel;
+    UserInfo *userInfo;
+    if (_isGrabOrder) {
+        userInfo = _orderDetail.sendOrderUser;
+    } else {
+        userInfo = _orderDetail.grabOrderUser;
+    }
+    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    _titleLabel.text = userInfo.nickName;
+
+    if (_isGrabOrder && userInfo.userid != 0) {
+        _subtitleLabel.text = [NSString stringWithFormat:@"已经发送%@单", userInfo.sendOrderCount];
+    } else if (userInfo.userid != 0) {
+        _subtitleLabel.text = [NSString stringWithFormat:@"已经接%@单", userInfo.sendOrderCount];
+    } else {
+        _subtitleLabel.text = nil;
+    }
     _timeLabel.text = _orderDetail.tasktime;
     _contentLabel.text = _orderDetail.content;
     _priceLabel.text = [NSString stringWithFormat:@"%@元", _orderDetail.price];

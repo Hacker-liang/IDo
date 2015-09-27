@@ -22,10 +22,11 @@
         _tasktime = [json objectForKey:@"timelength"];
         _address = [json objectForKey:@"serviceaddress"];
 
-        if ([json objectForKey:@"member"]) {
-            _userInfo = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
-        } else {
-            _userInfo = [[UserInfo alloc] initWithJson:[json objectForKey:@"fadanren"]];
+        if ([json objectForKey:@"jiedanren"]) {
+            _grabOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"jiedanren"]];
+        }
+        if ([json objectForKey:@"fadanren"]) {
+            _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"fadanren"]];
         }
         //订单被抢
         if ([[json objectForKey:@"status"] intValue] == 3) {

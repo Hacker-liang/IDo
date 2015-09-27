@@ -60,8 +60,7 @@
     btn.frame=CGRectMake(10, kWindowHeight-100, self.view.frame.size.width-20, 40);
     btn.titleLabel.font = [UIFont systemFontOfSize:17];
     [btn setTintColor:[UIColor whiteColor]];
-    btn.backgroundColor = [UIColor greenColor];
-    btn.layer.cornerRadius = 4.0;
+    [btn setBackgroundImage:[UIImage imageNamed:@"callbtn.png"] forState:UIControlStateNormal];
     [btn setTitle:@"确认支付" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(payforSure) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
@@ -147,7 +146,7 @@
     }
     
     UIImageView *imageView = (UIImageView*)[cell viewWithTag:990];
-    
+    imageView.image = [UIImage imageNamed:@"ali_pay.png"];
     UILabel *titleLab = (UILabel*)[cell viewWithTag:991];
     titleLab.text = @"使用支付宝支付";
     

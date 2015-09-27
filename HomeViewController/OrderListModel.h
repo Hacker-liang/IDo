@@ -11,7 +11,8 @@
 
 @interface OrderListModel : NSObject
 
-@property(copy, nonatomic) UserInfo *userInfo;
+@property(copy, nonatomic) UserInfo *sendOrderUser;
+@property(copy, nonatomic) UserInfo *grabOrderUser;
 
 @property(copy, nonatomic) NSString *orderId;
 @property(copy, nonatomic) NSString *orderNumber;

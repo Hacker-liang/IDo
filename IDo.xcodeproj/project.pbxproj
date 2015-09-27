@@ -17,6 +17,7 @@
 		D92B5AD11BB7836E00E3AC93 /* GrabOrderSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B5AD01BB7836E00E3AC93 /* GrabOrderSettingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D92B5AD51BB8106F00E3AC93 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B5AD41BB8106F00E3AC93 /* PayViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D92B5AD81BB812A900E3AC93 /* ali_pay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B5AD71BB812A900E3AC93 /* ali_pay@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D92B5ADA1BB815F100E3AC93 /* callbtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B5AD91BB815F100E3AC93 /* callbtn@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D95394E71BB2694900CB6746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E61BB2694900CB6746 /* main.m */; };
 		D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E91BB2694900CB6746 /* AppDelegate.m */; };
 		D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95394F11BB2694900CB6746 /* Assets.xcassets */; };
@@ -187,6 +188,7 @@
 		D92B5AD31BB8106F00E3AC93 /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
 		D92B5AD41BB8106F00E3AC93 /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
 		D92B5AD71BB812A900E3AC93 /* ali_pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ali_pay@2x.png"; sourceTree = "<group>"; };
+		D92B5AD91BB815F100E3AC93 /* callbtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callbtn@2x.png"; sourceTree = "<group>"; };
 		D95394E21BB2694900CB6746 /* IDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95394E61BB2694900CB6746 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D95394E81BB2694900CB6746 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 		D92B5AD61BB8122A00E3AC93 /* Pay */ = {
 			isa = PBXGroup;
 			children = (
+				D92B5AD91BB815F100E3AC93 /* callbtn@2x.png */,
 				D92B5AD71BB812A900E3AC93 /* ali_pay@2x.png */,
 			);
 			name = Pay;
@@ -1199,6 +1202,7 @@
 				D96EAA411BB5372100360ED8 /* icon_distance@2x.png in Resources */,
 				D96EAA111BB4D14900360ED8 /* icon_avatar_default@2x.png in Resources */,
 				D9777D491BB65E1900A7A64C /* icon_phone@2x.png in Resources */,
+				D92B5ADA1BB815F100E3AC93 /* callbtn@2x.png in Resources */,
 				D9777D4A1BB65E1900A7A64C /* icon_orderDetail_address@2x.png in Resources */,
 				D96EAA301BB5242A00360ED8 /* SendOrderDetailHeaderView.xib in Resources */,
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,

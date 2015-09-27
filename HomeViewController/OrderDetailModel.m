@@ -23,7 +23,8 @@
         _address = [json objectForKey:@"serviceaddress"];
         _lat = [json objectForKey:@"lat"];
         _lng = [json objectForKey:@"lng"];
-        _userInfo = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
+        _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
+        _grabOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"jiedanren"]];
         
         //订单被抢
         if ([[json objectForKey:@"status"] intValue] == 3) {
