@@ -45,7 +45,7 @@
 - (void)getOrder
 {
     NSString *url;
-    if (_isGrabOrder) {
+    if (!_isGrabOrder) {
         url = [NSString stringWithFormat:@"%@orderfadaning",baseUrl];
 
     } else {

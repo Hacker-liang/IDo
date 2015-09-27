@@ -54,7 +54,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntX-Dy-N2s">
-                        <rect key="frame" x="8" y="116" width="204" height="30"/>
+                        <rect key="frame" x="8" y="116" width="199" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="oCp-ht-GUs"/>
                         </constraints>
@@ -111,10 +111,10 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niB-zl-Rop">
-                        <rect key="frame" x="215" y="123" width="97" height="21"/>
+                        <rect key="frame" x="206" y="123" width="106" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Yrp-f4-Zhg"/>
-                            <constraint firstAttribute="width" constant="97" id="eNi-1D-uX8"/>
+                            <constraint firstAttribute="width" constant="106" id="eNi-1D-uX8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.98431372549999996" green="0.37647058820000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -151,7 +151,7 @@
                     <constraint firstAttribute="trailing" secondItem="Dhc-3N-MLr" secondAttribute="trailing" id="kml-xq-Ltd"/>
                     <constraint firstItem="JRM-jP-Ryt" firstAttribute="leading" secondItem="0gm-Fl-aIE" secondAttribute="trailing" constant="8" id="q5X-5l-Nfq"/>
                     <constraint firstAttribute="trailing" secondItem="arY-Wi-ipV" secondAttribute="trailing" constant="78" id="tAp-VZ-2hU"/>
-                    <constraint firstAttribute="trailing" secondItem="ntX-Dy-N2s" secondAttribute="trailing" constant="108" id="y0a-g6-1xs"/>
+                    <constraint firstAttribute="trailing" secondItem="ntX-Dy-N2s" secondAttribute="trailing" constant="113" id="y0a-g6-1xs"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

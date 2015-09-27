@@ -112,15 +112,7 @@
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
 
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
-        
-        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
-        orderBtn.layer.cornerRadius = 5.0;
-        orderBtn.backgroundColor = APP_THEME_COLOR;
-        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
-        [orderBtn setTitle:@"立即付款" forState:UIControlStateNormal];
-        [orderBtn addTarget:self action:@selector(payOrder:) forControlEvents:UIControlEventTouchUpInside];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-160, kWindowWidth, 60)];
         
     }  else if (_orderDetail.orderStatus == kOrderInProgress && !_isSendOrder) {
         tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
@@ -152,6 +144,7 @@
         orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
         [orderBtn setTitle:@"立即验收" forState:UIControlStateNormal];
         [orderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:orderBtn];
         
     } else if (_orderDetail.orderStatus == kOrderCancelPayTimeOut) {
         statusString = _orderDetail.orderStatusDesc;
@@ -165,6 +158,22 @@
 
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
+    } else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
+        tipsString = @"保持良好记录有助于快速成交订单";
+        statusString = _orderDetail.orderStatusDesc;
+        
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
+        
+        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+        orderBtn.layer.cornerRadius = 5.0;
+        orderBtn.backgroundColor = APP_THEME_COLOR;
+        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        [orderBtn setTitle:@"立即付款" forState:UIControlStateNormal];
+        [orderBtn addTarget:self action:@selector(payOrder:) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:orderBtn];
+
     }
     
     _footerView.backgroundColor = [UIColor whiteColor];
@@ -190,6 +199,7 @@
 
 - (void)getOrderInfo
 {
+    [SVProgressHUD showWithStatus:@"正在加载"];
     NSString *url = [NSString stringWithFormat:@"%@getorderdetails",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:_orderId forKey:@"orderid"];
@@ -201,6 +211,7 @@
     }
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [SVProgressHUD dismiss];
         if (response)
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
