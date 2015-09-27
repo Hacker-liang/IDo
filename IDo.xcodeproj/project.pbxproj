@@ -15,6 +15,8 @@
 		D90E2E3A1BB647BA00C2E6F3 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E381BB647BA00C2E6F3 /* OrderDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D90E2E3B1BB647BA00C2E6F3 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		D92B5AD11BB7836E00E3AC93 /* GrabOrderSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B5AD01BB7836E00E3AC93 /* GrabOrderSettingViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D92B5AD51BB8106F00E3AC93 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B5AD41BB8106F00E3AC93 /* PayViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D92B5AD81BB812A900E3AC93 /* ali_pay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B5AD71BB812A900E3AC93 /* ali_pay@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D95394E71BB2694900CB6746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E61BB2694900CB6746 /* main.m */; };
 		D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E91BB2694900CB6746 /* AppDelegate.m */; };
 		D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95394F11BB2694900CB6746 /* Assets.xcassets */; };
@@ -182,6 +184,9 @@
 		D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
 		D92B5ACF1BB7836E00E3AC93 /* GrabOrderSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderSettingViewController.h; sourceTree = "<group>"; };
 		D92B5AD01BB7836E00E3AC93 /* GrabOrderSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderSettingViewController.m; sourceTree = "<group>"; };
+		D92B5AD31BB8106F00E3AC93 /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
+		D92B5AD41BB8106F00E3AC93 /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
+		D92B5AD71BB812A900E3AC93 /* ali_pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ali_pay@2x.png"; sourceTree = "<group>"; };
 		D95394E21BB2694900CB6746 /* IDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95394E61BB2694900CB6746 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D95394E81BB2694900CB6746 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -469,6 +474,23 @@
 			name = OrderDetail;
 			sourceTree = "<group>";
 		};
+		D92B5AD21BB8106400E3AC93 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				D92B5AD31BB8106F00E3AC93 /* PayViewController.h */,
+				D92B5AD41BB8106F00E3AC93 /* PayViewController.m */,
+			);
+			name = Pay;
+			sourceTree = "<group>";
+		};
+		D92B5AD61BB8122A00E3AC93 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				D92B5AD71BB812A900E3AC93 /* ali_pay@2x.png */,
+			);
+			name = Pay;
+			sourceTree = "<group>";
+		};
 		D95394D91BB2694900CB6746 = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +521,7 @@
 		D95394E41BB2694900CB6746 /* IDo */ = {
 			isa = PBXGroup;
 			children = (
+				D92B5AD21BB8106400E3AC93 /* Pay */,
 				D96EA96B1BB3CF4400360ED8 /* Login */,
 				D96EA9491BB2EFEC00360ED8 /* Profile */,
 				D96EA91E1BB2A1F900360ED8 /* Common */,
@@ -1052,6 +1075,7 @@
 		D9B2F6B91BB28D2E00ED7DDF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D92B5AD61BB8122A00E3AC93 /* Pay */,
 				D9777D441BB65DFC00A7A64C /* OrderDetail */,
 				D96EAA0F1BB4D14000360ED8 /* UserInfo */,
 				D96EA9DF1BB3D91200360ED8 /* Common */,
@@ -1169,6 +1193,7 @@
 				D9B2F6C01BB28D7A00ED7DDF /* icon_menu_setting@2x.png in Resources */,
 				D96EA95A1BB37FE300360ED8 /* icon_menu@2x.png in Resources */,
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@2x.png in Resources */,
+				D92B5AD81BB812A900E3AC93 /* ali_pay@2x.png in Resources */,
 				D9B2F6BF1BB28D7A00ED7DDF /* icon_menu_wallet@2x.png in Resources */,
 				D96EAA511BB55DAC00360ED8 /* OrderContentTableViewCell.xib in Resources */,
 				D96EAA411BB5372100360ED8 /* icon_distance@2x.png in Resources */,
@@ -1282,6 +1307,7 @@
 				D96EAA091BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m in Sources */,
 				D96EA99E1BB3D22100360ED8 /* AFHTTPRequestOperationManager.m in Sources */,
 				D90E2E351BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m in Sources */,
+				D92B5AD51BB8106F00E3AC93 /* PayViewController.m in Sources */,
 				D96EAA541BB569BA00360ED8 /* FYTimeViewController.m in Sources */,
 				D96EAA391BB5337F00360ED8 /* CustomTableViewCell.m in Sources */,
 				D96EA9C81BB3D24700360ED8 /* MKAnnotationView+WebCache.m in Sources */,

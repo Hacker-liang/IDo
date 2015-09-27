@@ -486,7 +486,7 @@
             <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="GHc-CV-xw9" secondAttribute="bottom" constant="62" id="1xh-cA-IdU">
-                    <variation key="widthClass=compact" constant="99"/>
+                    <variation key="widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="Hpx-RU-LZc" secondAttribute="trailing" id="3bI-dX-sRl"/>
                 <constraint firstItem="Hpx-RU-LZc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="8SJ-N3-pDb"/>

@@ -7,6 +7,7 @@
 //
 
 #import "OrderDetailViewController.h"
+#import "PayViewController.h"
 
 @interface OrderDetailViewController ()
 
@@ -94,8 +95,12 @@
             [SVProgressHUD showErrorWithStatus:@"抢单失败了"];
         }
     }];
-    
+}
 
+- (void)payOrder:(id)sender
+{
+    PayViewController *vc = [[PayViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupFooterView
@@ -150,6 +155,12 @@
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
 
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+        
+    } else if (_orderDetail.orderStatus == kOrderGrabSuccess && !_isSendOrder) {
+        statusString = _orderDetail.orderStatusDesc;
+        tipsString = @"保持良好记录有助于快速成交订单";
+        
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     } else if (_orderDetail.orderStatus == kOrderCancelDispute) {
