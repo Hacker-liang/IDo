@@ -1,5 +1,5 @@
 //
-//  MySendOrderHistoryTableViewController.h
+//  MyOrderHistoryTableViewController.h
 //  IDo
 //
 //  Created by liangpengshuai on 9/26/15.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MySendOrderHistoryTableViewController : UITableViewController
+@interface MyOrderHistoryTableViewController : UITableViewController
+
+@property (nonatomic) BOOL isGrabOrder;
 
 @end

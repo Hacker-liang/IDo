@@ -10,9 +10,10 @@
 
 @implementation OrderListModel
 
-- (id)initWithJson:(id)json
+- (id)initWithJson:(id)json andIsSendOrder:(BOOL)isSendOrder
 {
     if (self = [super init]) {
+        _isSendOrder = isSendOrder;
         _content = [json objectForKey:@"content"];
         _orderId = [json objectForKey:@"id"];
         _price = [json objectForKey:@"money"];
@@ -26,16 +27,64 @@
         } else {
             _userInfo = [[UserInfo alloc] initWithJson:[json objectForKey:@"fadanren"]];
         }
-        if ([[json objectForKey:@"status"] isEqualToString:@"1"]) {
-            _orderStatus = kOrderInProgress;
-            _statusDesc = @"等待抢单";
+        //订单被抢
+        if ([[json objectForKey:@"status"] intValue] == 3) {
+            if ([[json objectForKey:@"haspay"] intValue] == 0) {
+                _orderStatus = kOrderGrabSuccess;
+                _orderStatusDesc = @"已经接单，等待发单人付款";
+            } else if ([[json objectForKey:@"haspay"] intValue] == 1) {
+                if ([[json objectForKey:@"hasconf"] intValue] == 0) {
+                    _orderStatus = kOrderPayed;
+                    _orderStatusDesc = @"发单人已经付款，等待验收";
+                } else {
+                    if (_isSendOrder) {
+                        if ([[json objectForKey:@"hascommenttoperson"] intValue] == 1) {
+                            _orderStatus = kOrderCompletion;
+                            _orderStatusDesc = @"订单已经完成";
+                            
+                        } else {
+                            _orderStatus = kOrderCheckDone;
+                            _orderStatusDesc = @"订单已经验收，等待评价";
+                            
+                        }
+                    } else {
+                        if ([[json objectForKey:@"hascommentfromperson"] intValue] == 1) {
+                            _orderStatus = kOrderCompletion;
+                            _orderStatusDesc = @"订单已经完成";
+                            
+                        } else {
+                            _orderStatus = kOrderCheckDone;
+                            _orderStatusDesc = @"订单已经验收，等待评价";
+                            
+                        }
+                        
+                    }
+                    
+                }
+            }
+        } else if ([[json objectForKey:@"status"] intValue] == 1) {
+            if ([[json objectForKey:@"tomemberid"] intValue] == 0) {
+                _orderStatus = kOrderInProgress;
+                _orderStatusDesc = @"等待活宝抢单";
+                
+            }
+        } else if ([[json objectForKey:@"status"] intValue] == 2) {
+            if ([[json objectForKey:@"tomemberid"] intValue] == 0) {
+                _orderStatus = kOrderCancelGrabTimeOut;
+                _orderStatusDesc = @"无人抢单,已取消";
+                
+            } else  if ([[json objectForKey:@"haspay"] intValue] == 1) {
+                _orderStatus = kOrderCancelDispute;
+                _orderStatusDesc = @"订单纠纷,已取消";
+                
+            } else {
+                _orderStatus = kOrderCancelPayTimeOut;
+                _orderStatusDesc = @"超时未付款,已取消";
+                
+            }
         }
-        if ([[json objectForKey:@"status"] isEqualToString:@"2"]) {
-            _orderStatus = kOrderCancel;
-            _statusDesc = @"无人抢单,已取消";
-        }
-
     }
+
     return self;
 }
 

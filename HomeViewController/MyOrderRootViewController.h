@@ -1,5 +1,5 @@
 //
-//  MySendOrderRootViewController.h
+//  MyOrderRootViewController.h
 //  IDo
 //
 //  Created by liangpengshuai on 9/26/15.
@@ -8,6 +8,8 @@
 
 #import "IDSegmentedRootViewController.h"
 
-@interface MySendOrderRootViewController : IDSegmentedRootViewController
+@interface MyOrderRootViewController : IDSegmentedRootViewController
+
+@property (nonatomic) BOOL isGrabOrder;
 
 @end

@@ -54,10 +54,8 @@
     NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
-    [mDict setObject:@"116.343196" forKey:@"lng"];
-    [mDict setObject:@"39.974850" forKey:@"lat"];
+    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
 
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [self.tableView.header endRefreshing];
@@ -70,7 +68,7 @@
             if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
                 [self.dataSource removeAllObjects];
                 for (NSDictionary *dic in tempList) {
-                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic];
+                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:NO];
                     [self.dataSource addObject:order];
                 }
             } else {
@@ -121,7 +119,7 @@
     OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
     OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
     ctl.orderId = model.orderId;
-    ctl.orderDetailType = OrderIngGrab;
+    ctl.isSendOrder = NO;
     [self.navigationController pushViewController:ctl animated:YES];
     
 }

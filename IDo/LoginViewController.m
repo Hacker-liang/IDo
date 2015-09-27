@@ -21,6 +21,10 @@
 @property(nonatomic,strong) NSString *codeNumY;
 @property (weak, nonatomic) IBOutlet UIButton *captchaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+
+@property (nonatomic, strong) CLLocation *location;
+
+
 @end
 
 @implementation LoginViewController
@@ -33,6 +37,14 @@
     [_captchaBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [_captchaBtn addTarget:self action:@selector(getVerCode) forControlEvents:UIControlEventTouchUpInside];
     [_loginBtn addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
+    [self updateUserLogation:nil];
+}
+
+- (IBAction)updateUserLogation:(id)sender {
+    [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
+        _location = userLocation;
+        _addressLabel.text = address;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,6 +54,9 @@
 
 - (void)loginClick
 {
+    if (!_addressLabel.text) {
+        [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];
+    }
     if ([self.phoneTextField.text isEqual:@""]) {
         [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
 
@@ -74,8 +89,8 @@
     [mDict setObject:@"" forKey:@"cityid"];
     [mDict setObject:@"" forKey:@"districtid"];
     [mDict setObject:address forKey:@"address"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserInfo userInfo].lng] forKey:@"lng"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserInfo userInfo].lat] forKey:@"lat"];
+    [mDict setObject:[NSString stringWithFormat:@"%f", _location.coordinate.longitude] forKey:@"lng"];
+    [mDict setObject:[NSString stringWithFormat:@"%f", _location.coordinate.latitude] forKey:@"lat"];
     [mDict setObject:@"2" forKey:@"devicetype"];
     [mDict setObject:[APService registrationID] forKey:@"devicenumber"];
     

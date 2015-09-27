@@ -23,9 +23,10 @@
 @property(copy, nonatomic) NSString *tasktime; //系统传输时间
 @property(copy, nonatomic) NSString *sex;      //性别
 @property(copy, nonatomic) NSString *distance; //范围
-@property(copy, nonatomic) NSString *statusDesc;
+@property(copy, nonatomic) NSString *orderStatusDesc;
 @property(nonatomic) OrderStatus orderStatus;
+@property (nonatomic) BOOL isSendOrder;
 
-- (id)initWithJson:(id)json;
+- (id)initWithJson:(id)json andIsSendOrder:(BOOL)isSendOrder;
 
 @end

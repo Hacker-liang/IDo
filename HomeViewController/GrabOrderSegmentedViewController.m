@@ -7,7 +7,8 @@
 //
 
 #import "GrabOrderSegmentedViewController.h"
-#import "GrabOrderListTableViewController.h"
+#import "GrabOrderDetailSegmentViewController.h"
+#import "MyOrderRootViewController.h"
 
 @interface GrabOrderSegmentedViewController ()
 
@@ -19,9 +20,9 @@
     self.segmentedNormalImages = @[];
     self.segmentedSelectedImages = @[];
     self.segmentedTitles = @[@"立即抢单", @"我的订单", @"评价"];
-    GrabOrderListTableViewController *ctl = [[GrabOrderListTableViewController alloc] init];
-    
-    UIViewController *ctl1 = [[UIViewController alloc] init];
+    GrabOrderDetailSegmentViewController *ctl = [[GrabOrderDetailSegmentViewController alloc] init];
+    MyOrderRootViewController *ctl1 = [[MyOrderRootViewController alloc] init];
+    ctl1.isGrabOrder = YES;
     UIViewController *ctl2 = [[UIViewController alloc] init];
 
 

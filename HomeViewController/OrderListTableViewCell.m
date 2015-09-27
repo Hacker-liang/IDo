@@ -30,7 +30,7 @@
     _timeLabel.text = _orderDetail.tasktime;
     _contentLabel.text = _orderDetail.content;
     _priceLabel.text = [NSString stringWithFormat:@"%@元", _orderDetail.price];
-    _orderStatusLabel.text = _orderDetail.statusDesc;
+    _orderStatusLabel.text = _orderDetail.orderStatusDesc;
     [_addressBtn setTitle:_orderDetail.address forState:UIControlStateNormal];
 }
 

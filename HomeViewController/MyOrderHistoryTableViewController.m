@@ -1,23 +1,23 @@
 //
-//  MySendOrderHistoryTableViewController.m
+//  MyOrderHistoryTableViewController.m
 //  IDo
 //
 //  Created by liangpengshuai on 9/26/15.
 //  Copyright © 2015 com.Yinengxin.xianne. All rights reserved.
 //
 
-#import "MySendOrderHistoryTableViewController.h"
+#import "MyOrderHistoryTableViewController.h"
 #import "OrderListModel.h"
 #import "OrderListTableViewCell.h"
 #import "OrderDetailViewController.h"
 
-@interface MySendOrderHistoryTableViewController ()
+@interface MyOrderHistoryTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
-@implementation MySendOrderHistoryTableViewController
+@implementation MyOrderHistoryTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,9 +47,15 @@
 
 - (void)getOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@historyfadan",baseUrl];
+    NSString *url;
+    if (_isGrabOrder) {
+        url = [NSString stringWithFormat:@"%@historyqiangdan",baseUrl];
+
+    } else {
+        url = [NSString stringWithFormat:@"%@historyfadan",baseUrl];
+    }
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [self.tableView.header endRefreshing];
@@ -62,7 +68,7 @@
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
                 for (NSDictionary *dic in tempList) {
-                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic];
+                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:!_isGrabOrder];
                     [self.dataSource addObject:order];
                 }
             } else {
@@ -102,6 +108,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderListCell" forIndexPath:indexPath];
+    cell.isGrabOrder = _isGrabOrder;
     OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
     cell.orderDetail = model;
     
@@ -113,7 +120,7 @@
     OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
     OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
     ctl.orderId = model.orderId;
-    ctl.orderDetailType = HistoryPie;
+    ctl.isSendOrder = !_isGrabOrder;
     [self.navigationController pushViewController:ctl animated:YES];
     
 }

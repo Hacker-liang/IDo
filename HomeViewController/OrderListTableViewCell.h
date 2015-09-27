@@ -10,6 +10,9 @@
 #import "OrderListModel.h"
 
 @interface OrderListTableViewCell : UITableViewCell
+
+@property (nonatomic) BOOL isGrabOrder;
+
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 

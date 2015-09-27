@@ -66,6 +66,7 @@
     item.coordinate = location;
     [_mapview addAnnotation:item];
     [_mapview setCenterCoordinate:location animated:YES];
+    [self setupFooterView];
 }
 
 - (void)grabOrder:(UIButton *)sender
@@ -97,58 +98,94 @@
 
 }
 
-- (UIView *)footerView
+- (void)setupFooterView
 {
-    if (!_footerView) {
-        NSString *tipsString;
-        NSString *statusString;
+    NSString *tipsString;
+    NSString *statusString;
 
-        if (_orderDetailType == HistoryPie) {
-            statusString = @"无人抢单，已取消";
-            tipsString = @"小提示：保持良好的记录有助于快速成交订单";
-            _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+    if (_orderDetail.orderStatus == kOrderCancelGrabTimeOut) {
+        statusString =  _orderDetail.orderStatusDesc;
+        tipsString = @"保持良好记录有助于快速成交订单";
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
 
-        } else if (_orderDetailType == OrderIngPie) {
-            statusString = @"等待活儿宝抢单";
-            tipsString = @"小提示：保持良好的记录有助于快速成交订单";
-            _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
-            
-        }  else if (_orderDetailType == OrderIngGrab) {
-            tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
-            statusString = @"等待活儿宝抢单";
-            _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
-            
-            UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
-            orderBtn.layer.cornerRadius = 5.0;
-            orderBtn.backgroundColor = APP_THEME_COLOR;
-            [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
-            [orderBtn setTitle:@"立即抢单" forState:UIControlStateNormal];
-            [orderBtn addTarget:self action:@selector(grabOrder:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [_footerView addSubview:orderBtn];
-        }
+    } else if (_orderDetail.orderStatus == kOrderInProgress && _isSendOrder) {
+        statusString = _orderDetail.orderStatusDesc;
+        tipsString = @"保持良好记录有助于快速成交订单";
+
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
         
-        _footerView.backgroundColor = [UIColor whiteColor];
-        UILabel *tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _footerView.bounds.size.width, 25)];
-        tipsLabel.text = tipsString;
-        tipsLabel.textColor = UIColorFromRGB(0x727272);
-        tipsLabel.textAlignment = NSTextAlignmentCenter;
-        tipsLabel.font = [UIFont systemFontOfSize:14.0];
-        [_footerView addSubview:tipsLabel];
+        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+        orderBtn.layer.cornerRadius = 5.0;
+        orderBtn.backgroundColor = APP_THEME_COLOR;
+        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        [orderBtn setTitle:@"立即付款" forState:UIControlStateNormal];
+        [orderBtn addTarget:self action:@selector(payOrder:) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, _footerView.bounds.size.width, 25)];
-        NSString *statusStr = [NSString stringWithFormat:@"状态: %@", statusString];
-        NSMutableAttributedString *statusAttr = [[NSMutableAttributedString alloc] initWithString:statusStr];
-        [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0], NSForegroundColorAttributeName: APP_THEME_COLOR} range:NSMakeRange(3, statusStr.length-3)];
-        [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13.0], NSForegroundColorAttributeName: UIColorFromRGB(0x727272)} range:NSMakeRange(0, 3)];
+    }  else if (_orderDetail.orderStatus == kOrderInProgress && !_isSendOrder) {
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
+        statusString = _orderDetail.orderStatusDesc;
 
-        statusLabel.attributedText = statusAttr;
-        statusLabel.textAlignment = NSTextAlignmentCenter;
-        [_footerView addSubview:statusLabel];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
+        
+        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+        orderBtn.layer.cornerRadius = 5.0;
+        orderBtn.backgroundColor = APP_THEME_COLOR;
+        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        [orderBtn setTitle:@"立即抢单" forState:UIControlStateNormal];
+        [orderBtn addTarget:self action:@selector(grabOrder:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_footerView addSubview:orderBtn];
+        
+    } else if (_orderDetail.orderStatus == kOrderPayed) {
+        tipsString = @"保持良好记录有助于快速成交订单";
+        statusString = _orderDetail.orderStatusDesc;
 
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
+        
+        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+        orderBtn.layer.cornerRadius = 5.0;
+        orderBtn.backgroundColor = APP_THEME_COLOR;
+        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        [orderBtn setTitle:@"立即验收" forState:UIControlStateNormal];
+        [orderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else if (_orderDetail.orderStatus == kOrderCancelPayTimeOut) {
+        statusString = _orderDetail.orderStatusDesc;
+        tipsString = @"保持良好记录有助于快速成交订单";
+
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+        
+    } else if (_orderDetail.orderStatus == kOrderCancelDispute) {
+        statusString = _orderDetail.orderStatusDesc;
+        tipsString = @"保持良好记录有助于快速成交订单";
+
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+        
     }
-    return _footerView;
+    
+    _footerView.backgroundColor = [UIColor whiteColor];
+    UILabel *tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _footerView.bounds.size.width, 25)];
+    tipsLabel.text = tipsString;
+    tipsLabel.textColor = UIColorFromRGB(0x727272);
+    tipsLabel.textAlignment = NSTextAlignmentCenter;
+    tipsLabel.font = [UIFont systemFontOfSize:14.0];
+    [_footerView addSubview:tipsLabel];
+    
+    UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, _footerView.bounds.size.width, 25)];
+    NSString *statusStr = [NSString stringWithFormat:@"状态: %@", statusString];
+    NSMutableAttributedString *statusAttr = [[NSMutableAttributedString alloc] initWithString:statusStr];
+    [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0], NSForegroundColorAttributeName: APP_THEME_COLOR} range:NSMakeRange(3, statusStr.length-3)];
+    [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13.0], NSForegroundColorAttributeName: UIColorFromRGB(0x727272)} range:NSMakeRange(0, 3)];
+
+    statusLabel.attributedText = statusAttr;
+    statusLabel.textAlignment = NSTextAlignmentCenter;
+    [_footerView addSubview:statusLabel];
+    [self.view addSubview:_footerView];
+
 }
 
 - (void)getOrderInfo
@@ -157,7 +194,7 @@
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:_orderId forKey:@"orderid"];
     
-    if (self.orderDetailType == HistoryPie || self.orderDetailType == OrderIngPie || self.orderDetailType == OrderFinish){
+    if (_isSendOrder){
         [mDict setObject:@"1" forKey:@"type"];
     }else{
         [mDict setObject:@"2" forKey:@"type"];
@@ -170,7 +207,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if([tempStatus integerValue] == 1) {
-                _orderDetail = [[OrderDetailModel alloc] initWithJson:[dict objectForKey:@"data"]];
+                _orderDetail = [[OrderDetailModel alloc] initWithJson:[dict objectForKey:@"data"] andIsSendOrder:_isSendOrder];
                 [self updateView];
             }
         }

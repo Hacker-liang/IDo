@@ -1,25 +1,27 @@
 //
-//  MySendOrderRootViewController.m
+//  MyOrderRootViewController.m
 //  IDo
 //
 //  Created by liangpengshuai on 9/26/15.
 //  Copyright © 2015 com.Yinengxin.xianne. All rights reserved.
 //
 
-#import "MySendOrderRootViewController.h"
-#import "MySendOrderHistoryTableViewController.h"
-#import "MySendOrderInProgressTableViewController.h"
+#import "MyOrderRootViewController.h"
+#import "MyOrderHistoryTableViewController.h"
+#import "MyOrderInProgressTableViewController.h"
 
-@interface MySendOrderRootViewController ()
+@interface MyOrderRootViewController ()
 
 @end
 
-@implementation MySendOrderRootViewController
+@implementation MyOrderRootViewController
 
 - (void)viewDidLoad {
     self.segmentedTitles = @[@"待处理订单", @"历史订单"];
-    MySendOrderInProgressTableViewController *ctl = [[MySendOrderInProgressTableViewController alloc] init];
-    MySendOrderHistoryTableViewController *ctl1 = [[MySendOrderHistoryTableViewController alloc] init];
+    MyOrderInProgressTableViewController *ctl = [[MyOrderInProgressTableViewController alloc] init];
+    MyOrderHistoryTableViewController *ctl1 = [[MyOrderHistoryTableViewController alloc] init];
+    ctl.isGrabOrder = _isGrabOrder;
+    ctl1.isGrabOrder = _isGrabOrder;
     self.viewControllers = @[ctl, ctl1];
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;

@@ -68,6 +68,7 @@
         _userInfo.lock = [dict objectForKey:@"lock"];
         _userInfo.zhifubao = [dict objectForKey:@"zhifubao"];
         _userInfo.weixin = [dict objectForKey:@"weixin"];
+
     } else {
         _userInfo = [[UserInfo alloc] initWithJson:dict];
     }
@@ -88,6 +89,8 @@
     [mDict setObject:_userInfo.lock forKey:@"lock"];
     [mDict setObject:_userInfo.zhifubao forKey:@"zhifubao"];
     [mDict setObject:_userInfo.weixin forKey:@"weixin"];
+    [mDict setObject:[NSNumber numberWithFloat:_userInfo.lat] forKey:@"lat"];
+    [mDict setObject:[NSNumber numberWithFloat:_userInfo.lng] forKey:@"lng"];
     [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:LoginInfoMark];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

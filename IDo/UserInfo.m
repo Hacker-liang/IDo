@@ -23,6 +23,15 @@
         _zhifubao = [dict objectForKey:@"zhifubao"];
         _weixin = [dict objectForKey:@"weixin"];
         _userLabel = [dict objectForKey:@"label"];
+        _lat = [[dict objectForKey:@"lat"] floatValue];
+        _lng = [[dict objectForKey:@"lng"] floatValue];
+        
+        [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
+            _address = address;
+            _lat = userLocation.coordinate.latitude;
+            _lng = userLocation.coordinate.longitude;
+        }];
+
     }
     return self;
 }

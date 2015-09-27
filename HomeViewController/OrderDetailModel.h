@@ -8,8 +8,30 @@
 
 typedef enum : NSUInteger {
     
+    //派单成功，等待抢单
     kOrderInProgress = 1,
-    kOrderCancel = 2
+    
+    //抢单成功，等待付款
+    kOrderGrabSuccess,
+    
+    //付款成功，等待验收
+    kOrderPayed,
+    
+    //验收成功，等待评价
+    kOrderCheckDone,
+    
+    //订单完成
+    kOrderCompletion,
+    
+    //订单取消，因为无人抢单
+    kOrderCancelGrabTimeOut,
+    
+    //订单取消，因为付款超时
+    kOrderCancelPayTimeOut,
+    
+    //订单取消，因为纠纷
+    kOrderCancelDispute,
+    
     
 } OrderStatus;
 
@@ -32,7 +54,11 @@ typedef enum : NSUInteger {
 @property(copy, nonatomic) NSString *sex;      //性别
 @property(copy, nonatomic) NSString *distance; //范围
 
+@property (nonatomic) BOOL isSendOrder;
+@property (nonatomic) OrderStatus orderStatus;
+@property (nonatomic, copy) NSString *orderStatusDesc;
 
-- (id)initWithJson:(id)json;
+
+- (id)initWithJson:(id)json andIsSendOrder:(BOOL)isSendOrder;
 
 @end

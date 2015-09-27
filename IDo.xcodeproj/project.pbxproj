@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D90E2E2C1BB626D000C2E6F3 /* MySendOrderRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E2B1BB626D000C2E6F3 /* MySendOrderRootViewController.m */; settings = {ASSET_TAGS = (); }; };
-		D90E2E301BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E2E1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		D90E2E311BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E2F1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		D90E2E351BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E331BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		D90E2E361BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E341BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D90E2E2C1BB626D000C2E6F3 /* MyOrderRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E2B1BB626D000C2E6F3 /* MyOrderRootViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D90E2E301BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E2E1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D90E2E311BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E2F1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D90E2E351BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E331BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D90E2E361BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E341BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		D90E2E3A1BB647BA00C2E6F3 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E381BB647BA00C2E6F3 /* OrderDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D90E2E3B1BB647BA00C2E6F3 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D92B5AD11BB7836E00E3AC93 /* GrabOrderSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B5AD01BB7836E00E3AC93 /* GrabOrderSettingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D95394E71BB2694900CB6746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E61BB2694900CB6746 /* main.m */; };
 		D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E91BB2694900CB6746 /* AppDelegate.m */; };
 		D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95394F11BB2694900CB6746 /* Assets.xcassets */; };
@@ -168,17 +169,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D90E2E2A1BB626D000C2E6F3 /* MySendOrderRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySendOrderRootViewController.h; sourceTree = "<group>"; };
-		D90E2E2B1BB626D000C2E6F3 /* MySendOrderRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySendOrderRootViewController.m; sourceTree = "<group>"; };
-		D90E2E2D1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySendOrderInProgressTableViewController.h; sourceTree = "<group>"; };
-		D90E2E2E1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySendOrderInProgressTableViewController.m; sourceTree = "<group>"; };
-		D90E2E2F1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySendOrderInProgressTableViewController.xib; sourceTree = "<group>"; };
-		D90E2E321BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySendOrderHistoryTableViewController.h; sourceTree = "<group>"; };
-		D90E2E331BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySendOrderHistoryTableViewController.m; sourceTree = "<group>"; };
-		D90E2E341BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySendOrderHistoryTableViewController.xib; sourceTree = "<group>"; };
+		D90E2E2A1BB626D000C2E6F3 /* MyOrderRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderRootViewController.h; sourceTree = "<group>"; };
+		D90E2E2B1BB626D000C2E6F3 /* MyOrderRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderRootViewController.m; sourceTree = "<group>"; };
+		D90E2E2D1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderInProgressTableViewController.h; sourceTree = "<group>"; };
+		D90E2E2E1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderInProgressTableViewController.m; sourceTree = "<group>"; };
+		D90E2E2F1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyOrderInProgressTableViewController.xib; sourceTree = "<group>"; };
+		D90E2E321BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderHistoryTableViewController.h; sourceTree = "<group>"; };
+		D90E2E331BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderHistoryTableViewController.m; sourceTree = "<group>"; };
+		D90E2E341BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyOrderHistoryTableViewController.xib; sourceTree = "<group>"; };
 		D90E2E371BB647BA00C2E6F3 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		D90E2E381BB647BA00C2E6F3 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
+		D92B5ACF1BB7836E00E3AC93 /* GrabOrderSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderSettingViewController.h; sourceTree = "<group>"; };
+		D92B5AD01BB7836E00E3AC93 /* GrabOrderSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderSettingViewController.m; sourceTree = "<group>"; };
 		D95394E21BB2694900CB6746 /* IDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95394E61BB2694900CB6746 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D95394E81BB2694900CB6746 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -452,14 +455,6 @@
 		D90E2E291BB626A200C2E6F3 /* MySendOrder */ = {
 			isa = PBXGroup;
 			children = (
-				D90E2E2A1BB626D000C2E6F3 /* MySendOrderRootViewController.h */,
-				D90E2E2B1BB626D000C2E6F3 /* MySendOrderRootViewController.m */,
-				D90E2E2D1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.h */,
-				D90E2E2E1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.m */,
-				D90E2E2F1BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.xib */,
-				D90E2E321BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.h */,
-				D90E2E331BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.m */,
-				D90E2E341BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.xib */,
 			);
 			name = MySendOrder;
 			sourceTree = "<group>";
@@ -822,6 +817,8 @@
 				D96EAA0A1BB40EA200360ED8 /* GrabOrderListTableViewController.h */,
 				D96EAA0B1BB40EA200360ED8 /* GrabOrderListTableViewController.m */,
 				D96EAA0C1BB40EA200360ED8 /* GrabOrderListTableViewController.xib */,
+				D92B5ACF1BB7836E00E3AC93 /* GrabOrderSettingViewController.h */,
+				D92B5AD01BB7836E00E3AC93 /* GrabOrderSettingViewController.m */,
 			);
 			name = GrabOrderDetail;
 			sourceTree = "<group>";
@@ -880,14 +877,22 @@
 			path = "UIAlertView+Block";
 			sourceTree = "<group>";
 		};
-		D96EAA591BB588F300360ED8 /* View */ = {
+		D96EAA591BB588F300360ED8 /* OrderList */ = {
 			isa = PBXGroup;
 			children = (
 				D96EAA5A1BB5890600360ED8 /* OrderListTableViewCell.h */,
 				D96EAA5B1BB5890600360ED8 /* OrderListTableViewCell.m */,
 				D96EAA5C1BB5890600360ED8 /* OrderListTableViewCell.xib */,
+				D90E2E2A1BB626D000C2E6F3 /* MyOrderRootViewController.h */,
+				D90E2E2B1BB626D000C2E6F3 /* MyOrderRootViewController.m */,
+				D90E2E2D1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.h */,
+				D90E2E2E1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m */,
+				D90E2E2F1BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib */,
+				D90E2E321BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.h */,
+				D90E2E331BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m */,
+				D90E2E341BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib */,
 			);
-			name = View;
+			name = OrderList;
 			sourceTree = "<group>";
 		};
 		D96EAA5F1BB5964F00360ED8 /* MJRefresh */ = {
@@ -997,7 +1002,7 @@
 		D9B2F6961BB280AE00ED7DDF /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D96EAA591BB588F300360ED8 /* View */,
+				D96EAA591BB588F300360ED8 /* OrderList */,
 				D96EAA451BB53A3F00360ED8 /* Model */,
 				D96EA91A1BB298A000360ED8 /* GrabOrder */,
 				D96EA9161BB2977200360ED8 /* SendOrder */,
@@ -1174,8 +1179,8 @@
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,
 				D9777D4C1BB65E1900A7A64C /* xx.png in Resources */,
 				D9777D4B1BB65E1900A7A64C /* nan.png in Resources */,
-				D90E2E361BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.xib in Resources */,
-				D90E2E311BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.xib in Resources */,
+				D90E2E361BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib in Resources */,
+				D90E2E311BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib in Resources */,
 				D96EAA441BB5377100360ED8 /* icon_time@2x.png in Resources */,
 				D96EAA5E1BB5890600360ED8 /* OrderListTableViewCell.xib in Resources */,
 				D90E2E3B1BB647BA00C2E6F3 /* OrderDetailViewController.xib in Resources */,
@@ -1235,7 +1240,7 @@
 				D96EA9D21BB3D24700360ED8 /* UIImage+GIF.m in Sources */,
 				D96EAA581BB56D9E00360ED8 /* UIAlertView+Block.m in Sources */,
 				D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */,
-				D90E2E2C1BB626D000C2E6F3 /* MySendOrderRootViewController.m in Sources */,
+				D90E2E2C1BB626D000C2E6F3 /* MyOrderRootViewController.m in Sources */,
 				D96EAA9D1BB5964F00360ED8 /* UIScrollView+MJRefresh.m in Sources */,
 				D96EA9CE1BB3D24700360ED8 /* SDWebImageDownloaderOperation.m in Sources */,
 				D96EA9DB1BB3D35A00360ED8 /* UserInfo.m in Sources */,
@@ -1276,16 +1281,17 @@
 				D96EA9E81BB3D9E300360ED8 /* LoginViewController.m in Sources */,
 				D96EAA091BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m in Sources */,
 				D96EA99E1BB3D22100360ED8 /* AFHTTPRequestOperationManager.m in Sources */,
-				D90E2E351BB6271C00C2E6F3 /* MySendOrderHistoryTableViewController.m in Sources */,
+				D90E2E351BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m in Sources */,
 				D96EAA541BB569BA00360ED8 /* FYTimeViewController.m in Sources */,
 				D96EAA391BB5337F00360ED8 /* CustomTableViewCell.m in Sources */,
 				D96EA9C81BB3D24700360ED8 /* MKAnnotationView+WebCache.m in Sources */,
-				D90E2E301BB6270D00C2E6F3 /* MySendOrderInProgressTableViewController.m in Sources */,
+				D90E2E301BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m in Sources */,
 				D9B2F6AC1BB2838300ED7DDF /* REFrostedViewController.m in Sources */,
 				D96EA9FE1BB3F46C00360ED8 /* SVHTTPClient.m in Sources */,
 				D96EAA2B1BB5230000360ED8 /* SendOrderDetailViewController.m in Sources */,
 				D96EAA2E1BB523D900360ED8 /* SendOrderDetailHeaderView.m in Sources */,
 				D96EA9211BB2A26900360ED8 /* IDSegmentedRootViewController.m in Sources */,
+				D92B5AD11BB7836E00E3AC93 /* GrabOrderSettingViewController.m in Sources */,
 				D96EAA9C1BB5964F00360ED8 /* UIScrollView+MJExtension.m in Sources */,
 				D96EA99F1BB3D22100360ED8 /* AFHTTPSessionManager.m in Sources */,
 				D96EA9CC1BB3D24700360ED8 /* SDWebImageDecoder.m in Sources */,
