@@ -34,7 +34,7 @@
                 _orderStatus = kOrderGrabSuccess;
                 _orderStatusDesc = @"已经接单，等待付款";
             } else if ([[json objectForKey:@"haspay"] intValue] == 1) {
-                if ([[json objectForKey:@"hasconf"] intValue] == 0) {
+                if ([[json objectForKey:@"hasconfpay"] intValue] == 0) {
                     _orderStatus = kOrderPayed;
                     _orderStatusDesc = @"已经付款，等待验收";
                 } else {
@@ -88,5 +88,47 @@
 
     return self;
 }
+
+- (void)setOrderStatus:(OrderStatus)orderStatus
+{
+    _orderStatus = orderStatus;
+    switch (_orderStatus) {
+        case kOrderCancelDispute:
+            _orderStatusDesc = @"订单纠纷,已取消";
+            break;
+            
+        case kOrderPayed:
+            _orderStatusDesc = @"已经付款，等待验收";
+            break;
+            
+        case kOrderCancelGrabTimeOut:
+            _orderStatusDesc = @"无人抢单,已取消";
+            break;
+            
+        case kOrderCancelPayTimeOut:
+            _orderStatusDesc = @"超时未付款,已取消";
+            break;
+            
+        case kOrderCheckDone:
+            _orderStatusDesc = @"已经验收，等待评价";
+            break;
+            
+        case kOrderCompletion:
+            _orderStatusDesc = @"订单已经完成";
+            break;
+            
+        case kOrderGrabSuccess:
+            _orderStatusDesc = @"已经接单，等待付款";
+            break;
+            
+        case kOrderInProgress:
+            _orderStatusDesc = @"等待活宝抢单";
+            break;
+            
+        default:
+            break;
+    }
+}
+
 
 @end

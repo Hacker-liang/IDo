@@ -18,4 +18,7 @@ typedef void(^PaySuccessBlock)(BOOL success,NSString *errorStr);
 @property(strong,nonatomic)NSString * huoerbaoID;
 
 @property(copy,nonatomic)PaySuccessBlock paySuccessBlock;
+
+- (id)initWithPaySuccessBlock:(PaySuccessBlock)block;
+
 @end

@@ -10,6 +10,9 @@
 #import "PayViewController.h"
 
 @interface OrderDetailViewController ()
+{
+    NSTimer *timer;
+}
 
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic) int countdown;
@@ -90,6 +93,12 @@
     } else if (_orderDetail.orderStatus == kOrderInProgress) {
         _countdown = _orderDetail.grabCountdown;
         [self startCountdown];
+    } else {
+        if (timer) {
+            [timer invalidate];
+            timer = nil;
+        }
+        _timeLeftLabel.text = nil;
     }
 }
 
@@ -103,10 +112,10 @@
     } else {
         _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
     }
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateLeftTime:) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateLeftTime) userInfo:nil repeats:YES];
 }
 
-- (void)updateLeftTime:(NSTimer *)timer
+- (void)updateLeftTime
 {
     if (_countdown == 0) {
         [timer invalidate];
@@ -151,15 +160,24 @@
 
 - (void)payOrder:(id)sender
 {
-    PayViewController *vc = [[PayViewController alloc] init];
+    PayViewController *vc = [[PayViewController alloc] initWithPaySuccessBlock:^(BOOL success, NSString *errorStr) {
+        if (success) {
+            _orderDetail.orderStatus = kOrderPayed;
+            [self updateView];
+            [self setupFooterView];
+        }
+    }];
     vc.price = _orderDetail.price;
-    vc.orderid = _orderDetail.orderNumber;
+    vc.orderid = _orderDetail.orderId;
     vc.huoerbaoID = _orderDetail.grabOrderUser.userid;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setupFooterView
 {
+    if (_footerView) {
+        _footerView = nil;
+    }
     NSString *tipsString;
     NSString *statusString;
 
@@ -290,6 +308,59 @@
         }
     }];
 }
+
+#pragma mark -确认支付给活儿宝
+
+- (void)checkOrder:(id)sender
+{
+    UIAlertView * alert=[[UIAlertView alloc]initWithTitle:@"确认任务验收" message:@"对方已按照要求完成任务，请确认支付，资金将直接支付给抢单人，谨慎操作。" delegate:self cancelButtonTitle:@"稍后验收" otherButtonTitles:@"确认验收", nil];
+    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [self confpay];
+        }
+    }];
+}
+
+- (void)confpay
+{
+    NSString *url = [NSString stringWithFormat:@"%@confpay",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:_orderDetail.orderId forKey:@"orderid"];
+    [SVProgressHUD showWithStatus:@"正在付款"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([tempStatus integerValue] == 1) {
+                UIAlertView * alertV = [[UIAlertView alloc]initWithTitle:@"恭喜，任务验收成功!" message:@"订单金额已向抢单人实时支付!您可以对抢单人的服务进行评价。" delegate:self cancelButtonTitle:@"稍后评价" otherButtonTitles:@"去评价", nil];
+                _orderDetail.orderStatus = kOrderCheckDone;
+                [self updateView];
+                [self setupFooterView];
+                [alertV showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+//                        EvaluationViewController *control = [[EvaluationViewController alloc] init];
+//                        control.evaluationType = 1;
+//                        control.orderid = self.orderId;
+//                        [self.navigationController pushViewController:control animated:YES];
+                    }
+                }];
+                
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"付款给活儿宝失败，请重试！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"付款给活儿宝失败，请重试！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }];
+}
+
 
 
 @end

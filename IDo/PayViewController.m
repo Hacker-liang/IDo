@@ -16,6 +16,14 @@
 @implementation PayViewController
 @synthesize payTab,price,huoerbaoID,orderid;
 
+- (id)initWithPaySuccessBlock:(PaySuccessBlock)block
+{
+    if (self = [super init]) {
+        _paySuccessBlock = block;
+    }
+    return self;
+}
+
 - (void)backClick
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -180,9 +188,10 @@
 
 -(void)payforSure
 {
+    [SVProgressHUD showWithStatus:@"正在加载"];
     AliPayTool *ali=[[AliPayTool alloc]init];
     __weak PayViewController *wSelf = self;
-    [ali aliPayWithProductName:@"佣金" productDescription:@"给活儿宝的佣金" andAmount:self.price orderId:self.orderid MoneyBao:@"0" AliPayMoney:@"1" shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
+    [ali aliPayWithProductName:@"佣金" productDescription:@"给活儿宝的佣金" andAmount:self.price orderId:self.orderid MoneyBao:price AliPayMoney:price shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
         [wSelf aliPayCallBackWithSuccessed:success errorString:errorStr];
     }];
 }
@@ -192,22 +201,16 @@
 // if success = YES 说明支付宝支付成功并且服务器记录成功，否则，支付不成功
 - (void)aliPayCallBackWithSuccessed:(BOOL)success errorString:(NSString *)errorStr
 {
-    if (success)
-    {
+    if (success) {
         // 确定派单推送订单成功(只是发送一个推送消息)
         [self PayStatusSure];
-        [self backAfterPayed];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付状态" message:errorStr delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
+    }  else {
+        [SVProgressHUD showErrorWithStatus:@"支付失败"];
     }
 }
 
 - (void)PayStatusSure
 {
-    
     NSString *url = [NSString stringWithFormat:@"%@orderpayover",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:orderid forKey:@"orderid"];
@@ -224,6 +227,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *status = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([status isEqualToString:@"1"]) {
+                [SVProgressHUD showSuccessWithStatus:@"恭喜你，支付成功"];
                 [self backAfterPayed];
             }
             else{
@@ -246,8 +250,6 @@
     {
         self.paySuccessBlock (YES,nil);
     }
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜，付款成功" message:@"抢单人已收到您的付款信息，您可与抢单人及时沟通尽快完成任务" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alert show];
 }
 
 @end

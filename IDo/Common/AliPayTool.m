@@ -162,8 +162,7 @@
         }];
     }
     //    支付宝支付
-    else
-    {
+    else {
         NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
         formatter.dateFormat=@"yyyyMMddHHmmssSSS";
         NSString *str=[formatter stringFromDate:[NSDate date]];
@@ -201,8 +200,7 @@
             orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                            orderSpec, signedString, @"RSA"];
         }
-        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic)
-         {
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
              NSString *status=[NSString stringWithFormat:@"%@",resultDic[@"resultStatus"]];
              if ([status isEqualToString:@"9000"])
              {
@@ -210,7 +208,7 @@
                      [self chargeQianbaoForAliMoney:aliMoney shouKuanID:shoukuanID rCompleteBlock:^(BOOL success, NSString *errorStr) {
                          completedBlock(success,errorStr);
                      }];
-                 }else{
+                 } else{
                      [self aliPayForOrderId:orderId qianBaoMoney:qianbao aliMoney:aliMoney shouKuanID:shoukuanID rCompletedBlock:^(BOOL success, NSString *errorStr) {
                          completedBlock(success, errorStr);
                      }];
@@ -257,7 +255,6 @@
             else{
                 completeBlock(NO, @"失败");
             }
-            
         }
         else
         {
