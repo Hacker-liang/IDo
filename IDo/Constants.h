@@ -61,6 +61,8 @@
 #define OrderidMark @"OrderidMark"  ///订单id
 #define UserStatusMark @"setUserStatus"  ///设置当前用户身份
 
+#define messageError @"网络貌似出问题了，等一会儿再试试吧…"
+
 #endif
 
 #endif /* Constants_h */

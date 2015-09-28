@@ -7,7 +7,7 @@
 //
 
 #import "PayViewController.h"
-//#import "AliPayTool.h"
+#import "AliPayTool.h"
 
 @interface PayViewController ()
 
@@ -180,12 +180,11 @@
 
 -(void)payforSure
 {
-//    Appdelegate.viewisWhere = PiePayView;
-//    AliPayTool *ali=[[AliPayTool alloc]init];
-//    __weak PayViewController *wSelf = self;
-//    [ali aliPayWithProductName:@"佣金" productDescription:@"给活儿宝的佣金" andAmount:self.price orderId:self.orderid MoneyBao:@"0" AliPayMoney:@"1" shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
-//        [wSelf aliPayCallBackWithSuccessed:success errorString:errorStr];
-//    }];
+    AliPayTool *ali=[[AliPayTool alloc]init];
+    __weak PayViewController *wSelf = self;
+    [ali aliPayWithProductName:@"佣金" productDescription:@"给活儿宝的佣金" andAmount:self.price orderId:self.orderid MoneyBao:@"0" AliPayMoney:@"1" shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
+        [wSelf aliPayCallBackWithSuccessed:success errorString:errorStr];
+    }];
 }
 
 // xuebao start
