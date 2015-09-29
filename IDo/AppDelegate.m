@@ -12,6 +12,7 @@
 #import "HomeViewController.h"
 #import "REFrostedViewController.h"
 #import "HomeMenuViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -31,24 +32,49 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:@"userLogout" object:nil];
     [self setupHomeView];
     return YES;
 }
 
+- (void)userDidLogout
+{
+    [self setupHomeView];
+}
+
 - (void)setupHomeView
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-  
-    _homeViewController = [[HomeViewController alloc] init];
-    _leftController = [[HomeMenuViewController alloc] init];
-    _leftController.mainViewController = _homeViewController;
-    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:[[UINavigationController alloc] initWithRootViewController:_homeViewController] menuViewController:_leftController];
-    frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-    frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
-    frostedViewController.liveBlur = YES;
-    frostedViewController.limitMenuViewSize = YES;
-    self.window.rootViewController = frostedViewController;
+    if ([[UserManager shareUserManager] isLogin]) {
+        _homeViewController = [[HomeViewController alloc] init];
+        _leftController = [[HomeMenuViewController alloc] init];
+        _leftController.mainViewController = _homeViewController;
+        REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:[[UINavigationController alloc] initWithRootViewController:_homeViewController] menuViewController:_leftController];
+        frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+        frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+        frostedViewController.liveBlur = YES;
+        frostedViewController.limitMenuViewSize = YES;
+        self.window.rootViewController = frostedViewController;
+    } else {
+        LoginViewController *ctl = [[LoginViewController alloc] initWithPaySuccessBlock:^(BOOL success, NSString *errorStr) {
+            if (success) {
+                _homeViewController = [[HomeViewController alloc] init];
+                _leftController = [[HomeMenuViewController alloc] init];
+                _leftController.mainViewController = _homeViewController;
+                REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:[[UINavigationController alloc] initWithRootViewController:_homeViewController] menuViewController:_leftController];
+                frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+                frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+                frostedViewController.liveBlur = YES;
+                frostedViewController.limitMenuViewSize = YES;
+                self.window.rootViewController = frostedViewController;
+            }
+        }];
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:ctl];
+        
+    }
+   
     [self.window makeKeyAndVisible];
 }
 

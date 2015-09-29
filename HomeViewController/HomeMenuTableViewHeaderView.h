@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *ratingView;
+@property (weak, nonatomic) IBOutlet UIButton *headerBtn;
 
 @property (nonatomic, strong) UserInfo *userInfo;
 

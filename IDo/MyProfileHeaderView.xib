@@ -22,9 +22,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCI-8e-cd1">
-                    <rect key="frame" x="8" y="124" width="584" height="30"/>
+                    <rect key="frame" x="8" y="120" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JD-IN-GF8">
@@ -48,15 +48,24 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdg-KF-XaE" customClass="CWStarRateView">
+                    <rect key="frame" x="230" y="158" width="140" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="140" id="Ywh-Vj-WQ4"/>
+                        <constraint firstAttribute="height" constant="20" id="lva-SF-XIa"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="pCI-8e-cd1" secondAttribute="bottom" constant="116" id="0g8-IQ-VSw"/>
+                <constraint firstItem="cpA-9w-aTR" firstAttribute="top" secondItem="vdg-KF-XaE" secondAttribute="bottom" constant="22" id="0hy-dx-I9c"/>
                 <constraint firstItem="cpA-9w-aTR" firstAttribute="leading" secondItem="4JD-IN-GF8" secondAttribute="trailing" id="1rU-49-3za"/>
+                <constraint firstItem="pCI-8e-cd1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="5Ll-u8-x5T"/>
                 <constraint firstAttribute="bottom" secondItem="4JD-IN-GF8" secondAttribute="bottom" id="7fn-by-nI5"/>
                 <constraint firstItem="vB9-FE-z5D" firstAttribute="height" secondItem="4JD-IN-GF8" secondAttribute="height" id="Bzv-J7-ZaV"/>
+                <constraint firstItem="vdg-KF-XaE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DM3-KZ-neG"/>
                 <constraint firstItem="V5i-jF-eXU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DcB-Oj-ObO"/>
-                <constraint firstAttribute="trailing" secondItem="pCI-8e-cd1" secondAttribute="trailing" constant="8" id="ES0-b9-Ijf"/>
+                <constraint firstItem="vdg-KF-XaE" firstAttribute="top" secondItem="pCI-8e-cd1" secondAttribute="bottom" constant="8" id="FrB-3p-zwk"/>
                 <constraint firstItem="4JD-IN-GF8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KUi-Df-0Sj"/>
                 <constraint firstAttribute="trailing" secondItem="vB9-FE-z5D" secondAttribute="trailing" id="N0T-Nj-ebn"/>
                 <constraint firstAttribute="bottom" secondItem="vB9-FE-z5D" secondAttribute="bottom" id="Sa7-WF-Vxx"/>
@@ -65,16 +74,16 @@
                 <constraint firstItem="vB9-FE-z5D" firstAttribute="top" secondItem="V5i-jF-eXU" secondAttribute="bottom" id="X8i-Vv-ca4"/>
                 <constraint firstItem="4JD-IN-GF8" firstAttribute="top" secondItem="V5i-jF-eXU" secondAttribute="bottom" id="Yd8-m4-ofI"/>
                 <constraint firstItem="vB9-FE-z5D" firstAttribute="width" secondItem="4JD-IN-GF8" secondAttribute="width" id="ZrP-UW-8dg"/>
-                <constraint firstItem="pCI-8e-cd1" firstAttribute="top" secondItem="9Hj-Rz-KLZ" secondAttribute="bottom" constant="29" id="aNv-VI-aM7"/>
                 <constraint firstItem="9Hj-Rz-KLZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="c9a-Kp-R2I"/>
                 <constraint firstItem="vB9-FE-z5D" firstAttribute="leading" secondItem="cpA-9w-aTR" secondAttribute="trailing" id="hqG-fM-9Zt"/>
                 <constraint firstItem="9Hj-Rz-KLZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lRp-dx-Lip"/>
                 <constraint firstItem="cpA-9w-aTR" firstAttribute="width" secondItem="4JD-IN-GF8" secondAttribute="width" id="nao-PY-05n"/>
                 <constraint firstItem="cpA-9w-aTR" firstAttribute="top" secondItem="V5i-jF-eXU" secondAttribute="bottom" id="ncy-gg-TPu"/>
+                <constraint firstAttribute="trailing" secondItem="pCI-8e-cd1" secondAttribute="trailing" constant="8" id="nqJ-hu-p2F"/>
                 <constraint firstItem="cpA-9w-aTR" firstAttribute="height" secondItem="4JD-IN-GF8" secondAttribute="height" id="oha-UE-gAL"/>
                 <constraint firstAttribute="bottom" secondItem="cpA-9w-aTR" secondAttribute="bottom" id="r3F-zE-6b4"/>
-                <constraint firstItem="pCI-8e-cd1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="wd5-PT-3PY"/>
                 <constraint firstAttribute="bottom" secondItem="V5i-jF-eXU" secondAttribute="bottom" constant="70" id="yHH-ze-KIU"/>
+                <constraint firstItem="pCI-8e-cd1" firstAttribute="top" secondItem="9Hj-Rz-KLZ" secondAttribute="bottom" constant="25" id="zpM-yc-dbG"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -83,6 +92,8 @@
                 <outlet property="complainBtn" destination="vB9-FE-z5D" id="FiR-dK-jOZ"/>
                 <outlet property="grabOrderCountBtn" destination="cpA-9w-aTR" id="5Jv-Kx-lOq"/>
                 <outlet property="headerImageView" destination="9Hj-Rz-KLZ" id="m76-si-Y2u"/>
+                <outlet property="nickNameLabel" destination="pCI-8e-cd1" id="AO7-FH-DN6"/>
+                <outlet property="ratingView" destination="vdg-KF-XaE" id="vB5-QS-dt6"/>
                 <outlet property="sendOrderCountBtn" destination="4JD-IN-GF8" id="QJP-73-IH5"/>
             </connections>
             <point key="canvasLocation" x="604" y="250"/>

@@ -107,7 +107,7 @@
                                 <constraint firstAttribute="height" constant="21" id="QAC-bV-Ew9"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -146,7 +146,7 @@
                                 <constraint firstAttribute="height" constant="42.5" id="v98-HQ-GSn"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -226,7 +226,7 @@
                                 <constraint firstAttribute="height" constant="37.5" id="YFp-gJ-Eco"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -500,13 +500,13 @@
                     <exclude reference="Hpx-RU-LZc"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="3bI-dX-sRl"/>
-                    <exclude reference="8SJ-N3-pDb"/>
-                    <exclude reference="LYa-0m-7F9"/>
                     <exclude reference="Dqh-ow-GJP"/>
                     <exclude reference="E3b-jh-cEl"/>
                     <exclude reference="QLe-nJ-GF0"/>
                     <exclude reference="gwD-P7-Tys"/>
+                    <exclude reference="3bI-dX-sRl"/>
+                    <exclude reference="8SJ-N3-pDb"/>
+                    <exclude reference="LYa-0m-7F9"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -515,13 +515,13 @@
                     <include reference="Hpx-RU-LZc"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="3bI-dX-sRl"/>
-                    <include reference="8SJ-N3-pDb"/>
-                    <include reference="LYa-0m-7F9"/>
                     <include reference="Dqh-ow-GJP"/>
                     <include reference="E3b-jh-cEl"/>
                     <include reference="QLe-nJ-GF0"/>
                     <include reference="gwD-P7-Tys"/>
+                    <include reference="3bI-dX-sRl"/>
+                    <include reference="8SJ-N3-pDb"/>
+                    <include reference="LYa-0m-7F9"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="216" y="180"/>

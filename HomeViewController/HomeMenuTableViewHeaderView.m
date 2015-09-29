@@ -7,7 +7,7 @@
 //
 
 #import "HomeMenuTableViewHeaderView.h"
-
+#import "CWStarRateView.h"
 @implementation HomeMenuTableViewHeaderView
 
 
@@ -19,6 +19,10 @@
 - (void)awakeFromNib
 {
     self.backgroundColor = APP_THEME_COLOR;
+    _headerImageView.layer.cornerRadius = 35.0;
+    _headerImageView.clipsToBounds = YES;
+    ((CWStarRateView *)_ratingView).scorePercent = 0.3;
+    ((CWStarRateView *)_ratingView).userInteractionEnabled = NO;
 }
 
 - (void)setUserInfo:(UserInfo *)userInfo

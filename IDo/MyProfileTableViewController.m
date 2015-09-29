@@ -9,11 +9,15 @@
 #import "MyProfileTableViewController.h"
 #import "MyProfileHeaderView.h"
 #import "MyProfileTableViewCell.h"
+#import "ASIFormDataRequest.h"
 
-@interface MyProfileTableViewController ()
+@interface MyProfileTableViewController () <UIImagePickerControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) MyProfileHeaderView *myprofileHeaderView;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) UserInfo *userInfo;
+@property (nonatomic, strong) UIImage *headerImage;
+
 
 @end
 
@@ -21,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _userInfo = [UserManager shareUserManager].userInfo;
     _dataSource = @[@"我的手机号", @"昵称", @"性别", @"我的支付宝", @"VIP 申请", @"声音控制"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MyProfileTableViewCell" bundle:nil] forCellReuseIdentifier:@"myProfileCell"];
     [self setupTableViewFooterView];
@@ -50,13 +55,27 @@
 {
     if (!_myprofileHeaderView) {
         _myprofileHeaderView = [MyProfileHeaderView myProfileHeaderView];
+        _myprofileHeaderView.userInfo = _userInfo;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setUserHead)];
+        tap.numberOfTapsRequired = 1;
+        tap.numberOfTouchesRequired = 1;
+        _myprofileHeaderView.headerImageView.userInteractionEnabled = YES;
+        [_myprofileHeaderView.headerImageView addGestureRecognizer:tap];
     }
     return _myprofileHeaderView;
 }
 
 - (void)logout
 {
-    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [[UserManager shareUserManager] logout];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
+            [SVProgressHUD showSuccessWithStatus:@"退出登录成功"];
+        }
+    }];
+   
 }
 
 #pragma mark - Table view data source
@@ -86,69 +105,309 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MyProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myProfileCell" forIndexPath:indexPath];
+    if (indexPath.row != 0) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     NSString *title = _dataSource[indexPath.row];
     cell.titleLabel.text = title;
+
+    switch (indexPath.row) {
+        case 0:
+            cell.subtitleLabel.text = [NSString stringWithFormat:@"%@(不可修改)", _userInfo.tel];
+            break;
+            
+        case 1:
+            cell.subtitleLabel.text = _userInfo.nickName;
+
+            break;
+            
+        case 2:
+            if ([_userInfo.sex integerValue] == 0) {
+                cell.subtitleLabel.text = @"男";
+            } else {
+                cell.subtitleLabel.text = @"女";
+            }
+
+            break;
+            
+        case 3:
+            cell.subtitleLabel.text = _userInfo.zhifubao;
+
+            break;
+            
+        case 4:
+            cell.subtitleLabel.text = nil;
+
+            break;
+            
+        case 5:
+            cell.subtitleLabel.text = nil;
+
+            break;
+        default:
+            break;
+    }
+    
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+//选中项回调
+- (void)tableView:(UITableView *)stableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [stableView deselectRowAtIndexPath:indexPath animated:YES];//消除选中状态
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        UIAlertView *thAlertView = [[UIAlertView alloc] initWithTitle:@"昵称"
+                                                              message:@"请输入昵称"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                                    otherButtonTitles:@"确定",nil];
+        thAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+        UITextField *tf=[thAlertView textFieldAtIndex:0];
+        tf.text = _userInfo.nickName;
+        tf.keyboardType = UIKeyboardTypeDefault;
+        thAlertView.tag = 500;
+        [thAlertView show];
+    }
     
-    // Pass the selected object to the new view controller.
+    if (indexPath.section == 0 && indexPath.row == 3) {
+        UIAlertView *thAlertView = [[UIAlertView alloc] initWithTitle:@"支付宝"
+                                                              message:@"请输入支付宝账户"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                                    otherButtonTitles:@"确定",nil];
+        thAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+        UITextField *tf=[thAlertView textFieldAtIndex:0];
+        tf.text = _userInfo.zhifubao;
+        tf.keyboardType = UIKeyboardTypeDefault;
+        thAlertView.tag = 501;
+        [thAlertView show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        if (alertView.tag == 500) {
+            //得到输入框
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length > 0 && [tf.text stringByReplacingOccurrencesOfString:@" " withString:@""].length >0)
+            {
+                [self changeUserSet:tf.text Type:@"1"];
+            }
+        }else if (alertView.tag == 501){
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length > 0 && [tf.text stringByReplacingOccurrencesOfString:@" " withString:@""].length >0)
+            {
+                [self changeUserSet:tf.text Type:@"4"];
+                _userInfo.zhifubao = tf.text;
+            }
+        }
+    }
+}
+
+- (void)changeUserSet:(NSString *)aContent Type:(NSString*)aType
+{
+    [SVProgressHUD showWithStatus:@"正在修改"];
+    NSString *url = [NSString stringWithFormat:@"%@editmembermes",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:_userInfo.userid forKey:@"memberid"];
+    [mDict setObject:aContent forKey:@"content"];
+    [mDict setObject:aType forKey:@"type"];
     
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSLog(@"jsonString = %@",jsonString);
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSInteger status = [[dict objectForKey:@"status"] integerValue];
+                if (status == 1) {
+                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                    if ([aType integerValue] == 1) {
+                        _userInfo.nickName = aContent;
+                    } else if ([aType integerValue] == 4) {
+                        _userInfo.zhifubao = aContent;
+                    }
+                    [[UserManager shareUserManager] saveUserData2Cache];
+                    [self.tableView reloadData];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"修改失败"];
+                }
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"修改失败"];
+        }
+    }];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 修改用户信息
+- (void)setUserHead
+{
+    UIActionSheet * editActionSheet = [[UIActionSheet alloc] initWithTitle:@"设置头像" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册中选择",nil];
+    [editActionSheet addButtonWithTitle:@"取消"];
+    editActionSheet.delegate = self;
+    [editActionSheet showInView:self.view];
 }
-*/
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex + 1 >= actionSheet.numberOfButtons ) {
+        return;
+    }
+    if (buttonIndex == 0)
+    {
+        NSUInteger sourceType = 0;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            sourceType = UIImagePickerControllerSourceTypeCamera;
+        }
+        else
+        {
+            sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        }
+        
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        
+        imagePickerController.delegate = self;
+        
+        imagePickerController.allowsEditing = YES;
+        
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:NO completion:^(void) {}];
+    }
+    else if (buttonIndex == 1)
+    {
+        NSUInteger sourceType = 0;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        else
+        {
+            sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        }
+        
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        
+        imagePickerController.delegate = self;
+        
+        imagePickerController.allowsEditing = YES;
+        
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:NO completion:^(void) {}];
+    }
+}
+
+# pragma mark 选取头像
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{
+        _headerImage  = [info objectForKey:UIImagePickerControllerOriginalImage];
+        NSData *imageData = UIImageJPEGRepresentation(_headerImage,0.5);
+        [self uploadHeadImage:imageData];
+        
+    }];
+}
+
+- (void)uploadHeadImage:(NSData*)imageData
+{
+    [SVProgressHUD showWithStatus:@"正在上传"];
+    ASIFormDataRequest *uploadImageRequest= [ASIFormDataRequest requestWithURL:[NSURL URLWithString:uploadheadImgURL]];
+    [uploadImageRequest setRequestMethod:@"POST"];
+    [uploadImageRequest setPostFormat:ASIMultipartFormDataPostFormat];
+    
+    //使用日期来保存
+    NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd-hh:mm"];
+    NSString *currDate = [dateFormat stringFromDate:[NSDate date]];
+    
+    NSString *photoName=[NSString stringWithFormat:@"%@.jpg",currDate];
+    
+    NSString *photoDescribe=@" ";
+    
+    NSLog(@"photoName=%@",photoName);
+    
+    NSLog(@"photoDescribe=%@",photoDescribe);
+    
+    NSLog(@"图片大小+++++%ld",[imageData length]/1024);
+    
+    //照片content
+    [uploadImageRequest addData:imageData withFileName:photoName andContentType:@"image/jpeg" forKey:@"file"];
+    
+    [uploadImageRequest setDelegate : self ];
+    
+    [uploadImageRequest setDidFinishSelector : @selector (requestFinished:)];
+    
+    [uploadImageRequest setDidFailSelector : @selector (responseFailed:)];
+    
+    [uploadImageRequest startAsynchronous];
+}
+
+#pragma mark ASIHTTPRequest Delegate Methods
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSString *jsonString = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
+    NSDictionary *dict = [jsonString objectFromJSONString];
+    if (dict) {
+        NSString *errorCode = dict[@"errorCode"];
+        if ([errorCode integerValue] == 0) {
+            NSString *dataStr = [NSString stringWithFormat:@"%@",dict[@"data"]];
+            if ((NSNull *)dataStr != [NSNull null] && ![dataStr isEqualToString:@""]) {
+                NSString *headPath = dict[@"data"][@"origin"];
+                [self uploadHeadPath:headPath];
+            }
+        }else{
+            [SVProgressHUD dismiss];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"系统提示"
+                                                                message:dict[@"errorMsg"]
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+            [alertView show];
+        }
+    }
+}
+
+- (void)responseFailed:(ASIHTTPRequest *)request {
+    [SVProgressHUD dismiss];
+    UIAlertView *failedAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"网络出问题了，请稍候重试!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [failedAlert show];
+}
+
+- (void)uploadHeadPath:(NSString*)aPath
+{
+    NSString *url = [NSString stringWithFormat:@"%@surememberimg",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict setObject:aPath forKey:@"img"];
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response) {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([dict[@"status"] integerValue] == 1) {
+                [UserManager shareUserManager].userInfo.avatar = aPath;
+                [[UserManager shareUserManager] saveUserData2Cache];
+                [_myprofileHeaderView.headerImageView sd_setImageWithURL:[NSURL URLWithString:aPath] placeholderImage:_headerImage];
+
+                [SVProgressHUD showSuccessWithStatus:@"上传成功"];
+                
+            }else{
+
+                [SVProgressHUD showErrorWithStatus:@"头像上传失败，请稍后再试！"];
+            }
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"头像上传失败，请稍后再试！"];
+        }
+    }];
+}
+
 
 @end

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^LoginCompletionBlock)(BOOL success,NSString *errorStr);
+
+
 @interface LoginViewController : UIViewController
+
+- (id)initWithPaySuccessBlock:(LoginCompletionBlock)block;
 
 @end

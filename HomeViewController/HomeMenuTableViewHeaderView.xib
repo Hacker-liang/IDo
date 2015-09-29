@@ -24,31 +24,38 @@
                         <constraint firstAttribute="height" constant="21" id="NuM-xE-AXM"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1K-P3-hj7">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1K-P3-hj7" customClass="CWStarRateView">
                     <rect key="frame" x="180" y="172" width="131" height="21"/>
-                    <color key="backgroundColor" red="0.99215686270000003" green="0.33725490200000002" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="amN-JS-b1P"/>
                         <constraint firstAttribute="width" constant="131" id="fsW-Wm-YY4"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WY9-zI-61g">
+                    <rect key="frame" x="0.0" y="0.0" width="490" height="210"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ClT-ht-MEf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4Of-vc-nM3"/>
+                <constraint firstAttribute="trailing" secondItem="WY9-zI-61g" secondAttribute="trailing" id="A4N-RF-abp"/>
                 <constraint firstAttribute="trailing" secondItem="rH7-oX-lGU" secondAttribute="trailing" constant="8" id="CcH-R9-sq0"/>
                 <constraint firstItem="rH7-oX-lGU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="UE6-Wl-hBN"/>
+                <constraint firstItem="WY9-zI-61g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bO8-gk-JRz"/>
+                <constraint firstItem="WY9-zI-61g" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gTF-XX-Fho"/>
                 <constraint firstItem="ClT-ht-MEf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="oCa-rJ-fvV"/>
                 <constraint firstItem="o1K-P3-hj7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pNq-dv-ovC"/>
+                <constraint firstAttribute="bottom" secondItem="WY9-zI-61g" secondAttribute="bottom" id="rgj-Hj-zeq"/>
                 <constraint firstItem="rH7-oX-lGU" firstAttribute="top" secondItem="ClT-ht-MEf" secondAttribute="bottom" constant="25" id="t8t-1w-vvZ"/>
                 <constraint firstAttribute="bottom" secondItem="o1K-P3-hj7" secondAttribute="bottom" constant="17" id="thC-Lq-Cub"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="headerBtn" destination="WY9-zI-61g" id="5p3-y5-gr0"/>
                 <outlet property="headerImageView" destination="ClT-ht-MEf" id="u31-ro-zZ6"/>
                 <outlet property="nickNameLabel" destination="rH7-oX-lGU" id="qRe-2N-2jY"/>
                 <outlet property="ratingView" destination="o1K-P3-hj7" id="QDR-9d-Zyu"/>

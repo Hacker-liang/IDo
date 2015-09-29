@@ -16,6 +16,10 @@
 
 - (BOOL)isLogin;
 
+- (void)logout;
+
 - (void)updateUserDataFromServer:(NSDictionary*)dict;
+
+- (void)saveUserData2Cache;
 
 @end

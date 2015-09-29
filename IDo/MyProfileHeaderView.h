@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CWStarRateView/CWStarRateView.h"
 
 @interface MyProfileHeaderView : UIView
 
@@ -15,6 +16,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendOrderCountBtn;
 @property (weak, nonatomic) IBOutlet UIButton *grabOrderCountBtn;
 @property (weak, nonatomic) IBOutlet UIButton *complainBtn;
+@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
+@property (weak, nonatomic) IBOutlet CWStarRateView *ratingView;
+
+@property (nonatomic, strong) UserInfo *userInfo;
 
 + (id)myProfileHeaderView;
 

@@ -17,6 +17,9 @@
 
 - (void)awakeFromNib
 {
+    _backgroundImageView.backgroundColor = APP_THEME_COLOR;
+    _headerImageView.clipsToBounds = YES;
+    _headerImageView.layer.cornerRadius = 35.0;
     CGFloat width = kWindowWidth/3;
     UIView *spaceView1 = [[UIView alloc] initWithFrame:CGRectMake(width, 8, 0.5, _sendOrderCountBtn.bounds.size.height-16)];
     spaceView1.backgroundColor = [UIColor grayColor];
@@ -29,6 +32,46 @@
     UIView *spaceView3 = [[UIView alloc] initWithFrame:CGRectMake(width, 8, 0.5, _sendOrderCountBtn.bounds.size.height-16)];
     spaceView3.backgroundColor = [UIColor grayColor];
     [_complainBtn addSubview:spaceView3];
-    
 }
+
+- (void)setUserInfo:(UserInfo *)userInfo
+{
+    _userInfo = userInfo;
+    _nickNameLabel.text = _userInfo.nickName;
+    _ratingView.scorePercent = 0.3;
+    _ratingView.userInteractionEnabled = NO;
+    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    
+    {
+        _sendOrderCountBtn.titleLabel.numberOfLines = 0;
+        [_sendOrderCountBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _sendOrderCountBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *sendOrderStr = [NSString stringWithFormat:@"%@笔\n发单", _userInfo.sendOrderCount];
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:sendOrderStr];
+        [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:25.0] range:NSMakeRange(0, attStr.length-4)];
+        [_sendOrderCountBtn setAttributedTitle:attStr forState:UIControlStateNormal];
+    }
+    
+    {
+        _grabOrderCountBtn.titleLabel.numberOfLines = 0;
+        [_grabOrderCountBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _grabOrderCountBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *grabOrderStr = [NSString stringWithFormat:@"%@笔\n派单", _userInfo.grabOrderCount];
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:grabOrderStr];
+        [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:25.0] range:NSMakeRange(0, attStr.length-4)];
+        [_grabOrderCountBtn setAttributedTitle:attStr forState:UIControlStateNormal];
+    }
+
+    {
+        _complainBtn.titleLabel.numberOfLines = 0;
+        [_complainBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _complainBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *str = [NSString stringWithFormat:@"%@笔\n被投诉", _userInfo.complainCount];
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+        [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:25.0] range:NSMakeRange(0, attStr.length-5)];
+        [_complainBtn setAttributedTitle:attStr forState:UIControlStateNormal];
+    }
+
+}
+
 @end

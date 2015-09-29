@@ -22,12 +22,22 @@
 @property (weak, nonatomic) IBOutlet UIButton *captchaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
+@property (nonatomic, copy) LoginCompletionBlock completionBlock;
+
 @property (nonatomic, strong) CLLocation *location;
 
 
 @end
 
 @implementation LoginViewController
+
+- (id)initWithPaySuccessBlock:(LoginCompletionBlock)block
+{
+    if (self = [super init]) {
+        _completionBlock = block;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,12 +113,23 @@
                 [SVProgressHUD showSuccessWithStatus:@"登录成功"];
                 NSDictionary *dataDict = [dict objectForKey:@"data"];
                 [[UserManager shareUserManager] updateUserDataFromServer:dataDict];
-                [self.navigationController popViewControllerAnimated:YES];
+                if (_completionBlock) {
+                    _completionBlock(YES, nil);
+                }
+                if (self.navigationController.viewControllers.count > 1) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
             } else {
+                if (_completionBlock) {
+                    _completionBlock(NO, nil);
+                }
                 [SVProgressHUD showErrorWithStatus:@"登录失败"];
             }
             
         } else {
+            if (_completionBlock) {
+                _completionBlock(NO, nil);
+            }
             [SVProgressHUD showErrorWithStatus:@"网络出问题了，请稍候重试!"];
 
         }

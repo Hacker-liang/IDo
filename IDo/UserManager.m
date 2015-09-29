@@ -39,7 +39,7 @@
     return self.userInfo;
 }
 
-- (void)loginOut
+- (void)logout
 {
     self.userInfo = nil;
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:LoginInfoMark];

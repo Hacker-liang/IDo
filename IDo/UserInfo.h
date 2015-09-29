@@ -24,6 +24,7 @@
 @property (nonatomic, copy) NSString *weixin;
 @property (nonatomic, copy) NSString *grabOrderCount;
 @property (nonatomic, copy) NSString *sendOrderCount;
+@property (nonatomic, copy) NSString *complainCount;
 @property (assign,nonatomic)double lat;
 @property (assign,nonatomic)double lng;
 @property (assign,nonatomic)double tasklat;

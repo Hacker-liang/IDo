@@ -25,6 +25,15 @@
         _userLabel = [dict objectForKey:@"label"];
         _lat = [[dict objectForKey:@"lat"] floatValue];
         _lng = [[dict objectForKey:@"lng"] floatValue];
+        if (![dict objectForKey:@"fadannumber"] || [dict objectForKey:@"fadannumber"] == [NSNull null]) {
+            _sendOrderCount = @"0";
+        }
+        
+        if (![dict objectForKey:@"jiedannumber"] || [dict objectForKey:@"jiedannumber"] == [NSNull null]) {
+            _grabOrderCount = @"0";
+        }
+        
+        _complainCount = @"0";
         
         [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
             _address = address;

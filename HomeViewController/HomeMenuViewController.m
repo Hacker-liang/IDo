@@ -28,6 +28,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     _headerView = [HomeMenuTableViewHeaderView homeMenuTableViewHeaderView];
     _headerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 210);
+    [_headerView.headerBtn addTarget:self action:@selector(gotoMyProfile) forControlEvents:UIControlEventTouchUpInside];
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"homeMenuCell"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
