@@ -47,18 +47,33 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="WC8-dw-TyA"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <color key="tintColor" red="0.98431372549999996" green="0.37647058820000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.98431372549999996" green="0.37647058820000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoe-b4-G2L">
                     <rect key="frame" x="400" y="110" width="200" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="2gv-B1-juw"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <color key="tintColor" red="0.98431372549999996" green="0.37647058820000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.98431372549999996" green="0.37647058820000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHR-We-iWL">
                     <rect key="frame" x="200" y="110" width="200" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="PuC-nF-cEF"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <color key="tintColor" red="0.98431372549999996" green="0.37647058820000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.98431372549999996" green="0.37647058820000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -91,9 +106,10 @@
             <connections>
                 <outlet property="accountRemainingBtn" destination="Xa6-pE-59B" id="6xv-Ks-vOu"/>
                 <outlet property="cashBtn" destination="yoe-b4-G2L" id="zrZ-0Q-4ZV"/>
+                <outlet property="earnLabel" destination="4Iu-WC-LAY" id="Y5K-Eh-h0z"/>
                 <outlet property="totalExpendBtn" destination="UHR-We-iWL" id="cJ9-Tv-xuG"/>
             </connections>
-            <point key="canvasLocation" x="618" y="170"/>
+            <point key="canvasLocation" x="315" y="146"/>
         </view>
     </objects>
 </document>

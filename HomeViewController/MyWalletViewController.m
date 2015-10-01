@@ -8,6 +8,7 @@
 
 #import "MyWalletViewController.h"
 #import "MyWalletTableViewHeaderView.h"
+#import "DealDetailViewController.h"
 
 @interface MyWalletViewController ()
 
@@ -45,6 +46,8 @@
     [cashBtn addTarget:self action:@selector(request2Cash) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:cashBtn];
     self.tableView.tableFooterView = footerView;
+    [self updateView];
+    [self getdata];
 }
 
 - (MyWalletTableViewHeaderView *)myWalletView
@@ -58,6 +61,82 @@
 - (void)request2Cash
 {
     
+}
+
+-(void)getdata
+{
+    [SVProgressHUD showWithStatus:@"正在加载"];
+    NSString *url = [NSString stringWithFormat:@"%@getmyqianbo",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *str=[NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([str isEqualToString:@"1"])
+            {
+                [UserManager shareUserManager].userInfo.wallet = [[WalletModel alloc] initWithJson:dict[@"data"]];
+                [self updateView];
+            }
+        }
+        else
+        {
+            UIAlertView *failedAlert = [[UIAlertView alloc]initWithTitle:nil message:messageError delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [failedAlert show];
+        }
+    }];
+}
+
+-(void)updateView
+{
+    WalletModel *wallet = [UserManager shareUserManager].userInfo.wallet;
+    _myWalletView.earnLabel.text = [NSString stringWithFormat:@"￥%@", wallet.earnMoney];
+    
+    {
+        NSString *str = [NSString stringWithFormat:@" 账户余额\n￥%@", wallet.remainingMoney];
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+        [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, 5)];
+        [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 5)];
+
+        [_myWalletView.accountRemainingBtn setAttributedTitle:attStr forState:UIControlStateNormal];
+    }
+    
+    {
+        NSString *str = [NSString stringWithFormat:@" 已经提醒\n￥%@", wallet.cashMoney];
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+        [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, 5)];
+        [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 5)];
+
+        [_myWalletView.cashBtn setAttributedTitle:attStr forState:UIControlStateNormal];
+    }
+    
+    {
+        NSString *str = [NSString stringWithFormat:@" 累计消费\n￥%@", wallet.payMoney];
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+        [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, 5)];
+        [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 5)];
+
+        [_myWalletView.totalExpendBtn setAttributedTitle:attStr forState:UIControlStateNormal];
+    }
+}
+
+///收支明细
+-(void)tap1Click
+{
+    DealDetailViewController * dealDetailVC = [[DealDetailViewController alloc]init];
+    dealDetailVC.titleStr = @"收支明细";
+    [self.navigationController pushViewController:dealDetailVC animated:YES];
+}
+///提现明细
+-(void)tap2Click
+{
+    DealDetailViewController * dealDetailVC = [[DealDetailViewController alloc]init];
+    dealDetailVC.titleStr = @"提现明细";
+    [self.navigationController pushViewController:dealDetailVC animated:YES];
 }
 
 #pragma mrak - UITableViewDatasourece
@@ -93,6 +172,17 @@
     cell.textLabel.text = _dataSource[indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        [self tap1Click];
+    } else {
+        [self tap2Click];
+
+    }
 }
 
 @end

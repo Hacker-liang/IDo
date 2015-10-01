@@ -17,8 +17,9 @@
 @implementation GrabOrderSegmentedViewController
 
 - (void)viewDidLoad {
-    self.segmentedNormalImages = @[];
-    self.segmentedSelectedImages = @[];
+    self.segmentedNormalImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
+    self.segmentedSelectedImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
+
     self.segmentedTitles = @[@"立即抢单", @"我的订单", @"评价"];
     GrabOrderDetailSegmentViewController *ctl = [[GrabOrderDetailSegmentViewController alloc] init];
     MyOrderRootViewController *ctl1 = [[MyOrderRootViewController alloc] init];
@@ -28,7 +29,15 @@
 
     self.viewControllers = @[ctl, ctl1, ctl2];
     [super viewDidLoad];
+    self.view.backgroundColor = APP_PAGE_COLOR;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    for (UIViewController *ctl in self.viewControllers) {
+        CGRect frame = ctl.view.frame;
+        frame.origin.y += 20;
+        frame.size.height -= 20;
+        ctl.view.frame = frame;
+    }
 
 }
 

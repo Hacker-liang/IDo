@@ -7,6 +7,7 @@
 //
 
 #import "IDSegmentedRootViewController.h"
+#import "TZButton.h"
 
 @interface IDSegmentedRootViewController () <UIScrollViewDelegate>
 
@@ -17,6 +18,8 @@
 
 @property (nonatomic, strong) UIScrollView *contentView;
 
+@property (nonatomic) CGFloat segmentedHeight;
+
 @end
 
 @implementation IDSegmentedRootViewController
@@ -24,6 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    if (_segmentedNormalImages.count) {
+        _segmentedHeight = 60;
+    } else {
+        _segmentedHeight = 49;
+    }
+    
     [self setupSegmentView];
     [self setupContentView];
 }
@@ -45,38 +54,48 @@
  */
 - (void)setupSegmentView
 {
-    UIView *segmentPanel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 49)];
+    UIView *segmentPanel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, _segmentedHeight)];
     segmentPanel.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:segmentPanel];
     
     NSMutableArray *buttonArray = [[NSMutableArray alloc] init];
     
     float btnWidth = self.view.bounds.size.width/[_segmentedTitles count];
-    float btnHeight = 49;
     float offsetX = 0;
-    
-    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, btnHeight-2, btnWidth, 2)];
+    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, _segmentedHeight-2, btnWidth, 2)];
     _indicatorView.backgroundColor = [UIColor orangeColor];
     [segmentPanel addSubview:_indicatorView];
     
     for (int i = 0; i < [_segmentedTitles count]; i++) {
         NSString *title = [_segmentedTitles objectAtIndex:i];
-        NSString *imageNormalName = [_segmentedTitles objectAtIndex:i];
-        NSString *imageSelectName = [_segmentedTitles objectAtIndex:i];
-        UIButton *segmentBtn = [[UIButton alloc] initWithFrame:CGRectMake(offsetX, 0, btnWidth, btnHeight)];
+        
+        UIButton *segmentBtn;
+        if (_segmentedNormalImages.count) {
+            segmentBtn = [[TZButton alloc] initWithFrame:CGRectMake(offsetX, 0, btnWidth, _segmentedHeight)];
+
+            NSString *imageNormalName = [_segmentedNormalImages objectAtIndex:i];
+            NSString *imageSelectName = [_segmentedSelectedImages objectAtIndex:i];
+            [segmentBtn setImage:[UIImage imageNamed:imageNormalName] forState:UIControlStateNormal];
+            [segmentBtn setImage:[UIImage imageNamed:imageSelectName] forState:UIControlStateSelected];
+            ((TZButton *)segmentBtn).topSpaceHight = 8;
+            ((TZButton *)segmentBtn).spaceHight = 8;
+            
+        } else {
+            segmentBtn = [[UIButton alloc] initWithFrame:CGRectMake(offsetX, 0, btnWidth, _segmentedHeight)];
+
+        }
+        
         [segmentBtn setTitle:title forState:UIControlStateNormal];
-        [segmentBtn setImage:[UIImage imageNamed:imageNormalName] forState:UIControlStateNormal];
-        [segmentBtn setImage:[UIImage imageNamed:imageSelectName] forState:UIControlStateSelected];
+
         [segmentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [segmentBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
-        [segmentBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
-        [segmentBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 3)];
         segmentBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
         segmentBtn.tag = i;
         [segmentBtn addTarget:self action:@selector(changePageAction:) forControlEvents:UIControlEventTouchUpInside];
         [segmentPanel addSubview:segmentBtn];
         [buttonArray addObject:segmentBtn];
         offsetX += btnWidth;
+        
         
         UIView *spaceView = [[UIView alloc] initWithFrame:CGRectMake(offsetX, 8, 0.5, 33)];
         spaceView.backgroundColor = [UIColor grayColor];
@@ -92,7 +111,7 @@
  */
 - (void)setupContentView
 {
-    _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 49, self.view.bounds.size.width, self.view.bounds.size.height-49)];
+    _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, _segmentedHeight, self.view.bounds.size.width, self.view.bounds.size.height-_segmentedHeight)];
     _contentView.pagingEnabled = YES;
     _contentView.delegate = self;
     _contentView.contentSize = CGSizeMake(self.view.bounds.size.width*_viewControllers.count, _contentView.bounds.size.height);
@@ -131,7 +150,7 @@
         btn.selected = NO;
     }
     sender.selected = YES;
-    _indicatorView.center = CGPointMake(sender.center.x, 48);
+    _indicatorView.center = CGPointMake(sender.center.x, _segmentedHeight-1);
     _currentViewController = newController;
     [_contentView setContentOffset:CGPointMake(_contentView.bounds.size.width*pageIndex, 0) animated:YES];
 }

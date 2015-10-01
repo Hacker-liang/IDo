@@ -52,6 +52,7 @@
     GrabOrderRootViewController *grabOrederCtl = [[GrabOrderRootViewController alloc] init];
     SendOrderRootViewController *sendOrderCtl = [[SendOrderRootViewController alloc] init];
     _viewControllers = @[grabOrederCtl, sendOrderCtl];
+    
     UIViewController *firstCtl = [_viewControllers firstObject];
     _currentViewController = firstCtl;
     [self addChildViewController:firstCtl];

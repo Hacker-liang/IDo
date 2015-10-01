@@ -13,6 +13,7 @@
 #import "MyWalletViewController.h"
 #import "MyProfileTableViewController.h"
 #import "LoginViewController.h"
+#import "AboutViewController.h"
 
 @interface HomeMenuViewController ()
 
@@ -53,8 +54,8 @@
     if (!_dataSource) {
         _dataSource = @[@{@"icon": @"icon_menu_wallet.png", @"title": @"我的钱包"},
                         @{@"icon": @"icon_menu_mine.png", @"title": @"个人中心"},
-                        @{@"icon": @"icon_menu_message.png", @"title": @"信息中心"},
-                        @{@"icon": @"icon_menu_setting.png", @"title": @"关于我们"}
+                        @{@"icon": @"icon_menu_message.png", @"title": @"关于我们"},
+                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
                         ];
     }
     return _dataSource;
@@ -87,12 +88,16 @@
 
 - (void)gotoAbout
 {
-    
+    AboutViewController *ctl = [[AboutViewController alloc] init];
+    [self.frostedViewController hideMenuViewController];
+
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
 - (void)gotoLogin
 {
     [self.frostedViewController hideMenuViewController];
+    
     LoginViewController *ctl = [[LoginViewController alloc] init];
     [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
@@ -142,6 +147,8 @@
         
     } else if (indexPath.row == 1) {
         [self gotoMyProfile];
+    } else if (indexPath.row == 2) {
+        [self gotoAbout];
     }
 }
 

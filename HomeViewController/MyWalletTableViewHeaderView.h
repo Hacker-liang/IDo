@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *totalExpendBtn;
 @property (weak, nonatomic) IBOutlet UIButton *cashBtn;
+@property (weak, nonatomic) IBOutlet UILabel *earnLabel;
 
 + (id)myWalletTableViewHeaderView;
 

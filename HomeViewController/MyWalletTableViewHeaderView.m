@@ -30,10 +30,11 @@
      UIView *spaceView3 = [[UIView alloc] initWithFrame:CGRectMake(width, 8, 0.5, _accountRemainingBtn.bounds.size.height-16)];
     spaceView3.backgroundColor = [UIColor grayColor];
     [_cashBtn addSubview:spaceView3];
-    
-    [_accountRemainingBtn setTitle:@"账户余额" forState:UIControlStateNormal];
-    [_totalExpendBtn setTitle:@"累计消费" forState:UIControlStateNormal];
-    [_cashBtn setTitle:@"已经体现" forState:UIControlStateNormal];
+
+    _cashBtn.titleLabel.numberOfLines = 0;
+    _totalExpendBtn.titleLabel.numberOfLines = 0;
+    _accountRemainingBtn.titleLabel.numberOfLines = 0;
+
 
 }
 

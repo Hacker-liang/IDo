@@ -7,6 +7,7 @@
 //工具类，用于读取配置文件
 
 #import <Foundation/Foundation.h>
+#import "WalletModel.h"
 
 
 @interface UserInfo : NSObject
@@ -25,6 +26,12 @@
 @property (nonatomic, copy) NSString *grabOrderCount;
 @property (nonatomic, copy) NSString *sendOrderCount;
 @property (nonatomic, copy) NSString *complainCount;
+@property (nonatomic) BOOL isVip;
+@property (nonatomic) BOOL isMute;
+
+@property (nonatomic, strong) WalletModel *wallet;
+
+
 @property (assign,nonatomic)double lat;
 @property (assign,nonatomic)double lng;
 @property (assign,nonatomic)double tasklat;

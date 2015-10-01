@@ -10,6 +10,7 @@
 #import "MyProfileHeaderView.h"
 #import "MyProfileTableViewCell.h"
 #import "ASIFormDataRequest.h"
+#import "Requtst2BeVIPViewController.h"
 
 @interface MyProfileTableViewController () <UIImagePickerControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -105,11 +106,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MyProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myProfileCell" forIndexPath:indexPath];
-    if (indexPath.row != 0) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else {
+    if (indexPath.row == 0) {
         cell.accessoryType = UITableViewCellAccessoryNone;
+
+    } else if (indexPath.row == 5) {
+        UISwitch *switchView=[[UISwitch alloc]init];
+        [switchView setOn:YES animated:YES];
+        [switchView addTarget:self action:@selector(switchAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        if(self.userInfo.isMute) {
+            switchView.on = YES;
+        } else {
+            switchView.on = NO;
+        }
+        cell.accessoryView=switchView;
+        cell.textLabel.textColor=[UIColor darkGrayColor];
+        cell.textLabel.text = @"声音控制";
+
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    
     NSString *title = _dataSource[indexPath.row];
     cell.titleLabel.text = title;
 
@@ -185,6 +201,26 @@
         thAlertView.tag = 501;
         [thAlertView show];
     }
+    if (indexPath.row == 4) {
+        Requtst2BeVIPViewController *ctl = [[Requtst2BeVIPViewController alloc] init];
+        [self.navigationController pushViewController:ctl animated:YES];
+    }
+}
+
+-(void)switchAction:(id)sender
+{
+    UISwitch *switchButton = (UISwitch*)sender;
+    BOOL isButtonOn = [switchButton isOn];
+    if (isButtonOn) {
+        _userInfo.isMute = YES;
+        [self changeUserSet:@"1" Type:@"6"];
+
+    }else {
+        _userInfo.isMute= NO;
+        [self changeUserSet:@"0" Type:@"6"];
+
+    }
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
