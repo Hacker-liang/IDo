@@ -42,12 +42,12 @@
     if (self.evaluationType == 1) {
         //发单人对接单人的评价，传的是接单人的id
         url = [NSString stringWithFormat:@"%@guzhucomment",baseUrl];
-        [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     }else{
          //接单人对发单人的评价，传的是发单人的id
         url = [NSString stringWithFormat:@"%@huobaocomment",baseUrl];
-        [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     }
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+
 
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [self.tableView.header endRefreshing];
@@ -102,6 +102,7 @@
 - (UITableViewCell *)tableView:(UITableView *)stableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EvaluationTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
+    cell.evaluationType = evaluationType;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.contentDic = dataArr[indexPath.section];
     return cell;

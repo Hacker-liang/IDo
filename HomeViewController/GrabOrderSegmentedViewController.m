@@ -26,7 +26,7 @@
     MyOrderRootViewController *ctl1 = [[MyOrderRootViewController alloc] init];
     ctl1.isGrabOrder = YES;
     EvaluationRecordViewController *ctl2 = [[EvaluationRecordViewController alloc] init];
-    ctl2.evaluationType = 2;
+    ctl2.evaluationType = 1;
 
     self.viewControllers = @[ctl, ctl1, ctl2];
     [super viewDidLoad];

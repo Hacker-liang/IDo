@@ -75,7 +75,16 @@
 {
     [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         CLPlacemark *placemark = [placemarks firstObject];
-        NSString *address = [NSString stringWithFormat:@"%@%@%@%@", placemark.locality, placemark.subLocality, placemark.thoroughfare, placemark.subThoroughfare];
+        NSString *address;
+        if (placemark.subThoroughfare) {
+            address = [NSString stringWithFormat:@"%@%@%@%@", placemark.locality, placemark.subLocality, placemark.thoroughfare, placemark.subThoroughfare];
+        } else {
+            address = [NSString stringWithFormat:@"%@%@%@", placemark.locality, placemark.subLocality, placemark.thoroughfare];
+        }
+        [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
+        [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
+        [UserManager shareUserManager].userInfo.address = address;
+        [[UserManager shareUserManager] saveUserData2Cache];
         
         if (_userLocationCompletionBlock) {
             _userLocationCompletionBlock(_userLocation, address);

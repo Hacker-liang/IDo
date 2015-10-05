@@ -58,9 +58,11 @@
     }
 
     if (self.evaluationType == 1) {
-        _ratingView.scorePercent = [contentDic[@"commentstartoperson"] integerValue]/5;
+        
+        _ratingView.scorePercent = [contentDic[@"commentstartoperson"] integerValue]/5.0;
+        
     }else{
-        _ratingView.scorePercent = [contentDic[@"commentstarfromperson"] integerValue]/5;
+        _ratingView.scorePercent = [contentDic[@"commentstarfromperson"] integerValue]/5.0;
 
     }
     

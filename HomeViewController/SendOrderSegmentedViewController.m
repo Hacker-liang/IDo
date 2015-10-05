@@ -32,7 +32,7 @@
     _mySendOrderCtl.isGrabOrder = NO;
     
     EvaluationRecordViewController *ctl2 = [[EvaluationRecordViewController alloc] init];
-    ctl2.evaluationType = 1;
+    ctl2.evaluationType = 2;
     self.viewControllers = @[_senderOrderCtl, _mySendOrderCtl, ctl2];
     [super viewDidLoad];
     

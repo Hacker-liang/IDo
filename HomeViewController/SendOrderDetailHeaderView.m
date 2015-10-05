@@ -26,22 +26,26 @@
 - (void)awakeFromNib
 {
     _mapView.delegate = self;
-    UserInfo *userInfo = [UserManager shareUserManager].userInfo;
-    _orderDetailModel.lat = [NSString stringWithFormat:@"%lf", userInfo.lat];
-    _orderDetailModel.lng = [NSString stringWithFormat:@"%lf", userInfo.lng];
-    _orderDetailModel.address = userInfo.address;
-    [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
-
     UserLocationManager *locationManager = [UserLocationManager shareInstance];
+
     [locationManager getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
         self.mapView.showsUserLocation = YES;
         _orderDetailModel.lat = [NSString stringWithFormat:@"%lf", userLocation.coordinate.latitude];
         _orderDetailModel.lng = [NSString stringWithFormat:@"%lf", userLocation.coordinate.longitude];
         _orderDetailModel.address = address;
+        [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
         [_locationBtn setTitle:address forState:UIControlStateNormal];
         [self adjustMapViewWithLocation:userLocation.coordinate];
     }];
+}
+
+- (void)setOrderDetailModel:(OrderDetailModel *)orderDetailModel
+{
+    _orderDetailModel = orderDetailModel;
+   
+    [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
+    
 }
 
 - (void)adjustMapViewWithLocation:(CLLocationCoordinate2D)location

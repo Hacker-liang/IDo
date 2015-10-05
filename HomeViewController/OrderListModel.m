@@ -21,6 +21,7 @@
         _sex = [json objectForKey:@"sex"];
         _tasktime = [json objectForKey:@"timelength"];
         _address = [json objectForKey:@"serviceaddress"];
+        _reminderCount = [json objectForKey:@"ask_money_times"];
 
         if ([json objectForKey:@"jiedanren"]) {
             _grabOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"jiedanren"]];

@@ -23,6 +23,7 @@
         _address = [json objectForKey:@"serviceaddress"];
         _lat = [json objectForKey:@"lat"];
         _lng = [json objectForKey:@"lng"];
+        _reminderCount = [json objectForKey:@"ask_money_times"];
         _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
         _grabOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"jiedanren"]];
         
@@ -38,7 +39,11 @@
             } else if ([[json objectForKey:@"haspay"] intValue] == 1) {
                 if ([[json objectForKey:@"hasconfpay"] intValue] == 0) {
                     _orderStatus = kOrderPayed;
-                    _orderStatusDesc = @"已经付款，等待验收";
+                    if (!_isSendOrder) {
+                        _orderStatusDesc = @"对方已付款,任务进行中";
+                    } else {
+                        _orderStatusDesc = [NSString stringWithFormat:@"已付款，请验收(被催单%@)", _reminderCount];
+                    }
                     
                 } else {
                     if (_isSendOrder) {

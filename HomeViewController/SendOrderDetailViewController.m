@@ -12,8 +12,9 @@
 #import "OrderDetailModel.h"
 #import "OrderContentTableViewCell.h"
 #import "FYTimeViewController.h"
+#import "ChangeLocationTableViewController.h"
 
-@interface SendOrderDetailViewController () <UIActionSheetDelegate>
+@interface SendOrderDetailViewController () <UIActionSheetDelegate, ChangeLocationDelegate>
 
 @property (nonatomic ,strong) SendOrderDetailHeaderView *headerView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -27,14 +28,17 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     if (self = [super initWithStyle:style]) {
-
+        _orderDetail = [[OrderDetailModel alloc] init];
+        UserInfo *userInfo = [UserManager shareUserManager].userInfo;
+        _orderDetail.lat = [NSString stringWithFormat:@"%lf", userInfo.lat];
+        _orderDetail.lng = [NSString stringWithFormat:@"%lf", userInfo.lng];
+        _orderDetail.address = userInfo.address;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _orderDetail = [[OrderDetailModel alloc] init];
     _orderDetail.price = @"5";
     _orderDetail.distance = @"5";
     self.navigationItem.title = @"立即派单";
@@ -65,6 +69,9 @@
 {
     if (!_headerView) {
         _headerView = [SendOrderDetailHeaderView sendOrderDetailHeaderView];
+        _headerView.orderDetailModel = _orderDetail;
+        [_headerView.locationBtn addTarget:self action:@selector(setupAddress) forControlEvents:UIControlEventTouchUpInside];
+
     }
     return _headerView;
 }
@@ -84,24 +91,11 @@
     self.tableView.tableFooterView = footerView;
 }
 
-- (void)setupTime
-{
-    
-}
-
-- (void)setupMoney
-{
-    
-}
-
-- (void)setupDestance
-{
-    
-}
-
 - (void)setupAddress
 {
-    
+    ChangeLocationTableViewController *ctl = [[ChangeLocationTableViewController alloc] init];
+    ctl.delegate = self;
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:ctl] animated:YES completion:nil];
 }
 
 //获取十分钟之后的时间
@@ -126,6 +120,16 @@
     _orderDetail.tasktime = [NSString stringWithFormat:@"%d-%02d-%02d %02d:%02d:00",year,month,myday,myhour,minute];
     
     _showtime = [AppTools returnUploadTime:_orderDetail.tasktime isCurrentDay:YES];
+}
+
+#pragma mark - ChangeLocationDelegate
+
+- (void)didChangeAddress:(float)lat lng:(float)lng address:(NSString *)address
+{
+    _orderDetail.lat = [NSString stringWithFormat:@"%lf", lat];
+    _orderDetail.lng = [NSString stringWithFormat:@"%lf", lng];
+    _orderDetail.address = address;
+    _headerView.orderDetailModel = _orderDetail;
 }
 
 #pragma mark - IBAction Methods
@@ -192,7 +196,6 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    self.headerView.orderDetailModel = self.orderDetail;
     return self.headerView;
 }
 

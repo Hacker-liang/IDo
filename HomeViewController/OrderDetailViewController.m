@@ -220,9 +220,9 @@
         
         [_footerView addSubview:orderBtn];
         
-    } else if (_orderDetail.orderStatus == kOrderPayed) {
+    } else if (_orderDetail.orderStatus == kOrderPayed && _isSendOrder) {
         
-        tipsString = @"保持良好记录有助于快速成交订单";
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         statusString = _orderDetail.orderStatusDesc;
 
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
@@ -236,6 +236,22 @@
         [orderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
         [_footerView addSubview:orderBtn];
         
+    } else if (_orderDetail.orderStatus == kOrderPayed && !_isSendOrder) {
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
+        statusString = _orderDetail.orderStatusDesc;
+        
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
+        
+        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+        orderBtn.layer.cornerRadius = 5.0;
+        orderBtn.backgroundColor = APP_THEME_COLOR;
+        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        NSString *str = [NSString stringWithFormat:@"请派单人验收任务(%@次)", _orderDetail.reminderCount];
+        [orderBtn setTitle:str forState:UIControlStateNormal];
+        [orderBtn addTarget:self action:@selector(reminderUserPay:) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:orderBtn];
+
     } else if (_orderDetail.orderStatus == kOrderCancelPayTimeOut) {
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
@@ -354,6 +370,39 @@
     }];
 }
 
+//催款
+- (void)reminderUserPay:(id)sender
+{
+    [SVProgressHUD showWithStatus:@"正在催款"];
+    NSString *url = [NSString stringWithFormat:@"%@dept",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:_orderDetail.orderId forKey:@"orderid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSLog(@"jsonString = %@",jsonString);
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([tempStatus integerValue] == 1) {
+                int number = [_orderDetail.reminderCount intValue] + 1;
+                _orderDetail.reminderCount = [NSString stringWithFormat:@"%d", number];
+                [self updateDetailViewWithStatus:_orderDetail.orderStatus andShouldReloadOrderDetail:NO];
+                [SVProgressHUD showSuccessWithStatus:@"您的催款信息已发送"];
+                
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"付款给活儿宝失败，请重试!"];
+            }
+        }
+        else{
+            [SVProgressHUD showErrorWithStatus:@"付款给活儿宝失败，请重试!"];
+
+        }
+    }];
+
+}
+
 //评价
 - (void)ratingAction:(UIButton *)btn
 {
@@ -387,10 +436,7 @@
                 [self updateDetailViewWithStatus:kOrderCheckDone andShouldReloadOrderDetail:NO];
                 [alertV showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
-//                        EvaluationViewController *control = [[EvaluationViewController alloc] init];
-//                        control.evaluationType = 1;
-//                        control.orderid = self.orderId;
-//                        [self.navigationController pushViewController:control animated:YES];
+                        [self ratingAction:nil];
                     }
                 }];
                 

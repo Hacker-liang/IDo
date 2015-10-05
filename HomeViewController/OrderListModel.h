@@ -25,6 +25,7 @@
 @property(copy, nonatomic) NSString *sex;      //性别
 @property(copy, nonatomic) NSString *distance; //范围
 @property(copy, nonatomic) NSString *orderStatusDesc;
+@property(copy, nonatomic) NSString *reminderCount; //范围
 @property(nonatomic) OrderStatus orderStatus;
 @property (nonatomic) BOOL isSendOrder;
 

@@ -10,6 +10,8 @@
 
 @interface EvaluationViewController ()
 
+@property (nonatomic, strong) UIScrollView *scrollView;
+
 @end
 
 @implementation EvaluationViewController
@@ -59,11 +61,11 @@
 
 - (void)buildView
 {
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:scrollView];
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:_scrollView];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 120)];
     view.backgroundColor = COLOR(10, 148, 53);
-    [scrollView addSubview:view];
+    [_scrollView addSubview:view];
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(kWindowWidth/2-30, 20, 60, 60)];
     headImage.backgroundColor = [UIColor clearColor];
@@ -95,17 +97,17 @@
     Star.font = [UIFont systemFontOfSize:15.0];
     Star.textAlignment = NSTextAlignmentCenter;
     Star.backgroundColor=[UIColor clearColor];
-    [scrollView addSubview:Star];
+    [_scrollView addSubview:Star];
     
     self.ratingBar = [[RatingBar alloc] initWithFrame:CGRectMake(kWindowWidth/2-90, 170+64, 140, 30)];
-    [scrollView addSubview:self.ratingBar];
+    [_scrollView addSubview:self.ratingBar];
     
     UILabel * plLab = [[UILabel alloc]initWithFrame:CGRectMake(0 ,210+64,kWindowWidth,20)];
     plLab.text=@"发表评论";
     plLab.font = [UIFont systemFontOfSize:15.0];
     plLab.textAlignment = NSTextAlignmentCenter;
     plLab.backgroundColor=[UIColor clearColor];
-    [scrollView addSubview:plLab];
+    [_scrollView addSubview:plLab];
     
     self.textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(20, 245+64, self.view.frame.size.width-40, 100)];
     self.textView.delegate = self;
@@ -116,8 +118,8 @@
     self.textView.editable = YES;
     self.textView.textColor = COLOR(98, 98, 98);
     self.textView.font = [UIFont systemFontOfSize:16];
-    [scrollView addSubview:self.textView];
-    scrollView.contentSize = CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+10);
+    [_scrollView addSubview:self.textView];
+    _scrollView.contentSize = CGSizeMake(_scrollView.bounds.size.width, _scrollView.bounds.size.height+10);
 }
 
 - (void)Submit
@@ -174,7 +176,14 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    [_scrollView setContentOffset:CGPointMake(0, 100) animated:YES];
 }
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [_scrollView setContentOffset:CGPointZero animated:YES];
+}
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
 {
     if ([text isEqualToString:@"\n"]) {

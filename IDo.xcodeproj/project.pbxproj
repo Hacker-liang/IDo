@@ -64,6 +64,17 @@
 		D946C90B1BC28F3400AAD3A3 /* EvaluationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D946C9091BC28F3400AAD3A3 /* EvaluationTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		D946C90E1BC29C9F00AAD3A3 /* icon_female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D946C90C1BC29C9F00AAD3A3 /* icon_female@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D946C90F1BC29C9F00AAD3A3 /* icon_male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D946C90D1BC29C9F00AAD3A3 /* icon_male@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D946C9111BC2C20C00AAD3A3 /* icon_right_dot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D946C9101BC2C20C00AAD3A3 /* icon_right_dot@3x.png */; settings = {ASSET_TAGS = (); }; };
+		D946C91A1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D946C9181BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D946C91B1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D946C9191BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D946C91D1BC2C4E800AAD3A3 /* icon_search_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D946C91C1BC2C4E800AAD3A3 /* icon_search_bg@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D946C9211BC2CC6200AAD3A3 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C9201BC2CC6200AAD3A3 /* AMapSearchKit.framework */; settings = {ASSET_TAGS = (); }; };
+		D946C9231BC2D28500AAD3A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C9221BC2D28500AAD3A3 /* CoreLocation.framework */; };
+		D946C9251BC2D5B500AAD3A3 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C9241BC2D5B500AAD3A3 /* libstdc++.6.0.9.tbd */; };
+		D946C9271BC2D5C300AAD3A3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C9261BC2D5C300AAD3A3 /* OpenGLES.framework */; };
+		D946C9291BC2D5D300AAD3A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C9281BC2D5D300AAD3A3 /* QuartzCore.framework */; };
+		D946C92B1BC2D6B700AAD3A3 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C92A1BC2D6B700AAD3A3 /* libz.1.dylib */; };
+		D946C92D1BC2D94900AAD3A3 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C92C1BC2D94900AAD3A3 /* MAMapKit.framework */; settings = {ASSET_TAGS = (); }; };
 		D95394E71BB2694900CB6746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E61BB2694900CB6746 /* main.m */; };
 		D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E91BB2694900CB6746 /* AppDelegate.m */; };
 		D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95394F11BB2694900CB6746 /* Assets.xcassets */; };
@@ -414,6 +425,18 @@
 		D946C9091BC28F3400AAD3A3 /* EvaluationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationTableViewCell.xib; sourceTree = "<group>"; };
 		D946C90C1BC29C9F00AAD3A3 /* icon_female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_female@2x.png"; sourceTree = "<group>"; };
 		D946C90D1BC29C9F00AAD3A3 /* icon_male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_male@2x.png"; sourceTree = "<group>"; };
+		D946C9101BC2C20C00AAD3A3 /* icon_right_dot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_right_dot@3x.png"; sourceTree = "<group>"; };
+		D946C9171BC2C42B00AAD3A3 /* ChangeLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLocationTableViewController.h; sourceTree = "<group>"; };
+		D946C9181BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLocationTableViewController.m; sourceTree = "<group>"; };
+		D946C9191BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeLocationTableViewController.xib; sourceTree = "<group>"; };
+		D946C91C1BC2C4E800AAD3A3 /* icon_search_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_search_bg@2x.png"; sourceTree = "<group>"; };
+		D946C9201BC2CC6200AAD3A3 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
+		D946C9221BC2D28500AAD3A3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D946C9241BC2D5B500AAD3A3 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		D946C9261BC2D5C300AAD3A3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		D946C9281BC2D5D300AAD3A3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D946C92A1BC2D6B700AAD3A3 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
+		D946C92C1BC2D94900AAD3A3 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		D95394E21BB2694900CB6746 /* IDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95394E61BB2694900CB6746 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D95394E81BB2694900CB6746 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -714,6 +737,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D946C9251BC2D5B500AAD3A3 /* libstdc++.6.0.9.tbd in Frameworks */,
+				D946C92B1BC2D6B700AAD3A3 /* libz.1.dylib in Frameworks */,
+				D946C9291BC2D5D300AAD3A3 /* QuartzCore.framework in Frameworks */,
+				D946C92D1BC2D94900AAD3A3 /* MAMapKit.framework in Frameworks */,
+				D946C9271BC2D5C300AAD3A3 /* OpenGLES.framework in Frameworks */,
+				D946C9231BC2D28500AAD3A3 /* CoreLocation.framework in Frameworks */,
+				D946C9211BC2CC6200AAD3A3 /* AMapSearchKit.framework in Frameworks */,
 				D953959F1BB273DA00CB6746 /* Security.framework in Frameworks */,
 				D9B28A001BBD811700FB97E5 /* UIKit.framework in Frameworks */,
 				D9B289FE1BBD810F00FB97E5 /* Foundation.framework in Frameworks */,
@@ -752,6 +782,9 @@
 		D90E2E291BB626A200C2E6F3 /* MySendOrder */ = {
 			isa = PBXGroup;
 			children = (
+				D946C9171BC2C42B00AAD3A3 /* ChangeLocationTableViewController.h */,
+				D946C9181BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m */,
+				D946C9191BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib */,
 			);
 			name = MySendOrder;
 			sourceTree = "<group>";
@@ -968,6 +1001,13 @@
 		D95394D91BB2694900CB6746 = {
 			isa = PBXGroup;
 			children = (
+				D946C92C1BC2D94900AAD3A3 /* MAMapKit.framework */,
+				D946C92A1BC2D6B700AAD3A3 /* libz.1.dylib */,
+				D946C9281BC2D5D300AAD3A3 /* QuartzCore.framework */,
+				D946C9261BC2D5C300AAD3A3 /* OpenGLES.framework */,
+				D946C9241BC2D5B500AAD3A3 /* libstdc++.6.0.9.tbd */,
+				D946C9221BC2D28500AAD3A3 /* CoreLocation.framework */,
+				D946C9201BC2CC6200AAD3A3 /* AMapSearchKit.framework */,
 				D9B289FF1BBD811700FB97E5 /* UIKit.framework */,
 				D9B289FD1BBD810F00FB97E5 /* Foundation.framework */,
 				D9B289FB1BBD810000FB97E5 /* CoreGraphics.framework */,
@@ -1310,6 +1350,8 @@
 		D96EA9DF1BB3D91200360ED8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D946C91C1BC2C4E800AAD3A3 /* icon_search_bg@2x.png */,
+				D946C9101BC2C20C00AAD3A3 /* icon_right_dot@3x.png */,
 				D946C90C1BC29C9F00AAD3A3 /* icon_female@2x.png */,
 				D946C90D1BC29C9F00AAD3A3 /* icon_male@2x.png */,
 				D9B289EE1BBCEDE600FB97E5 /* icon_order@3x.png */,
@@ -1819,12 +1861,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D946C91B1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib in Resources */,
 				D91F2F381BC2196A002CE690 /* icon_setting_newmsg@3x.png in Resources */,
 				D9B289ED1BBCEBC500FB97E5 /* Icon.png in Resources */,
 				D96EA9E91BB3D9E300360ED8 /* LoginViewController.xib in Resources */,
 				D91F2F391BC2196A002CE690 /* icon_setting_rul_bg@3x.png in Resources */,
 				D96EA9481BB2EB7300360ED8 /* MyWalletViewController.xib in Resources */,
 				D9B2F6C01BB28D7A00ED7DDF /* icon_menu_setting@3x.png in Resources */,
+				D946C91D1BC2C4E800AAD3A3 /* icon_search_bg@2x.png in Resources */,
 				D96EA95A1BB37FE300360ED8 /* icon_menu@3x.png in Resources */,
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@3x.png in Resources */,
 				D9ADC3F71BBA603100B1B7E1 /* bt_star_a.png in Resources */,
@@ -1869,6 +1913,7 @@
 				D96EAA3A1BB5337F00360ED8 /* CustomTableViewCell.xib in Resources */,
 				D91F2F251BC214C7002CE690 /* icon_tage_bg@3x.png in Resources */,
 				D9B289DD1BBCE51F00FB97E5 /* blueArrow@2x.png in Resources */,
+				D946C9111BC2C20C00AAD3A3 /* icon_right_dot@3x.png in Resources */,
 				D946C90E1BC29C9F00AAD3A3 /* icon_female@2x.png in Resources */,
 				D96EA9151BB292BB00360ED8 /* HomeMenuViewController.xib in Resources */,
 				D99EAD481BBCD3C0005A02D3 /* Requtst2BeVIPViewController.xib in Resources */,
@@ -1953,6 +1998,7 @@
 				D92B5C151BB8F3B600E3AC93 /* RSADataSigner.m in Sources */,
 				D96EAA901BB5964F00360ED8 /* MJRefreshHeader.m in Sources */,
 				D96EAA0D1BB40EA200360ED8 /* GrabOrderListTableViewController.m in Sources */,
+				D946C91A1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m in Sources */,
 				D96EA9C91BB3D24700360ED8 /* NSData+ImageContentType.m in Sources */,
 				D96EA9141BB292BB00360ED8 /* HomeMenuViewController.m in Sources */,
 				D96EAA971BB5964F00360ED8 /* MJRefreshGifHeader.m in Sources */,
@@ -2178,9 +2224,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/IDo/Libs/Pay",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IDo/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/IDo/Libs/Pay";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/IDo/Libs/Pay",
+					"$(PROJECT_DIR)/IDo",
+				);
 				INFOPLIST_FILE = IDo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2188,7 +2238,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IDo/Libs/Pay",
 					"$(PROJECT_DIR)/IDo/Libs/JPush",
+					"$(PROJECT_DIR)/IDo",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2206,9 +2258,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/IDo/Libs/Pay",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IDo/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/IDo/Libs/Pay";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/IDo/Libs/Pay",
+					"$(PROJECT_DIR)/IDo",
+				);
 				INFOPLIST_FILE = IDo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2216,7 +2272,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/IDo/Libs/Pay",
 					"$(PROJECT_DIR)/IDo/Libs/JPush",
+					"$(PROJECT_DIR)/IDo",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

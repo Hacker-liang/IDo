@@ -282,11 +282,46 @@
             }
         }];
         
-    }else if([notificationType isEqualToString:@"dept" ]) { //接单方 催款
+    } else if([notificationType isEqualToString:@"dept" ]) { //接单方 催款
+        
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"确认任务验收" message:[userInfo objectForKey:@"content"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if(buttonIndex == 1){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
+                    } else {
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.orderId = orderId;
+                        ctl.isSendOrder = YES;
+                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                    }
+                } else {
+                    OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                    ctl.orderId = orderId;
+                    ctl.isSendOrder = YES;
+                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                }
+                
+            } else if(buttonIndex == 0){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
+                    }
+                }
+            }
+        }];
+
         [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:@"4"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderPieStatusChange];
         
-    }else if([notificationType isEqualToString:@"confpay" ]) { //发单方已确认付款
+    } else if([notificationType isEqualToString:@"confpay" ]) { //发单方已确认付款
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"对方已成功验收任务！" delegate:self cancelButtonTitle:@"稍后评价" otherButtonTitles:@"去评价", nil];
 //        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
 //            if (buttonIndex == 1) {

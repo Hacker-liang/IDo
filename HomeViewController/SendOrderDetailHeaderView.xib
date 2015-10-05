@@ -16,7 +16,7 @@
                 </mapView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcY-Et-Zqh">
                     <rect key="frame" x="0.0" y="270" width="600" height="30"/>
-                    <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="c6K-ff-sqL"/>
                     </constraints>
@@ -27,15 +27,24 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_right_dot.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPl-z5-UI3">
+                    <rect key="frame" x="563" y="275" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="ibU-2t-Uc2"/>
+                        <constraint firstAttribute="width" constant="20" id="yeI-Wm-8I3"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="TaQ-yG-mC3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2r8-S1-8cj"/>
                 <constraint firstAttribute="bottom" secondItem="TaQ-yG-mC3" secondAttribute="bottom" id="7pC-0t-T7e"/>
                 <constraint firstItem="TaQ-yG-mC3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EBJ-Xr-a6f"/>
+                <constraint firstAttribute="bottom" secondItem="rPl-z5-UI3" secondAttribute="bottom" constant="5" id="LI4-1Q-KSK"/>
                 <constraint firstAttribute="bottom" secondItem="AcY-Et-Zqh" secondAttribute="bottom" id="PhL-wc-nBn"/>
                 <constraint firstItem="AcY-Et-Zqh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Rhe-Fa-dZa"/>
                 <constraint firstAttribute="trailing" secondItem="TaQ-yG-mC3" secondAttribute="trailing" id="XZ4-mU-M45"/>
+                <constraint firstAttribute="trailing" secondItem="rPl-z5-UI3" secondAttribute="trailing" constant="17" id="cX3-bd-zQL"/>
                 <constraint firstAttribute="trailing" secondItem="AcY-Et-Zqh" secondAttribute="trailing" id="ttC-pz-5Js"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -49,5 +58,6 @@
     </objects>
     <resources>
         <image name="icon_address.png" width="15" height="19"/>
+        <image name="icon_right_dot.png" width="20" height="20"/>
     </resources>
 </document>
