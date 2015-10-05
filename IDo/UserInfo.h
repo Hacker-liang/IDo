@@ -28,6 +28,9 @@
 @property (nonatomic, copy) NSString *complainCount;
 @property (nonatomic) BOOL isVip;
 @property (nonatomic) BOOL isMute;
+@property (nonatomic, copy) NSString *pushType;  //1是全部订单  2标签订单
+
+@property (nonatomic, strong) NSMutableArray *tagArray;
 
 @property (nonatomic, strong) WalletModel *wallet;
 

@@ -9,6 +9,7 @@
 #import "SendOrderSegmentedViewController.h"
 #import "SenderOrderViewController.h"
 #import "MyOrderRootViewController.h"
+#import "EvaluationRecordViewController.h"
 
 @interface SendOrderSegmentedViewController ()
 
@@ -20,22 +21,37 @@
 @implementation SendOrderSegmentedViewController
 
 - (void)viewDidLoad {
-    self.segmentedNormalImages = @[];
-    self.segmentedSelectedImages = @[];
-    self.segmentedTitles = @[@"立即派单", @"我的订单", @"评价"];
+    self.view.backgroundColor = APP_PAGE_COLOR;
+    self.segmentedNormalImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
+    self.segmentedSelectedImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
+    
+    self.segmentedTitles = @[@"立即派单", @"我的订单", @"我的评价"];
     
     _senderOrderCtl = [[SenderOrderViewController alloc] initWithNibName:@"SenderOrderViewController" bundle:nil];
     _mySendOrderCtl = [[MyOrderRootViewController alloc] init];
     _mySendOrderCtl.isGrabOrder = NO;
-    UIViewController *ctl = [[UIViewController alloc] init];
-    self.viewControllers = @[_senderOrderCtl, _mySendOrderCtl, ctl];
+    
+    EvaluationRecordViewController *ctl2 = [[EvaluationRecordViewController alloc] init];
+    ctl2.evaluationType = 1;
+    self.viewControllers = @[_senderOrderCtl, _mySendOrderCtl, ctl2];
     [super viewDidLoad];
+    
+    for (int i=0; i<self.viewControllers.count; i++) {
+        if (i!= 0) {
+            UIViewController *ctl = [self.viewControllers objectAtIndex:i];
+            CGRect frame = ctl.view.frame;
+            frame.origin.y += 20;
+            frame.size.height -= 20;
+            ctl.view.frame = frame;
+        } else {
+            UIViewController *ctl = [self.viewControllers objectAtIndex:i];
+            CGRect frame = ctl.view.frame;
+            frame.origin.y += 11;
+            frame.size.height -= 11;
+            ctl.view.frame = frame;
 
+        }
+    }
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 
 @end

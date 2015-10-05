@@ -95,9 +95,9 @@
     NSString *url = [NSString stringWithFormat:@"%@login",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:self.phoneTextField.text forKey:@"tel"];
-    [mDict setObject:@"" forKey:@"provinceid"];
-    [mDict setObject:@"" forKey:@"cityid"];
-    [mDict setObject:@"" forKey:@"districtid"];
+//    [mDict setObject:@"" forKey:@"provinceid"];
+//    [mDict setObject:@"" forKey:@"cityid"];
+//    [mDict setObject:@"" forKey:@"districtid"];
     [mDict setObject:address forKey:@"address"];
     [mDict setObject:[NSString stringWithFormat:@"%f", _location.coordinate.longitude] forKey:@"lng"];
     [mDict setObject:[NSString stringWithFormat:@"%f", _location.coordinate.latitude] forKey:@"lat"];

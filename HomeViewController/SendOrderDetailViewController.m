@@ -150,14 +150,15 @@
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
     [mDict safeSetObject:_orderDetail.content forKey:@"content"];
-    [mDict safeSetObject:@"0.01" forKey:@"money"];
+    [mDict safeSetObject:@"1" forKey:@"money"];
     [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
     [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
-    [mDict safeSetObject:_orderDetail.sex forKey:@"sex"];
-    [mDict safeSetObject:@"1" forKey:@"range"];
-    [mDict safeSetObject:@"" forKey:@"img"];
+    [mDict safeSetObject:@"0" forKey:@"sex"];
+    [mDict safeSetObject:@"0" forKey:@"range"];
     [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];
     [mDict safeSetObject:_orderDetail.lat forKey:@"lat"];
+    [mDict safeSetObject:@"" forKey:@"img"];
+
     [mDict safeSetObject:_orderDetail.distance forKey:@"distance_range"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {

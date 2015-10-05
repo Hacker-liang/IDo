@@ -114,9 +114,9 @@
         [switchView setOn:YES animated:YES];
         [switchView addTarget:self action:@selector(switchAction:) forControlEvents:(UIControlEventTouchUpInside)];
         if(self.userInfo.isMute) {
-            switchView.on = YES;
+            [switchView setOn:YES animated:NO];
         } else {
-            switchView.on = NO;
+            [switchView setOn:NO animated:NO];
         }
         cell.accessoryView=switchView;
         cell.textLabel.textColor=[UIColor darkGrayColor];

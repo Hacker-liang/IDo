@@ -24,4 +24,7 @@
 @property (nonatomic) BOOL isSendOrder;
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
+
+- (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload;
+
 @end

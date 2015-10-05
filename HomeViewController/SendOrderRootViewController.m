@@ -73,8 +73,6 @@
         }
     }
     
-    NSLog(@"scrollView offsetY:%lf", _scrollView.contentOffset.y);
-    NSLog(@"%lf", self.scrollView.bounds.size.height);
     CGFloat height = (self.scrollView.bounds.size.height - 214) + scrollView.contentOffset.y;
     _segementedController.view.frame = CGRectMake(0, _segementedController.view.frame.origin.y, _segementedController.view.bounds.size.width, height);
 }

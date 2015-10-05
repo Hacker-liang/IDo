@@ -173,7 +173,7 @@
         order.tradeNO = str; //订单ID(由商家□自□行制定)
         order.productName = productName; //商品标题
         order.productDescription = description; //商品描述
-        order.amount = amount; //商 品价格
+        order.amount = @"0.01"; //商 品价格
         order.notifyURL = @"http://baidu.com"; //回调URL
         order.service = @"mobile.securitypay.pay";
         order.paymentType = @"1";

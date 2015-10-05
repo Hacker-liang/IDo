@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="inputTagCell" rowHeight="84" id="KGk-i7-Jjw" customClass="InputTagTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="83.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnI-6a-1wh">
+                        <rect key="frame" x="20" y="7" width="91" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="91" id="0eB-yr-9dp"/>
+                            <constraint firstAttribute="height" constant="22" id="DPF-3y-O99"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="自由设定标签" image="icon_setting_2.png">
+                            <color key="titleColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您要添加的内容" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CIv-T2-4Ph">
+                        <rect key="frame" x="20" y="37" width="145" height="26"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="wyf-0q-beo"/>
+                            <constraint firstAttribute="width" constant="145" id="zvD-qI-vW8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPc-iI-V8P">
+                        <rect key="frame" x="179" y="39.5" width="46" height="23.5"/>
+                        <color key="backgroundColor" red="0.23921568627450981" green="0.76078431372549016" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23.5" id="4bG-lI-mfk"/>
+                            <constraint firstAttribute="width" constant="46" id="EAa-7w-04H"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="添加">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小提示:为确保您能顺利抢单，设定标签尽可能简明，以2字为宜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xn-DP-kk1">
+                        <rect key="frame" x="20" y="71" width="292" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="XnK-Fb-VfM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                        <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RnI-6a-1wh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="3yT-YC-XWr"/>
+                    <constraint firstItem="CIv-T2-4Ph" firstAttribute="top" secondItem="RnI-6a-1wh" secondAttribute="bottom" constant="8" id="4ds-f3-pBg"/>
+                    <constraint firstItem="9xn-DP-kk1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="AiP-r6-NOZ"/>
+                    <constraint firstItem="CIv-T2-4Ph" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="O2x-YL-8p4"/>
+                    <constraint firstItem="RnI-6a-1wh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Rdp-Ey-tiz"/>
+                    <constraint firstItem="RPc-iI-V8P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="39.5" id="fh1-N0-I6t"/>
+                    <constraint firstItem="RPc-iI-V8P" firstAttribute="leading" secondItem="CIv-T2-4Ph" secondAttribute="trailing" constant="14" id="fyK-8w-tBp"/>
+                    <constraint firstItem="9xn-DP-kk1" firstAttribute="top" secondItem="RPc-iI-V8P" secondAttribute="bottom" constant="8" id="plX-aj-9mW"/>
+                    <constraint firstAttribute="trailing" secondItem="9xn-DP-kk1" secondAttribute="trailing" constant="8" id="zHU-8w-XwQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="addBtn" destination="RPc-iI-V8P" id="Efy-ql-u6K"/>
+                <outlet property="textField" destination="CIv-T2-4Ph" id="Xvd-Iv-kiH"/>
+            </connections>
+            <point key="canvasLocation" x="253" y="295"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_setting_2.png" width="14" height="12"/>
+    </resources>
+</document>

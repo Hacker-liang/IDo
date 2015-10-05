@@ -30,7 +30,9 @@
                                 <constraint firstAttribute="height" constant="60" id="Qeq-8c-TDj">
                                     <variation key="widthClass=compact" constant="50.5"/>
                                 </constraint>
-                                <constraint firstAttribute="width" constant="73" id="xkP-fz-XTR"/>
+                                <constraint firstAttribute="width" constant="73" id="xkP-fz-XTR">
+                                    <variation key="widthClass=compact" constant="64"/>
+                                </constraint>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -55,7 +57,7 @@
                                     <variation key="widthClass=compact" constant="50.5"/>
                                 </constraint>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
@@ -223,7 +225,9 @@
                     <constraints>
                         <constraint firstItem="GVc-1e-B18" firstAttribute="leading" secondItem="eaV-gQ-eeF" secondAttribute="trailing" constant="5" id="7mV-7S-mmb"/>
                         <constraint firstAttribute="trailing" secondItem="eaV-gQ-eeF" secondAttribute="trailing" constant="59" id="Cbo-E9-A5t"/>
-                        <constraint firstItem="eaV-gQ-eeF" firstAttribute="leading" secondItem="9cO-pg-6hS" secondAttribute="trailing" constant="13" id="IeZ-0g-qoF"/>
+                        <constraint firstItem="eaV-gQ-eeF" firstAttribute="leading" secondItem="9cO-pg-6hS" secondAttribute="trailing" constant="13" id="IeZ-0g-qoF">
+                            <variation key="widthClass=compact" constant="8"/>
+                        </constraint>
                         <constraint firstItem="fzz-zv-Isu" firstAttribute="leading" secondItem="doC-Ga-HZF" secondAttribute="leading" id="J5g-CK-axb"/>
                         <constraint firstAttribute="bottom" secondItem="cHz-q8-bHS" secondAttribute="bottom" constant="15" id="JZG-W1-auC">
                             <variation key="widthClass=compact" constant="9"/>

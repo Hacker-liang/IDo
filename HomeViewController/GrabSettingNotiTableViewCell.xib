@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="grabSettingNotiCell" id="KGk-i7-Jjw" customClass="GrabSettingNotiTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_setting_newmsg.png" translatesAutoresizingMaskIntoConstraints="NO" id="jdg-ge-gko">
+                        <rect key="frame" x="8" y="13" width="20" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="FQZ-pX-Tmp"/>
+                            <constraint firstAttribute="width" constant="20" id="LFI-fO-SEt"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新订单提醒" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKZ-oR-dNO">
+                        <rect key="frame" x="44" y="12" width="91" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="91" id="75Y-ch-faY"/>
+                            <constraint firstAttribute="height" constant="21" id="w0R-yQ-0PN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ntu-8C-On9">
+                        <rect key="frame" x="257" y="7" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="JAW-bO-i1n"/>
+                            <constraint firstAttribute="height" constant="31" id="TT2-jM-CUs"/>
+                        </constraints>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Ntu-8C-On9" secondAttribute="trailing" constant="14" id="KWd-3Q-eLd"/>
+                    <constraint firstItem="DKZ-oR-dNO" firstAttribute="leading" secondItem="jdg-ge-gko" secondAttribute="trailing" constant="16" id="L8S-m1-9h9"/>
+                    <constraint firstItem="jdg-ge-gko" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="RFb-vn-6sN"/>
+                    <constraint firstItem="jdg-ge-gko" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="U6W-tc-HDv"/>
+                    <constraint firstItem="DKZ-oR-dNO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bep-Lc-jpk"/>
+                    <constraint firstItem="Ntu-8C-On9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="d9Q-0s-Ve0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="switchBtn" destination="Ntu-8C-On9" id="2u3-WA-ni7"/>
+            </connections>
+            <point key="canvasLocation" x="253" y="238"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_setting_newmsg.png" width="17" height="15"/>
+    </resources>
+</document>

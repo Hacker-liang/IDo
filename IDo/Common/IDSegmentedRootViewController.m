@@ -45,7 +45,6 @@
 {
     [super viewDidLayoutSubviews];
     
-    NSLog(@"%lf", self.view.bounds.size.height);
     _contentView.frame = CGRectMake(0, 49, self.view.bounds.size.width, self.view.bounds.size.height-49);
 }
 

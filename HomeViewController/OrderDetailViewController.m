@@ -8,6 +8,7 @@
 
 #import "OrderDetailViewController.h"
 #import "PayViewController.h"
+#import "EvaluationViewController.h"
 
 @interface OrderDetailViewController ()
 {
@@ -34,6 +35,16 @@
     [self getOrderInfo];
     [self.view addSubview:self.footerView];
 
+}
+
+- (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload
+{
+    _orderDetail.orderStatus = status;
+    [self updateView];
+    [self setupFooterView];
+    if (isReload) {
+        [self getOrderInfo];
+    }
 }
 
 - (void)viewDidLayoutSubviews
@@ -190,7 +201,7 @@
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
 
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-160, kWindowWidth, 60)];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     }  else if (_orderDetail.orderStatus == kOrderInProgress && !_isSendOrder) {
         tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
@@ -209,10 +220,10 @@
         [_footerView addSubview:orderBtn];
         
     } else if (_orderDetail.orderStatus == kOrderPayed) {
+        
         tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
 
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
         
         UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
@@ -257,7 +268,28 @@
         [orderBtn setTitle:@"立即付款" forState:UIControlStateNormal];
         [orderBtn addTarget:self action:@selector(payOrder:) forControlEvents:UIControlEventTouchUpInside];
         [_footerView addSubview:orderBtn];
-
+        
+    } else if(_orderDetail.orderStatus == kOrderCheckDone) {
+        tipsString = @"保持良好记录有助于快速成交订单";
+        statusString = _orderDetail.orderStatusDesc;
+        
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
+        
+        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+        orderBtn.layer.cornerRadius = 5.0;
+        orderBtn.backgroundColor = APP_THEME_COLOR;
+        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        [orderBtn setTitle:@"去评价" forState:UIControlStateNormal];
+        [orderBtn addTarget:self action:@selector(ratingAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:orderBtn];
+        
+    } else if (_orderDetail.orderStatus == kOrderCompletion) {
+        statusString = _orderDetail.orderStatusDesc;
+        tipsString = @"保持良好记录有助于快速成交订单";
+        
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
     }
     
     _footerView.backgroundColor = [UIColor whiteColor];
@@ -321,6 +353,19 @@
     }];
 }
 
+//评价
+- (void)ratingAction:(UIButton *)btn
+{
+    EvaluationViewController *control = [[EvaluationViewController alloc] init];
+    if (_isSendOrder){
+        control.evaluationType = 1;
+    }else{
+        control.evaluationType = 2;
+    }
+    control.orderDetail = self.orderDetail;
+    [self.navigationController pushViewController:control animated:YES];
+}
+
 - (void)confpay
 {
     NSString *url = [NSString stringWithFormat:@"%@confpay",baseUrl];
@@ -337,9 +382,8 @@
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([tempStatus integerValue] == 1) {
                 UIAlertView * alertV = [[UIAlertView alloc]initWithTitle:@"恭喜，任务验收成功!" message:@"订单金额已向抢单人实时支付!您可以对抢单人的服务进行评价。" delegate:self cancelButtonTitle:@"稍后评价" otherButtonTitles:@"去评价", nil];
-                _orderDetail.orderStatus = kOrderCheckDone;
-                [self updateView];
-                [self setupFooterView];
+
+                [self updateDetailViewWithStatus:kOrderCheckDone andShouldReloadOrderDetail:NO];
                 [alertV showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
 //                        EvaluationViewController *control = [[EvaluationViewController alloc] init];

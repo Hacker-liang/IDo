@@ -12,7 +12,9 @@
 #ifdef __OBJC__
 
 
-#define baseUrl @"http://58.30.16.58/?action="
+//#define baseUrl @"http://58.30.16.58/?action="
+#define baseUrl @"http://112.124.51.74/?action="
+
 #define kYzmURL @"http://58.30.16.58/SMS.php"
 #define severURL @"http://58.30.16.58/"
 #define uploadheadImgURL @"http://58.30.16.59/upload/upload.php"

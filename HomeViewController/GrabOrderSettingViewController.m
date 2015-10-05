@@ -7,8 +7,17 @@
 //
 
 #import "GrabOrderSettingViewController.h"
+#import "GrabSettingPushTableViewCell.h"
+#import "GrabSettingNotiTableViewCell.h"
+#import "GrabSetTagTableViewCell.h"
+#import "InputTagTableViewCell.h"
+#import "HotTagTableViewCell.h"
 
-@interface GrabOrderSettingViewController ()
+@interface GrabOrderSettingViewController () <HotTagTableViewCellDelegate, GrabSetTagTableViewCellDelegate>
+
+@property (nonatomic, strong) NSMutableArray *allTagArray;
+
+@property (nonatomic) NSInteger rowCount;
 
 @end
 
@@ -16,22 +25,304 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.rowCount = 6;
+    self.tableView.backgroundColor = APP_PAGE_COLOR;
+    [self.tableView registerNib:[UINib nibWithNibName:@"GrabSettingPushTableViewCell" bundle:nil] forCellReuseIdentifier:@"grabSettingPushCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"GrabSettingNotiTableViewCell" bundle:nil] forCellReuseIdentifier:@"grabSettingNotiCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"GrabSetTagTableViewCell" bundle:nil] forCellReuseIdentifier:@"grabSetTagCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"InputTagTableViewCell" bundle:nil] forCellReuseIdentifier:@"inputTagCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HotTagTableViewCell" bundle:nil] forCellReuseIdentifier:@"hotTagCell"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"commonCell"];
+    [self getMemberData];
+    [self getALLabData];
+    [self getMyLabData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSMutableArray *)allTagArray
+{
+    if (!_allTagArray) {
+        _allTagArray = [[NSMutableArray alloc] init];
+    }
+    return _allTagArray;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)getMemberData
+{
+    NSString *url = [NSString stringWithFormat:@"%@getmembermes",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([dict[@"status"] integerValue] == 1) {
+                [UserManager shareUserManager].userInfo.pushType = [NSString stringWithFormat:@"%@",dict[@"data"][@"tsstatic"]];
+                if ([[UserManager shareUserManager].userInfo.pushType isEqualToString:@"1"]) {
+                    self.rowCount = 2;
+                } else {
+                    self.rowCount = 6;
+                }
+                [self.tableView reloadData];
+            }
+        }
+    }];
 }
-*/
 
+- (void)getALLabData
+{
+    NSString *url = [NSString stringWithFormat:@"%@systemlabel",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:@"0" forKey:@"loadnumber"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            [self.allTagArray removeAllObjects];
+            for (NSDictionary *d in dict[@"data"]) {
+                [self.allTagArray addObject:d[@"name"]];
+            }
+            [self.tableView reloadData];
+        }
+    }];
+}
+
+- (void)getMyLabData
+{
+    NSString *url = [NSString stringWithFormat:@"%@mylabel",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([dict[@"status"] integerValue] == 1) {
+                NSArray *arr = dict[@"data"];
+                NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                for (NSDictionary *d in arr) {
+                    NSString *name = [NSString stringWithFormat:@"%@",d[@"labelname"]];
+                    [tempArray addObject:name];
+                }
+                [UserManager shareUserManager].userInfo.tagArray = tempArray;
+                [self.tableView reloadData];
+            }
+        }
+    }];
+}
+
+- (void)saveChange
+{
+    GrabSettingPushTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:1]];
+    NSString *url = [NSString stringWithFormat:@"%@setqdrule",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+
+    if (cell.allOrderBtn.selected) {
+        [mDict setObject:@"2" forKey:@"tsstatic"];
+    }
+    [SVProgressHUD showWithStatus:@"正在设置"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response) {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dic = [jsonString objectFromJSONString];
+            NSString *str=[NSString stringWithFormat:@"%@",dic[@"status"]];
+            if ([str isEqualToString:@"1"]) {
+                if (cell.allOrderBtn.selected) {
+                    cell.allOrderBtn.selected = NO;
+                    cell.tagOrderBtn.selected = YES;
+                    [UserManager shareUserManager].userInfo.pushType = @"2";
+                    self.rowCount = 6;
+                    
+                } else {
+                    cell.allOrderBtn.selected = YES;
+                    cell.tagOrderBtn.selected = NO;
+                    [UserManager shareUserManager].userInfo.pushType = @"1";
+                    self.rowCount = 2;
+
+                }
+                [self.tableView reloadData];
+                [SVProgressHUD showSuccessWithStatus:@"设置成功"];
+                
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"设置失败"];
+                
+            }
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"设置失败"];
+        }
+    }];
+}
+
+- (void)pushSwitch:(UISwitch *)btn
+{
+    
+}
+
+- (void)allOrderAction:(UIButton *)btn
+{
+    if (!btn.selected) {
+        [self saveChange];
+    }
+}
+
+- (void)tagOrderAction:(UIButton *)btn
+{
+    if (!btn.selected) {
+        [self saveChange];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.0001;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 3 || section == 4) {
+        return 0.0001;
+    }
+    return 20.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 3) {
+        return [GrabSetTagTableViewCell heigthOfCellWithDataSource:[UserManager shareUserManager].userInfo.tagArray];
+    } else if (indexPath.section == 4) {
+        return 84.0;
+        
+    } else if (indexPath.section == 5){
+        return [HotTagTableViewCell heigthOfCellWithDataSource:_allTagArray];
+    } else {
+        return 44.0;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.rowCount;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        GrabSettingNotiTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"grabSettingNotiCell" forIndexPath:indexPath];
+        [cell.switchBtn addTarget:self action:@selector(pushSwitch:) forControlEvents:UIControlEventValueChanged];
+        [cell.switchBtn setOn:[UserManager shareUserManager].userInfo.isMute];
+        return cell;
+        
+    } else if (indexPath.section == 1) {
+        GrabSettingPushTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"grabSettingPushCell" forIndexPath:indexPath];
+        [cell.allOrderBtn addTarget:self action:@selector(allOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.tagOrderBtn addTarget:self action:@selector(tagOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+        if ([[UserManager shareUserManager].userInfo.pushType isEqualToString:@"1"]) {
+            cell.allOrderBtn.selected = YES;
+            cell.tagOrderBtn.selected = NO;
+        } else {
+            cell.allOrderBtn.selected = NO;
+            cell.tagOrderBtn.selected = YES;
+        }
+
+        return cell;
+
+    } else if (indexPath.section == 2) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"commonCell" forIndexPath:indexPath];
+        cell.imageView.image = [UIImage imageNamed:@"icon_myself.png"];
+        cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+        cell.textLabel.text = @"我的标签";
+        return cell;
+        
+    } else if (indexPath.section == 3) {
+        GrabSetTagTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"grabSetTagCell" forIndexPath:indexPath];
+        cell.dataSource = [UserManager shareUserManager].userInfo.tagArray;
+        cell.delegate = self;
+        return cell;
+        
+    } else if (indexPath.section == 4) {
+        InputTagTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inputTagCell" forIndexPath:indexPath];
+        [cell.addBtn addTarget:self action:@selector(addTagAction:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    } else {
+        HotTagTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotTagCell" forIndexPath:indexPath];
+        cell.dataSource = _allTagArray;
+        cell.delegate = self;
+        return cell;
+    }
+}
+
+#pragma mark - HotTagTableViewCellDelegate
+
+- (void)hotTagDidSelectItemAtIndex:(NSIndexPath *)indexPath
+{
+    [self addTag:[_allTagArray objectAtIndex:indexPath.row]];
+}
+
+- (void)addTag:(NSString *)tag
+{
+    [SVProgressHUD showWithStatus:@"正在添加"];
+    NSString *url = [NSString stringWithFormat:@"%@addlabel",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
+    [mDict setObject:@"送水" forKey:@"labelname"];
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
+                [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                [[UserManager shareUserManager].userInfo.tagArray addObject:tag];
+                [self.tableView reloadData];
+                
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"添加失败"];
+            }
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"添加失败"];
+        }
+    }];
+}
+
+- (void)setTagDidSelectItemAtIndex:(NSIndexPath *)indexPath
+{
+    NSString *tag = [[UserManager shareUserManager].userInfo.tagArray objectAtIndex:indexPath.row];
+    NSString *url = [NSString stringWithFormat:@"%@removelabel",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict setObject:tag forKey:@"labelname"];
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        NSDictionary *dict = [jsonString objectFromJSONString];
+        NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+        if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
+            [[UserManager shareUserManager].userInfo.tagArray removeObjectAtIndex:indexPath.row];
+            [self.tableView reloadData];
+        }
+    }];
+}
+
+- (void)addTagAction:(UIButton *)btn
+{
+    InputTagTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:4]];
+    if (cell.textField.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"输入的标签不能为空"];
+        return;
+    }
+    cell.textField.text = @"";
+    [self addTag:cell.textField.text];
+}
 @end

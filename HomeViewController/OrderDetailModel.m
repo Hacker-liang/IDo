@@ -39,6 +39,7 @@
                 if ([[json objectForKey:@"hasconfpay"] intValue] == 0) {
                     _orderStatus = kOrderPayed;
                     _orderStatusDesc = @"已经付款，等待验收";
+                    
                 } else {
                     if (_isSendOrder) {
                         if ([[json objectForKey:@"hascommenttoperson"] intValue] == 1) {
@@ -48,7 +49,6 @@
                         } else {
                             _orderStatus = kOrderCheckDone;
                             _orderStatusDesc = @"已经验收，等待评价";
-
                         }
                     } else {
                         if ([[json objectForKey:@"hascommentfromperson"] intValue] == 1) {
@@ -60,9 +60,7 @@
                             _orderStatusDesc = @"已经验收，等待评价";
 
                         }
-                        
                     }
-                    
                 }
             }
         } else if ([[json objectForKey:@"status"] intValue] == 1) {
