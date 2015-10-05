@@ -21,7 +21,7 @@
     self.backgroundColor = APP_THEME_COLOR;
     _headerImageView.layer.cornerRadius = 35.0;
     _headerImageView.clipsToBounds = YES;
-    ((CWStarRateView *)_ratingView).scorePercent = 0.3;
+    ((CWStarRateView *)_ratingView).scorePercent = [[UserManager shareUserManager].userInfo.rating intValue]/5;
     ((CWStarRateView *)_ratingView).userInteractionEnabled = NO;
 }
 

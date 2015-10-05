@@ -27,7 +27,12 @@
     self.view.backgroundColor = APP_PAGE_COLOR;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"EvaluationTableViewCell" bundle:nil] forCellReuseIdentifier:@"ratingCell"];
-    [self getRecord];
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getRecord];
+    }];
+    
+    [self.tableView.header beginRefreshing];
+
 }
 
 - (void)getRecord
@@ -45,6 +50,7 @@
     }
 
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [self.tableView.header endRefreshing];
         if (response)
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];

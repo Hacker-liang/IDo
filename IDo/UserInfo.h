@@ -26,6 +26,8 @@
 @property (nonatomic, copy) NSString *grabOrderCount;
 @property (nonatomic, copy) NSString *sendOrderCount;
 @property (nonatomic, copy) NSString *complainCount;
+@property (nonatomic, copy) NSString *rating;
+
 @property (nonatomic) BOOL isVip;
 @property (nonatomic) BOOL isMute;
 @property (nonatomic, copy) NSString *pushType;  //1是全部订单  2标签订单

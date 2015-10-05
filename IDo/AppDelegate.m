@@ -248,23 +248,35 @@
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜，对方已付款" message:@"对方已付款，请按照对方要求尽快完成订单任务。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
-//                if (self.viewisWhere == OrderDetailedView){
-//                    if ([self.testOrder isEqualToString:orderId]) {
-//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:@"1"];
-//                    }else{
-//                        [self.navController popViewControllerAnimated:NO];
-//                        OrderDetailedViewController *control = [[OrderDetailedViewController alloc] init];
-//                        control.orderId = orderId;
-//                        control.fromType = OrderIngGrab;
-//                        [self.navController pushViewController:control animated:YES];
-//                    }
-//                }else{
-//                    OrderDetailedViewController *control = [[OrderDetailedViewController alloc] init];
-//                    control.orderId = orderId;
-//                    control.fromType = OrderIngGrab;
-//                    [self.navController pushViewController:control animated:YES];
-//                }
-            }else{
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
+                    } else {
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.orderId = orderId;
+                        ctl.isSendOrder = YES;
+                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                    }
+                } else {
+                    OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                    ctl.orderId = orderId;
+                    ctl.isSendOrder = YES;
+                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                }
+                
+            } else if(buttonIndex == 0){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderGrabSuccess andShouldReloadOrderDetail:YES];
+                        return;
+                    }
+                }
+            } else{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:@"1"];
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderGrabStatusChange];
             }

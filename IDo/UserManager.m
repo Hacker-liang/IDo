@@ -89,6 +89,15 @@
     [mDict setObject:_userInfo.lock forKey:@"lock"];
     [mDict setObject:_userInfo.zhifubao forKey:@"zhifubao"];
     [mDict setObject:_userInfo.weixin forKey:@"weixin"];
+    [mDict setObject:_userInfo.rating forKey:@"star"];
+    [mDict setObject:_userInfo.sendOrderCount forKey:@"fadannumber"];
+    [mDict setObject:_userInfo.grabOrderCount forKey:@"jiedannumber"];
+    [mDict setObject:_userInfo.complainCount forKey:@"totalComplaintTimes"];
+    if (_userInfo.isMute) {
+        [mDict setObject:@"1" forKey:@"isMute"];
+    } else {
+        [mDict setObject:@"0" forKey:@"isMute"];
+    }
     [mDict setObject:[NSNumber numberWithFloat:_userInfo.lat] forKey:@"lat"];
     [mDict setObject:[NSNumber numberWithFloat:_userInfo.lng] forKey:@"lng"];
     [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:LoginInfoMark];

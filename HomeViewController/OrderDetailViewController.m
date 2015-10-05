@@ -41,7 +41,6 @@
 {
     _orderDetail.orderStatus = status;
     [self updateView];
-    [self setupFooterView];
     if (isReload) {
         [self getOrderInfo];
     }
@@ -158,6 +157,7 @@
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ((NSNull *)tempStatus != [NSNull null]&&[tempStatus isEqualToString:@"1"]) {
                 [SVProgressHUD showSuccessWithStatus:@"恭喜你，抢单成功"];
+                [self updateDetailViewWithStatus:kOrderGrabSuccess andShouldReloadOrderDetail:NO];
                 
             } else{
                 [SVProgressHUD showErrorWithStatus:@"抢单失败了"];
@@ -187,6 +187,7 @@
 - (void)setupFooterView
 {
     if (_footerView) {
+        [_footerView removeFromSuperview];
         _footerView = nil;
     }
     NSString *tipsString;

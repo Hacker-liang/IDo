@@ -17,6 +17,9 @@
         _nickName = [dict objectForKey:@"nikename"];
         _tel = [dict objectForKey:@"tel"];
         _sex = [dict objectForKey:@"sex"];
+        if ([[dict objectForKey:@"img"] containsString:@"http"]) {
+            _avatar = [dict objectForKey:@"img"];
+        }
         _avatar = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
         _level = [dict objectForKey:@"level"];
         _lock = [dict objectForKey:@"lock"];
@@ -25,16 +28,30 @@
         _userLabel = [dict objectForKey:@"label"];
         _lat = [[dict objectForKey:@"lat"] floatValue];
         _lng = [[dict objectForKey:@"lng"] floatValue];
-        if (![dict objectForKey:@"fadannumber"] || [dict objectForKey:@"fadannumber"] == [NSNull null]) {
-            _sendOrderCount = @"0";
+       
+        if ([[dict objectForKey:@"isMute"] isEqualToString:@"1"]) {
+            _isMute = YES;
+        } else {
+            _isMute = NO;
         }
-        
+
+        _rating = [dict objectForKey:@"star"];
         if (![dict objectForKey:@"jiedannumber"] || [dict objectForKey:@"jiedannumber"] == [NSNull null]) {
             _grabOrderCount = @"0";
+        } else {
+            _grabOrderCount = [dict objectForKey:@"jiedannumber"];
         }
-        
-        _complainCount = @"0";
-        
+        if (![dict objectForKey:@"fadannumber"] || [dict objectForKey:@"fadannumber"] == [NSNull null]) {
+            _sendOrderCount = @"0";
+        } else {
+            _sendOrderCount = [dict objectForKey:@"fadannumber"];
+        }
+        if (![dict objectForKey:@"totalComplaintTimes"] || [dict objectForKey:@"totalComplaintTimes"] == [NSNull null]) {
+            _complainCount = @"0";
+        } else {
+            _complainCount = [dict objectForKey:@"totalComplaintTimes"];
+        }
+
         [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
             _address = address;
             _lat = userLocation.coordinate.latitude;

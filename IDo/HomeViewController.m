@@ -27,7 +27,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIButton *menu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
+    UIButton *menu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 44)];
     [menu setImage:[UIImage imageNamed:@"icon_menu.png"] forState:UIControlStateNormal];
     menu.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [menu addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
