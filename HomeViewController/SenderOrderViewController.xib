@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ch0-Wm-4Yd">
-                    <rect key="frame" x="192" y="42" width="217" height="61"/>
+                    <rect key="frame" x="192" y="62" width="217" height="61"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="61" id="MvE-Og-jAX"/>
                         <constraint firstAttribute="width" constant="217" id="hFr-sh-qOF"/>
@@ -33,7 +33,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Ch0-Wm-4Yd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="42" id="4kW-fb-QUB"/>
+                <constraint firstItem="Ch0-Wm-4Yd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="62" id="4kW-fb-QUB"/>
                 <constraint firstItem="Ch0-Wm-4Yd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TpS-gh-Oih"/>
             </constraints>
             <point key="canvasLocation" x="163" y="131"/>

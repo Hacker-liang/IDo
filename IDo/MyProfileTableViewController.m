@@ -71,9 +71,15 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
         if (buttonIndex == 1) {
-            [[UserManager shareUserManager] logout];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
-            [SVProgressHUD showSuccessWithStatus:@"退出登录成功"];
+            [SVProgressHUD showWithStatus:@"正在退出"];
+            [[UserManager shareUserManager] asyncLogout:^(BOOL isSuccess) {
+                if (isSuccess) {
+                    [SVProgressHUD showSuccessWithStatus:@"退出登录成功"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"退出登录失败"];
+                }
+            }];
         }
     }];
    
@@ -110,8 +116,12 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
 
     } else if (indexPath.row == 5) {
-        UISwitch *switchView=[[UISwitch alloc]init];
-        [switchView setOn:YES animated:YES];
+        UISwitch *switchView;
+        if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
+            switchView = (UISwitch *)cell.accessoryView;
+        } else {
+            switchView=[[UISwitch alloc]init];
+        }
         [switchView addTarget:self action:@selector(switchAction:) forControlEvents:(UIControlEventTouchUpInside)];
         if(self.userInfo.isMute) {
             [switchView setOn:YES animated:NO];
@@ -140,7 +150,7 @@
             break;
             
         case 2:
-            if ([_userInfo.sex integerValue] == 0) {
+            if ([_userInfo.sex integerValue] == 1) {
                 cell.subtitleLabel.text = @"男";
             } else {
                 cell.subtitleLabel.text = @"女";
@@ -188,6 +198,14 @@
         [thAlertView show];
     }
     
+    if (indexPath.section == 0 && indexPath.row == 2) {
+        UIActionSheet * editActionSheet = [[UIActionSheet alloc] initWithTitle:@"修改性别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"男",@"女",nil];
+        [editActionSheet addButtonWithTitle:@"取消"];
+        editActionSheet.delegate = self;
+        editActionSheet.tag = 601;
+        [editActionSheet showInView:self.view];
+    }
+    
     if (indexPath.section == 0 && indexPath.row == 3) {
         UIAlertView *thAlertView = [[UIAlertView alloc] initWithTitle:@"支付宝"
                                                               message:@"请输入支付宝账户"
@@ -218,7 +236,6 @@
     }else {
         _userInfo.isMute= NO;
         [self changeUserSet:@"0" Type:@"6"];
-
     }
     
 }
@@ -290,56 +307,70 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex + 1 >= actionSheet.numberOfButtons ) {
-        return;
-    }
-    if (buttonIndex == 0)
-    {
-        NSUInteger sourceType = 0;
-        // 判断是否支持相机
-        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            sourceType = UIImagePickerControllerSourceTypeCamera;
-        }
-        else
-        {
-            sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    if (actionSheet.tag == 601) {
+        if (buttonIndex == 0) {
+            [self changeUserSet:@"1" Type:@"3"];
+            [UserManager shareUserManager].userInfo.sex = @"1";
+            [[UserManager shareUserManager] saveUserData2Cache];
+
+        } else if (buttonIndex == 1) {
+            [self changeUserSet:@"2" Type:@"3"];
+            [UserManager shareUserManager].userInfo.sex = @"2";
+            [[UserManager shareUserManager] saveUserData2Cache];
         }
         
-        // 跳转到相机或相册页面
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        
-        imagePickerController.delegate = self;
-        
-        imagePickerController.allowsEditing = YES;
-        
-        imagePickerController.sourceType = sourceType;
-        
-        [self presentViewController:imagePickerController animated:NO completion:^(void) {}];
-    }
-    else if (buttonIndex == 1)
-    {
-        NSUInteger sourceType = 0;
-        // 判断是否支持相机
-        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    } else {
+        if (buttonIndex + 1 >= actionSheet.numberOfButtons ) {
+            return;
         }
-        else
+        if (buttonIndex == 0)
         {
-            sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            NSUInteger sourceType = 0;
+            // 判断是否支持相机
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            {
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+            }
+            else
+            {
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+            
+            // 跳转到相机或相册页面
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            
+            imagePickerController.delegate = self;
+            
+            imagePickerController.allowsEditing = YES;
+            
+            imagePickerController.sourceType = sourceType;
+            
+            [self presentViewController:imagePickerController animated:NO completion:^(void) {}];
         }
-        
-        // 跳转到相机或相册页面
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        
-        imagePickerController.delegate = self;
-        
-        imagePickerController.allowsEditing = YES;
-        
-        imagePickerController.sourceType = sourceType;
-        
-        [self presentViewController:imagePickerController animated:NO completion:^(void) {}];
+        else if (buttonIndex == 1)
+        {
+            NSUInteger sourceType = 0;
+            // 判断是否支持相机
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            {
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+            else
+            {
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+            
+            // 跳转到相机或相册页面
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            
+            imagePickerController.delegate = self;
+            
+            imagePickerController.allowsEditing = YES;
+            
+            imagePickerController.sourceType = sourceType;
+            
+            [self presentViewController:imagePickerController animated:NO completion:^(void) {}];
+        }
     }
 }
 
@@ -444,6 +475,7 @@
         }
     }];
 }
+
 
 
 @end

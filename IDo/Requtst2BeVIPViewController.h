@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Requtst2BeVIPViewController : UIViewController
+@interface Requtst2BeVIPViewController : TZViewController
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIButton *requestBtn;
 

@@ -39,11 +39,40 @@
     return self.userInfo;
 }
 
-- (void)logout
+- (void)asyncLogout:(void (^)(BOOL))completion
 {
-    self.userInfo = nil;
-    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:LoginInfoMark];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *url = [NSString stringWithFormat:@"%@editMemberLoginStatus",baseUrl];
+
+    NSMutableDictionary *mDict=  [[NSMutableDictionary alloc] init];
+    [mDict setObject:_userInfo.userid forKey:@"memberid"];
+    [mDict setObject:@"0" forKey:@"content"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response) {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSInteger status = [[dict objectForKey:@"status"] integerValue];
+            if (status == 1) {
+                self.userInfo = nil;
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:LoginInfoMark];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                completion(YES);
+
+            } else {
+                if (completion) {
+                    completion(NO);
+                }
+            }
+            
+        } else {
+            if (completion) {
+                completion(NO);
+            }
+            
+        }
+    }];
+
+    
 }
 
 //读取配置文件，加载数据

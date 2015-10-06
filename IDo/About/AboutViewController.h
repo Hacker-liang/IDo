@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutViewController : UIViewController<UITableViewDelegate ,UITableViewDataSource>
+@interface AboutViewController : TZViewController<UITableViewDelegate ,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *tableView;
 @end

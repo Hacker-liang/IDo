@@ -81,10 +81,12 @@
         } else {
             address = [NSString stringWithFormat:@"%@%@%@", placemark.locality, placemark.subLocality, placemark.thoroughfare];
         }
-        [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
-        [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
-        [UserManager shareUserManager].userInfo.address = address;
-        [[UserManager shareUserManager] saveUserData2Cache];
+        if ([[UserManager shareUserManager] isLogin]) {
+            [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
+            [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
+            [UserManager shareUserManager].userInfo.address = address;
+            [[UserManager shareUserManager] saveUserData2Cache];
+        }
         
         if (_userLocationCompletionBlock) {
             _userLocationCompletionBlock(_userLocation, address);

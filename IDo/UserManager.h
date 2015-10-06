@@ -16,7 +16,7 @@
 
 - (BOOL)isLogin;
 
-- (void)logout;
+- (void)asyncLogout:(void (^) (BOOL isSuccess))completion;
 
 - (void)updateUserDataFromServer:(NSDictionary*)dict;
 

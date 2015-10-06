@@ -10,7 +10,7 @@
 #import "RatingBar.h"
 #import "UIPlaceHolderTextView.h"
 
-@interface EvaluationViewController : UIViewController<UITextViewDelegate>
+@interface EvaluationViewController : TZViewController <UITextViewDelegate>
 
 @property (nonatomic, assign) NSInteger evaluationType; //1发单人评价 2接单人评价
 

@@ -19,8 +19,9 @@
         _sex = [dict objectForKey:@"sex"];
         if ([[dict objectForKey:@"img"] containsString:@"http"]) {
             _avatar = [dict objectForKey:@"img"];
+        } else {
+            _avatar = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
         }
-        _avatar = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
         _level = [dict objectForKey:@"level"];
         _lock = [dict objectForKey:@"lock"];
         _zhifubao = [dict objectForKey:@"zhifubao"];

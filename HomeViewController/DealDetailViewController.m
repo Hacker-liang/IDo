@@ -164,7 +164,7 @@
     contentLabel.textColor = UIColorFromRGB(0x3ab34c);
     [cell.contentView addSubview:contentLabel];
     
-    contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(contentLabel.frame.origin.x, CGRectGetMaxY(contentLabel.frame)+10, contentLabel.frame.size.width, 20)];
+    contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, CGRectGetMaxY(contentLabel.frame)+10, self.view.frame.size.width-210, 20)];
     contentLabel.text = dic[@"time"];
     contentLabel.font = [UIFont systemFontOfSize:15];
     contentLabel.textAlignment = NSTextAlignmentRight;

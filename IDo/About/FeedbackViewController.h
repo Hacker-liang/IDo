@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedbackViewController : UIViewController
+@interface FeedbackViewController : TZViewController
 
 @property(strong,nonatomic)UITextView *content;
 @property(strong,nonatomic)UIButton *tijiao;

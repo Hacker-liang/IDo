@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SendOrderDetailViewController.h"
 
-@interface SendOrderDetailViewController : UITableViewController
+@interface SendOrderDetailViewController : TZTableViewController
 
 @end

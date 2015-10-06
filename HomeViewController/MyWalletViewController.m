@@ -9,6 +9,7 @@
 #import "MyWalletViewController.h"
 #import "MyWalletTableViewHeaderView.h"
 #import "DealDetailViewController.h"
+#import "ApplyForViewController.h"
 
 @interface MyWalletViewController ()
 
@@ -60,7 +61,18 @@
 
 - (void)request2Cash
 {
+    WalletModel *wallet = [UserManager shareUserManager].userInfo.wallet;
+
+    if ([wallet.remainingMoney isEqualToString:@"0"]) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"您的账户余额为0，不能进行提现" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     
+    ApplyForViewController * receive = [[ApplyForViewController alloc]init];
+    receive.yueStr = wallet.remainingMoney;
+    receive.titleStr = @"申请提现";
+    [self.navigationController pushViewController:receive animated:YES];
 }
 
 -(void)getdata

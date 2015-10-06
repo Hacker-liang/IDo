@@ -42,7 +42,7 @@
     self.navigationItem.titleView = _searchBar;
     UIImageView *imageBg = [[UIImageView alloc]initWithFrame:CGRectMake((kWindowWidth - 210)/2, 68, 210, 130)];
     imageBg.image = [UIImage imageNamed:@"search_default_background"];
-    
+    [_searchBar becomeFirstResponder];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 

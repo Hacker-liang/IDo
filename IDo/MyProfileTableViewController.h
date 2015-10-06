@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyProfileTableViewController : UITableViewController
+@interface MyProfileTableViewController : TZTableViewController
 
 @end

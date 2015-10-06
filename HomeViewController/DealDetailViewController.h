@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "UIPullRefreshViewController.h"
 
-@interface DealDetailViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
+@interface DealDetailViewController : TZViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)NSString *titleStr;
 @property (nonatomic,strong)NSMutableArray *dealArr;

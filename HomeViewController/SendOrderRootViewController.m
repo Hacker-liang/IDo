@@ -82,7 +82,6 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"scrollViewDidEndDecelerating");
     
     if (scrollView.contentOffset.y > 75) {
         CGPoint point = CGPointMake(0, 150);
