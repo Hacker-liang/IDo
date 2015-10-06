@@ -102,6 +102,46 @@
     [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
+
+- (void)get_version{
+    [SVProgressHUD showWithStatus:@"正在检查新版本"];
+    [SVHTTPRequest POST:@"https://itunes.apple.com/lookup?id=983842433" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if (dict)
+            {
+                NSInteger resultCount = [[dict objectForKey:@"resultCount"] integerValue];
+                if (resultCount == 1) {
+                    NSArray *arr = [dict objectForKey:@"results"];
+                    if (arr.count) {
+                        NSDictionary *arrDict = arr[0];
+                        if (arrDict) {
+                            NSString *version = [arrDict objectForKey:@"version"];
+                            NSString *locVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+                            int result = [locVersion compare:version];
+                            if (result == -1)
+                            {
+                                NSString *appUrl = [arrDict objectForKey:@"trackViewUrl"];
+                                NSString *meaasge = [NSString stringWithFormat:@"发现新版本%@，是否更新?",version];
+                                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:meaasge delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+                                [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                                    if (buttonIndex == 1) {
+                                        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:appUrl]];
+                                    }
+                                }];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }];
+}
+
+
 #pragma mark - TableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -149,6 +189,8 @@
         [self gotoMyProfile];
     } else if (indexPath.row == 2) {
         [self gotoAbout];
+    } else if (indexPath.row ==3) {
+        [self get_version];
     }
 }
 

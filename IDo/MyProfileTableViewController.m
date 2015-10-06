@@ -129,8 +129,9 @@
             [switchView setOn:NO animated:NO];
         }
         cell.accessoryView=switchView;
-        cell.textLabel.textColor=[UIColor darkGrayColor];
-        cell.textLabel.text = @"声音控制";
+        cell.textLabel.font = [UIFont systemFontOfSize:17.0];
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.textLabel.text = @" 声音控制";
 
     } else {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

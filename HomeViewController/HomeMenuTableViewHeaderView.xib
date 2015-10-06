@@ -23,8 +23,8 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="NuM-xE-AXM"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1K-P3-hj7" customClass="CWStarRateView">

@@ -34,16 +34,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.view.backgroundColor=[UIColor groupTableViewBackgroundColor];
-    UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-30, 74, 60, 60)];
+    UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-30, 84, 60, 60)];
     img.image=[UIImage imageNamed:@"Icon.png"];
     [self.view addSubview:img];
-    UILabel *banben=[[UILabel alloc]initWithFrame:CGRectMake(0, 144, self.view.frame.size.width, 20)];
+    UILabel *banben=[[UILabel alloc]initWithFrame:CGRectMake(0, 164, self.view.frame.size.width, 20)];
     banben.text=@"我干1.0";
     banben.textAlignment=1;
     [self.view addSubview:banben];
     
     
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 180, self.view.frame.size.width, self.view.frame.size.height-160) style:UITableViewStyleGrouped];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 190, self.view.frame.size.width, self.view.frame.size.height-160) style:UITableViewStyleGrouped];
     self.tableView.delegate= self;
     self.tableView.dataSource =self;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
