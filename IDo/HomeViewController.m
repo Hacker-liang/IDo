@@ -41,6 +41,9 @@
     [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.titleView = _titleBtn;
     
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"切换" style:UIBarButtonItemStylePlain target:self action:@selector(switchPage:)];
+    self.navigationItem.rightBarButtonItem = item;
+    
     [self setupContentViewContrller];
 }
 

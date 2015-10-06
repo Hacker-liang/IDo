@@ -14,6 +14,11 @@
 		D90E2E361BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E341BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		D90E2E3A1BB647BA00C2E6F3 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E381BB647BA00C2E6F3 /* OrderDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D90E2E3B1BB647BA00C2E6F3 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D916A5971BC36092005F5286 /* icon_sendOrder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D916A5961BC36092005F5286 /* icon_sendOrder@3x.png */; settings = {ASSET_TAGS = (); }; };
+		D916A5A11BC3627A005F5286 /* AutoSlideScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A59A1BC3627A005F5286 /* AutoSlideScrollView.m */; settings = {ASSET_TAGS = (); }; };
+		D916A5A21BC3627A005F5286 /* MyPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A59C1BC3627A005F5286 /* MyPageControl.m */; settings = {ASSET_TAGS = (); }; };
+		D916A5A31BC3627A005F5286 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A59E1BC3627A005F5286 /* NSTimer+Addition.m */; settings = {ASSET_TAGS = (); }; };
+		D916A5A41BC3627A005F5286 /* AutoSlideScrollView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D916A5A01BC3627A005F5286 /* AutoSlideScrollView.bundle */; settings = {ASSET_TAGS = (); }; };
 		D91F2F1D1BC21179002CE690 /* GrabSettingPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D91F2F1B1BC21179002CE690 /* GrabSettingPushTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		D91F2F1E1BC21179002CE690 /* GrabSettingPushTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91F2F1C1BC21179002CE690 /* GrabSettingPushTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		D91F2F211BC2140F002CE690 /* icon_rule_def@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D91F2F201BC2140F002CE690 /* icon_rule_def@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -75,6 +80,14 @@
 		D946C9291BC2D5D300AAD3A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C9281BC2D5D300AAD3A3 /* QuartzCore.framework */; };
 		D946C92B1BC2D6B700AAD3A3 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C92A1BC2D6B700AAD3A3 /* libz.1.dylib */; };
 		D946C92D1BC2D94900AAD3A3 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D946C92C1BC2D94900AAD3A3 /* MAMapKit.framework */; settings = {ASSET_TAGS = (); }; };
+		D947D65E1BC2E7600061D609 /* icon_phone_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D947D65D1BC2E7600061D609 /* icon_phone_normal@3x.png */; settings = {ASSET_TAGS = (); }; };
+		D947D6611BC2EEC60061D609 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D947D6601BC2EEC60061D609 /* MyAnnotation.m */; settings = {ASSET_TAGS = (); }; };
+		D947D6661BC2EEDC0061D609 /* FYAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D947D6631BC2EEDC0061D609 /* FYAnnotation.m */; settings = {ASSET_TAGS = (); }; };
+		D947D6671BC2EEDC0061D609 /* FYAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D947D6651BC2EEDC0061D609 /* FYAnnotationView.m */; settings = {ASSET_TAGS = (); }; };
+		D947D66C1BC2EFCB0061D609 /* MYwomen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D947D6681BC2EFCB0061D609 /* MYwomen@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D947D66D1BC2EFCB0061D609 /* men1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D947D6691BC2EFCB0061D609 /* men1@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D947D66E1BC2EFCB0061D609 /* MYwomen_vip1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D947D66A1BC2EFCB0061D609 /* MYwomen_vip1@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D947D66F1BC2EFCB0061D609 /* men_vip1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D947D66B1BC2EFCB0061D609 /* men_vip1@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D95394E71BB2694900CB6746 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E61BB2694900CB6746 /* main.m */; };
 		D95394EA1BB2694900CB6746 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D95394E91BB2694900CB6746 /* AppDelegate.m */; };
 		D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95394F11BB2694900CB6746 /* Assets.xcassets */; };
@@ -93,7 +106,6 @@
 		D96EA9271BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9261BB2A5BD00360ED8 /* SendOrderSegmentedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D96EA92B1BB2D54B00360ED8 /* SenderOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9291BB2D54B00360ED8 /* SenderOrderViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D96EA92C1BB2D54B00360ED8 /* SenderOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA92A1BB2D54B00360ED8 /* SenderOrderViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		D96EA9341BB2DEA400360ED8 /* icon_sendOrder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9331BB2DEA400360ED8 /* icon_sendOrder@3x.png */; settings = {ASSET_TAGS = (); }; };
 		D96EA93C1BB2E35D00360ED8 /* MyWalletTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA93B1BB2E35D00360ED8 /* MyWalletTableViewHeaderView.m */; settings = {ASSET_TAGS = (); }; };
 		D96EA93E1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA93D1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib */; settings = {ASSET_TAGS = (); }; };
 		D96EA9471BB2EB7300360ED8 /* MyWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9451BB2EB7300360ED8 /* MyWalletViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -190,7 +202,7 @@
 		D96EAA9D1BB5964F00360ED8 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA891BB5964F00360ED8 /* UIScrollView+MJRefresh.m */; settings = {ASSET_TAGS = (); }; };
 		D96EAA9E1BB5964F00360ED8 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA8B1BB5964F00360ED8 /* UIView+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
 		D96EAAA11BB59C2B00360ED8 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAAA01BB59C2B00360ED8 /* OrderListModel.m */; settings = {ASSET_TAGS = (); }; };
-		D9777D491BB65E1900A7A64C /* icon_phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D451BB65E1900A7A64C /* icon_phone@3x.png */; settings = {ASSET_TAGS = (); }; };
+		D9777D491BB65E1900A7A64C /* icon_phone_disable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D451BB65E1900A7A64C /* icon_phone_disable@3x.png */; settings = {ASSET_TAGS = (); }; };
 		D9777D4A1BB65E1900A7A64C /* icon_orderDetail_address@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D461BB65E1900A7A64C /* icon_orderDetail_address@3x.png */; settings = {ASSET_TAGS = (); }; };
 		D9777D4B1BB65E1900A7A64C /* nan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D471BB65E1900A7A64C /* nan@3x.png */; settings = {ASSET_TAGS = (); }; };
 		D9777D4C1BB65E1900A7A64C /* xx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D481BB65E1900A7A64C /* xx@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -275,6 +287,14 @@
 		D90E2E371BB647BA00C2E6F3 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		D90E2E381BB647BA00C2E6F3 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
+		D916A5961BC36092005F5286 /* icon_sendOrder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sendOrder@3x.png"; sourceTree = "<group>"; };
+		D916A5991BC3627A005F5286 /* AutoSlideScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoSlideScrollView.h; sourceTree = "<group>"; };
+		D916A59A1BC3627A005F5286 /* AutoSlideScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoSlideScrollView.m; sourceTree = "<group>"; };
+		D916A59B1BC3627A005F5286 /* MyPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageControl.h; sourceTree = "<group>"; };
+		D916A59C1BC3627A005F5286 /* MyPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageControl.m; sourceTree = "<group>"; };
+		D916A59D1BC3627A005F5286 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
+		D916A59E1BC3627A005F5286 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
+		D916A5A01BC3627A005F5286 /* AutoSlideScrollView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AutoSlideScrollView.bundle; sourceTree = "<group>"; };
 		D91F2F1A1BC21179002CE690 /* GrabSettingPushTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabSettingPushTableViewCell.h; sourceTree = "<group>"; };
 		D91F2F1B1BC21179002CE690 /* GrabSettingPushTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabSettingPushTableViewCell.m; sourceTree = "<group>"; };
 		D91F2F1C1BC21179002CE690 /* GrabSettingPushTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabSettingPushTableViewCell.xib; sourceTree = "<group>"; };
@@ -437,6 +457,17 @@
 		D946C9281BC2D5D300AAD3A3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D946C92A1BC2D6B700AAD3A3 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		D946C92C1BC2D94900AAD3A3 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
+		D947D65D1BC2E7600061D609 /* icon_phone_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_phone_normal@3x.png"; sourceTree = "<group>"; };
+		D947D65F1BC2EEC60061D609 /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		D947D6601BC2EEC60061D609 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
+		D947D6621BC2EEDC0061D609 /* FYAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYAnnotation.h; sourceTree = "<group>"; };
+		D947D6631BC2EEDC0061D609 /* FYAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYAnnotation.m; sourceTree = "<group>"; };
+		D947D6641BC2EEDC0061D609 /* FYAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYAnnotationView.h; sourceTree = "<group>"; };
+		D947D6651BC2EEDC0061D609 /* FYAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYAnnotationView.m; sourceTree = "<group>"; };
+		D947D6681BC2EFCB0061D609 /* MYwomen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MYwomen@2x.png"; sourceTree = "<group>"; };
+		D947D6691BC2EFCB0061D609 /* men1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "men1@2x.png"; sourceTree = "<group>"; };
+		D947D66A1BC2EFCB0061D609 /* MYwomen_vip1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MYwomen_vip1@2x.png"; sourceTree = "<group>"; };
+		D947D66B1BC2EFCB0061D609 /* men_vip1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "men_vip1@2x.png"; sourceTree = "<group>"; };
 		D95394E21BB2694900CB6746 /* IDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95394E61BB2694900CB6746 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D95394E81BB2694900CB6746 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -473,7 +504,6 @@
 		D96EA92A1BB2D54B00360ED8 /* SenderOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SenderOrderViewController.xib; sourceTree = "<group>"; };
 		D96EA9301BB2DAF100360ED8 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D96EA9311BB2DB1700360ED8 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		D96EA9331BB2DEA400360ED8 /* icon_sendOrder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sendOrder@3x.png"; sourceTree = "<group>"; };
 		D96EA93A1BB2E35D00360ED8 /* MyWalletTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletTableViewHeaderView.h; sourceTree = "<group>"; };
 		D96EA93B1BB2E35D00360ED8 /* MyWalletTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletTableViewHeaderView.m; sourceTree = "<group>"; };
 		D96EA93D1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWalletTableViewHeaderView.xib; sourceTree = "<group>"; };
@@ -647,7 +677,7 @@
 		D96EAA8B1BB5964F00360ED8 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		D96EAA9F1BB59C2B00360ED8 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		D96EAAA01BB59C2B00360ED8 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
-		D9777D451BB65E1900A7A64C /* icon_phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_phone@3x.png"; sourceTree = "<group>"; };
+		D9777D451BB65E1900A7A64C /* icon_phone_disable@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_phone_disable@3x.png"; sourceTree = "<group>"; };
 		D9777D461BB65E1900A7A64C /* icon_orderDetail_address@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_orderDetail_address@3x.png"; sourceTree = "<group>"; };
 		D9777D471BB65E1900A7A64C /* nan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nan@3x.png"; sourceTree = "<group>"; };
 		D9777D481BB65E1900A7A64C /* xx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xx@3x.png"; sourceTree = "<group>"; };
@@ -782,6 +812,12 @@
 		D90E2E291BB626A200C2E6F3 /* MySendOrder */ = {
 			isa = PBXGroup;
 			children = (
+				D947D6621BC2EEDC0061D609 /* FYAnnotation.h */,
+				D947D6631BC2EEDC0061D609 /* FYAnnotation.m */,
+				D947D6641BC2EEDC0061D609 /* FYAnnotationView.h */,
+				D947D6651BC2EEDC0061D609 /* FYAnnotationView.m */,
+				D947D65F1BC2EEC60061D609 /* MyAnnotation.h */,
+				D947D6601BC2EEC60061D609 /* MyAnnotation.m */,
 				D946C9171BC2C42B00AAD3A3 /* ChangeLocationTableViewController.h */,
 				D946C9181BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m */,
 				D946C9191BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib */,
@@ -800,6 +836,28 @@
 				D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */,
 			);
 			name = OrderDetail;
+			sourceTree = "<group>";
+		};
+		D916A5981BC3627A005F5286 /* AutoSlideScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				D916A5991BC3627A005F5286 /* AutoSlideScrollView.h */,
+				D916A59A1BC3627A005F5286 /* AutoSlideScrollView.m */,
+				D916A59B1BC3627A005F5286 /* MyPageControl.h */,
+				D916A59C1BC3627A005F5286 /* MyPageControl.m */,
+				D916A59D1BC3627A005F5286 /* NSTimer+Addition.h */,
+				D916A59E1BC3627A005F5286 /* NSTimer+Addition.m */,
+				D916A59F1BC3627A005F5286 /* Resources */,
+			);
+			path = AutoSlideScrollView;
+			sourceTree = "<group>";
+		};
+		D916A59F1BC3627A005F5286 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D916A5A01BC3627A005F5286 /* AutoSlideScrollView.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		D91F2F191BC20FE2002CE690 /* GrabOrderSetting */ = {
@@ -1138,6 +1196,7 @@
 		D96EA91E1BB2A1F900360ED8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D916A5981BC3627A005F5286 /* AutoSlideScrollView */,
 				D946C9031BC2854800AAD3A3 /* UIPlaceHolderTextView.h */,
 				D946C9041BC2854800AAD3A3 /* UIPlaceHolderTextView.m */,
 				D946C8EE1BC2228300AAD3A3 /* CityCardReusableView.h */,
@@ -1172,7 +1231,7 @@
 				D96EAA3C1BB5372100360ED8 /* icon_content@3x.png */,
 				D96EAA3D1BB5372100360ED8 /* icon_distance@3x.png */,
 				D96EAA3E1BB5372100360ED8 /* icon_money@3x.png */,
-				D96EA9331BB2DEA400360ED8 /* icon_sendOrder@3x.png */,
+				D916A5961BC36092005F5286 /* icon_sendOrder@3x.png */,
 			);
 			name = senderOrder;
 			sourceTree = "<group>";
@@ -1563,7 +1622,12 @@
 		D9777D441BB65DFC00A7A64C /* OrderDetail */ = {
 			isa = PBXGroup;
 			children = (
-				D9777D451BB65E1900A7A64C /* icon_phone@3x.png */,
+				D947D6681BC2EFCB0061D609 /* MYwomen@2x.png */,
+				D947D6691BC2EFCB0061D609 /* men1@2x.png */,
+				D947D66A1BC2EFCB0061D609 /* MYwomen_vip1@2x.png */,
+				D947D66B1BC2EFCB0061D609 /* men_vip1@2x.png */,
+				D9777D451BB65E1900A7A64C /* icon_phone_disable@3x.png */,
+				D947D65D1BC2E7600061D609 /* icon_phone_normal@3x.png */,
 				D9777D461BB65E1900A7A64C /* icon_orderDetail_address@3x.png */,
 				D9777D471BB65E1900A7A64C /* nan@3x.png */,
 				D9777D481BB65E1900A7A64C /* xx@3x.png */,
@@ -1865,9 +1929,11 @@
 				D91F2F381BC2196A002CE690 /* icon_setting_newmsg@3x.png in Resources */,
 				D9B289ED1BBCEBC500FB97E5 /* Icon.png in Resources */,
 				D96EA9E91BB3D9E300360ED8 /* LoginViewController.xib in Resources */,
+				D916A5971BC36092005F5286 /* icon_sendOrder@3x.png in Resources */,
 				D91F2F391BC2196A002CE690 /* icon_setting_rul_bg@3x.png in Resources */,
 				D96EA9481BB2EB7300360ED8 /* MyWalletViewController.xib in Resources */,
 				D9B2F6C01BB28D7A00ED7DDF /* icon_menu_setting@3x.png in Resources */,
+				D947D66C1BC2EFCB0061D609 /* MYwomen@2x.png in Resources */,
 				D946C91D1BC2C4E800AAD3A3 /* icon_search_bg@2x.png in Resources */,
 				D96EA95A1BB37FE300360ED8 /* icon_menu@3x.png in Resources */,
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@3x.png in Resources */,
@@ -1880,7 +1946,9 @@
 				D96EAA511BB55DAC00360ED8 /* OrderContentTableViewCell.xib in Resources */,
 				D96EAA411BB5372100360ED8 /* icon_distance@3x.png in Resources */,
 				D96EAA111BB4D14900360ED8 /* icon_avatar_default@3x.png in Resources */,
-				D9777D491BB65E1900A7A64C /* icon_phone@3x.png in Resources */,
+				D9777D491BB65E1900A7A64C /* icon_phone_disable@3x.png in Resources */,
+				D947D66D1BC2EFCB0061D609 /* men1@2x.png in Resources */,
+				D947D65E1BC2E7600061D609 /* icon_phone_normal@3x.png in Resources */,
 				D9ADC3FF1BBA670A00B1B7E1 /* b27_icon_star_gray@2x.png in Resources */,
 				D92B5ADA1BB815F100E3AC93 /* callbtn@2x.png in Resources */,
 				D91F2F3B1BC21B6E002CE690 /* icon_myself@3x.png in Resources */,
@@ -1908,6 +1976,7 @@
 				D96EA94E1BB2F01E00360ED8 /* MyProfileTableViewController.xib in Resources */,
 				D91F2F231BC2143E002CE690 /* icon_rule_sel@3x.png in Resources */,
 				D946C8FA1BC23B2900AAD3A3 /* HotTagTableViewCell.xib in Resources */,
+				D916A5A41BC3627A005F5286 /* AutoSlideScrollView.bundle in Resources */,
 				D96EA9531BB2F05100360ED8 /* MyProfileHeaderView.xib in Resources */,
 				D96EA9861BB3D1FB00360ED8 /* SVProgressHUD.bundle in Resources */,
 				D96EAA3A1BB5337F00360ED8 /* CustomTableViewCell.xib in Resources */,
@@ -1930,11 +1999,12 @@
 				D9ADC4001BBA670A00B1B7E1 /* b27_icon_star_yellow@2x.png in Resources */,
 				D95394F21BB2694900CB6746 /* Assets.xcassets in Resources */,
 				D9B2F6951BB27FA900ED7DDF /* Default-568h@2x.png in Resources */,
+				D947D66E1BC2EFCB0061D609 /* MYwomen_vip1@2x.png in Resources */,
 				D96EAA3F1BB5372100360ED8 /* icon_address@3x.png in Resources */,
 				D96EA93E1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib in Resources */,
 				D96EAA421BB5372100360ED8 /* icon_money@3x.png in Resources */,
-				D96EA9341BB2DEA400360ED8 /* icon_sendOrder@3x.png in Resources */,
 				D96EAA9A1BB5964F00360ED8 /* MJRefresh.bundle in Resources */,
+				D947D66F1BC2EFCB0061D609 /* men_vip1@2x.png in Resources */,
 				D96EAA051BB3FFB500360ED8 /* banner_default@2x.png in Resources */,
 				D91F2F341BC21965002CE690 /* icon_setting_1@3x.png in Resources */,
 				D946C8E51BC21CD200AAD3A3 /* GrabSetTagTableViewCell.xib in Resources */,
@@ -1986,7 +2056,9 @@
 				D92B5C101BB8F3B600E3AC93 /* DataSigner.m in Sources */,
 				D96EA9CE1BB3D24700360ED8 /* SDWebImageDownloaderOperation.m in Sources */,
 				D96EA9DB1BB3D35A00360ED8 /* UserInfo.m in Sources */,
+				D947D6611BC2EEC60061D609 /* MyAnnotation.m in Sources */,
 				D96EAA9E1BB5964F00360ED8 /* UIView+MJExtension.m in Sources */,
+				D916A5A31BC3627A005F5286 /* NSTimer+Addition.m in Sources */,
 				D91F2F291BC21741002CE690 /* GrabOrderSettingViewController.m in Sources */,
 				D99EAD081BBA8213005A02D3 /* ASIAuthenticationDialog.m in Sources */,
 				D96EA9571BB3776200360ED8 /* MyProfileTableViewCell.m in Sources */,
@@ -2005,6 +2077,7 @@
 				D96EA91D1BB298C200360ED8 /* GrabOrderRootViewController.m in Sources */,
 				D9B2F6AA1BB2838300ED7DDF /* RECommonFunctions.m in Sources */,
 				D90E2E3A1BB647BA00C2E6F3 /* OrderDetailViewController.m in Sources */,
+				D916A5A11BC3627A005F5286 /* AutoSlideScrollView.m in Sources */,
 				D946C90A1BC28F3400AAD3A3 /* EvaluationTableViewCell.m in Sources */,
 				D96EA9D71BB3D24700360ED8 /* UIView+WebCacheOperation.m in Sources */,
 				D96EAA8D1BB5964F00360ED8 /* MJRefreshBackFooter.m in Sources */,
@@ -2043,9 +2116,11 @@
 				D91F2F1D1BC21179002CE690 /* GrabSettingPushTableViewCell.m in Sources */,
 				D90E2E351BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m in Sources */,
 				D92B5AD51BB8106F00E3AC93 /* PayViewController.m in Sources */,
+				D916A5A21BC3627A005F5286 /* MyPageControl.m in Sources */,
 				D96EAA541BB569BA00360ED8 /* FYTimeViewController.m in Sources */,
 				D96EAA391BB5337F00360ED8 /* CustomTableViewCell.m in Sources */,
 				D96EA9C81BB3D24700360ED8 /* MKAnnotationView+WebCache.m in Sources */,
+				D947D6661BC2EEDC0061D609 /* FYAnnotation.m in Sources */,
 				D946C8E91BC21EE400AAD3A3 /* GrabTagCollectionViewCell.m in Sources */,
 				D90E2E301BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m in Sources */,
 				D9B2F6AC1BB2838300ED7DDF /* REFrostedViewController.m in Sources */,
@@ -2098,6 +2173,7 @@
 				D96EAA8C1BB5964F00360ED8 /* MJRefreshAutoFooter.m in Sources */,
 				D9B2F6AE1BB2838300ED7DDF /* UIView+REFrostedViewController.m in Sources */,
 				D96EAA8F1BB5964F00360ED8 /* MJRefreshFooter.m in Sources */,
+				D947D6671BC2EEDC0061D609 /* FYAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

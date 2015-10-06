@@ -26,14 +26,17 @@
     [super viewDidLoad];
     self.navigationItem.title = @"订单详情";
     _mapview.showsUserLocation = YES;
-    
+    _conteViewConstraint.constant = 14;
+    _addressBtn.titleLabel.numberOfLines = 0;
     [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self adjustMapViewWithLocation:userLocation.coordinate];
     }];
     _avatarImageView.layer.cornerRadius = 17.0;
     _avatarImageView.clipsToBounds = YES;
     [self getOrderInfo];
+
     [self.view addSubview:self.footerView];
+    [_phoneLabel addTarget:self action:@selector(callClick) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
@@ -71,10 +74,21 @@
     } else {
         userInfo = _orderDetail.sendOrderUser;
     }
+    if (userInfo.userid.length != 0) {
+        _conteViewConstraint.constant = 64;
+    } else {
+        _conteViewConstraint.constant = 14;
+    }
+    NSString *sex = userInfo.sex;
+    if ([sex isEqualToString:@"1"]) {
+        [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
+    } else {
+        [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
+    }
     if (!_isSendOrder && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"已经发送%@单", userInfo.sendOrderCount];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔", userInfo.sendOrderCount];
     } else if (userInfo.userid != 0 && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"已经接%@单", userInfo.sendOrderCount];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔", userInfo.sendOrderCount];
     } else {
         _userDescLabel.text = nil;
     }
@@ -109,6 +123,11 @@
             timer = nil;
         }
         _timeLeftLabel.text = nil;
+    }
+    if (_orderDetail.orderStatus == kOrderPayed) {
+        _phoneLabel.enabled = YES;
+    } else {
+        _phoneLabel.enabled = NO;
     }
 }
 
@@ -354,6 +373,24 @@
                 _orderDetail = [[OrderDetailModel alloc] initWithJson:[dict objectForKey:@"data"] andIsSendOrder:_isSendOrder];
                 [self updateView];
             }
+        }
+    }];
+}
+
+- (void)callClick
+{
+    UserInfo *userInfo;
+    if (_isSendOrder) {
+        userInfo = _orderDetail.grabOrderUser;
+    } else {
+        userInfo = _orderDetail.sendOrderUser;
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"确认拨打以下电话？" message:userInfo.tel delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", userInfo.tel]];
+            [[UIApplication sharedApplication] openURL:url];
         }
     }];
 }

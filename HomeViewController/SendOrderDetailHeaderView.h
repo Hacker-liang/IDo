@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) OrderDetailModel *orderDetailModel;
 
+@property (nonatomic, strong) NSMutableArray *userList;
+
 + (id)sendOrderDetailHeaderView;
 
 @end

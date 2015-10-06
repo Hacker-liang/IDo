@@ -30,13 +30,24 @@
     } else {
         userInfo = _orderDetail.grabOrderUser;
     }
+    NSString *sex = userInfo.sex;
+    if ([sex isEqualToString:@"1"]) {
+        [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
+    } else {
+        [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
+    }
+    if (userInfo.userid.length == 0) {
+        _sexImageView.hidden = YES;
+    } else {
+        _sexImageView.hidden = NO;
+    }
     [_headerImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
     _titleLabel.text = userInfo.nickName;
 
     if (_isGrabOrder && userInfo.userid != 0) {
-        _subtitleLabel.text = [NSString stringWithFormat:@"已经发送%@单", userInfo.sendOrderCount];
+        _subtitleLabel.text = [NSString stringWithFormat:@"成功发单%@笔", userInfo.sendOrderCount];
     } else if (userInfo.userid != 0) {
-        _subtitleLabel.text = [NSString stringWithFormat:@"已经接%@单", userInfo.sendOrderCount];
+        _subtitleLabel.text = [NSString stringWithFormat:@"成功接单%@笔", userInfo.sendOrderCount];
     } else {
         _subtitleLabel.text = nil;
     }

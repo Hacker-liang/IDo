@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderDetailViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *conteViewConstraint;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sexImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userDescLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderTimeLabel;
@@ -24,6 +27,7 @@
 @property (nonatomic) BOOL isSendOrder;
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
+@property (weak, nonatomic) IBOutlet UIButton *phoneLabel;
 
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload;
 

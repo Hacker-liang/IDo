@@ -65,31 +65,32 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if ([scrollView isEqual:self.scrollView]) {
-        
-        if (scrollView.contentOffset.y > 150) {
-            CGPoint point = CGPointMake(0, 150);
-            scrollView.contentOffset = point;
-        }
-    }
-    
     CGFloat height = (self.scrollView.bounds.size.height - 214) + scrollView.contentOffset.y;
     _segementedController.view.frame = CGRectMake(0, _segementedController.view.frame.origin.y, _segementedController.view.bounds.size.width, height);
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (scrollView.contentOffset.y > 100) {
+    if (scrollView.contentOffset.y > 75) {
         CGPoint point = CGPointMake(0, 150);
-        scrollView.contentOffset = point;
+        [scrollView setContentOffset:point animated:YES];
+        
+    } else {
+        [scrollView setContentOffset:CGPointZero animated:YES];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y > 100) {
+    NSLog(@"scrollViewDidEndDecelerating");
+    
+    if (scrollView.contentOffset.y > 75) {
         CGPoint point = CGPointMake(0, 150);
         scrollView.contentOffset = point;
+        
+    } else {
+        scrollView.contentOffset = CGPointZero;
+        
     }
 }
 

@@ -13,6 +13,7 @@
 #import "OrderContentTableViewCell.h"
 #import "FYTimeViewController.h"
 #import "ChangeLocationTableViewController.h"
+#import "MyAnnotation.h"
 
 @interface SendOrderDetailViewController () <UIActionSheetDelegate, ChangeLocationDelegate>
 
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
 @property (nonatomic, copy) NSString *showtime;
+@property (nonatomic, strong) NSMutableArray *userList;
+
 
 @end
 
@@ -46,6 +49,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderContentTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderContentCell"];
     [self Time];
     [self setupTableViewFooterView];
+    [self getWoGanUserdata];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +68,13 @@
     return _dataSource;
 }
 
+- (NSMutableArray *)userList
+{
+    if (!_userList) {
+        _userList = [[NSMutableArray alloc] init];
+    }
+    return _userList;
+}
 
 - (SendOrderDetailHeaderView *)headerView
 {
@@ -182,6 +193,32 @@
         }
     }];
 
+}
+
+- (void)getWoGanUserdata
+{
+    NSString *url = [NSString stringWithFormat:@"%@getuserinfo",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSArray *tempList = dict[@"data"];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
+                [self.userList removeAllObjects];
+                for (int i = 0; i < [tempList count]; i ++) {
+                     MyAnnotation *annotation=[[MyAnnotation alloc]initWithDic:tempList[i]];
+                    [self.userList addObject:annotation];
+                }
+                _headerView.userList = self.userList;
+            }
+            
+        }
+    }];
 }
 
 #pragma mark - TableViewDataSource
