@@ -23,12 +23,12 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="累计收入" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INt-jY-KJo">
-                    <rect key="frame" x="266" y="14" width="68" height="21"/>
+                    <rect key="frame" x="266" y="18" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="68" id="Fbj-Mm-Nt6"/>
                         <constraint firstAttribute="height" constant="21" id="YVl-Rh-vcF"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -91,10 +91,10 @@
                 <constraint firstItem="Y8c-aI-YYd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SRF-3T-5nL"/>
                 <constraint firstItem="INt-jY-KJo" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WLp-YH-YmZ"/>
                 <constraint firstItem="4Iu-WC-LAY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="We2-Fq-Gxe"/>
-                <constraint firstItem="4Iu-WC-LAY" firstAttribute="top" secondItem="INt-jY-KJo" secondAttribute="bottom" constant="21" id="Wpk-pS-5qD"/>
+                <constraint firstItem="4Iu-WC-LAY" firstAttribute="top" secondItem="INt-jY-KJo" secondAttribute="bottom" constant="17" id="Wpk-pS-5qD"/>
                 <constraint firstItem="Xa6-pE-59B" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ajP-Zg-xof"/>
                 <constraint firstAttribute="bottom" secondItem="UHR-We-iWL" secondAttribute="bottom" constant="20" id="cJ2-MM-Sc1"/>
-                <constraint firstItem="INt-jY-KJo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="euF-BW-RI6"/>
+                <constraint firstItem="INt-jY-KJo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="euF-BW-RI6"/>
                 <constraint firstItem="Y8c-aI-YYd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fOO-Gy-1nE"/>
                 <constraint firstItem="yoe-b4-G2L" firstAttribute="height" secondItem="Xa6-pE-59B" secondAttribute="height" id="ghe-ot-UgY"/>
                 <constraint firstItem="yoe-b4-G2L" firstAttribute="width" secondItem="Xa6-pE-59B" secondAttribute="width" id="hsa-2T-9Ib"/>

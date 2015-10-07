@@ -182,6 +182,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableViewCell" forIndexPath:indexPath];
     cell.textLabel.text = _dataSource[indexPath.row];
+    cell.textLabel.textColor = [UIColor grayColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

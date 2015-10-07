@@ -134,7 +134,9 @@
     
     if (_orderDetail.orderStatus == kOrderGrabSuccess) {
         _countdown = _orderDetail.payCountdown;
-        [self startCountdown];
+        if (_countdown > 0) {
+            [self startCountdown];
+        }
         
     } else if (_orderDetail.orderStatus == kOrderInProgress) {
         _countdown = _orderDetail.grabCountdown;
