@@ -15,9 +15,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFM-Aa-n5G">
-                        <rect key="frame" x="143" y="14" width="169" height="22"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <rect key="frame" x="143" y="14" width="161" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Kr-Ae-D2b">
@@ -43,7 +43,7 @@
                     <constraint firstItem="4Kr-Ae-D2b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="FGC-rJ-ULp"/>
                     <constraint firstItem="FEs-jf-RK0" firstAttribute="leading" secondItem="4Kr-Ae-D2b" secondAttribute="trailing" constant="13" id="NcM-o2-In7"/>
                     <constraint firstItem="uFM-Aa-n5G" firstAttribute="leading" secondItem="FEs-jf-RK0" secondAttribute="trailing" constant="18" id="PW6-uy-zzW"/>
-                    <constraint firstAttribute="trailing" secondItem="uFM-Aa-n5G" secondAttribute="trailing" constant="8" id="U4A-a6-gWe"/>
+                    <constraint firstAttribute="trailing" secondItem="uFM-Aa-n5G" secondAttribute="trailing" constant="16" id="U4A-a6-gWe"/>
                     <constraint firstItem="4Kr-Ae-D2b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="UuE-qv-EWp"/>
                     <constraint firstItem="uFM-Aa-n5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="hsB-UZ-Rx0"/>
                     <constraint firstItem="FEs-jf-RK0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="p9C-7d-93p"/>

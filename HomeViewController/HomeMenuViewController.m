@@ -176,6 +176,13 @@
     NSDictionary *dic = self.dataSource[indexPath.row];
     cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:@"icon"]];
     cell.titleLabel.text = [dic objectForKey:@"title"];
+    
+    if (indexPath.row == 3) {
+        NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
+        NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
+        NSString *text =[NSString stringWithFormat:@"v%@",versionNum];
+        cell.subtitleLabel.text = text;
+    }
     return cell;
 }
 
