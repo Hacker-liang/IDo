@@ -15,7 +15,6 @@
     _contentTextView.layer.borderWidth = 0.5;
     _contentTextView.layer.cornerRadius = 3.0;
     _contentTextView.delegate = self;
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -53,7 +53,13 @@
     }
     _timeLabel.text = _orderDetail.tasktime;
     _contentLabel.text = _orderDetail.content;
-    _priceLabel.text = [NSString stringWithFormat:@"%@元", _orderDetail.price];
+    
+    NSString *str = [NSString stringWithFormat:@"%@元", _orderDetail.price];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(0,str.length-1)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, str.length-1)];
+    _priceLabel.attributedText = attStr;
+    
     _orderStatusLabel.text = _orderDetail.orderStatusDesc;
     [_addressBtn setTitle:_orderDetail.address forState:UIControlStateNormal];
 }

@@ -42,8 +42,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _orderDetail.price = @"5";
-    _orderDetail.distance = @"5";
+    _orderDetail.price = @"0";
+    _orderDetail.distance = @"10";
     self.navigationItem.title = @"立即派单";
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderContentTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderContentCell"];
@@ -59,8 +59,8 @@
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@{@"icon": @"icon_time"},
-                        @{@"icon": @"icon_money.png"},
+        _dataSource = @[@{@"icon": @"icon_money.png"},
+                        @{@"icon": @"icon_time"},
                         @{@"icon": @"icon_content.png"},
                         @{@"icon": @"icon_distance.png"}
                         ];
@@ -160,12 +160,17 @@
         return;
     }
     
+    if ([_orderDetail.price intValue] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"悬赏金额不得低于1元"];
+        return;
+    }
+    
     [SVProgressHUD showWithStatus:@"正在派单"];
     NSString *url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
     [mDict safeSetObject:_orderDetail.content forKey:@"content"];
-    [mDict safeSetObject:@"1" forKey:@"money"];
+    [mDict safeSetObject:_orderDetail.price forKey:@"money"];
     [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
     [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
     [mDict safeSetObject:@"0" forKey:@"sex"];
@@ -263,14 +268,21 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
 
         return cell;
+        
     } else {
         CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.indicateImageView.image = [UIImage imageNamed: imageName];
         if (indexPath.row == 0) {
-            cell.titleLabel.text = _showtime;
+            NSString *str = [NSString stringWithFormat:@"悬赏金额 %@ 元", _orderDetail.price];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+            [attStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:NSMakeRange(5,str.length-7)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(5, str.length-7)];
+            cell.titleLabel.attributedText = attStr;
+
         } else if (indexPath.row == 1) {
-            cell.titleLabel.text = [NSString stringWithFormat:@"￥%@", _orderDetail.price];
+            cell.titleLabel.text = _showtime;
+
         } else if (indexPath.row == 3) {
             cell.titleLabel.text = [NSString stringWithFormat:@"发单范围  %@公里", _orderDetail.distance];
 
@@ -284,18 +296,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.view endEditing:YES];
     if (indexPath.row == 0) {
-        
-        FYTimeViewController *control = [[FYTimeViewController alloc] init];
-        control.postValue=^(NSString *aShowTime,NSString *aTaskTime)
-        {
-            _orderDetail.tasktime = aTaskTime;
-            CustomTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-            _showtime = aShowTime;
-            cell.titleLabel.text = _showtime;
-        };
-        [self.navigationController pushViewController:control animated:YES];
-        
-    } else if (indexPath.row == 1) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"悬赏金额" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
@@ -314,6 +314,17 @@
                 }
             }
         }];
+        
+    } else if (indexPath.row == 1) {
+        FYTimeViewController *control = [[FYTimeViewController alloc] init];
+        control.postValue=^(NSString *aShowTime,NSString *aTaskTime)
+        {
+            _orderDetail.tasktime = aTaskTime;
+            CustomTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            _showtime = aShowTime;
+            cell.titleLabel.text = _showtime;
+        };
+        [self.navigationController pushViewController:control animated:YES];
         
     } else if (indexPath.row == 3) {
         UIActionSheet * editActionSheet = [[UIActionSheet alloc] initWithTitle:@"发单范围" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"5公里",@"10公里",@"15公里",nil];

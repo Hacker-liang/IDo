@@ -93,7 +93,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Wp-g2-1TY">
-                        <rect key="frame" x="250" y="70.5" width="62" height="36"/>
+                        <rect key="frame" x="250" y="66.5" width="62" height="36"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="62" id="2S7-6n-0AC"/>
                             <constraint firstAttribute="height" constant="36" id="TRt-zz-T0y"/>
@@ -151,7 +151,7 @@
                     <constraint firstItem="GwM-QF-rc2" firstAttribute="top" secondItem="G8D-dm-MyE" secondAttribute="bottom" constant="3.5" id="RGx-eS-MH6"/>
                     <constraint firstItem="Nlk-mg-mwp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="62" id="RWf-1l-nHj"/>
                     <constraint firstItem="ntX-Dy-N2s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="WGD-B0-Ps5"/>
-                    <constraint firstItem="Dhc-3N-MLr" firstAttribute="top" secondItem="0Wp-g2-1TY" secondAttribute="bottom" constant="3.5" id="b7g-iE-b09"/>
+                    <constraint firstItem="Dhc-3N-MLr" firstAttribute="top" secondItem="0Wp-g2-1TY" secondAttribute="bottom" constant="7.5" id="b7g-iE-b09"/>
                     <constraint firstAttribute="bottom" secondItem="Dhc-3N-MLr" secondAttribute="bottom" constant="39" id="c7M-hc-szT"/>
                     <constraint firstItem="Nlk-mg-mwp" firstAttribute="leading" secondItem="GwM-QF-rc2" secondAttribute="trailing" constant="-2.5" id="dUa-6N-muR"/>
                     <constraint firstItem="arY-Wi-ipV" firstAttribute="top" secondItem="G8D-dm-MyE" secondAttribute="bottom" constant="7.5" id="eTL-5v-e7c"/>
