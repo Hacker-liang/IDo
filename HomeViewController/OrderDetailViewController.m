@@ -10,13 +10,18 @@
 #import "PayViewController.h"
 #import "EvaluationViewController.h"
 #import "ComplaintViewController.h"
+#import "FYAnnotation.h"
+#import "FYAnnotationView.h"
 
-@interface OrderDetailViewController ()
+@interface OrderDetailViewController () <MKMapViewDelegate>
 {
     NSTimer *timer;
 }
 
 @property (nonatomic, strong) UIView *footerView;
+@property (nonatomic) CLLocationCoordinate2D userLocation;
+@property (nonatomic) CLLocationCoordinate2D missionLocation;
+
 @property (nonatomic) int countdown;
 
 @end
@@ -26,7 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"订单详情";
-    _mapview.showsUserLocation = YES;
+//    _mapview.showsUserLocation = YES;
+    _mapview.delegate = self;
     _conteViewConstraint.constant = 14;
     _addressBtn.titleLabel.numberOfLines = 0;
     _complainBtn.layer.cornerRadius = 3.0;
@@ -37,9 +43,6 @@
     _cancelBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _cancelBtn.layer.borderWidth = 0.5;
     
-    [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
-        [self adjustMapViewWithLocation:userLocation.coordinate];
-    }];
     _avatarImageView.layer.cornerRadius = 17.0;
     _avatarImageView.clipsToBounds = YES;
     [self getOrderInfo];
@@ -66,7 +69,7 @@
 
 - (void)adjustMapViewWithLocation:(CLLocationCoordinate2D)location
 {
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.05, 0.05);
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.03, 0.03);
     MKCoordinateRegion region = MKCoordinateRegionMake(location,span);
     MKCoordinateRegion adjustedRegion = [_mapview regionThatFits:region];
     [_mapview setRegion:adjustedRegion animated:YES];
@@ -96,9 +99,9 @@
         [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
     }
     
-    CLLocation *current=[[CLLocation alloc] initWithLatitude:userInfo.lat longitude:userInfo.lng];
+    CLLocation *current = [[CLLocation alloc] initWithLatitude:_userLocation.latitude longitude:_userLocation.longitude];
     //第二个坐标
-    CLLocation *before=[[CLLocation alloc] initWithLatitude:[UserManager shareUserManager].userInfo.lat longitude:[UserManager shareUserManager].userInfo.lng];
+    CLLocation *before=[[CLLocation alloc] initWithLatitude:_missionLocation.latitude longitude:_missionLocation.longitude];
     CLLocationDistance meters=[current distanceFromLocation:before];
 
     if (!_isSendOrder && userInfo.userid != 0) {
@@ -123,13 +126,6 @@
     [_addressBtn setTitle:_orderDetail.address forState:UIControlStateNormal];
     [_orderNumberBtn setTitle:[NSString stringWithFormat:@"订单编号  %@", _orderDetail.orderNumber] forState:UIControlStateNormal];
     
-    
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake([_orderDetail.lat floatValue], [_orderDetail.lng floatValue]);
-    MKPointAnnotation* item = [[MKPointAnnotation alloc]init];
-    item.coordinate = location;
-    [_mapview addAnnotation:item];
-    [_mapview setCenterCoordinate:location animated:YES];
-    [self adjustMapViewWithLocation:location];
     [self setupFooterView];
     
     if (_orderDetail.orderStatus == kOrderGrabSuccess) {
@@ -279,7 +275,6 @@
             }];
         }
     }];
-    
 }
 
 - (void)setupFooterView
@@ -466,10 +461,83 @@
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if([tempStatus integerValue] == 1) {
                 _orderDetail = [[OrderDetailModel alloc] initWithJson:[dict objectForKey:@"data"] andIsSendOrder:_isSendOrder];
+                _missionLocation = CLLocationCoordinate2DMake([_orderDetail.lat floatValue], [_orderDetail.lng floatValue]);
                 [self updateView];
+                [self datouzhen];
+                [self drawRoute];
             }
         }
     }];
+}
+
+-(void)datouzhen
+{
+    [self.mapview.layer removeAllAnimations];
+    [self.mapview removeOverlays:self.mapview.overlays];;
+    [self.mapview removeAnnotations:self.mapview.annotations];
+    
+    UserInfo *userInfo;
+    if (_isSendOrder) {
+        userInfo = _orderDetail.grabOrderUser;
+    } else {
+        userInfo = _orderDetail.sendOrderUser;
+    }
+    
+    FYAnnotation *tag2 = [[FYAnnotation alloc]init];
+    tag2.coordinate = _missionLocation;
+    tag2.icon = @"ic_location_marker.png";
+    
+    [self.mapview addAnnotation:tag2];
+    [self adjustMapViewWithLocation:_missionLocation];
+   
+    if ([userInfo.userid integerValue] == 0) {
+
+        return;
+    } else {
+        _userLocation = CLLocationCoordinate2DMake(userInfo.lat, userInfo.lng);
+    }
+    
+
+    
+
+    FYAnnotation *tg = [[FYAnnotation alloc]init];
+    tg.coordinate = _userLocation;
+    
+    if ( [userInfo.sex isEqualToString:@"1"] &&[userInfo.level isEqualToString:@"1"])
+    {
+        tg.icon=@"men1.png";
+    }
+    else if ([userInfo.sex isEqualToString:@"1"]&&[userInfo.level isEqualToString:@"2"])
+    {
+        tg.icon=@"men_vip1.png";
+    }
+    else if ([userInfo.sex isEqualToString:@"2"] && [userInfo.level isEqualToString:@"1"])
+    {
+        tg.icon=@"MYwomen.png";
+    }
+    else
+    {
+        tg.icon=@"MYwomen_vip1.png";
+    }
+    [self.mapview addAnnotation:tg];
+
+}
+
+- (void)drawRoute
+{
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    CLLocation *startLocation = [[CLLocation alloc] initWithLatitude:_userLocation.latitude longitude:_userLocation.longitude];
+
+    CLLocation *endLocation = [[CLLocation alloc] initWithLatitude:_missionLocation.latitude longitude:_missionLocation.longitude];
+
+    [geocoder reverseGeocodeLocation:startLocation completionHandler:^(NSArray *placemarkOne, NSError *error) {
+        CLPlacemark *startPlacemark = [placemarkOne firstObject];
+        [geocoder reverseGeocodeLocation:endLocation completionHandler:^(NSArray *placemarTwo, NSError *error) {
+            CLPlacemark *endPlacemark = [placemarTwo firstObject];
+            [self startDirectionsWithStartClPlacemark:startPlacemark endCLPlacemark:endPlacemark];
+        }];
+    }];
+
 }
 
 - (void)callClick
@@ -585,5 +653,55 @@
 }
 
 
+
+- (void)startDirectionsWithStartClPlacemark:(CLPlacemark *)startCLPlacemark endCLPlacemark:(CLPlacemark *)endCLPlacemark
+
+{
+    MKPlacemark *startMKPlacemark = [[MKPlacemark alloc] initWithPlacemark:startCLPlacemark];
+    MKMapItem *startItem = [[MKMapItem alloc] initWithPlacemark:startMKPlacemark];
+    MKPlacemark *endMKPlacemark = [[MKPlacemark alloc] initWithPlacemark:endCLPlacemark];
+    MKMapItem *endItem = [[MKMapItem alloc] initWithPlacemark:endMKPlacemark];
+    MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+    request.source = startItem;
+    request.destination = endItem;
+    MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+        for (MKRoute *route in response.routes) {
+            [self.mapview addOverlay:route.polyline];
+        }
+    }];
+}
+
+/**
+ 
+ *  绘制路线时会调用(添加遮盖时会调用)
+ 
+ *
+ 
+ *  @param mapView   mapView
+ 
+ *  @param overlay
+ 
+ */
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
+{
+    // 创建一条路径遮盖
+    MKPolylineRenderer*line = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+    line.lineWidth = 3; // 路线宽度
+    line.strokeColor = [UIColor redColor];//路线宽度
+    return line;
+}
+
+#pragma mark getWoGanUserdata 在地图上显示自定义的大头针模型
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(FYAnnotation *)annotation
+{
+    if (![annotation isKindOfClass:[FYAnnotation class]]) return nil;
+    //        1.获得大头针控件
+    FYAnnotationView *annoView=[FYAnnotationView annotationViewWithMapView:self.mapview];
+    //        2.传递模型
+    annoView.annotation=annotation;
+    return annoView;
+}
 
 @end

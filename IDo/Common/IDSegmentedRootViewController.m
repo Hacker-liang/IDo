@@ -61,7 +61,7 @@
     
     float btnWidth = self.view.bounds.size.width/[_segmentedTitles count];
     float offsetX = 0;
-    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, _segmentedHeight-2, btnWidth, 2)];
+    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(20, _segmentedHeight-2, btnWidth-40, 2)];
     _indicatorView.backgroundColor = [UIColor orangeColor];
     [segmentPanel addSubview:_indicatorView];
     
@@ -71,6 +71,7 @@
         UIButton *segmentBtn;
         if (_segmentedNormalImages.count) {
             segmentBtn = [[TZButton alloc] initWithFrame:CGRectMake(offsetX, 0, btnWidth, _segmentedHeight)];
+            segmentBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
 
             NSString *imageNormalName = [_segmentedNormalImages objectAtIndex:i];
             NSString *imageSelectName = [_segmentedSelectedImages objectAtIndex:i];
@@ -81,6 +82,7 @@
             
         } else {
             segmentBtn = [[UIButton alloc] initWithFrame:CGRectMake(offsetX, 0, btnWidth, _segmentedHeight)];
+            segmentBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
 
         }
         
@@ -88,13 +90,11 @@
 
         [segmentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [segmentBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
-        segmentBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
         segmentBtn.tag = i;
         [segmentBtn addTarget:self action:@selector(changePageAction:) forControlEvents:UIControlEventTouchUpInside];
         [segmentPanel addSubview:segmentBtn];
         [buttonArray addObject:segmentBtn];
         offsetX += btnWidth;
-        
         
         UIView *spaceView = [[UIView alloc] initWithFrame:CGRectMake(offsetX, 8, 0.5, 33)];
         spaceView.backgroundColor = [UIColor grayColor];

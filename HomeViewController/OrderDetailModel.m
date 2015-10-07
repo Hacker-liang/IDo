@@ -23,6 +23,13 @@
         _address = [json objectForKey:@"serviceaddress"];
         _lat = [json objectForKey:@"lat"];
         _lng = [json objectForKey:@"lng"];
+        
+        NSLog(@"%@", _lat);
+        NSLog(@"%@", _lng);
+        NSLog(@"%lf", [UserManager shareUserManager].userInfo.lat);
+        NSLog(@"%lf", [UserManager shareUserManager].userInfo.lng);
+
+        
         _reminderCount = [json objectForKey:@"ask_money_times"];
         _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
         _grabOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"jiedanren"]];

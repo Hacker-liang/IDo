@@ -66,6 +66,14 @@
 {
     CLLocation *location = [locations lastObject];
     _userLocation = location;
+    [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
+    [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
+    
+    NSLog(@"%lf", [UserManager shareUserManager].userInfo.lat);
+    NSLog(@"%lf", [UserManager shareUserManager].userInfo.lng);
+
+    [[UserManager shareUserManager] saveUserData2Cache];
+
     [self.locationManager stopUpdatingLocation];
     [self getAddressByLocation:_userLocation];
 }
