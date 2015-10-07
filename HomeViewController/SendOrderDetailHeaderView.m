@@ -96,23 +96,21 @@
     {
         FYAnnotation *tg=[[FYAnnotation alloc]init];
         
-        tg.title = @"确认对此用户进行 VIP 发单";
         if ( [an.sex isEqualToString:@"1"] &&[an.level isEqualToString:@"1"])
         {
             tg.icon=@"men1.png";
         }
         else if ([an.sex isEqualToString:@"1"]&&[an.level isEqualToString:@"2"])
         {
-            tg.title = @"确认对此用户进行 VIP 发单";
             tg.icon=@"men_vip1.png";
         }
         else if ([an.sex isEqualToString:@"2"] && [an.level isEqualToString:@"1"])
         {
             tg.icon=@"MYwomen.png";
         }
-        else
+        else if ([an.sex isEqualToString:@"2"]&&[an.level isEqualToString:@"2"])
         {
-            tg.title = @"确认对此用户进行 VIP 发单";
+            tg.title = @"确认对此用户进行 VIP发单?";
             tg.icon=@"MYwomen_vip1.png";
         }
         tg.coordinate=CLLocationCoordinate2DMake([an.lat floatValue], [an.lng floatValue]);

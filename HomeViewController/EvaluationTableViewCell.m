@@ -36,7 +36,7 @@
         }
         NSString *avatar = contentDic[@"guzhumes"][@"img"];
         NSString *totalAvatar = [NSString stringWithFormat:@"%@%@",headURL,avatar];
-        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:[UIImage imageNamed:@"Icon"]];
+        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:totalAvatar] placeholderImage:[UIImage imageNamed:@"Icon"]];
         _subtitleLabel.text = str;
     }else{
         _nickLabel.text = contentDic[@"huobaomes"][@"nikename"];
