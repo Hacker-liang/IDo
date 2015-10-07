@@ -523,8 +523,6 @@
     }
     
 
-    
-
     FYAnnotation *tg = [[FYAnnotation alloc]init];
     tg.coordinate = _userLocation;
     
@@ -545,6 +543,8 @@
         tg.icon=@"MYwomen_vip1.png";
     }
     [self.mapview addAnnotation:tg];
+    
+    [self moveMapToCenteratMapView:_mapview];
 
 }
 
@@ -697,17 +697,30 @@
     }];
 }
 
-/**
- 
- *  绘制路线时会调用(添加遮盖时会调用)
- 
- *
- 
- *  @param mapView   mapView
- 
- *  @param overlay
- 
- */
+- (void)moveMapToCenteratMapView:(MKMapView *)mv_bmap
+{
+    double minLat = 0.0;
+    double minLon = 0.0;
+    double maxLat = 0.0;
+    double maxLon = 0.0;
+    
+    minLat = _userLocation.latitude;
+    minLon = _userLocation.longitude;
+    maxLat = _missionLocation.latitude;
+    maxLon = _missionLocation.longitude;
+
+    minLon = minLon - 0.01;
+    minLat = minLat - 0.01;
+    maxLon = maxLon + 0.01;
+    maxLat = maxLat + 0.01;
+    double midLat = (minLat + maxLat) / 2;
+    double midLon = (minLon + maxLon) / 2;
+    CLLocationCoordinate2D centerPoint = CLLocationCoordinate2DMake(midLat, midLon);
+    MKCoordinateSpan span = MKCoordinateSpanMake((maxLat - minLat)*1.6, (maxLon - minLon)*1.6);
+    MKCoordinateRegion region = MKCoordinateRegionMake(centerPoint,span);
+    MKCoordinateRegion adjustedRegion = [_mapview regionThatFits:region];
+    [mv_bmap setRegion:adjustedRegion animated:YES];
+}
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {

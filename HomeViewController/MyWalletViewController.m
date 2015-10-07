@@ -118,7 +118,7 @@
     }
     
     {
-        NSString *str = [NSString stringWithFormat:@" 已经提醒\n￥%@", wallet.cashMoney];
+        NSString *str = [NSString stringWithFormat:@" 已经提现\n￥%@", wallet.cashMoney];
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
         [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, 5)];
         [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 5)];

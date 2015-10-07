@@ -32,6 +32,7 @@
 {
     _mapView.delegate = self;
     _vipContentView.hidden = YES;
+    _locationBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     _vipAvatarImageView.layer.cornerRadius = 19;
     _vipAvatarImageView.clipsToBounds = YES;
     _locationBtn.titleLabel.numberOfLines = 0;

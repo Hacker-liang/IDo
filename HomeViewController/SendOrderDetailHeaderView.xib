@@ -14,13 +14,21 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TaQ-yG-mC3">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                 </mapView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnH-fa-HQg">
+                    <rect key="frame" x="557" y="265" width="43" height="35"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="43" id="Uun-op-RqC"/>
+                        <constraint firstAttribute="height" constant="35" id="f4w-w5-6sL"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcY-Et-Zqh">
-                    <rect key="frame" x="0.0" y="265" width="600" height="35"/>
+                    <rect key="frame" x="0.0" y="265" width="558" height="35"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="c6K-ff-sqL"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="icon_address.png">
@@ -107,8 +115,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="RnH-fa-HQg" secondAttribute="bottom" id="1Sq-56-9Dz"/>
                 <constraint firstItem="TaQ-yG-mC3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2r8-S1-8cj"/>
                 <constraint firstAttribute="bottom" secondItem="TaQ-yG-mC3" secondAttribute="bottom" id="7pC-0t-T7e"/>
+                <constraint firstAttribute="trailing" secondItem="RnH-fa-HQg" secondAttribute="trailing" id="Dbp-il-Vmj"/>
                 <constraint firstItem="TaQ-yG-mC3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EBJ-Xr-a6f"/>
                 <constraint firstAttribute="bottom" secondItem="rPl-z5-UI3" secondAttribute="bottom" constant="5" id="LI4-1Q-KSK"/>
                 <constraint firstAttribute="bottom" secondItem="AcY-Et-Zqh" secondAttribute="bottom" id="PhL-wc-nBn"/>
@@ -116,7 +126,7 @@
                 <constraint firstAttribute="trailing" secondItem="TaQ-yG-mC3" secondAttribute="trailing" id="XZ4-mU-M45"/>
                 <constraint firstAttribute="trailing" secondItem="GND-Og-gpa" secondAttribute="trailing" id="abK-yZ-rTj"/>
                 <constraint firstAttribute="trailing" secondItem="rPl-z5-UI3" secondAttribute="trailing" constant="14" id="cX3-bd-zQL"/>
-                <constraint firstAttribute="trailing" secondItem="AcY-Et-Zqh" secondAttribute="trailing" id="ttC-pz-5Js"/>
+                <constraint firstAttribute="trailing" secondItem="AcY-Et-Zqh" secondAttribute="trailing" constant="42" id="ttC-pz-5Js"/>
                 <constraint firstItem="GND-Og-gpa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="w9M-ja-slV"/>
                 <constraint firstItem="AcY-Et-Zqh" firstAttribute="top" secondItem="GND-Og-gpa" secondAttribute="bottom" id="z2o-PQ-cZg"/>
             </constraints>
