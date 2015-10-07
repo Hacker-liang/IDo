@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) CLLocation *currentLocation;
 
+@property (nonatomic, strong) NSMutableArray *annotationList;
+
 @end
 
 @implementation SendOrderDetailHeaderView
@@ -29,6 +31,9 @@
 - (void)awakeFromNib
 {
     _mapView.delegate = self;
+    _vipContentView.hidden = YES;
+    _vipAvatarImageView.layer.cornerRadius = 19;
+    _vipAvatarImageView.clipsToBounds = YES;
     UserLocationManager *locationManager = [UserLocationManager shareInstance];
 
     [locationManager getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
@@ -78,12 +83,33 @@
     FYAnnotationView *annoView=[FYAnnotationView annotationViewWithMapView:self.mapView];
     //        2.传递模型
     annoView.annotation=annotation;
-    annoView.canShowCallout = YES;
+
+    NSInteger tag = [self.annotationList indexOfObject:annotation];
+    annoView.tag = tag;
     return annoView;
 }
 
-- (void)mapView:(MKMapView *)sender annotationView:(MKAnnotationView *)aView calloutAccessoryControlTapped:(UIControl *)control
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    NSLog(@"view tag: %ld", view.tag);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"向 VIP 用户指定派单" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            MyAnnotation *an = _userList[view.tag];
+            _vipAnnotation = an;
+            _vipContentView.hidden = NO;
+            [_vipAvatarImageView sd_setImageWithURL:[NSURL URLWithString: an.avatar] placeholderImage:[UIImage imageNamed:@"Icon"]];
+            _nickNameLabel.text = an.nickName;
+            _subtitleLabel.text = an.subtitle;
+            NSString *sex = an.sex;
+            if ([sex isEqualToString:@"1"]) {
+                [_vipSexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
+            } else {
+                [_vipSexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
+            }
+
+        }
+    }];
 }
 
 #pragma mark datouzhen 设置 大头针
@@ -92,9 +118,11 @@
     [self.mapView.layer removeAllAnimations];
     [self.mapView removeOverlays:self.mapView.overlays];;
     [self.mapView removeAnnotations:self.mapView.annotations];
+    _annotationList = [[NSMutableArray alloc] init];
     for (MyAnnotation *an in self.userList)
     {
         FYAnnotation *tg=[[FYAnnotation alloc]init];
+        [_annotationList addObject:tg];
         
         if ( [an.sex isEqualToString:@"1"] &&[an.level isEqualToString:@"1"])
         {
@@ -110,7 +138,6 @@
         }
         else if ([an.sex isEqualToString:@"2"]&&[an.level isEqualToString:@"2"])
         {
-            tg.title = @"确认对此用户进行 VIP发单?";
             tg.icon=@"MYwomen_vip1.png";
         }
         tg.coordinate=CLLocationCoordinate2DMake([an.lat floatValue], [an.lng floatValue]);

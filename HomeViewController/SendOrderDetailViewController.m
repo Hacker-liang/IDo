@@ -14,6 +14,7 @@
 #import "FYTimeViewController.h"
 #import "ChangeLocationTableViewController.h"
 #import "MyAnnotation.h"
+#import "OrderDetailViewController.h"
 
 @interface SendOrderDetailViewController () <UIActionSheetDelegate, ChangeLocationDelegate>
 
@@ -165,19 +166,38 @@
         return;
     }
     
-    [SVProgressHUD showWithStatus:@"正在派单"];
-    NSString *url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
+    NSString *url;
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
-    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
-    [mDict safeSetObject:_orderDetail.content forKey:@"content"];
-    [mDict safeSetObject:_orderDetail.price forKey:@"money"];
-    [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
-    [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
-    [mDict safeSetObject:@"0" forKey:@"sex"];
-    [mDict safeSetObject:@"0" forKey:@"range"];
-    [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];
-    [mDict safeSetObject:_orderDetail.lat forKey:@"lat"];
-    [mDict safeSetObject:@"" forKey:@"img"];
+
+    [SVProgressHUD showWithStatus:@"正在派单"];
+    
+    if (_headerView.vipContentView.hidden) {
+        url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
+        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
+        [mDict safeSetObject:_orderDetail.price forKey:@"money"];
+        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
+        [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
+        [mDict safeSetObject:@"0" forKey:@"sex"];
+        [mDict safeSetObject:@"0" forKey:@"range"];
+        [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];
+        [mDict safeSetObject:_orderDetail.lat forKey:@"lat"];
+        [mDict safeSetObject:@"" forKey:@"img"];
+    } else {
+        url = [NSString stringWithFormat:@"%@surepublishorderToVip", baseUrl];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
+        [mDict safeSetObject:_headerView.vipAnnotation.userid forKey:@"tomemberid"];
+        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
+        [mDict safeSetObject:_orderDetail.price forKey:@"money"];
+        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
+        [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
+        [mDict safeSetObject:@"0" forKey:@"sex"];
+        [mDict safeSetObject:@"0" forKey:@"range"];
+        [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];
+        [mDict safeSetObject:_orderDetail.lat forKey:@"lat"];
+        [mDict safeSetObject:@"" forKey:@"img"];
+
+    }
 
     [mDict safeSetObject:_orderDetail.distance forKey:@"distance_range"];
     
@@ -188,8 +208,21 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if([tempStatus integerValue] == 1) {
-                [SVProgressHUD showSuccessWithStatus:@"派单成功"];
-                [self.navigationController popViewControllerAnimated:YES];
+                if (_headerView.hidden) {
+                    [SVProgressHUD showSuccessWithStatus:@"派单成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"向VIP用户派单成功" message:@"可到正在进行的订单中关注状态" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.isSendOrder = YES;
+                        ctl.orderId = [[dict objectForKey:@"data"] objectForKey:@"id"];
+                        NSMutableArray *ctls = [self.navigationController.viewControllers mutableCopy];
+                        [ctls replaceObjectAtIndex:ctls.count-1 withObject:ctl];
+                        self.navigationController.viewControllers = ctls;
+                    }];
+                }
+               
             } else {
                 [SVProgressHUD showErrorWithStatus:@"派单失败"];
             }

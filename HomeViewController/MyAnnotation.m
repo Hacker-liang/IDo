@@ -18,6 +18,9 @@
         self.lng=dic[@"lng"];
         self.lat=dic[@"lat"];
         self.userid=dic[@"id"];
+        self.nickName = dic[@"nikename"];
+        self.avatar = [NSString stringWithFormat:@"%@%@", headURL, dic[@"img"]];
+        _subtitle = [NSString stringWithFormat:@"成功接单%@笔", dic[@"jiedannumber"]];
 
     }
     return self;

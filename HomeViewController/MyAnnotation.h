@@ -15,6 +15,11 @@
 @property(copy,nonatomic)NSString *lat;
 @property(copy,nonatomic)NSString *level;
 @property(copy,nonatomic)NSString *userid;
+@property(copy,nonatomic)NSString *nickName;
+@property(copy,nonatomic)NSString *avatar;
+@property (copy, nonatomic) NSString *subtitle;
+
+
 
 
 -(id)initWithDic:(NSDictionary *)dic;

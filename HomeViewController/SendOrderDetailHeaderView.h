@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "OrderDetailModel.h"
+#import "MyAnnotation.h"
 
 @interface SendOrderDetailHeaderView : UIView
 
@@ -17,6 +18,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationBtn;
 
 @property (nonatomic, strong) OrderDetailModel *orderDetailModel;
+@property (weak, nonatomic) IBOutlet UIView *vipContentView;
+@property (weak, nonatomic) IBOutlet UIImageView *vipAvatarImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *vipSexImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+
+@property (nonatomic, strong) MyAnnotation *vipAnnotation;
 
 @property (nonatomic, strong) NSMutableArray *userList;
 
