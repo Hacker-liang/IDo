@@ -35,6 +35,7 @@
             [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
         }
         NSString *avatar = contentDic[@"guzhumes"][@"img"];
+        NSString *totalAvatar = [NSString stringWithFormat:@"%@%@",headURL,avatar];
         [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:[UIImage imageNamed:@"Icon"]];
         _subtitleLabel.text = str;
     }else{

@@ -15,14 +15,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Yj-p3-OB8">
-                        <rect key="frame" x="8" y="7" width="30" height="30"/>
+                        <rect key="frame" x="8" y="9" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="1vw-T1-HPj"/>
-                            <constraint firstAttribute="height" constant="30" id="ffo-4x-o9q"/>
+                            <constraint firstAttribute="width" constant="25" id="1vw-T1-HPj"/>
+                            <constraint firstAttribute="height" constant="25" id="ffo-4x-o9q"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUJ-Lg-5VM">
-                        <rect key="frame" x="55" y="11" width="255" height="21"/>
+                        <rect key="frame" x="41" y="11" width="269" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="PFJ-Fx-pSD"/>
                         </constraints>
@@ -34,7 +34,7 @@
                 <constraints>
                     <constraint firstItem="9Yj-p3-OB8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Cpc-MC-xRc"/>
                     <constraint firstItem="PUJ-Lg-5VM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="L7E-Mc-fC8"/>
-                    <constraint firstItem="PUJ-Lg-5VM" firstAttribute="leading" secondItem="9Yj-p3-OB8" secondAttribute="trailing" constant="17" id="eTM-ML-3M2"/>
+                    <constraint firstItem="PUJ-Lg-5VM" firstAttribute="leading" secondItem="9Yj-p3-OB8" secondAttribute="trailing" constant="8" id="eTM-ML-3M2"/>
                     <constraint firstItem="9Yj-p3-OB8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tOR-H6-zeJ"/>
                     <constraint firstAttribute="trailing" secondItem="PUJ-Lg-5VM" secondAttribute="trailing" constant="10" id="ulo-L1-sY8"/>
                 </constraints>

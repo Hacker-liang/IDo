@@ -38,7 +38,7 @@
 {
     _userInfo = userInfo;
     _nickNameLabel.text = _userInfo.nickName;
-    _ratingView.scorePercent = [_userInfo.rating intValue]/5;;
+    _ratingView.scorePercent = [_userInfo.rating intValue]/5.0;;
     _ratingView.userInteractionEnabled = NO;
     [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
     

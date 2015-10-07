@@ -1928,7 +1928,7 @@
 				TargetAttributes = {
 					D95394E11BB2694900CB6746 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 6A8PL5G3FA;
+						DevelopmentTeam = PM5EXLZ6Y8;
 					};
 					D95394FA1BB2694900CB6746 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2367,7 +2367,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f9af8f95-a27d-4081-ae06-863a09855678";
 			};
 			name = Debug;
 		};
@@ -2401,7 +2401,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a99ca5c9-d7d2-452a-992a-86f80054300d";
 			};
 			name = Release;
 		};

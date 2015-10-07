@@ -28,7 +28,7 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_right_dot.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPl-z5-UI3">
-                    <rect key="frame" x="563" y="275" width="20" height="20"/>
+                    <rect key="frame" x="566" y="275" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="ibU-2t-Uc2"/>
                         <constraint firstAttribute="width" constant="20" id="yeI-Wm-8I3"/>
@@ -44,7 +44,7 @@
                 <constraint firstAttribute="bottom" secondItem="AcY-Et-Zqh" secondAttribute="bottom" id="PhL-wc-nBn"/>
                 <constraint firstItem="AcY-Et-Zqh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Rhe-Fa-dZa"/>
                 <constraint firstAttribute="trailing" secondItem="TaQ-yG-mC3" secondAttribute="trailing" id="XZ4-mU-M45"/>
-                <constraint firstAttribute="trailing" secondItem="rPl-z5-UI3" secondAttribute="trailing" constant="17" id="cX3-bd-zQL"/>
+                <constraint firstAttribute="trailing" secondItem="rPl-z5-UI3" secondAttribute="trailing" constant="14" id="cX3-bd-zQL"/>
                 <constraint firstAttribute="trailing" secondItem="AcY-Et-Zqh" secondAttribute="trailing" id="ttC-pz-5Js"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

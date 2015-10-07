@@ -66,7 +66,6 @@
 {
     CLLocation *location = [locations lastObject];
     _userLocation = location;
-    NSLog(@"latitude纬度: %f, longitude经度: %f",location.coordinate.latitude, location.coordinate.longitude);
     [self.locationManager stopUpdatingLocation];
     [self getAddressByLocation:_userLocation];
 }

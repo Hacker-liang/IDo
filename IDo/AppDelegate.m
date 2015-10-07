@@ -62,14 +62,6 @@
     [APService crashLogON];
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    //判断程序是不是由推送服务完成的
-    if (launchOptions) {
-        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        if (pushNotificationKey) {
-            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-            [self receiveRemoteNotificationStart:pushNotificationKey];
-        }
-    }
     
     return YES;
 }
@@ -89,6 +81,7 @@
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
     [APService registerDeviceToken:deviceToken];
+    NSLog(@"deviceToken %@", deviceToken);
     [self resgisterToken];
 }
 
@@ -136,9 +129,6 @@
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
-            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSLog(@"jsonString = %@",jsonString);
-            
         } else {
         }
     }];
