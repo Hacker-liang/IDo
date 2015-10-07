@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderDetailViewController">
             <connections>
                 <outlet property="addressBtn" destination="eRV-pt-cnX" id="NGv-f5-7e7"/>
+                <outlet property="addressConstraint" destination="Zz2-tY-JKj" id="wZn-vk-25k"/>
                 <outlet property="avatarImageView" destination="cxp-Qe-bFf" id="3ht-na-hjS"/>
                 <outlet property="conteViewConstraint" destination="8SJ-N3-pDb" id="35R-rZ-siH"/>
                 <outlet property="contentView" destination="Hpx-RU-LZc" id="l8v-Bq-jsb"/>
@@ -129,7 +130,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="Hb4-Zx-BVb"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
@@ -149,7 +150,7 @@
                                 <constraint firstAttribute="width" constant="42" id="keP-4w-WRn"/>
                                 <constraint firstAttribute="height" constant="42.5" id="v98-HQ-GSn"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">

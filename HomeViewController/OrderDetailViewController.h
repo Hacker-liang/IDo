@@ -29,6 +29,8 @@
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
 @property (weak, nonatomic) IBOutlet UIButton *phoneLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressConstraint;
+
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload;
 
 @end

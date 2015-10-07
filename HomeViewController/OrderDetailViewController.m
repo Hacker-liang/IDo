@@ -85,10 +85,16 @@
     } else {
         [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
     }
+    
+    CLLocation *current=[[CLLocation alloc] initWithLatitude:userInfo.lat longitude:userInfo.lng];
+    //第二个坐标
+    CLLocation *before=[[CLLocation alloc] initWithLatitude:[UserManager shareUserManager].userInfo.lat longitude:[UserManager shareUserManager].userInfo.lng];
+    CLLocationDistance meters=[current distanceFromLocation:before];
+
     if (!_isSendOrder && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔", userInfo.sendOrderCount];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%d米", userInfo.sendOrderCount, (int)meters];
     } else if (userInfo.userid != 0 && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔", userInfo.sendOrderCount];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%d米", userInfo.grabOrderCount, (int)meters];
     } else {
         _userDescLabel.text = nil;
     }
