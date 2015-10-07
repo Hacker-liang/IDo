@@ -114,7 +114,7 @@
 - (void)replaceController:(UIViewController *)oldController newController:(UIViewController *)newController
 {
     [self addChildViewController:newController];
-    [self transitionFromViewController:oldController toViewController:newController duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
+    [self transitionFromViewController:oldController toViewController:newController duration:0.5  options:UIViewAnimationOptionTransitionFlipFromLeft animations:nil completion:^(BOOL finished) {
         if (finished) {
             [newController didMoveToParentViewController:self];
             [oldController willMoveToParentViewController:nil];

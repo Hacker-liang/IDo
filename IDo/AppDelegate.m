@@ -151,6 +151,7 @@
         frostedViewController.direction = REFrostedViewControllerDirectionLeft;
         frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
         frostedViewController.liveBlur = YES;
+        frostedViewController.menuViewSize = CGSizeMake(250, kWindowHeight);
         frostedViewController.limitMenuViewSize = YES;
         self.window.rootViewController = frostedViewController;
     } else {

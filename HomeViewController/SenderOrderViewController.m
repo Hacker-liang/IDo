@@ -50,6 +50,12 @@
     };
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_mainView.scrollView setContentOffset:CGPointZero];
+    
+}
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
