@@ -151,9 +151,10 @@
         frostedViewController.direction = REFrostedViewControllerDirectionLeft;
         frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
         frostedViewController.liveBlur = YES;
-        frostedViewController.menuViewSize = CGSizeMake(250, kWindowHeight);
         frostedViewController.limitMenuViewSize = YES;
         self.window.rootViewController = frostedViewController;
+        frostedViewController.menuViewSize = CGSizeMake(275, kWindowHeight);
+
     } else {
         LoginViewController *ctl = [[LoginViewController alloc] initWithPaySuccessBlock:^(BOOL success, NSString *errorStr) {
             if (success) {

@@ -208,7 +208,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if([tempStatus integerValue] == 1) {
-                if (_headerView.hidden) {
+                if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
