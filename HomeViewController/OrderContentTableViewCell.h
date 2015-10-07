@@ -10,7 +10,8 @@
 
 @interface OrderContentTableViewCell : UITableViewCell <UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *placeholderTextField;
+
+@property (weak, nonatomic) IBOutlet UILabel *placeholderTextField;
 
 @property (weak, nonatomic) IBOutlet UIImageView *indicateImageView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;

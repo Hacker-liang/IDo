@@ -324,7 +324,12 @@
         
     } else if (_orderDetail.orderStatus == kOrderPayed && _isSendOrder) {
         
-        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
+        statusString = _orderDetail.orderStatusDesc;
+        _addressConstraint.constant = 100;
+        _complainBtn.hidden = NO;
+        _cancelBtn.hidden = NO;
+        
+        tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
 
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];

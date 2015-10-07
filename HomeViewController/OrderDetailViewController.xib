@@ -252,8 +252,8 @@
                                 <constraint firstAttribute="height" constant="30" id="8hk-nR-dnl"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" image="icon_orderDetail_address.png">
+                            <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="icon_address.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <variation key="default">
@@ -273,8 +273,8 @@
                                 <constraint firstAttribute="height" constant="30" id="PPl-T7-XfR"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" image="icon_orderDetail_address.png">
+                            <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="ic_order_number.png">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <variation key="default">
@@ -663,7 +663,8 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_orderDetail_address.png" width="14" height="14"/>
+        <image name="ic_order_number.png" width="14" height="14"/>
+        <image name="icon_address.png" width="15" height="19"/>
         <image name="icon_phone_disable.png" width="32" height="32"/>
         <image name="icon_phone_normal.png" width="37" height="39"/>
     </resources>

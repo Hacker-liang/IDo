@@ -14,6 +14,7 @@
 @interface HomeViewController ()
 
 @property (nonatomic, strong) UIButton *titleBtn;
+@property (nonatomic, strong) UIImageView *refreshImageView;
 
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) UIViewController *currentViewController;
@@ -36,13 +37,22 @@
     
     _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
     [_titleBtn addTarget:self action:@selector(switchPage:) forControlEvents:UIControlEventTouchUpInside];
-    [_titleBtn setTitle:@"我干 -- 抢单" forState:UIControlStateNormal];
+    [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
     _titleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
     [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.titleView = _titleBtn;
     
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"切换" style:UIBarButtonItemStylePlain target:self action:@selector(switchPage:)];
-    self.navigationItem.rightBarButtonItem = item;
+    _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(42.5, 11, 15, 13)];
+    _refreshImageView.image = [UIImage imageNamed:@"icon_refresh.png"];
+    [_titleBtn addSubview:_refreshImageView];
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [btn setTitle:@"切换" forState:UIControlStateNormal];
+    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    btn.titleLabel.font  = [UIFont systemFontOfSize:15.0];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(switchPage:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
     [self setupContentViewContrller];
 }
@@ -73,13 +83,21 @@
 
 - (void)switchPage:(id)sender
 {
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
+    rotationAnimation.duration = 0.3;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = NO;
+    [_refreshImageView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    
     NSUInteger index = [_viewControllers indexOfObject:_currentViewController];
     [self changePage:1-index];
     if (index == 0) {
-        [_titleBtn setTitle:@"我干 -- 派单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:@"我干     派单" forState:UIControlStateNormal];
         
     } else {
-        [_titleBtn setTitle:@"我干 -- 抢单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
     }
 }
 

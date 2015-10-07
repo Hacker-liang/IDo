@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import "APService.h"
 #import "OrderDetailViewController.h"
+#import "EvaluationViewController.h"
 
 @interface AppDelegate ()
 
@@ -312,31 +313,47 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderPieStatusChange];
         
     } else if([notificationType isEqualToString:@"confpay" ]) { //发单方已确认付款
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"对方已成功验收任务！" delegate:self cancelButtonTitle:@"稍后评价" otherButtonTitles:@"去评价", nil];
-//        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-//            if (buttonIndex == 1) {
-//                //进入去评价
-//                EvaluationViewController *control = [[EvaluationViewController alloc] init];
-//                control.evaluationType = 2;
-//                control.orderid = orderId;
-//                [self.navController pushViewController:control animated:YES];
-//                
-//            }else{
-//                if (self.viewisWhere != HomeView) {
-//                    [self.navController popToRootViewControllerAnimated:YES];
-//                }
-//            }
-//        }];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"对方已成功验收任务！" delegate:self cancelButtonTitle:@"稍后评价" otherButtonTitles:@"去评价", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                //进入去评价
+                EvaluationViewController *control = [[EvaluationViewController alloc] init];
+                control.evaluationType = 2;
+                control.orderid = orderId;
+                [self.homeViewController.navigationController pushViewController:control animated:YES];
+                
+            } else{
+                
+            }
+        }];
     } else if([notificationType isEqualToString:@"askCancelOrder" ]) { //发单方 请求取消订单
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"请求取消订单" message:@"您有一笔订单，发单人请求取消，请确认，如同意，资金将返回对方账户。" delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];
-//        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-//            if (buttonIndex == 1) {
-//                [self.homeController agreeCancelOrderGrab:orderId];
-//                if (self.viewisWhere == OrderDetailedView) {
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:@"4"];
-//                }
-//            }
-//        }];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"请求取消订单" message:@"您有一笔订单，发单人请求取消，请确认，如同意，资金将返回对方账户。" delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [SVProgressHUD showWithStatus:@"正在提交"];
+                NSString *url = [NSString stringWithFormat:@"%@allowCancelOrder",baseUrl];
+                NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+                [mDict setObject:orderId forKey:@"orderid"];
+                [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+                
+                [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                    if (response)
+                    {
+                        NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                        NSDictionary *dict = [jsonString objectFromJSONString];
+                        NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+                        if ([tempStatus integerValue] == 1) {
+                            [SVProgressHUD showSuccessWithStatus:@"请求成功"];
+                        } else {
+                            [SVProgressHUD showSuccessWithStatus:@"请求失败"];
+                        }
+                    } else {
+                        [SVProgressHUD showSuccessWithStatus:@"请求失败"];
+                    }
+                }];
+            }
+        }];
+        
     } else if([notificationType isEqualToString:@"tomemberAskCancelOrder" ]) { //接单方请求取消
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];
 //        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {

@@ -26,31 +26,32 @@
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入任务要求" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ciq-qU-fZD">
-                        <rect key="frame" x="47" y="8" width="265" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请详细输入任务要求..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgQ-Zz-jbs">
+                        <rect key="frame" x="47" y="8" width="222" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="XQl-Vb-UKD"/>
+                            <constraint firstAttribute="height" constant="30" id="f1f-Bu-luF"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
+                        <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="mgQ-Zz-jbs" secondAttribute="trailing" constant="51" id="760-5u-ME6"/>
                     <constraint firstAttribute="trailing" secondItem="mDD-Yn-AJA" secondAttribute="trailing" constant="8" id="7lk-t4-VnC"/>
                     <constraint firstItem="mDD-Yn-AJA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Bsg-7B-psb"/>
                     <constraint firstAttribute="bottom" secondItem="mDD-Yn-AJA" secondAttribute="bottom" constant="8" id="EtP-Pc-d0a"/>
                     <constraint firstItem="pAX-ug-pik" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FfX-wx-8BG"/>
                     <constraint firstItem="pAX-ug-pik" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="JbZ-gw-jL7"/>
                     <constraint firstItem="mDD-Yn-AJA" firstAttribute="leading" secondItem="pAX-ug-pik" secondAttribute="trailing" constant="8" id="Lfw-Sn-aBS"/>
-                    <constraint firstItem="Ciq-qU-fZD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="d7f-oX-Qmh"/>
-                    <constraint firstAttribute="trailing" secondItem="Ciq-qU-fZD" secondAttribute="trailing" constant="8" id="eun-kV-FMU"/>
-                    <constraint firstItem="Ciq-qU-fZD" firstAttribute="leading" secondItem="pAX-ug-pik" secondAttribute="trailing" constant="17" id="mid-59-qF8"/>
+                    <constraint firstItem="mgQ-Zz-jbs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jW1-Nh-7Kb"/>
+                    <constraint firstItem="mgQ-Zz-jbs" firstAttribute="leading" secondItem="pAX-ug-pik" secondAttribute="trailing" constant="17" id="zBJ-fR-Y98"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentTextView" destination="mDD-Yn-AJA" id="wey-5o-k1a"/>
                 <outlet property="indicateImageView" destination="pAX-ug-pik" id="fB5-yn-gue"/>
-                <outlet property="placeholderTextField" destination="Ciq-qU-fZD" id="BVw-8y-2lZ"/>
+                <outlet property="placeholderTextField" destination="mgQ-Zz-jbs" id="f1H-tS-9zp"/>
             </connections>
             <point key="canvasLocation" x="258" y="229.5"/>
         </tableViewCell>
