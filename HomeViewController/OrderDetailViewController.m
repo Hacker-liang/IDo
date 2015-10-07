@@ -12,6 +12,7 @@
 #import "ComplaintViewController.h"
 #import "FYAnnotation.h"
 #import "FYAnnotationView.h"
+#import "OtherUserProfileTableViewController.h"
 
 @interface OrderDetailViewController () <MKMapViewDelegate>
 {
@@ -46,6 +47,12 @@
     _avatarImageView.layer.cornerRadius = 20.0;
     _avatarImageView.clipsToBounds = YES;
     [self getOrderInfo];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [tapGesture addTarget:self action:@selector(gotoUserProfile)];
+    [_avatarImageView addGestureRecognizer:tapGesture];
 
     [self.view addSubview:self.footerView];
     [_phoneLabel addTarget:self action:@selector(callClick) forControlEvents:UIControlEventTouchUpInside];
@@ -77,6 +84,24 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)gotoUserProfile
+{
+    UserInfo *userInfo;
+    if (_isSendOrder) {
+        userInfo = _orderDetail.grabOrderUser;
+    } else {
+        userInfo = _orderDetail.sendOrderUser;
+    }
+    OtherUserProfileTableViewController *ctl = [[OtherUserProfileTableViewController alloc] init];
+    ctl.userInfo = userInfo;
+    if (_isSendOrder){
+        ctl.evaluationType = 1;
+    }else{
+        ctl.evaluationType = 2;
+    }
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 - (void)updateView

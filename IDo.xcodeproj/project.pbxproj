@@ -36,6 +36,8 @@
 		D916A5C91BC50819005F5286 /* ic_vip_order@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D916A5C81BC50819005F5286 /* ic_vip_order@3x.png */; settings = {ASSET_TAGS = (); }; };
 		D916A5CB1BC5539D005F5286 /* ic_location_marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D916A5CA1BC5539D005F5286 /* ic_location_marker@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D916A5CD1BC560CE005F5286 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D916A5CC1BC560CE005F5286 /* Icon.png */; settings = {ASSET_TAGS = (); }; };
+		D916A5D31BC5684E005F5286 /* OtherUserProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A5D11BC5684E005F5286 /* OtherUserProfileTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D916A5D41BC5684E005F5286 /* OtherUserProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D916A5D21BC5684E005F5286 /* OtherUserProfileTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		D91F2F1D1BC21179002CE690 /* GrabSettingPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D91F2F1B1BC21179002CE690 /* GrabSettingPushTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		D91F2F1E1BC21179002CE690 /* GrabSettingPushTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91F2F1C1BC21179002CE690 /* GrabSettingPushTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		D91F2F211BC2140F002CE690 /* icon_rule_def@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D91F2F201BC2140F002CE690 /* icon_rule_def@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -334,6 +336,9 @@
 		D916A5C81BC50819005F5286 /* ic_vip_order@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vip_order@3x.png"; sourceTree = "<group>"; };
 		D916A5CA1BC5539D005F5286 /* ic_location_marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_location_marker@2x.png"; sourceTree = "<group>"; };
 		D916A5CC1BC560CE005F5286 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D916A5D01BC5684E005F5286 /* OtherUserProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileTableViewController.h; sourceTree = "<group>"; };
+		D916A5D11BC5684E005F5286 /* OtherUserProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserProfileTableViewController.m; sourceTree = "<group>"; };
+		D916A5D21BC5684E005F5286 /* OtherUserProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherUserProfileTableViewController.xib; sourceTree = "<group>"; };
 		D91F2F1A1BC21179002CE690 /* GrabSettingPushTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabSettingPushTableViewCell.h; sourceTree = "<group>"; };
 		D91F2F1B1BC21179002CE690 /* GrabSettingPushTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabSettingPushTableViewCell.m; sourceTree = "<group>"; };
 		D91F2F1C1BC21179002CE690 /* GrabSettingPushTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabSettingPushTableViewCell.xib; sourceTree = "<group>"; };
@@ -921,6 +926,32 @@
 			name = ComplaintViewController;
 			sourceTree = "<group>";
 		};
+		D916A5CE1BC567E0005F5286 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				D96EA94A1BB2F01E00360ED8 /* MyProfileTableViewController.h */,
+				D96EA94B1BB2F01E00360ED8 /* MyProfileTableViewController.m */,
+				D96EA94C1BB2F01E00360ED8 /* MyProfileTableViewController.xib */,
+				D96EA94F1BB2F04500360ED8 /* MyProfileHeaderView.h */,
+				D96EA9501BB2F04500360ED8 /* MyProfileHeaderView.m */,
+				D96EA9521BB2F05100360ED8 /* MyProfileHeaderView.xib */,
+				D96EA9541BB3776200360ED8 /* MyProfileTableViewCell.h */,
+				D96EA9551BB3776200360ED8 /* MyProfileTableViewCell.m */,
+				D96EA9561BB3776200360ED8 /* MyProfileTableViewCell.xib */,
+			);
+			name = MyProfile;
+			sourceTree = "<group>";
+		};
+		D916A5CF1BC567F1005F5286 /* OtherProfile */ = {
+			isa = PBXGroup;
+			children = (
+				D916A5D01BC5684E005F5286 /* OtherUserProfileTableViewController.h */,
+				D916A5D11BC5684E005F5286 /* OtherUserProfileTableViewController.m */,
+				D916A5D21BC5684E005F5286 /* OtherUserProfileTableViewController.xib */,
+			);
+			name = OtherProfile;
+			sourceTree = "<group>";
+		};
 		D91F2F191BC20FE2002CE690 /* GrabOrderSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1140,10 +1171,10 @@
 		D95394E41BB2694900CB6746 /* IDo */ = {
 			isa = PBXGroup;
 			children = (
+				D96EA9491BB2EFEC00360ED8 /* Profile */,
 				D9B289DE1BBCEA0D00FB97E5 /* Setting */,
 				D92B5AD21BB8106400E3AC93 /* Pay */,
 				D96EA96B1BB3CF4400360ED8 /* Login */,
-				D96EA9491BB2EFEC00360ED8 /* Profile */,
 				D96EA91E1BB2A1F900360ED8 /* Common */,
 				D9B2F6961BB280AE00ED7DDF /* HomeViewController */,
 				D96EA9391BB2E30100360ED8 /* MyWallet */,
@@ -1335,17 +1366,10 @@
 		D96EA9491BB2EFEC00360ED8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D916A5CF1BC567F1005F5286 /* OtherProfile */,
 				D99EAD431BBCD37A005A02D3 /* Vip */,
 				D96EA9D81BB3D2F200360ED8 /* AccountModel */,
-				D96EA94A1BB2F01E00360ED8 /* MyProfileTableViewController.h */,
-				D96EA94B1BB2F01E00360ED8 /* MyProfileTableViewController.m */,
-				D96EA94C1BB2F01E00360ED8 /* MyProfileTableViewController.xib */,
-				D96EA94F1BB2F04500360ED8 /* MyProfileHeaderView.h */,
-				D96EA9501BB2F04500360ED8 /* MyProfileHeaderView.m */,
-				D96EA9521BB2F05100360ED8 /* MyProfileHeaderView.xib */,
-				D96EA9541BB3776200360ED8 /* MyProfileTableViewCell.h */,
-				D96EA9551BB3776200360ED8 /* MyProfileTableViewCell.m */,
-				D96EA9561BB3776200360ED8 /* MyProfileTableViewCell.xib */,
+				D916A5CE1BC567E0005F5286 /* MyProfile */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -2051,6 +2075,7 @@
 				D90E2E311BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib in Resources */,
 				D91F2F211BC2140F002CE690 /* icon_rule_def@3x.png in Resources */,
 				D9ADC3F81BBA603100B1B7E1 /* bt_star_b.png in Resources */,
+				D916A5D41BC5684E005F5286 /* OtherUserProfileTableViewController.xib in Resources */,
 				D96EAA441BB5377100360ED8 /* icon_time@3x.png in Resources */,
 				D91F2F2A1BC21741002CE690 /* GrabOrderSettingViewController.xib in Resources */,
 				D916A5C91BC50819005F5286 /* ic_vip_order@3x.png in Resources */,
@@ -2242,6 +2267,7 @@
 				D99EAD471BBCD3C0005A02D3 /* Requtst2BeVIPViewController.m in Sources */,
 				D96EA9A51BB3D22100360ED8 /* AFURLSessionManager.m in Sources */,
 				D96EA9D61BB3D24700360ED8 /* UIImageView+WebCache.m in Sources */,
+				D916A5D31BC5684E005F5286 /* OtherUserProfileTableViewController.m in Sources */,
 				D96EAA981BB5964F00360ED8 /* MJRefreshNormalHeader.m in Sources */,
 				D96EAA941BB5964F00360ED8 /* MJRefreshBackGifFooter.m in Sources */,
 				D946C8F41BC2347100AAD3A3 /* InputTagTableViewCell.m in Sources */,

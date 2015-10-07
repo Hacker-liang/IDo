@@ -1,0 +1,127 @@
+//
+//  OtherUserProfileTableViewController.m
+//  IDo
+//
+//  Created by liangpengshuai on 10/7/15.
+//  Copyright © 2015 com.Yinengxin.xianne. All rights reserved.
+//
+
+#import "OtherUserProfileTableViewController.h"
+#import "MyProfileHeaderView.h"
+#import "MyProfileTableViewCell.h"
+#import "ASIFormDataRequest.h"
+#import "Requtst2BeVIPViewController.h"
+#import "EvaluationTableViewCell.h"
+
+@interface OtherUserProfileTableViewController () <UIImagePickerControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) MyProfileHeaderView *myprofileHeaderView;
+@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) UIImage *headerImage;
+
+
+@end
+
+@implementation OtherUserProfileTableViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.tableView registerNib:[UINib nibWithNibName:@"EvaluationTableViewCell" bundle:nil] forCellReuseIdentifier:@"ratingCell"];
+    [self getRecord];
+    self.navigationItem.title = @"个人中心";
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (MyProfileHeaderView *)myprofileHeaderView
+{
+    if (!_myprofileHeaderView) {
+        _myprofileHeaderView = [MyProfileHeaderView myProfileHeaderView];
+        _myprofileHeaderView.userInfo = _userInfo;
+    }
+    return _myprofileHeaderView;
+}
+
+- (void)getRecord
+{
+    NSString *url = @"";
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    if (self.evaluationType == 1) {
+        //发单人对接单人的评价，传的是接单人的id
+        url = [NSString stringWithFormat:@"%@guzhucomment",baseUrl];
+    }else{
+        //接单人对发单人的评价，传的是发单人的id
+        url = [NSString stringWithFormat:@"%@huobaocomment",baseUrl];
+    }
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [self.tableView.header endRefreshing];
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([tempStatus integerValue] == 1) {
+                self.dataSource = dict[@"data"];
+                [self.tableView reloadData];
+            }
+        }
+    }];
+}
+
+
+
+#pragma mark - Table view data source
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 270;
+    }
+    return 20;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return self.myprofileHeaderView;
+    }
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0;
+    }
+    return self.dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)stableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    EvaluationTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
+    cell.evaluationType = _evaluationType;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.contentDic = _dataSource[indexPath.row];
+    return cell;
+}
+
+@end
