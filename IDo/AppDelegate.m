@@ -63,6 +63,7 @@
     [APService crashLogON];
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [APService setBadge:0];
     
     return YES;
 }
@@ -80,16 +81,16 @@
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
-    
     [APService registerDeviceToken:deviceToken];
     NSLog(@"deviceToken %@", deviceToken);
     [self resgisterToken];
 }
 
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     if (application.applicationState != UIApplicationStateActive) {
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        [APService setBadge:0];
         [self receiveRemoteNotification:userInfo];
         
     }else{
@@ -180,6 +181,16 @@
 - (void)receiveRemoteNotification:(NSDictionary*)userInfo
 {
     NSLog(@"userInfo = %@",userInfo);
+    
+    //发送本地推送
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [NSDate date]; //触发通知的时间
+    notification.alertBody = [userInfo objectForKey:@"content"];
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.alertAction = @"打开";
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
     NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
     NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
     [[NSUserDefaults standardUserDefaults] setObject:orderId forKey:OrderidMark];

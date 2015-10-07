@@ -15,6 +15,7 @@
 #import "ChangeLocationTableViewController.h"
 #import "MyAnnotation.h"
 #import "OrderDetailViewController.h"
+#import "APService.h"
 
 @interface SendOrderDetailViewController () <UIActionSheetDelegate, ChangeLocationDelegate>
 
@@ -208,6 +209,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if([tempStatus integerValue] == 1) {
+                [self sendOrderPushWithOrderId:[[dict objectForKey:@"data"] objectForKey:@"id"]];
                 if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];
                     [self.navigationController popViewControllerAnimated:YES];
@@ -228,6 +230,25 @@
             }
         } else {
             [SVProgressHUD showErrorWithStatus:@"派单失败"];
+        }
+    }];
+}
+
+- (void)sendOrderPushWithOrderId:(NSString *)orderId
+{
+    NSString *url = [NSString stringWithFormat:@"%@gettzpersonnum", baseUrl];
+
+    [SVHTTPRequest POST:url parameters:@{@"orderid": orderId, @"devnumber": [APService registrationID]} completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if([tempStatus integerValue] == 1) {
+                
+            } else {
+            }
+        } else {
         }
     }];
 

@@ -34,6 +34,7 @@
     _vipContentView.hidden = YES;
     _vipAvatarImageView.layer.cornerRadius = 19;
     _vipAvatarImageView.clipsToBounds = YES;
+    _locationBtn.titleLabel.numberOfLines = 0;
     UserLocationManager *locationManager = [UserLocationManager shareInstance];
 
     [locationManager getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
