@@ -31,7 +31,7 @@
         if ([[json objectForKey:@"status"] intValue] == 3) {
             if ([[json objectForKey:@"haspay"] intValue] == 0) {
                 _orderStatus = kOrderGrabSuccess;
-                _orderStatusDesc = @"已经接单，等待付款";
+                _orderStatusDesc = @"已抢单，等待对方付款";
                 NSInteger shouldPayTime = [[json objectForKey:@"countdown"] intValue] + 1200;
                 NSTimeInterval timeNow = [NSDate date].timeIntervalSince1970;
                 _payCountdown = shouldPayTime - timeNow;
@@ -125,7 +125,7 @@
             break;
             
         case kOrderGrabSuccess:
-            _orderStatusDesc = @"已经接单，等待付款";
+            _orderStatusDesc = @"已抢单，等待对方付款";
             break;
             
         case kOrderInProgress:

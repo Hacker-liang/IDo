@@ -32,5 +32,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressConstraint;
 
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload;
+@property (weak, nonatomic) IBOutlet UIButton *complainBtn;
 
 @end

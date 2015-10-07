@@ -9,6 +9,7 @@
 #import "OrderDetailViewController.h"
 #import "PayViewController.h"
 #import "EvaluationViewController.h"
+#import "ComplaintViewController.h"
 
 @interface OrderDetailViewController ()
 {
@@ -28,6 +29,10 @@
     _mapview.showsUserLocation = YES;
     _conteViewConstraint.constant = 14;
     _addressBtn.titleLabel.numberOfLines = 0;
+    _complainBtn.layer.cornerRadius = 3.0;
+    _complainBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _complainBtn.layer.borderWidth = 0.5;
+    
     [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self adjustMapViewWithLocation:userLocation.coordinate];
     }];
@@ -37,7 +42,7 @@
 
     [self.view addSubview:self.footerView];
     [_phoneLabel addTarget:self action:@selector(callClick) forControlEvents:UIControlEventTouchUpInside];
-
+    [_complainBtn addTarget:self action:@selector(complainAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload
@@ -103,7 +108,13 @@
 
     _orderTimeLabel.text = _orderDetail.tasktime;
     _orderContentLabel.text = _orderDetail.content;
-    _priceLabel.text = [NSString stringWithFormat:@"%@元", _orderDetail.price];
+    
+    NSString *str = [NSString stringWithFormat:@"%@元", _orderDetail.price];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(0,str.length-1)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, str.length-1)];
+    _priceLabel.attributedText = attStr;
+
     [_addressBtn setTitle:_orderDetail.address forState:UIControlStateNormal];
     [_orderNumberBtn setTitle:[NSString stringWithFormat:@"订单编号  %@", _orderDetail.orderNumber] forState:UIControlStateNormal];
     
@@ -116,7 +127,7 @@
     [self adjustMapViewWithLocation:location];
     [self setupFooterView];
     
-    if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
+    if (_orderDetail.orderStatus == kOrderGrabSuccess) {
         _countdown = _orderDetail.payCountdown;
         [self startCountdown];
         
@@ -136,7 +147,6 @@
         _phoneLabel.enabled = NO;
     }
 }
-
 
 - (void)startCountdown
 {
@@ -161,8 +171,14 @@
     int sec = _countdown%60;
     if (sec < 10) {
         _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
-    } else {
+    } else if (sec > 0){
         _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
+    } else {
+        if (_orderDetail.orderStatus == kOrderGrabSuccess) {
+            [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:YES];
+        } else {
+            [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:YES];
+        }
     }
 }
 
@@ -209,16 +225,36 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)complainAction
+{
+    ComplaintViewController *control = [[ComplaintViewController alloc] init];
+    UserInfo *userInfo;
+    if (_isSendOrder) {
+        userInfo = _orderDetail.grabOrderUser;
+    } else {
+        userInfo = _orderDetail.sendOrderUser;
+    }
+    
+    control.tousuId = [UserManager shareUserManager].userInfo.userid;
+    control.beitousuId = userInfo.userid;
+    [self.navigationController pushViewController:control animated:YES];
+}
+
 - (void)setupFooterView
 {
     if (_footerView) {
         [_footerView removeFromSuperview];
         _footerView = nil;
     }
+    _complainBtn.hidden = YES;
+    _addressConstraint.constant = 8;
+    
     NSString *tipsString;
     NSString *statusString;
 
     if (_orderDetail.orderStatus == kOrderCancelGrabTimeOut) {
+        _addressConstraint.constant = 100;
+        _complainBtn.hidden = NO;
         statusString =  _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
@@ -280,12 +316,13 @@
     } else if (_orderDetail.orderStatus == kOrderCancelPayTimeOut) {
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
-
+        _addressConstraint.constant = 70;
+        _complainBtn.hidden = NO;
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     } else if (_orderDetail.orderStatus == kOrderGrabSuccess && !_isSendOrder) {
         statusString = _orderDetail.orderStatusDesc;
-        tipsString = @"保持良好记录有助于快速成交订单";
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
@@ -296,7 +333,7 @@
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     } else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
-        tipsString = @"保持良好记录有助于快速成交订单";
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         statusString = _orderDetail.orderStatusDesc;
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
