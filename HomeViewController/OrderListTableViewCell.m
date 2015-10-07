@@ -26,7 +26,11 @@
     _orderDetail = orderDetail;
     UserInfo *userInfo;
     if (_isGrabOrder) {
-        userInfo = _orderDetail.sendOrderUser;
+        if (_orderDetail.sendOrderUser) {
+            userInfo = _orderDetail.sendOrderUser;
+        } else {
+            userInfo = _orderDetail.member;
+        }
     } else {
         userInfo = _orderDetail.grabOrderUser;
     }

@@ -38,6 +38,10 @@
         if ([json objectForKey:@"fadanren"]) {
             _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"fadanren"]];
         }
+        
+        if ([json objectForKey:@"member"]) {
+            _member = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
+        }
         //订单被抢
         if ([[json objectForKey:@"status"] intValue] == 3) {
             if ([[json objectForKey:@"haspay"] intValue] == 0) {

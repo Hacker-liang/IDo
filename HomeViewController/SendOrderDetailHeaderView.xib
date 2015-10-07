@@ -112,6 +112,14 @@
                         <constraint firstItem="DcZ-ve-i1N" firstAttribute="leading" secondItem="D0j-Wm-kRV" secondAttribute="trailing" constant="8" id="zf7-JG-zmY"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaj-0I-ZTR">
+                    <rect key="frame" x="549" y="8" width="43" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="43" id="sfh-ki-ShR"/>
+                        <constraint firstAttribute="height" constant="27" id="uca-kj-e2F"/>
+                    </constraints>
+                    <state key="normal" image="mapMark_GPS.png"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -125,9 +133,11 @@
                 <constraint firstItem="AcY-Et-Zqh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Rhe-Fa-dZa"/>
                 <constraint firstAttribute="trailing" secondItem="TaQ-yG-mC3" secondAttribute="trailing" id="XZ4-mU-M45"/>
                 <constraint firstAttribute="trailing" secondItem="GND-Og-gpa" secondAttribute="trailing" id="abK-yZ-rTj"/>
+                <constraint firstAttribute="trailing" secondItem="gaj-0I-ZTR" secondAttribute="trailing" constant="8" id="agB-PL-AMy"/>
                 <constraint firstAttribute="trailing" secondItem="rPl-z5-UI3" secondAttribute="trailing" constant="14" id="cX3-bd-zQL"/>
                 <constraint firstAttribute="trailing" secondItem="AcY-Et-Zqh" secondAttribute="trailing" constant="42" id="ttC-pz-5Js"/>
                 <constraint firstItem="GND-Og-gpa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="w9M-ja-slV"/>
+                <constraint firstItem="gaj-0I-ZTR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="xn7-eg-60f"/>
                 <constraint firstItem="AcY-Et-Zqh" firstAttribute="top" secondItem="GND-Og-gpa" secondAttribute="bottom" id="z2o-PQ-cZg"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -135,6 +145,7 @@
             <connections>
                 <outlet property="locationBtn" destination="AcY-Et-Zqh" id="qTq-op-UQh"/>
                 <outlet property="mapView" destination="TaQ-yG-mC3" id="VQV-sg-EHA"/>
+                <outlet property="myLocationBtn" destination="gaj-0I-ZTR" id="nOW-Ob-GDo"/>
                 <outlet property="nickNameLabel" destination="D0j-Wm-kRV" id="wPH-vw-xN6"/>
                 <outlet property="subtitleLabel" destination="M99-6G-HJS" id="Rhx-r2-uco"/>
                 <outlet property="vipAvatarImageView" destination="Nso-yB-dg0" id="QGr-r2-WkU"/>
@@ -148,5 +159,6 @@
         <image name="ic_vip_order.png" width="89" height="46"/>
         <image name="icon_address.png" width="15" height="19"/>
         <image name="icon_right_dot.png" width="20" height="20"/>
+        <image name="mapMark_GPS.png" width="16" height="20"/>
     </resources>
 </document>

@@ -12,6 +12,7 @@
 #import "MyAnnotation.h"
 
 @interface SendOrderDetailHeaderView : UIView
+@property (weak, nonatomic) IBOutlet UIButton *myLocationBtn;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -28,6 +29,10 @@
 
 @property (nonatomic, strong) NSMutableArray *userList;
 
+@property (nonatomic) CLLocationCoordinate2D missionLocation;
+
 + (id)sendOrderDetailHeaderView;
+
+-(void)datouzhen;
 
 @end

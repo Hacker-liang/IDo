@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) NSMutableArray *annotationList;
 
+
 @end
 
 @implementation SendOrderDetailHeaderView
@@ -36,21 +37,31 @@
     _vipAvatarImageView.layer.cornerRadius = 19;
     _vipAvatarImageView.clipsToBounds = YES;
     _locationBtn.titleLabel.numberOfLines = 0;
+    _myLocationBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    _myLocationBtn.layer.cornerRadius = 5.0;
+    _myLocationBtn.clipsToBounds = YES;
+    [_myLocationBtn addTarget:self action:@selector(showUserLocation) forControlEvents:UIControlEventTouchUpInside];
+    
     UserLocationManager *locationManager = [UserLocationManager shareInstance];
+    _missionLocation = CLLocationCoordinate2DMake([UserManager shareUserManager].userInfo.lat, [UserManager shareUserManager].userInfo.lng);
+    _orderDetailModel.lat = [NSString stringWithFormat:@"%lf",[UserManager shareUserManager].userInfo.lat];
+    _orderDetailModel.lng = [NSString stringWithFormat:@"%lf",[UserManager shareUserManager].userInfo.lng];
+    _orderDetailModel.address = [UserManager shareUserManager].userInfo.address;
+    
+    [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
 
+    [self adjustMapViewWithLocation:_missionLocation];
+    
     [locationManager getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
-        self.mapView.showsUserLocation = YES;
         _orderDetailModel.lat = [NSString stringWithFormat:@"%lf", userLocation.coordinate.latitude];
         _orderDetailModel.lng = [NSString stringWithFormat:@"%lf", userLocation.coordinate.longitude];
         _orderDetailModel.address = address;
+        _mapView.showsUserLocation = YES;
+
         [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
         [_locationBtn setTitle:address forState:UIControlStateNormal];
-        [self adjustMapViewWithLocation:userLocation.coordinate];
     }];
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake([UserManager shareUserManager].userInfo.lat, [UserManager shareUserManager].userInfo.lng);
-    [self adjustMapViewWithLocation:location];
-
 }
 
 - (void)setOrderDetailModel:(OrderDetailModel *)orderDetailModel
@@ -59,6 +70,11 @@
    
     [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
     
+}
+
+- (void)showUserLocation
+{
+    [self adjustMapViewWithLocation: CLLocationCoordinate2DMake([UserManager shareUserManager].userInfo.lat, [UserManager shareUserManager].userInfo.lng)];
 }
 
 - (void)setUserList:(NSMutableArray *)userList
@@ -94,10 +110,13 @@
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     NSLog(@"view tag: %ld", view.tag);
+    MyAnnotation *an = _userList[view.tag];
+    if ([an.level integerValue] == 1) {
+        return;
+    }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"向 VIP 用户指定派单" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
         if (buttonIndex == 1) {
-            MyAnnotation *an = _userList[view.tag];
             _vipAnnotation = an;
             _vipContentView.hidden = NO;
             [_vipAvatarImageView sd_setImageWithURL:[NSURL URLWithString: an.avatar] placeholderImage:[UIImage imageNamed:@"Icon"]];
@@ -146,6 +165,11 @@
         tg.coordinate=CLLocationCoordinate2DMake([an.lat floatValue], [an.lng floatValue]);
         [self.mapView addAnnotation:tg];
     }
+    FYAnnotation *tg=[[FYAnnotation alloc]init];
+    tg.icon = @"ic_location_marker.png";
+    tg.coordinate = _missionLocation;
+    [self.mapView addAnnotation:tg];
+    [self adjustMapViewWithLocation:_missionLocation];
 }
 
 @end

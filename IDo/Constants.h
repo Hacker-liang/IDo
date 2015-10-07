@@ -62,6 +62,9 @@
 #define OrderGrabStatusChange @"OrderGrabStatusChange"  ///抢单状态改变
 #define OrderidMark @"OrderidMark"  ///订单id
 #define UserStatusMark @"setUserStatus"  ///设置当前用户身份
+#define kNewOrderNoti @"kNewOrder"     //新订单
+#define kNewRating @"newRating"     //新评价
+
 
 #define messageError @"网络貌似出问题了，等一会儿再试试吧…"
 

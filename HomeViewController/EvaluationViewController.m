@@ -28,14 +28,6 @@
     self.title = @"评价";
     self.view.backgroundColor=[UIColor groupTableViewBackgroundColor];
     
-    UIButton *btn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn.frame=Top_ButtonRect;
-    [btn setTintColor:COLOR(69, 69, 69)];
-    btn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [btn setTitle:@"提交" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(Submit) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithCustomView:btn]];
-    
     NSString *url = [NSString stringWithFormat:@"%@getorderdetails",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:self.orderDetail.orderId forKey:@"orderid"];
@@ -64,7 +56,7 @@
     _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_scrollView];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 120)];
-    view.backgroundColor = COLOR(10, 148, 53);
+    view.backgroundColor = APP_THEME_COLOR;
     [_scrollView addSubview:view];
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(kWindowWidth/2-30, 20, 60, 60)];
@@ -80,7 +72,7 @@
     }
     [view addSubview:headImage];
     
-    UILabel *nameLab = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 80.0f, kWindowWidth, 25)];
+    UILabel *nameLab = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 85.0f, kWindowWidth, 25)];
     nameLab.backgroundColor = [UIColor clearColor];
     nameLab.font = [UIFont boldSystemFontOfSize:15];
     nameLab.textColor = COLOR(255, 255, 255);
@@ -99,7 +91,7 @@
     Star.backgroundColor=[UIColor clearColor];
     [_scrollView addSubview:Star];
     
-    self.ratingBar = [[RatingBar alloc] initWithFrame:CGRectMake(kWindowWidth/2-90, 170+64, 140, 30)];
+    self.ratingBar = [[RatingBar alloc] initWithFrame:CGRectMake(kWindowWidth/2-80, 170+64, 140, 30)];
     [_scrollView addSubview:self.ratingBar];
     
     UILabel * plLab = [[UILabel alloc]initWithFrame:CGRectMake(0 ,210+64,kWindowWidth,20)];
@@ -120,6 +112,16 @@
     self.textView.font = [UIFont systemFontOfSize:16];
     [_scrollView addSubview:self.textView];
     _scrollView.contentSize = CGSizeMake(_scrollView.bounds.size.width, _scrollView.bounds.size.height+10);
+    
+    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, self.textView.frame.origin.y + 120, _scrollView.bounds.size.width-20, 40)];
+    submitBtn.backgroundColor = APP_THEME_COLOR;
+    submitBtn.layer.cornerRadius = 5.0;
+    [submitBtn setTitle:@"提交评价" forState:UIControlStateNormal];
+    [submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    submitBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [submitBtn addTarget:self action:@selector(Submit) forControlEvents:UIControlEventTouchUpInside];
+    [_scrollView addSubview:submitBtn];
+
 }
 
 - (void)Submit

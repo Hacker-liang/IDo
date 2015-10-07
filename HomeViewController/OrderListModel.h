@@ -13,6 +13,7 @@
 
 @property(copy, nonatomic) UserInfo *sendOrderUser;
 @property(copy, nonatomic) UserInfo *grabOrderUser;
+@property(copy, nonatomic) UserInfo *member;
 
 @property(copy, nonatomic) NSString *orderId;
 @property(copy, nonatomic) NSString *orderNumber;

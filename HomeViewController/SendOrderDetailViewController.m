@@ -142,7 +142,9 @@
     _orderDetail.lat = [NSString stringWithFormat:@"%lf", lat];
     _orderDetail.lng = [NSString stringWithFormat:@"%lf", lng];
     _orderDetail.address = address;
+    _headerView.missionLocation = CLLocationCoordinate2DMake(lat, lng);
     _headerView.orderDetailModel = _orderDetail;
+    [_headerView datouzhen];
 }
 
 #pragma mark - IBAction Methods

@@ -197,21 +197,52 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     if (![notificationType isEqualToString:@"gettzpersonnum"] && ![notificationType isEqualToString:@"comment"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:orderId];
-        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderStatusChange];
     }
     
+    if ([notificationType isEqualToString:@"commentFromPerson"])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNewRating object:nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"订单提醒" message:@"发单人已经对您进行评价" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if(buttonIndex == 1){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderCompletion andShouldReloadOrderDetail:YES];
+                        return;
+                    } else {
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.orderId = orderId;
+                        ctl.isSendOrder = NO;
+                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                    }
+                } else {
+                    OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                    ctl.orderId = orderId;
+                    ctl.isSendOrder = NO;
+                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                }
+                
+            } else if(buttonIndex == 0){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderCompletion andShouldReloadOrderDetail:YES];
+                        return;
+                    }
+                }
+            }
+        }];
+
+        
+    }
     if ([notificationType isEqualToString:@"gettzpersonnum"])
     {
-//        if (self.viewisWhere !=GrabOrderView) {
-//            if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
-//                GrabOrderViewController *vc = [[GrabOrderViewController alloc] init];
-//                [self.navController pushViewController:vc animated:YES];
-//            }else{
-//                
-//            }
-//            
-//        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNewOrderNoti object:nil];
+        
     } else if([notificationType isEqualToString:@"scrambleorder"]) { //发单被抢通知
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderPieStatusChange];
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜，您已被抢单！" message:@"请在20分钟内尽快完成付款，超时订单将自动取消。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];

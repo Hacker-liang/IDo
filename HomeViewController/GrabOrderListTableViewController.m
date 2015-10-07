@@ -25,12 +25,13 @@
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderListCell"];
     self.tableView.backgroundColor = APP_PAGE_COLOR;
-
+    [self.tableView.header beginRefreshing];
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getOrder];
     }];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self.tableView.header selector:@selector(beginRefreshing) name:kNewOrderNoti object:nil];
     
-    [self.tableView.header beginRefreshing];
 }
 
 - (OrderListEmptyView *)emptyView
@@ -45,6 +46,11 @@
 {
     [super viewWillAppear:animated];
     [self.tableView.header beginRefreshing];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,6 +137,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderListCell" forIndexPath:indexPath];
     OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
+    cell.isGrabOrder = YES;
     cell.orderDetail = model;
     
     return cell;
