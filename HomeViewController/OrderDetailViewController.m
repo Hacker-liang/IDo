@@ -544,7 +544,7 @@
     }
     [self.mapview addAnnotation:tg];
     
-    [self moveMapToCenteratMapView:_mapview];
+    [self moveMapToCenteratMapView:self.mapview];
 
 }
 
@@ -716,10 +716,10 @@
     double midLat = (minLat + maxLat) / 2;
     double midLon = (minLon + maxLon) / 2;
     CLLocationCoordinate2D centerPoint = CLLocationCoordinate2DMake(midLat, midLon);
-    MKCoordinateSpan span = MKCoordinateSpanMake((maxLat - minLat)*1.6, (maxLon - minLon)*1.6);
+    MKCoordinateSpan span = MKCoordinateSpanMake(fabs((maxLat - minLat)*1.6), fabs((maxLon - minLon)*1.6));
     MKCoordinateRegion region = MKCoordinateRegionMake(centerPoint,span);
     MKCoordinateRegion adjustedRegion = [_mapview regionThatFits:region];
-    [mv_bmap setRegion:adjustedRegion animated:YES];
+    [_mapview setRegion:adjustedRegion animated:YES];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
