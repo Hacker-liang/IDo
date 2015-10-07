@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     
+    self.indictorWidth = 90;
     self.segmentedTitles = @[@"附近订单", @"抢单设置"];
     GrabOrderListTableViewController *ctl = [[GrabOrderListTableViewController alloc] init];
     GrabOrderSettingViewController *ctl1 = [[GrabOrderSettingViewController alloc] init];

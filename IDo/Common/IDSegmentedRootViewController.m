@@ -61,7 +61,7 @@
     
     float btnWidth = self.view.bounds.size.width/[_segmentedTitles count];
     float offsetX = 0;
-    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(20, _segmentedHeight-2, btnWidth-40, 2)];
+    _indicatorView = [[UIView alloc] initWithFrame:CGRectMake((btnWidth-_indictorWidth)/2, _segmentedHeight-2, _indictorWidth, 2)];
     _indicatorView.backgroundColor = [UIColor orangeColor];
     [segmentPanel addSubview:_indicatorView];
     

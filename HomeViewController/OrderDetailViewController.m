@@ -43,7 +43,7 @@
     _cancelBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _cancelBtn.layer.borderWidth = 0.5;
     
-    _avatarImageView.layer.cornerRadius = 17.0;
+    _avatarImageView.layer.cornerRadius = 20.0;
     _avatarImageView.clipsToBounds = YES;
     [self getOrderInfo];
 

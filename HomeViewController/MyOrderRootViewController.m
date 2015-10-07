@@ -17,6 +17,7 @@
 @implementation MyOrderRootViewController
 
 - (void)viewDidLoad {
+    self.indictorWidth = 90;
     self.segmentedTitles = @[@"待处理订单", @"历史订单"];
     MyOrderInProgressTableViewController *ctl = [[MyOrderInProgressTableViewController alloc] init];
     MyOrderHistoryTableViewController *ctl1 = [[MyOrderHistoryTableViewController alloc] init];

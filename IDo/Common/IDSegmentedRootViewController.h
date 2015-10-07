@@ -31,6 +31,9 @@
  */
 @property (nonatomic, strong) NSArray *segmentedTitles;
 
+@property (nonatomic) CGFloat indictorWidth;
+
+
 @property (nonatomic, strong) UIFont *segmentedTitleFont;
 
 @property (nonatomic, strong) NSArray *viewControllers;

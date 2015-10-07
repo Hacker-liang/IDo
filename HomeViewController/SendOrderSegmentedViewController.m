@@ -24,7 +24,8 @@
     self.view.backgroundColor = APP_PAGE_COLOR;
     self.segmentedNormalImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
     self.segmentedSelectedImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
-    
+    self.indictorWidth = 70;
+
     self.segmentedTitles = @[@"立即派单", @"我的订单", @"我的评价"];
     
     _senderOrderCtl = [[SenderOrderViewController alloc] initWithNibName:@"SenderOrderViewController" bundle:nil];
