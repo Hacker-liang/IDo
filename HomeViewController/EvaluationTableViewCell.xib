@@ -64,12 +64,12 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评价星级:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Cl-kv-X2c">
-                        <rect key="frame" x="185" y="31" width="55" height="12"/>
+                        <rect key="frame" x="180" y="32" width="60" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="55" id="axF-Hu-xAe"/>
-                            <constraint firstAttribute="height" constant="12" id="xGe-Y0-O1F"/>
+                            <constraint firstAttribute="width" constant="60" id="axF-Hu-xAe"/>
+                            <constraint firstAttribute="height" constant="14" id="xGe-Y0-O1F"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -121,7 +121,7 @@
                     <constraint firstItem="QCU-zX-ZY6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="42" id="rwR-Ip-ekX"/>
                     <constraint firstAttribute="trailing" secondItem="FXb-1g-ga5" secondAttribute="trailing" constant="8" id="tTa-MJ-ATr"/>
                     <constraint firstAttribute="trailing" secondItem="0DR-ex-GDG" secondAttribute="trailing" id="u9g-bO-ZmM"/>
-                    <constraint firstItem="8Cl-kv-X2c" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="2" id="uuj-rF-8dt"/>
+                    <constraint firstItem="8Cl-kv-X2c" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="3" id="uuj-rF-8dt"/>
                     <constraint firstItem="qk9-Df-XHZ" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="2" id="z0x-gP-ENs"/>
                 </constraints>
             </tableViewCellContentView>

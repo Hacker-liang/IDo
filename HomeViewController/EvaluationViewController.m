@@ -154,9 +154,6 @@
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜,已完成评价" message:@"感谢使用《我干》" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
                 [self.navigationController popToRootViewControllerAnimated:YES];
-            }else{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的评价提交失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
             }
         }else{
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的评价提交失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

@@ -60,9 +60,6 @@
                 self.dataArr = dict[@"data"];
                 [self.tableView reloadData];
             }
-        }else{
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的评价提交失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
         }
     }];
 }
