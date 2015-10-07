@@ -17,18 +17,21 @@
         _content = [json objectForKey:@"content"];
         _orderId = [json objectForKey:@"id"];
         _price = [json objectForKey:@"money"];
+
+        float priceValue = [_price floatValue];
+        if (priceValue - (int)priceValue) {
+            _price = [NSString  stringWithFormat:@"%.2f", priceValue];
+        } else {
+            _price = [NSString stringWithFormat:@"%d", (int)priceValue];
+            _price = [NSString stringWithFormat:@"%d", (int)priceValue];
+        }
+        
         _orderNumber = [json objectForKey:@"ordernumber"];
         _sex = [json objectForKey:@"sex"];
         _tasktime = [json objectForKey:@"timelength"];
         _address = [json objectForKey:@"serviceaddress"];
         _lat = [json objectForKey:@"lat"];
         _lng = [json objectForKey:@"lng"];
-        
-        NSLog(@"%@", _lat);
-        NSLog(@"%@", _lng);
-        NSLog(@"%lf", [UserManager shareUserManager].userInfo.lat);
-        NSLog(@"%lf", [UserManager shareUserManager].userInfo.lng);
-
         
         _reminderCount = [json objectForKey:@"ask_money_times"];
         _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];

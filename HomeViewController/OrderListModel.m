@@ -17,6 +17,15 @@
         _content = [json objectForKey:@"content"];
         _orderId = [json objectForKey:@"id"];
         _price = [json objectForKey:@"money"];
+        
+        float priceValue = [_price floatValue];
+        if (priceValue - (int)priceValue) {
+            _price = [NSString  stringWithFormat:@"%.2f", priceValue];
+        } else {
+            _price = [NSString stringWithFormat:@"%d", (int)priceValue];
+        }
+        
+        
         _orderNumber = [json objectForKey:@"ordernumber"];
         _sex = [json objectForKey:@"sex"];
         _tasktime = [json objectForKey:@"timelength"];
