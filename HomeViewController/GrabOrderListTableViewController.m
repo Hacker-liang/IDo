@@ -10,10 +10,12 @@
 #import "OrderListTableViewCell.h"
 #import "OrderListModel.h"
 #import "OrderDetailViewController.h"
+#import "OrderListEmptyView.h"
 
 @interface GrabOrderListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) OrderListEmptyView *emptyView;
 
 @end
 
@@ -29,6 +31,14 @@
     }];
     
     [self.tableView.header beginRefreshing];
+}
+
+- (OrderListEmptyView *)emptyView
+{
+    if (!_emptyView) {
+        _emptyView = [[OrderListEmptyView alloc] initWithFrame:CGRectMake(0,30, self.view.bounds.size.width, 200) andContent:@"暂无待处理订单"];
+    }
+    return _emptyView;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,6 +57,16 @@
         _dataSource = [[NSMutableArray alloc] init];
     }
     return _dataSource;
+}
+
+- (void)setupEmptyView
+{
+    if (!_dataSource.count) {
+        [self.emptyView removeFromSuperview];
+        [self.tableView addSubview:self.emptyView];
+    } else {
+        [self.emptyView removeFromSuperview];
+    }
 }
 
 - (void)getOrder
@@ -71,6 +91,8 @@
                     OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:NO];
                     [self.dataSource addObject:order];
                 }
+                [self setupEmptyView];
+                
             } else {
                 [self.dataSource removeAllObjects];
             }

@@ -10,10 +10,13 @@
 #import "OrderListModel.h"
 #import "OrderListTableViewCell.h"
 #import "OrderDetailViewController.h"
+#import "OrderListEmptyView.h"
+
 
 @interface MyOrderHistoryTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) OrderListEmptyView *emptyView;
 
 @end
 
@@ -50,6 +53,24 @@
     return _dataSource;
 }
 
+- (OrderListEmptyView *)emptyView
+{
+    if (!_emptyView) {
+        _emptyView = [[OrderListEmptyView alloc] initWithFrame:CGRectMake(0,30, self.view.bounds.size.width, 200) andContent:@"暂无待处理订单"];
+    }
+    return _emptyView;
+}
+
+- (void)setupEmptyView
+{
+    if (!_dataSource.count) {
+        [self.emptyView removeFromSuperview];
+        [self.tableView addSubview:self.emptyView];
+    } else {
+        [self.emptyView removeFromSuperview];
+    }
+}
+
 - (void)getOrder
 {
     NSString *url;
@@ -80,6 +101,7 @@
             }
             [self.tableView reloadData];
         }
+        [self setupEmptyView];
     }];
     
 }

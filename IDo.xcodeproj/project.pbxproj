@@ -38,6 +38,8 @@
 		D916A5CD1BC560CE005F5286 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D916A5CC1BC560CE005F5286 /* Icon.png */; settings = {ASSET_TAGS = (); }; };
 		D916A5D31BC5684E005F5286 /* OtherUserProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A5D11BC5684E005F5286 /* OtherUserProfileTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D916A5D41BC5684E005F5286 /* OtherUserProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D916A5D21BC5684E005F5286 /* OtherUserProfileTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D916A5D71BC579D3005F5286 /* OrderListEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A5D61BC579D3005F5286 /* OrderListEmptyView.m */; settings = {ASSET_TAGS = (); }; };
+		D916A5DA1BC57A30005F5286 /* icon_empty@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D916A5D91BC57A30005F5286 /* icon_empty@3x.png */; settings = {ASSET_TAGS = (); }; };
 		D91F2F1D1BC21179002CE690 /* GrabSettingPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D91F2F1B1BC21179002CE690 /* GrabSettingPushTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		D91F2F1E1BC21179002CE690 /* GrabSettingPushTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91F2F1C1BC21179002CE690 /* GrabSettingPushTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		D91F2F211BC2140F002CE690 /* icon_rule_def@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D91F2F201BC2140F002CE690 /* icon_rule_def@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -339,6 +341,9 @@
 		D916A5D01BC5684E005F5286 /* OtherUserProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileTableViewController.h; sourceTree = "<group>"; };
 		D916A5D11BC5684E005F5286 /* OtherUserProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserProfileTableViewController.m; sourceTree = "<group>"; };
 		D916A5D21BC5684E005F5286 /* OtherUserProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherUserProfileTableViewController.xib; sourceTree = "<group>"; };
+		D916A5D51BC579D3005F5286 /* OrderListEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListEmptyView.h; sourceTree = "<group>"; };
+		D916A5D61BC579D3005F5286 /* OrderListEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListEmptyView.m; sourceTree = "<group>"; };
+		D916A5D91BC57A30005F5286 /* icon_empty@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_empty@3x.png"; sourceTree = "<group>"; };
 		D91F2F1A1BC21179002CE690 /* GrabSettingPushTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabSettingPushTableViewCell.h; sourceTree = "<group>"; };
 		D91F2F1B1BC21179002CE690 /* GrabSettingPushTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabSettingPushTableViewCell.m; sourceTree = "<group>"; };
 		D91F2F1C1BC21179002CE690 /* GrabSettingPushTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabSettingPushTableViewCell.xib; sourceTree = "<group>"; };
@@ -950,6 +955,16 @@
 				D916A5D21BC5684E005F5286 /* OtherUserProfileTableViewController.xib */,
 			);
 			name = OtherProfile;
+			sourceTree = "<group>";
+		};
+		D916A5D81BC57A08005F5286 /* OrderListEmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				D916A5D91BC57A30005F5286 /* icon_empty@3x.png */,
+				D916A5D51BC579D3005F5286 /* OrderListEmptyView.h */,
+				D916A5D61BC579D3005F5286 /* OrderListEmptyView.m */,
+			);
+			name = OrderListEmptyView;
 			sourceTree = "<group>";
 		};
 		D91F2F191BC20FE2002CE690 /* GrabOrderSetting */ = {
@@ -1867,6 +1882,7 @@
 				D95395191BB26B0200CB6746 /* HomeViewController.m */,
 				D9B2F6B31BB287F900ED7DDF /* HomeMenu */,
 				D90E2E3C1BB647C100C2E6F3 /* OrderDetail */,
+				D916A5D81BC57A08005F5286 /* OrderListEmptyView */,
 			);
 			path = HomeViewController;
 			sourceTree = SOURCE_ROOT;
@@ -2084,6 +2100,7 @@
 				D90E2E3B1BB647BA00C2E6F3 /* OrderDetailViewController.xib in Resources */,
 				D96EA9581BB3776200360ED8 /* MyProfileTableViewCell.xib in Resources */,
 				D96EA92C1BB2D54B00360ED8 /* SenderOrderViewController.xib in Resources */,
+				D916A5DA1BC57A30005F5286 /* icon_empty@3x.png in Resources */,
 				D946C8F51BC2347100AAD3A3 /* InputTagTableViewCell.xib in Resources */,
 				D916A5B51BC37317005F5286 /* common_icon_navigation_back_hilighted@2x.png in Resources */,
 				D96EA94E1BB2F01E00360ED8 /* MyProfileTableViewController.xib in Resources */,
@@ -2230,6 +2247,7 @@
 				D946C8ED1BC21FA000AAD3A3 /* TaoziCollectionLayout.m in Sources */,
 				D96EAA091BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m in Sources */,
 				D9B289E81BBCEA2300FB97E5 /* AboutViewController.m in Sources */,
+				D916A5D71BC579D3005F5286 /* OrderListEmptyView.m in Sources */,
 				D99EAD091BBA8213005A02D3 /* ASIDownloadCache.m in Sources */,
 				D96EA99E1BB3D22100360ED8 /* AFHTTPRequestOperationManager.m in Sources */,
 				D91F2F1D1BC21179002CE690 /* GrabSettingPushTableViewCell.m in Sources */,

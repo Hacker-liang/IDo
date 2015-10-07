@@ -37,7 +37,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntF-M4-elr">
-                        <rect key="frame" x="63" y="8" width="249" height="21"/>
+                        <rect key="frame" x="63" y="6" width="249" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="bKy-DM-fRs"/>
                         </constraints>
@@ -51,7 +51,7 @@
                             <constraint firstAttribute="height" constant="15" id="4fe-rQ-xZn"/>
                             <constraint firstAttribute="width" constant="112" id="R1H-Mc-eyg"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -98,7 +98,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="LwT-Lf-9cd" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="2" id="1Vy-Bt-jUG"/>
+                    <constraint firstItem="LwT-Lf-9cd" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="4" id="1Vy-Bt-jUG"/>
                     <constraint firstItem="FXb-1g-ga5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="2iI-oc-kZz"/>
                     <constraint firstItem="qk9-Df-XHZ" firstAttribute="leading" secondItem="QCU-zX-ZY6" secondAttribute="trailing" constant="8" id="7bP-lF-aJJ"/>
                     <constraint firstItem="LwT-Lf-9cd" firstAttribute="leading" secondItem="8Cl-kv-X2c" secondAttribute="trailing" constant="3" id="8g8-m7-dgd"/>
@@ -107,7 +107,7 @@
                     <constraint firstAttribute="trailing" secondItem="ntF-M4-elr" secondAttribute="trailing" constant="8" id="Eqw-oH-kyA"/>
                     <constraint firstAttribute="bottom" secondItem="Tew-QW-3dH" secondAttribute="bottom" constant="29" id="HJn-2u-2w3"/>
                     <constraint firstItem="0DR-ex-GDG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="JKH-9r-c3Q"/>
-                    <constraint firstItem="ntF-M4-elr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="NHS-Yv-5TO"/>
+                    <constraint firstItem="ntF-M4-elr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="NHS-Yv-5TO"/>
                     <constraint firstItem="97X-Dj-guU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="SR8-OT-rkQ"/>
                     <constraint firstAttribute="trailing" secondItem="LwT-Lf-9cd" secondAttribute="trailing" constant="8" id="TAs-wA-W1y"/>
                     <constraint firstAttribute="bottomMargin" secondItem="HVS-he-0Mc" secondAttribute="bottom" constant="-3.5" id="Twl-vF-Ifq"/>
@@ -121,8 +121,8 @@
                     <constraint firstItem="QCU-zX-ZY6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="42" id="rwR-Ip-ekX"/>
                     <constraint firstAttribute="trailing" secondItem="FXb-1g-ga5" secondAttribute="trailing" constant="8" id="tTa-MJ-ATr"/>
                     <constraint firstAttribute="trailing" secondItem="0DR-ex-GDG" secondAttribute="trailing" id="u9g-bO-ZmM"/>
-                    <constraint firstItem="8Cl-kv-X2c" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="3" id="uuj-rF-8dt"/>
-                    <constraint firstItem="qk9-Df-XHZ" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="2" id="z0x-gP-ENs"/>
+                    <constraint firstItem="8Cl-kv-X2c" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="5" id="uuj-rF-8dt"/>
+                    <constraint firstItem="qk9-Df-XHZ" firstAttribute="top" secondItem="ntF-M4-elr" secondAttribute="bottom" constant="4" id="z0x-gP-ENs"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
