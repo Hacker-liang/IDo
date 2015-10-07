@@ -33,5 +33,6 @@
 
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload;
 @property (weak, nonatomic) IBOutlet UIButton *complainBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 
 @end

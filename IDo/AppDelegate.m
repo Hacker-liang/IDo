@@ -356,33 +356,41 @@
         }];
     }else if([notificationType isEqualToString:@"gettzpersonnum" ]) { //收到新订单 通知
 //        self.homeController.isHaveGrabOrder.hidden = NO;
+        
     }else if([notificationType isEqualToString:@"delorder" ]) { //发单方未付款时，单方直接取消订单
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"对不起，订单被取消" message:@"您有一笔订单被发单人取消" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
-//        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-//            if (buttonIndex == 1) {
-//                if (self.viewisWhere == OrderDetailedView){
-//                    if ([self.testOrder isEqualToString:orderId]) {
-//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:@"7"];
-//                    }else{
-//                        OrderDetailedViewController *control = [[OrderDetailedViewController alloc] init];
-//                        control.orderId = orderId;
-//                        control.fromType = HistoryGrab;
-//                        [self.navController pushViewController:control animated:YES];
-//                    }
-//                }else{
-//                    OrderDetailedViewController *control = [[OrderDetailedViewController alloc] init];
-//                    control.orderId = orderId;
-//                    control.fromType = HistoryGrab;
-//                    [self.navController pushViewController:control animated:YES];
-//                }
-//            }else{
-//                if (self.viewisWhere == OrderDetailedView){
-//                    if ([self.testOrder isEqualToString:orderId]) {
-//                        [self.navController popViewControllerAnimated:YES];
-//                    }
-//                }
-//            }
-//        }];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"对不起，订单被取消" message:@"您有一笔订单被发单人取消" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if(buttonIndex == 1){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:YES];
+                        return;
+                    } else {
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.orderId = orderId;
+                        ctl.isSendOrder = NO;
+                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                    }
+                } else {
+                    OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                    ctl.orderId = orderId;
+                    ctl.isSendOrder = NO;
+                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                }
+                
+            } else if(buttonIndex == 0){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
+                    }
+                }
+            }
+        }];
     }
 }
 

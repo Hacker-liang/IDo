@@ -33,6 +33,10 @@
     _complainBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _complainBtn.layer.borderWidth = 0.5;
     
+    _cancelBtn.layer.cornerRadius = 3.0;
+    _cancelBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _cancelBtn.layer.borderWidth = 0.5;
+    
     [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self adjustMapViewWithLocation:userLocation.coordinate];
     }];
@@ -43,6 +47,7 @@
     [self.view addSubview:self.footerView];
     [_phoneLabel addTarget:self action:@selector(callClick) forControlEvents:UIControlEventTouchUpInside];
     [_complainBtn addTarget:self action:@selector(complainAction) forControlEvents:UIControlEventTouchUpInside];
+    [_cancelBtn addTarget:self action:@selector(cancelOrder) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload
@@ -198,7 +203,7 @@
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ((NSNull *)tempStatus != [NSNull null]&&[tempStatus isEqualToString:@"1"]) {
                 [SVProgressHUD showSuccessWithStatus:@"恭喜你，抢单成功"];
-                [self updateDetailViewWithStatus:kOrderGrabSuccess andShouldReloadOrderDetail:NO];
+                [self updateDetailViewWithStatus:kOrderGrabSuccess andShouldReloadOrderDetail:YES];
                 
             } else{
                 [SVProgressHUD showErrorWithStatus:@"抢单失败了"];
@@ -240,6 +245,41 @@
     [self.navigationController pushViewController:control animated:YES];
 }
 
+- (void)cancelOrder
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认取消订单吗？" message:@"很抱歉我们的活儿宝未能向您提供完善的服务" delegate:nil cancelButtonTitle:@"再等等"otherButtonTitles:@"取消订单", nil];
+    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [SVProgressHUD showWithStatus:@"正在取消"];
+            NSString *url = [NSString stringWithFormat:@"%@delorder",baseUrl];
+            NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+            [mDict setObject:_orderDetail.orderId forKey:@"orderid"];
+            
+            [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                [SVProgressHUD dismiss];
+                if (response)
+                {
+                    NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                    NSDictionary *dict = [jsonString objectFromJSONString];
+                    NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+                    if ([tempStatus integerValue] == 1) {
+                        UIAlertView *canclealert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"订单取消成功。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                        [canclealert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                            if (buttonIndex == 0) {
+                                [self.navigationController popToRootViewControllerAnimated:YES];
+                            }
+                        }];
+                        
+                        
+                    }
+                }
+
+            }];
+        }
+    }];
+    
+}
+
 - (void)setupFooterView
 {
     if (_footerView) {
@@ -248,12 +288,13 @@
     }
     _complainBtn.hidden = YES;
     _addressConstraint.constant = 8;
+    _cancelBtn.hidden = YES;
     
     NSString *tipsString;
     NSString *statusString;
 
     if (_orderDetail.orderStatus == kOrderCancelGrabTimeOut) {
-        _addressConstraint.constant = 100;
+        _addressConstraint.constant = 70;
         _complainBtn.hidden = NO;
         statusString =  _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
@@ -315,12 +356,13 @@
 
     } else if (_orderDetail.orderStatus == kOrderCancelPayTimeOut) {
         statusString = _orderDetail.orderStatusDesc;
-        tipsString = @"保持良好记录有助于快速成交订单";
-        _addressConstraint.constant = 70;
-        _complainBtn.hidden = NO;
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     } else if (_orderDetail.orderStatus == kOrderGrabSuccess && !_isSendOrder) {
+        _addressConstraint.constant = 70;
+        _complainBtn.hidden = NO;
+
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         
@@ -328,13 +370,16 @@
         
     } else if (_orderDetail.orderStatus == kOrderCancelDispute) {
         statusString = _orderDetail.orderStatusDesc;
-        tipsString = @"保持良好记录有助于快速成交订单";
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
 
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     } else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
-        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
+        tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
+        _addressConstraint.constant = 100;
+        _complainBtn.hidden = NO;
+        _cancelBtn.hidden = NO;
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
