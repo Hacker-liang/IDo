@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) void (^userLocationCompletionBlock)(CLLocation *userLocation, NSString *address);
 @property (nonatomic, strong) CLLocationManager* locationManager;
+
 @property (nonatomic, strong) CLGeocoder *geocoder;
 
 
@@ -66,13 +67,12 @@
 {
     CLLocation *location = [locations lastObject];
     _userLocation = location;
-    [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
-    [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
-    
-    NSLog(@"%lf", [UserManager shareUserManager].userInfo.lat);
-    NSLog(@"%lf", [UserManager shareUserManager].userInfo.lng);
-
-    [[UserManager shareUserManager] saveUserData2Cache];
+    if ([[UserManager shareUserManager] isLogin]) {
+        [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
+        [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
+        
+        [[UserManager shareUserManager] saveUserData2Cache];
+    }
 
     [self.locationManager stopUpdatingLocation];
     [self getAddressByLocation:_userLocation];
@@ -83,8 +83,10 @@
     [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         CLPlacemark *placemark = [placemarks firstObject];
         NSString *address;
+        
         NSDictionary *dic = placemark.addressDictionary;
         address = dic[@"Name"];
+        _userCityCode = dic[@"City"];
         if ([[UserManager shareUserManager] isLogin]) {
             [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
             [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;

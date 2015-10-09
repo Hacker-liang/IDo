@@ -23,4 +23,6 @@
  *是否允许可触摸
  */
 @property (nonatomic,assign) BOOL enable;
+
+
 @end

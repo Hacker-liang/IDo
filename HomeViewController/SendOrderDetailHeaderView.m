@@ -31,6 +31,7 @@
 
 - (void)awakeFromNib
 {
+    _city = @"beijing";
     _mapView.delegate = self;
     _vipContentView.hidden = YES;
     _locationBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -58,7 +59,7 @@
         _orderDetailModel.lng = [NSString stringWithFormat:@"%lf", userLocation.coordinate.longitude];
         _orderDetailModel.address = address;
         _mapView.showsUserLocation = YES;
-
+        _city = locationManager.userCityCode;
         [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
         [_locationBtn setTitle:address forState:UIControlStateNormal];
     }];

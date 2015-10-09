@@ -30,6 +30,9 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"EvaluationTableViewCell" bundle:nil] forCellReuseIdentifier:@"ratingCell"];
     [self getRecord];
     self.navigationItem.title = @"个人中心";
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 70)];
+    self.tableView.tableFooterView = view;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +43,7 @@
 {
     if (!_myprofileHeaderView) {
         _myprofileHeaderView = [MyProfileHeaderView myProfileHeaderView];
+        _myprofileHeaderView.showSexImage = YES;
         _myprofileHeaderView.userInfo = _userInfo;
     }
     return _myprofileHeaderView;
@@ -56,8 +60,7 @@
         //接单人对发单人的评价，传的是发单人的id
         url = [NSString stringWithFormat:@"%@huobaocomment",baseUrl];
     }
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-    
+    [mDict setObject:_userInfo.userid forKey:@"memberid"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [self.tableView.header endRefreshing];
@@ -73,8 +76,6 @@
         }
     }];
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -105,14 +106,14 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.dataSource.count+1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 0;
     }
-    return self.dataSource.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)stableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,7 +121,7 @@
     EvaluationTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
     cell.evaluationType = _evaluationType;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.contentDic = _dataSource[indexPath.row];
+    cell.contentDic = _dataSource[indexPath.section-1];
     return cell;
 }
 

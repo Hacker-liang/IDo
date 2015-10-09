@@ -62,12 +62,12 @@
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(kWindowWidth/2-30, 20, 60, 60)];
     headImage.backgroundColor = [UIColor clearColor];
     headImage.layer.masksToBounds=YES;
-    headImage.layer.cornerRadius=10;    //最重要的是这个地方要设成imgview高的一半
+    headImage.layer.cornerRadius=30;    //最重要的是这个地方要设成imgview高的一半
     if (self.evaluationType == 1) {
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",headURL,_orderDetail.grabOrderUser.avatar]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",_orderDetail.grabOrderUser.avatar]];
         [headImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Icon"]];
     }else{
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",headURL,_orderDetail.sendOrderUser.avatar]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",_orderDetail.sendOrderUser.avatar]];
         [headImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Icon"]];
     }
     [view addSubview:headImage];

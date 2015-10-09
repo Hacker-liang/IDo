@@ -56,6 +56,7 @@
 {
     if (!_myprofileHeaderView) {
         _myprofileHeaderView = [MyProfileHeaderView myProfileHeaderView];
+        _myprofileHeaderView.ratingView.isYellow = NO;
         _myprofileHeaderView.userInfo = _userInfo;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setUserHead)];
         tap.numberOfTapsRequired = 1;
@@ -461,7 +462,7 @@
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
             if ([dict[@"status"] integerValue] == 1) {
-                [UserManager shareUserManager].userInfo.avatar = aPath;
+                [UserManager shareUserManager].userInfo.avatar = [NSString stringWithFormat:@"%@%@",headURL,aPath];
                 [[UserManager shareUserManager] saveUserData2Cache];
                 [_myprofileHeaderView.headerImageView sd_setImageWithURL:[NSURL URLWithString:aPath] placeholderImage:_headerImage];
 

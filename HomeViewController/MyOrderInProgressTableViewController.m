@@ -23,12 +23,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderListCell"];
     self.tableView.backgroundColor = APP_PAGE_COLOR;
     
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getOrder];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self.tableView.header selector:@selector(beginRefreshing) name:OrderGrabStatusChange object:nil];
     
     [self.tableView.header beginRefreshing];
 }
@@ -37,6 +40,11 @@
 {
     [super viewWillAppear:animated];
     [self.tableView.header beginRefreshing];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self.tableView.header];
 }
 
 - (void)didReceiveMemoryWarning {

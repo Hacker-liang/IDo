@@ -43,7 +43,6 @@
     UIImageView *imageBg = [[UIImageView alloc]initWithFrame:CGRectMake((kWindowWidth - 210)/2, 68, 210, 130)];
     imageBg.image = [UIImage imageNamed:@"search_default_background"];
     [_searchBar becomeFirstResponder];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,11 +80,23 @@
     return self.dataSource.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
     AMapPOI *poi = [self.dataSource objectAtIndex:indexPath.row];
     cell.textLabel.text = poi.name;
-    
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+    NSString *str = [NSString stringWithFormat:@"%@%@",  poi.city, poi.district];
+    cell.detailTextLabel.text = str;
+    cell.detailTextLabel.textColor = [UIColor grayColor];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:13.0];
     return cell;
 }
 
@@ -93,8 +104,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     AMapPOI *poi = [self.dataSource objectAtIndex:indexPath.row];
-
-    [_delegate didChangeAddress:poi.location.latitude lng:poi.location.longitude address:poi.name];
+   
+    NSString *str = [NSString stringWithFormat:@"%@%@%@",  poi.city, poi.district, poi.name];
+    [_delegate didChangeAddress:poi.location.latitude lng:poi.location.longitude address:str];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -114,8 +126,13 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    if (searchText.length == 0) {
+        return;
+    }
     AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];
     request.keywords = searchText;
+    request.city = _cityCode;
+    request.requireExtension = YES;
     [_searchApi AMapPOIKeywordsSearch:request];
 }
 

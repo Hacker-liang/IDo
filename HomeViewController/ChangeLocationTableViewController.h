@@ -18,4 +18,6 @@
 
 @property (nonatomic, weak)id<ChangeLocationDelegate>delegate;
 
+@property (nonatomic, copy) NSString *cityCode;
+
 @end

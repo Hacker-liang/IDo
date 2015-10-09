@@ -32,6 +32,7 @@
     UIView *spaceView3 = [[UIView alloc] initWithFrame:CGRectMake(width, 8, 0.5, _sendOrderCountBtn.bounds.size.height-16)];
     spaceView3.backgroundColor = [UIColor grayColor];
     [_complainBtn addSubview:spaceView3];
+    _sexImageView.hidden = !_showSexImage;
 }
 
 - (void)setUserInfo:(UserInfo *)userInfo
@@ -56,7 +57,7 @@
         _grabOrderCountBtn.titleLabel.numberOfLines = 0;
         [_grabOrderCountBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _grabOrderCountBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        NSString *grabOrderStr = [NSString stringWithFormat:@"%@笔\n派单", _userInfo.grabOrderCount];
+        NSString *grabOrderStr = [NSString stringWithFormat:@"%@笔\n抢单", _userInfo.grabOrderCount];
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:grabOrderStr];
         [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:25.0] range:NSMakeRange(0, attStr.length-4)];
         [_grabOrderCountBtn setAttributedTitle:attStr forState:UIControlStateNormal];
@@ -70,6 +71,13 @@
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
         [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:25.0] range:NSMakeRange(0, attStr.length-5)];
         [_complainBtn setAttributedTitle:attStr forState:UIControlStateNormal];
+    }
+    
+    NSString *sex = userInfo.sex;
+    if ([sex isEqualToString:@"1"]) {
+        [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
+    } else {
+        [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
     }
 
 }

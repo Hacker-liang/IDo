@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     _avatarImageView.clipsToBounds = YES;
     _avatarImageView.layer.cornerRadius = 17.5;
+    _ratingView.isYellow = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -27,7 +28,7 @@
 
     if (self.evaluationType == 1) {
         _nickLabel.text = contentDic[@"guzhumes"][@"nikename"];
-        NSString *str = [NSString stringWithFormat:@"成功发单%@次", contentDic[@"guzhumes"][@"fadannumber"]];
+        NSString *str = [NSString stringWithFormat:@"成功发%@次", contentDic[@"guzhumes"][@"fadannumber"]];
         NSString *sex = contentDic[@"guzhumes"][@"sex"];
         if ([sex isEqualToString:@"1"]) {
             [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
@@ -49,7 +50,9 @@
             [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
         }
         NSString *avatar = contentDic[@"huobaomes"][@"img"];
-        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:[UIImage imageNamed:@"Icon"]];
+        NSString *totalAvatar = [NSString stringWithFormat:@"%@%@",headURL,avatar];
+
+        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:totalAvatar] placeholderImage:[UIImage imageNamed:@"Icon"]];
     }
     
     if (self.evaluationType == 1) {

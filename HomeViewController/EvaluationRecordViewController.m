@@ -30,7 +30,7 @@
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getRecord];
     }];
-    [[NSNotificationCenter defaultCenter] addObserver:self.tableView.header selector:@selector(beginRefreshing) name:kNewRating object:nil];
+       [[NSNotificationCenter defaultCenter] addObserver:self.tableView.header selector:@selector(beginRefreshing) name:kNewRating object:nil];
     
     [self.tableView.header beginRefreshing];
 

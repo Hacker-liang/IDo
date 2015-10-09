@@ -24,4 +24,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars;
 
+@property (nonatomic, assign) BOOL isYellow;
+
 @end

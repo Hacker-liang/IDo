@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *complainBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet CWStarRateView *ratingView;
+@property (weak, nonatomic) IBOutlet UIImageView *sexImageView;
+
+@property (nonatomic) BOOL showSexImage;
 
 @property (nonatomic, strong) UserInfo *userInfo;
 

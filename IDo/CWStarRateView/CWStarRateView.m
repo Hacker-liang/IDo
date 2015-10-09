@@ -8,8 +8,6 @@
 
 #import "CWStarRateView.h"
 
-#define FOREGROUND_STAR_IMAGE_NAME @"b27_icon_star_yellow"
-#define BACKGROUND_STAR_IMAGE_NAME @"b27_icon_star_gray"
 #define DEFALUT_STAR_NUMBER 5
 #define ANIMATION_TIME_INTERVAL 0.2
 
@@ -57,8 +55,14 @@
     _hasAnimation = NO;//默认为NO
     _allowIncompleteStar = NO;//默认为NO
 
-    self.foregroundStarView = [self createStarViewWithImage:FOREGROUND_STAR_IMAGE_NAME];
-    self.backgroundStarView = [self createStarViewWithImage:BACKGROUND_STAR_IMAGE_NAME];
+    if (_isYellow) {
+        self.foregroundStarView = [self createStarViewWithImage:@"b27_icon_star_yellow.png"];
+        self.backgroundStarView = [self createStarViewWithImage:@"b27_icon_star_gray.png"];
+
+    } else {
+        self.foregroundStarView = [self createStarViewWithImage:@"b27_icon_star_white_yellow.png"];
+        self.backgroundStarView = [self createStarViewWithImage:@"b27_icon_star_white_gray.png"];
+    }
     
     [self addSubview:self.backgroundStarView];
     [self addSubview:self.foregroundStarView];
@@ -66,6 +70,25 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTapRateView:)];
     tapGesture.numberOfTapsRequired = 1;
     [self addGestureRecognizer:tapGesture];
+}
+
+- (void)setIsYellow:(BOOL)isYellow
+{
+    _isYellow = isYellow;
+    [self.foregroundStarView removeFromSuperview];
+    [self.backgroundStarView removeFromSuperview];
+
+    if (_isYellow) {
+        self.foregroundStarView = [self createStarViewWithImage:@"b27_icon_star_yellow.png"];
+        self.backgroundStarView = [self createStarViewWithImage:@"b27_icon_star_gray.png"];
+        
+    } else {
+        self.foregroundStarView = [self createStarViewWithImage:@"b27_icon_star_white_yellow.png"];
+        self.backgroundStarView = [self createStarViewWithImage:@"b27_icon_star_white_gray.png"];
+    }
+
+    [self addSubview:self.backgroundStarView];
+    [self addSubview:self.foregroundStarView];
 }
 
 - (void)userTapRateView:(UITapGestureRecognizer *)gesture {

@@ -244,6 +244,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewOrderNoti object:nil];
         
     } else if([notificationType isEqualToString:@"scrambleorder"]) { //发单被抢通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:OrderGrabStatusChange object:nil];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderPieStatusChange];
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜，您已被抢单！" message:@"请在20分钟内尽快完成付款，超时订单将自动取消。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {

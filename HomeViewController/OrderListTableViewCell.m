@@ -51,7 +51,7 @@
     if (_isGrabOrder && userInfo.userid != 0) {
         _subtitleLabel.text = [NSString stringWithFormat:@"成功发单%@笔", userInfo.sendOrderCount];
     } else if (userInfo.userid != 0) {
-        _subtitleLabel.text = [NSString stringWithFormat:@"成功接单%@笔", userInfo.sendOrderCount];
+        _subtitleLabel.text = [NSString stringWithFormat:@"成功接单%@笔", userInfo.grabOrderCount];
     } else {
         _subtitleLabel.text = nil;
     }

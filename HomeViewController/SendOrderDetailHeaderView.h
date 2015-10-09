@@ -31,6 +31,9 @@
 
 @property (nonatomic) CLLocationCoordinate2D missionLocation;
 
+@property (nonatomic, strong) NSString *city;
+
+
 + (id)sendOrderDetailHeaderView;
 
 -(void)datouzhen;

@@ -108,6 +108,7 @@
 {
     ChangeLocationTableViewController *ctl = [[ChangeLocationTableViewController alloc] init];
     ctl.delegate = self;
+    ctl.cityCode = _headerView.city;
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:ctl] animated:YES completion:nil];
 }
 

@@ -55,6 +55,13 @@
                         <constraint firstAttribute="height" constant="20" id="lva-SF-XIa"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qgw-w2-itf">
+                    <rect key="frame" x="319" y="77" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="iOl-MC-yxq"/>
+                        <constraint firstAttribute="width" constant="20" id="mt5-5I-ZVC"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -66,6 +73,7 @@
                 <constraint firstItem="vdg-KF-XaE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DM3-KZ-neG"/>
                 <constraint firstItem="V5i-jF-eXU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DcB-Oj-ObO"/>
                 <constraint firstItem="vdg-KF-XaE" firstAttribute="top" secondItem="pCI-8e-cd1" secondAttribute="bottom" constant="8" id="FrB-3p-zwk"/>
+                <constraint firstItem="Qgw-w2-itf" firstAttribute="top" secondItem="9Hj-Rz-KLZ" secondAttribute="bottom" constant="-18" id="Gvf-4C-5vd"/>
                 <constraint firstItem="4JD-IN-GF8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KUi-Df-0Sj"/>
                 <constraint firstAttribute="trailing" secondItem="vB9-FE-z5D" secondAttribute="trailing" id="N0T-Nj-ebn"/>
                 <constraint firstAttribute="bottom" secondItem="vB9-FE-z5D" secondAttribute="bottom" id="Sa7-WF-Vxx"/>
@@ -76,6 +84,7 @@
                 <constraint firstItem="vB9-FE-z5D" firstAttribute="width" secondItem="4JD-IN-GF8" secondAttribute="width" id="ZrP-UW-8dg"/>
                 <constraint firstItem="9Hj-Rz-KLZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="c9a-Kp-R2I"/>
                 <constraint firstItem="vB9-FE-z5D" firstAttribute="leading" secondItem="cpA-9w-aTR" secondAttribute="trailing" id="hqG-fM-9Zt"/>
+                <constraint firstItem="Qgw-w2-itf" firstAttribute="leading" secondItem="9Hj-Rz-KLZ" secondAttribute="trailing" constant="-16" id="l2Y-wy-ItS"/>
                 <constraint firstItem="9Hj-Rz-KLZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lRp-dx-Lip"/>
                 <constraint firstItem="cpA-9w-aTR" firstAttribute="width" secondItem="4JD-IN-GF8" secondAttribute="width" id="nao-PY-05n"/>
                 <constraint firstItem="cpA-9w-aTR" firstAttribute="top" secondItem="V5i-jF-eXU" secondAttribute="bottom" id="ncy-gg-TPu"/>
@@ -95,6 +104,7 @@
                 <outlet property="nickNameLabel" destination="pCI-8e-cd1" id="AO7-FH-DN6"/>
                 <outlet property="ratingView" destination="vdg-KF-XaE" id="vB5-QS-dt6"/>
                 <outlet property="sendOrderCountBtn" destination="4JD-IN-GF8" id="QJP-73-IH5"/>
+                <outlet property="sexImageView" destination="Qgw-w2-itf" id="i1v-dy-2cS"/>
             </connections>
             <point key="canvasLocation" x="604" y="250"/>
         </view>

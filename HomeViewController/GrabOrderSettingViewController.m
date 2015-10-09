@@ -82,10 +82,13 @@
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
             [self.allTagArray removeAllObjects];
-            for (NSDictionary *d in dict[@"data"]) {
-                [self.allTagArray addObject:d[@"name"]];
+            if ([dict[@"data"] isKindOfClass:[NSDictionary class]]) {
+                for (NSDictionary *d in dict[@"data"]) {
+                    [self.allTagArray addObject:d[@"name"]];
+                }
+                [self.tableView reloadData];
             }
-            [self.tableView reloadData];
+           
         }
     }];
 }
@@ -322,7 +325,7 @@
         [SVProgressHUD showErrorWithStatus:@"输入的标签不能为空"];
         return;
     }
-    cell.textField.text = @"";
     [self addTag:cell.textField.text];
+    cell.textField.text = @"";
 }
 @end
