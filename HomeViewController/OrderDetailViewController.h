@@ -28,6 +28,7 @@
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
 @property (weak, nonatomic) IBOutlet UIButton *phoneLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelBtnConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressConstraint;
 

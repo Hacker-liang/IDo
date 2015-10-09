@@ -30,12 +30,6 @@
         _lat = [[dict objectForKey:@"lat"] floatValue];
         _lng = [[dict objectForKey:@"lng"] floatValue];
        
-        if ([[dict objectForKey:@"isMute"] isEqualToString:@"1"]) {
-            _isMute = YES;
-        } else {
-            _isMute = NO;
-        }
-
         _rating = [dict objectForKey:@"star"];
         if (![dict objectForKey:@"jiedannumber"] || [dict objectForKey:@"jiedannumber"] == [NSNull null]) {
             _grabOrderCount = @"0";
@@ -58,9 +52,16 @@
             _lat = userLocation.coordinate.latitude;
             _lng = userLocation.coordinate.longitude;
         }];
+        
+        _isMute = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_isMute", _userid]] boolValue];
 
     }
     return self;
 }
 
+- (void)setIsMute:(BOOL)isMute
+{
+    _isMute = isMute;
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_isMute] forKey:[NSString stringWithFormat:@"%@_isMute", _userid]];
+}
 @end

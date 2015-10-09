@@ -33,6 +33,8 @@
     [super viewDidLoad];
     self.navigationItem.title = @"订单详情";
 //    _mapview.showsUserLocation = YES;
+    _cancelBtn.hidden = YES;
+    _complainBtn.hidden = YES;
     _mapview.delegate = self;
     _conteViewConstraint.constant = 14;
     _addressBtn.titleLabel.numberOfLines = 0;
@@ -282,7 +284,7 @@
             [SVProgressHUD showWithStatus:@"正在取消"];
             NSString *url = [NSString stringWithFormat:@"%@delorder",baseUrl];
             NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-            [mDict setObject:_orderDetail.orderId forKey:@"orderid"];
+            [mDict safeSetObject:_orderDetail.orderId forKey:@"orderid"];
             
             [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                 [SVProgressHUD dismiss];
@@ -317,6 +319,7 @@
     _complainBtn.hidden = YES;
     _addressConstraint.constant = 8;
     _cancelBtn.hidden = YES;
+    _cancelBtnConstraint.constant = 52;
     
     NSString *tipsString;
     NSString *statusString;
@@ -329,6 +332,9 @@
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
 
     } else if (_orderDetail.orderStatus == kOrderInProgress && _isSendOrder) {
+        _cancelBtn.hidden = NO;
+        _addressConstraint.constant = 70;
+        _cancelBtnConstraint.constant = 12;
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
 
@@ -556,6 +562,9 @@
 
 - (void)drawRoute
 {
+    if (_userLocation.latitude ==0 || _missionLocation.latitude == 0) {
+        return;
+    }
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     CLLocation *startLocation = [[CLLocation alloc] initWithLatitude:_userLocation.latitude longitude:_userLocation.longitude];
 

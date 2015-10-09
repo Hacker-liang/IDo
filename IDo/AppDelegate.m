@@ -167,6 +167,7 @@
                 frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
                 frostedViewController.liveBlur = YES;
                 frostedViewController.limitMenuViewSize = YES;
+                frostedViewController.menuViewSize = CGSizeMake(275, kWindowHeight);
                 self.window.rootViewController = frostedViewController;
             }
         }];
@@ -182,22 +183,25 @@
 {
     NSLog(@"userInfo = %@",userInfo);
     
-    SystemSoundID myAlertSound;
+    if (![UserManager shareUserManager].userInfo.isMute) {
+        SystemSoundID myAlertSound;
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/sms-received1.caf"]];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &myAlertSound);
+        AudioServicesPlaySystemSound(myAlertSound);
+        
+        //发送本地推送
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        notification.fireDate = [NSDate date]; //触发通知的时间
+        notification.alertBody = [userInfo objectForKey:@"content"];
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.alertAction = @"打开";
+        notification.timeZone = [NSTimeZone defaultTimeZone];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        
+    }
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/sms-received1.caf"]];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &myAlertSound);
-    AudioServicesPlaySystemSound(myAlertSound);
-    
-    //发送本地推送
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [NSDate date]; //触发通知的时间
-    notification.alertBody = [userInfo objectForKey:@"content"];
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    notification.alertAction = @"打开";
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    
-    NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
+      NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
     NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
     [[NSUserDefaults standardUserDefaults] setObject:orderId forKey:OrderidMark];
     [[NSUserDefaults standardUserDefaults] synchronize];

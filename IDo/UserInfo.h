@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "WalletModel.h"
 
-
 @interface UserInfo : NSObject
 
 @property (nonatomic, copy) NSString *userid;

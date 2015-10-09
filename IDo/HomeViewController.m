@@ -55,6 +55,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
     [self setupContentViewContrller];
+    [self changeProfileStatusWithPageIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,7 +109,30 @@
     if ([newController isEqual:_currentViewController]) {
         return;
     }
+    [self changeProfileStatusWithPageIndex:pageIndex];
     [self replaceController:_currentViewController newController:newController];
+}
+
+- (void)changeProfileStatusWithPageIndex:(int)index
+{
+    NSString *url = [NSString stringWithFormat:@"%@setUserStatus", baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[NSString stringWithFormat:@"%d", 1-index] forKey:@"idDo"];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"id"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response) {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSInteger status = [[dict objectForKey:@"status"] integerValue];
+            if (status == 1) {
+                
+            } else {
+            }
+            
+        } else {
+        }
+    }];
 }
 
 - (void)replaceController:(UIViewController *)oldController newController:(UIViewController *)newController

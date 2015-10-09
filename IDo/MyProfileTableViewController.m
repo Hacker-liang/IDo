@@ -124,7 +124,7 @@
             switchView=[[UISwitch alloc]init];
         }
         [switchView addTarget:self action:@selector(switchAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        if(self.userInfo.isMute) {
+        if(!self.userInfo.isMute) {
             [switchView setOn:YES animated:NO];
         } else {
             [switchView setOn:NO animated:NO];
@@ -231,7 +231,7 @@
 {
     UISwitch *switchButton = (UISwitch*)sender;
     BOOL isButtonOn = [switchButton isOn];
-    if (isButtonOn) {
+    if (!isButtonOn) {
         _userInfo.isMute = YES;
         [self changeUserSet:@"1" Type:@"6"];
 

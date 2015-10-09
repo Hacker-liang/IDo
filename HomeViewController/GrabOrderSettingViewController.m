@@ -38,6 +38,12 @@
     [self getMyLabData];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (NSMutableArray *)allTagArray
 {
     if (!_allTagArray) {
@@ -223,7 +229,7 @@
     if (indexPath.section == 0) {
         GrabSettingNotiTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"grabSettingNotiCell" forIndexPath:indexPath];
         [cell.switchBtn addTarget:self action:@selector(pushSwitch:) forControlEvents:UIControlEventValueChanged];
-        [cell.switchBtn setOn:[UserManager shareUserManager].userInfo.isMute];
+        [cell.switchBtn setOn:![UserManager shareUserManager].userInfo.isMute];
         return cell;
         
     } else if (indexPath.section == 1) {
