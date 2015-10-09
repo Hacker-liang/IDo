@@ -2507,7 +2507,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e81a8d84-79eb-4221-ad10-c0e326ea7157";
+				PROVISIONING_PROFILE = "5c7496fe-5ec3-4b9a-bdde-1edb770c0911";
 			};
 			name = Release;
 		};
