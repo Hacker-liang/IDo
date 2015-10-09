@@ -82,10 +82,9 @@
 {
     [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         CLPlacemark *placemark = [placemarks firstObject];
-        NSString *address;
         
         NSDictionary *dic = placemark.addressDictionary;
-        address = dic[@"Name"];
+        NSString *address = [NSString stringWithFormat:@"%@%@%@%@", dic[@"City"], dic[@"SubLocality"], dic[@"Street"], dic[@"Name"]];
         _userCityCode = dic[@"City"];
         if ([[UserManager shareUserManager] isLogin]) {
             [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
