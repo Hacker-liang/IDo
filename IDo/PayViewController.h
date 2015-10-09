@@ -10,7 +10,7 @@
 
 typedef void(^PaySuccessBlock)(BOOL success,NSString *errorStr);
 
-@interface PayViewController : TZViewController<UITableViewDataSource,UITableViewDelegate>
+@interface PayViewController : TZViewController <UITableViewDataSource,UITableViewDelegate>
 
 @property(strong,nonatomic)UITableView *payTab;
 @property(strong,nonatomic)NSString *price;
