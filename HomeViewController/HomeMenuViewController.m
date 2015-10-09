@@ -125,13 +125,20 @@
                             if (result == -1)
                             {
                                 NSString *appUrl = [arrDict objectForKey:@"trackViewUrl"];
-                                NSString *meaasge = [NSString stringWithFormat:@"发现新版本%@，是否更新?",version];
-                                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:meaasge delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-                                [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                                    if (buttonIndex == 1) {
-                                        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:appUrl]];
-                                    }
-                                }];
+                                NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
+                                NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
+                                if ([versionNum floatValue] < [version floatValue]) {
+                                    NSString *meaasge = [NSString stringWithFormat:@"发现新版本%@，是否更新?",version];
+                                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:meaasge delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+                                    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                                        if (buttonIndex == 1) {
+                                            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:appUrl]];
+                                        }
+                                    }];
+                                } else {
+                                    [SVProgressHUD showSuccessWithStatus:@"恭喜你，已经是最新版本"];
+                                }
+                               
                             }
                         }
                     }
