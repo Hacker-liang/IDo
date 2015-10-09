@@ -161,7 +161,11 @@
         
     } else if (_orderDetail.orderStatus == kOrderInProgress) {
         _countdown = _orderDetail.grabCountdown;
-        [self startCountdown];
+        if (_countdown > 0) {
+            [self startCountdown];
+        } else {
+            [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:NO];
+        }
     } else {
         if (timer) {
             [timer invalidate];
