@@ -182,6 +182,12 @@
 {
     NSLog(@"userInfo = %@",userInfo);
     
+    SystemSoundID myAlertSound;
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/sms-received1.caf"]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &myAlertSound);
+    AudioServicesPlaySystemSound(myAlertSound);
+    
     //发送本地推送
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.fireDate = [NSDate date]; //触发通知的时间
