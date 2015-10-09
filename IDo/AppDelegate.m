@@ -62,10 +62,14 @@
     [APService setupWithOption:launchOptions];
     [APService crashLogON];
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [APService setBadge:0];
     
     return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [APService setBadge:0];
 }
 
 - (void)receiveJPushMessage:(NSNotification *)noti
