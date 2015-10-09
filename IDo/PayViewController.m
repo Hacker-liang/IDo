@@ -24,11 +24,6 @@
     return self;
 }
 
-- (void)backClick
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -37,12 +32,6 @@
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PayStatusSure) name:@"paySureNotification" object:nil];
-    
-    UIButton *leftBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBt.frame = Top_ButtonRect;
-  
-    [leftBt addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc]initWithCustomView:leftBt]];
     
     self.payTab = [[UITableView alloc]initWithFrame:CGRectMake(0.0f,0,kWindowWidth,kWindowHeight-100) style:UITableViewStylePlain];
     self.payTab.delegate = self;
