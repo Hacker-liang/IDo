@@ -82,7 +82,6 @@
 {
     if (!_headerView) {
         _headerView = [SendOrderDetailHeaderView sendOrderDetailHeaderView];
-        _headerView.orderDetailModel = _orderDetail;
         [_headerView.locationBtn addTarget:self action:@selector(setupAddress) forControlEvents:UIControlEventTouchUpInside];
 
     }
@@ -144,7 +143,6 @@
     _orderDetail.lng = [NSString stringWithFormat:@"%lf", lng];
     _orderDetail.address = address;
     _headerView.missionLocation = CLLocationCoordinate2DMake(lat, lng);
-    _headerView.orderDetailModel = _orderDetail;
     [_headerView datouzhen];
 }
 
@@ -184,8 +182,8 @@
         [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
         [mDict safeSetObject:@"0" forKey:@"sex"];
         [mDict safeSetObject:@"0" forKey:@"range"];
-        [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];
-        [mDict safeSetObject:_orderDetail.lat forKey:@"lat"];
+        [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.longitude] forKey:@"lng"];
+        [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.latitude] forKey:@"lat"];
         [mDict safeSetObject:@"" forKey:@"img"];
     } else {
         url = [NSString stringWithFormat:@"%@surepublishorderToVip", baseUrl];

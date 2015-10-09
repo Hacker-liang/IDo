@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *annotationList;
 
 
+
 @end
 
 @implementation SendOrderDetailHeaderView
@@ -44,34 +45,26 @@
     [_myLocationBtn addTarget:self action:@selector(showUserLocation) forControlEvents:UIControlEventTouchUpInside];
     
     UserLocationManager *locationManager = [UserLocationManager shareInstance];
-    _missionLocation = CLLocationCoordinate2DMake([UserManager shareUserManager].userInfo.lat, [UserManager shareUserManager].userInfo.lng);
-    _orderDetailModel.lat = [NSString stringWithFormat:@"%lf",[UserManager shareUserManager].userInfo.lat];
-    _orderDetailModel.lng = [NSString stringWithFormat:@"%lf",[UserManager shareUserManager].userInfo.lng];
-    _orderDetailModel.address = [UserManager shareUserManager].userInfo.address;
-    
-    [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
+    _lat = [UserManager shareUserManager].userInfo.lat;
+    _lng = [UserManager shareUserManager].userInfo.lng;
+    _address = [UserManager shareUserManager].userInfo.address;
+    _missionLocation = CLLocationCoordinate2DMake(_lat, _lng);
+
+    [_locationBtn setTitle:_address forState:UIControlStateNormal];
 
     [self adjustMapViewWithLocation:_missionLocation];
     
     [locationManager getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
-        _orderDetailModel.lat = [NSString stringWithFormat:@"%lf", userLocation.coordinate.latitude];
-        _orderDetailModel.lng = [NSString stringWithFormat:@"%lf", userLocation.coordinate.longitude];
-        _orderDetailModel.address = address;
-        _mapView.showsUserLocation = YES;
+        _lat = userLocation.coordinate.latitude;
+        _lng = userLocation.coordinate.longitude;
+        _address = address;
         _city = locationManager.userCityCode;
-        [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
+        [_locationBtn setTitle:_address forState:UIControlStateNormal];
         [_locationBtn setTitle:address forState:UIControlStateNormal];
+        _missionLocation = CLLocationCoordinate2DMake(_lat, _lng);
         [self datouzhen];
     }];
-}
-
-- (void)setOrderDetailModel:(OrderDetailModel *)orderDetailModel
-{
-    _orderDetailModel = orderDetailModel;
-   
-    [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
-    
 }
 
 - (void)showUserLocation
@@ -164,7 +157,7 @@
         {
             tg.icon=@"MYwomen_vip1.png";
         }
-        tg.coordinate=CLLocationCoordinate2DMake([an.lat floatValue], [an.lng floatValue]);
+        tg.coordinate=CLLocationCoordinate2DMake([an.lat doubleValue], [an.lng doubleValue]);
         [self.mapView addAnnotation:tg];
     }
     FYAnnotation *tg=[[FYAnnotation alloc]init];

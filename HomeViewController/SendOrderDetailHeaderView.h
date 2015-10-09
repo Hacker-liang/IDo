@@ -18,7 +18,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *locationBtn;
 
-@property (nonatomic, strong) OrderDetailModel *orderDetailModel;
 @property (weak, nonatomic) IBOutlet UIView *vipContentView;
 @property (weak, nonatomic) IBOutlet UIImageView *vipAvatarImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *vipSexImageView;
@@ -33,6 +32,9 @@
 
 @property (nonatomic, strong) NSString *city;
 
+@property (nonatomic) double lat;
+@property (nonatomic) double lng;
+@property (nonatomic, copy) NSString *address;
 
 + (id)sendOrderDetailHeaderView;
 
