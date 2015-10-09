@@ -2017,7 +2017,7 @@
 				TargetAttributes = {
 					D95394E11BB2694900CB6746 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = D8ME4YHUXS;
+						DevelopmentTeam = PE4BUR4VUP;
 					};
 					D95394FA1BB2694900CB6746 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2471,9 +2471,9 @@
 					"$(PROJECT_DIR)/IDo",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d329acac-92fe-445f-bac6-799f8453f6b5";
+				PROVISIONING_PROFILE = "f9af8f95-a27d-4081-ae06-863a09855678";
 			};
 			name = Debug;
 		};
@@ -2505,9 +2505,9 @@
 					"$(PROJECT_DIR)/IDo",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c7496fe-5ec3-4b9a-bdde-1edb770c0911";
+				PROVISIONING_PROFILE = "a99ca5c9-d7d2-452a-992a-86f80054300d";
 			};
 			name = Release;
 		};

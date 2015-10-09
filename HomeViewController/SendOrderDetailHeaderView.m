@@ -62,6 +62,7 @@
         _city = locationManager.userCityCode;
         [_locationBtn setTitle:_orderDetailModel.address forState:UIControlStateNormal];
         [_locationBtn setTitle:address forState:UIControlStateNormal];
+        [self datouzhen];
     }];
 }
 
