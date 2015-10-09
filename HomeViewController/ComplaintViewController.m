@@ -86,13 +86,21 @@
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            NSString *content = dict[@"info"];
             if ([tempStatus integerValue] == 1) {
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的投诉已成功提交" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的投诉提交失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
+                if (content.length) {
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:content delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alert show];
+
+                } else {
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的投诉提交失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alert show];
+
+                }
             }
         }else{
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的投诉提交失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

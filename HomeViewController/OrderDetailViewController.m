@@ -147,6 +147,8 @@
     [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(0,str.length-1)];
     [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, str.length-1)];
     _priceLabel.attributedText = attStr;
+    _priceLabel.adjustsFontSizeToFitWidth = YES;
+
 
     [_addressBtn setTitle:_orderDetail.address forState:UIControlStateNormal];
     [_orderNumberBtn setTitle:[NSString stringWithFormat:@"订单编号  %@", _orderDetail.orderNumber] forState:UIControlStateNormal];
