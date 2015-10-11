@@ -118,7 +118,7 @@
     NSString *url = [NSString stringWithFormat:@"%@setUserStatus", baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSString stringWithFormat:@"%d", 1-index] forKey:@"idDo"];
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"id"];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"id"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {

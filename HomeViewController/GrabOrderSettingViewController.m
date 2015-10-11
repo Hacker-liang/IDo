@@ -56,7 +56,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@getmembermes",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
@@ -103,7 +103,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@mylabel",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)

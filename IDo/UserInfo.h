@@ -17,6 +17,8 @@
 @property (nonatomic, copy) NSString *sex;
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *adcode;
+
 @property (nonatomic, copy) NSString *userLabel;
 @property (nonatomic, copy) NSString *level;
 @property (nonatomic, copy) NSString *lock;

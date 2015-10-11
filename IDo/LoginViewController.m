@@ -99,15 +99,15 @@
     NSString *address = @"1";
     NSString *url = [NSString stringWithFormat:@"%@login",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:self.phoneTextField.text forKey:@"tel"];
+    [mDict safeSetObject:self.phoneTextField.text forKey:@"tel"];
 //    [mDict setObject:@"" forKey:@"provinceid"];
 //    [mDict setObject:@"" forKey:@"cityid"];
 //    [mDict setObject:@"" forKey:@"districtid"];
-    [mDict setObject:address forKey:@"address"];
-    [mDict setObject:[NSString stringWithFormat:@"%f", _location.coordinate.longitude] forKey:@"lng"];
-    [mDict setObject:[NSString stringWithFormat:@"%f", _location.coordinate.latitude] forKey:@"lat"];
-    [mDict setObject:@"2" forKey:@"devicetype"];
-    [mDict setObject:[APService registrationID] forKey:@"devicenumber"];
+    [mDict safeSetObject:address forKey:@"address"];
+    [mDict safeSetObject:[NSString stringWithFormat:@"%f", _location.coordinate.longitude] forKey:@"lng"];
+    [mDict safeSetObject:[NSString stringWithFormat:@"%f", _location.coordinate.latitude] forKey:@"lat"];
+    [mDict safeSetObject:@"2" forKey:@"devicetype"];
+    [mDict safeSetObject:[APService registrationID] forKey:@"devicenumber"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {

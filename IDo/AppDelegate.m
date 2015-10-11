@@ -169,7 +169,7 @@
     NSLog(@"registrationID = %@",registrationID);
     NSString *url = [NSString stringWithFormat:@"%@reSetDeviceNumber",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject: [UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict safeSetObject: [UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     [mDict setObject:registrationID forKey:@"devicenumber"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -344,13 +344,13 @@
                     } else {
                         OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
                         ctl.orderId = orderId;
-                        ctl.isSendOrder = YES;
+                        ctl.isSendOrder = NO;
                         [self.homeViewController.navigationController pushViewController:ctl animated:YES];
                     }
                 } else {
                     OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
                     ctl.orderId = orderId;
-                    ctl.isSendOrder = YES;
+                    ctl.isSendOrder = NO;
                     [self.homeViewController.navigationController pushViewController:ctl animated:YES];
                 }
                 
@@ -415,7 +415,7 @@
                 //进入去评价
                 NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
                 EvaluationViewController *control = [[EvaluationViewController alloc] init];
-                control.evaluationType = 1;
+                control.evaluationType = 2;
                 control.orderid = orderId;
                 [self.homeViewController.navigationController pushViewController:control animated:YES];
                 

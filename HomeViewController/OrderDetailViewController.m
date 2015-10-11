@@ -691,7 +691,7 @@
 
                 [self updateDetailViewWithStatus:kOrderCheckDone andShouldReloadOrderDetail:YES];
                 [alertV showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                    if (buttonIndex == 1) {
+                    if (buttonIndex == 0) {
                         [self ratingAction:nil];
                     }
                 }];

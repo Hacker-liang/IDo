@@ -44,7 +44,7 @@
     NSString *url = [NSString stringWithFormat:@"%@editMemberLoginStatus",baseUrl];
 
     NSMutableDictionary *mDict=  [[NSMutableDictionary alloc] init];
-    [mDict setObject:_userInfo.userid forKey:@"memberid"];
+    [mDict safeSetObject:_userInfo.userid forKey:@"memberid"];
     [mDict setObject:@"0" forKey:@"content"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -81,6 +81,12 @@
     id dict = [[NSUserDefaults standardUserDefaults] objectForKey:LoginInfoMark];
     if ([dict isKindOfClass:[NSDictionary class]]) {
         _userInfo = [[UserInfo alloc] initWithJson:dict];
+        [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
+            _userInfo.address = address;
+            _userInfo.lat = userLocation.coordinate.latitude;
+            _userInfo.lng = userLocation.coordinate.longitude;
+        }];
+
     }
 }
 
@@ -109,26 +115,27 @@
 {
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     //存储时，除NSNumber类型使用对应的类型意外，其他的都是使用setObject:forKey:
-    [mDict setObject:_userInfo.userid forKey:@"id"];
-    [mDict setObject:_userInfo.nickName forKey:@"nikename"];
-    [mDict setObject:_userInfo.tel forKey:@"tel"];
-    [mDict setObject:_userInfo.sex forKey:@"sex"];
-    [mDict setObject:_userInfo.avatar forKey:@"img"];
-    [mDict setObject:_userInfo.level forKey:@"level"];
-    [mDict setObject:_userInfo.lock forKey:@"lock"];
-    [mDict setObject:_userInfo.zhifubao forKey:@"zhifubao"];
-    [mDict setObject:_userInfo.weixin forKey:@"weixin"];
-    [mDict setObject:_userInfo.rating forKey:@"star"];
-    [mDict setObject:_userInfo.sendOrderCount forKey:@"fadannumber"];
-    [mDict setObject:_userInfo.grabOrderCount forKey:@"jiedannumber"];
-    [mDict setObject:_userInfo.complainCount forKey:@"totalComplaintTimes"];
+    [mDict safeSetObject:_userInfo.userid forKey:@"id"];
+    [mDict safeSetObject:_userInfo.nickName forKey:@"nikename"];
+    [mDict safeSetObject:_userInfo.tel forKey:@"tel"];
+    [mDict safeSetObject:_userInfo.sex forKey:@"sex"];
+    [mDict safeSetObject:_userInfo.avatar forKey:@"img"];
+    [mDict safeSetObject:_userInfo.level forKey:@"level"];
+    [mDict safeSetObject:_userInfo.lock forKey:@"lock"];
+    [mDict safeSetObject:_userInfo.zhifubao forKey:@"zhifubao"];
+    [mDict safeSetObject:_userInfo.weixin forKey:@"weixin"];
+    [mDict safeSetObject:_userInfo.rating forKey:@"star"];
+    [mDict safeSetObject:_userInfo.adcode forKey:@"adcode"];
+    [mDict safeSetObject:_userInfo.sendOrderCount forKey:@"fadannumber"];
+    [mDict safeSetObject:_userInfo.grabOrderCount forKey:@"jiedannumber"];
+    [mDict safeSetObject:_userInfo.complainCount forKey:@"totalComplaintTimes"];
     if (_userInfo.isMute) {
         [mDict setObject:@"1" forKey:@"isMute"];
     } else {
         [mDict setObject:@"0" forKey:@"isMute"];
     }
-    [mDict setObject:[NSNumber numberWithFloat:_userInfo.lat] forKey:@"lat"];
-    [mDict setObject:[NSNumber numberWithFloat:_userInfo.lng] forKey:@"lng"];
+    [mDict safeSetObject:[NSNumber numberWithFloat:_userInfo.lat] forKey:@"lat"];
+    [mDict safeSetObject:[NSNumber numberWithFloat:_userInfo.lng] forKey:@"lng"];
     [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:LoginInfoMark];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

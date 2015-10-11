@@ -27,8 +27,9 @@
         _zhifubao = [dict objectForKey:@"zhifubao"];
         _weixin = [dict objectForKey:@"weixin"];
         _userLabel = [dict objectForKey:@"label"];
-        _lat = [[dict objectForKey:@"lat"] floatValue];
-        _lng = [[dict objectForKey:@"lng"] floatValue];
+        _lat = [[dict objectForKey:@"lat"] doubleValue];
+        _lng = [[dict objectForKey:@"lng"] doubleValue];
+        _adcode = [dict objectForKey:@"adcode"];
        
         _rating = [dict objectForKey:@"star"];
         if (![dict objectForKey:@"jiedannumber"] || [dict objectForKey:@"jiedannumber"] == [NSNull null]) {
@@ -47,12 +48,6 @@
             _complainCount = [dict objectForKey:@"totalComplaintTimes"];
         }
 
-        [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
-            _address = address;
-            _lat = userLocation.coordinate.latitude;
-            _lng = userLocation.coordinate.longitude;
-        }];
-        
         _isMute = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_isMute", _userid]] boolValue];
 
     }

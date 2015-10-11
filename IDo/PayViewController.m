@@ -206,8 +206,8 @@
     [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"fukuanrenid"];
     [mDict setObject:self.huoerbaoID forKey:@"shoukuanmemberid"];
     [mDict setObject:self.price forKey:@"shoukuanmembermoney"];
-    [mDict setObject:@"0" forKey:@"qianbaomoney"];
-    [mDict setObject:self.price forKey:@"zhifubaomoney"];
+    [mDict setObject:@"0" forKey:@"dailiuserid"];
+    [mDict setObject:@"0" forKey:@"dailiusermoney"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)

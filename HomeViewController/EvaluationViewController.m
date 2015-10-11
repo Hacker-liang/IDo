@@ -82,10 +82,10 @@
     headImage.layer.masksToBounds=YES;
     headImage.layer.cornerRadius=30;    //最重要的是这个地方要设成imgview高的一半
     if (self.evaluationType == 1) {
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",_orderDetail.grabOrderUser.avatar]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",_userInfo.avatar]];
         [headImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Icon"]];
     }else{
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",_orderDetail.sendOrderUser.avatar]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",_userInfo.avatar]];
         [headImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Icon"]];
     }
     [view addSubview:headImage];
@@ -95,11 +95,8 @@
     nameLab.font = [UIFont boldSystemFontOfSize:15];
     nameLab.textColor = COLOR(255, 255, 255);
     nameLab.textAlignment = 1;
-    if (self.evaluationType == 1) {
-        nameLab.text = _orderDetail.grabOrderUser.nickName;
-    }else{
-        nameLab.text = _orderDetail.sendOrderUser.nickName;
-    }
+    
+    nameLab.text = _userInfo.nickName;
     [view addSubview:nameLab];
     
     UILabel * Star = [[UILabel alloc]initWithFrame:CGRectMake(0 ,145+64,kWindowWidth,20)];

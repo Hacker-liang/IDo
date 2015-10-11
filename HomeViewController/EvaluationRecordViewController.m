@@ -52,7 +52,7 @@
          //接单人对发单人的评价，传的是发单人的id
         url = [NSString stringWithFormat:@"%@huobaocomment",baseUrl];
     }
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
 
 
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {

@@ -147,10 +147,40 @@
 
     }
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, 200, 20)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, 50, 20)];
     titleLabel.text = typeStr;
     titleLabel.font = [UIFont systemFontOfSize:17];
     [cell.contentView addSubview:titleLabel];
+
+    if (![self.titleStr isEqualToString:@"收支明细"]) {
+        NSString *flagStr;
+        switch ([dic[@"flag"]intValue]) {
+            case 1:
+                flagStr = @"待审核";
+                break;
+            case 2:
+                flagStr = @"初审通过";
+                break;
+            case 3:
+                flagStr = @"审核通过";
+                break;
+            case 4:
+                flagStr = @"审核拒绝";
+                break;
+                
+            default:
+                flagStr = @"";
+                break;
+        }
+        UILabel *flagLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 15, 100, 20)];
+        flagLabel.font = [UIFont systemFontOfSize:13.0];
+        flagLabel.textColor = UIColorFromRGB(0x3DC219);
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"状态：%@", flagStr]];
+        [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14.0] range:NSMakeRange(0, 3)];
+        [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 3)];        flagLabel.attributedText = attStr;
+        [cell.contentView addSubview:flagLabel];
+    }
+    
     
     titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLabel.frame)+10, 200, 20)];
     titleLabel.text = [NSString stringWithFormat:@"财务流水号：%@",dic[@"id"]];

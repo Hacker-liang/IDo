@@ -7,13 +7,14 @@
 //
 
 #import "UserLocationManager.h"
+#import <AMapSearchKit/AMapSearchKit.h>
 
-@interface UserLocationManager () <CLLocationManagerDelegate>
+@interface UserLocationManager () <CLLocationManagerDelegate, AMapSearchDelegate>
 
 @property (nonatomic, copy) void (^userLocationCompletionBlock)(CLLocation *userLocation, NSString *address);
 @property (nonatomic, strong) CLLocationManager* locationManager;
 
-@property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, strong) AMapSearchAPI *search;
 
 
 @end
@@ -40,14 +41,6 @@
     return _locationManager;
 }
 
-- (CLGeocoder *)geocoder
-{
-    if (!_geocoder) {
-        _geocoder = [[CLGeocoder alloc] init];
-    }
-    return _geocoder;
-}
-
 - (void)getUserLocationWithCompletionBlcok:(void (^) (CLLocation *userLocation, NSString *address))block
 {
     _userLocationCompletionBlock = block;
@@ -66,28 +59,57 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = [locations lastObject];
-    _userLocation = location;
-    if ([[UserManager shareUserManager] isLogin]) {
-        [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
-        [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
-        
-        [[UserManager shareUserManager] saveUserData2Cache];
-        [self updateSeaverLocation];
-    }
+    
+    NSString *url = @"http://restapi.amap.com/v3/assistant/coordinate/convert";
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[NSString stringWithFormat:@"%lf,%lf",  location.coordinate.longitude,  location.coordinate.latitude] forKey:@"locations"];
+    [mDict setObject:@"gps" forKey:@"coordsys"];
+    [mDict setObject:@"json" forKey:@"output"];
+    [mDict setObject:@"1f6a71da431504fd184266684ca745eb" forKey:@"key"];
 
-    [self.locationManager stopUpdatingLocation];
-    [self getAddressByLocation:_userLocation];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response) {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSInteger status = [[dict objectForKey:@"status"] integerValue];
+            if (status == 1) {
+                
+                NSString *location = [dict objectForKey:@"locations"];
+                double lng = [[[location componentsSeparatedByString:@","] firstObject] doubleValue];
+                double lat = [[[location componentsSeparatedByString:@","] lastObject] doubleValue];
+
+                _userLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+
+                if ([[UserManager shareUserManager] isLogin]) {
+                    [UserManager shareUserManager].userInfo.lat = _userLocation.coordinate.latitude;
+                    [UserManager shareUserManager].userInfo.lng = _userLocation.coordinate.longitude;
+                    
+                    [[UserManager shareUserManager] saveUserData2Cache];
+                    [self updateSeaverLocation];
+                }
+                [self.locationManager stopUpdatingLocation];
+
+                [self getAddressByLocation:_userLocation];
+
+            } else {
+                
+            }
+            
+        } else {
+            
+        }
+    }];
 }
 
 - (void)updateSeaverLocation
 {
-    NSString *url = [NSString stringWithFormat:@"%@getapk", baseUrl];
+    NSString *url = [NSString stringWithFormat:@"%@ ", baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSString stringWithFormat:@"%lf", _userLocation.coordinate.latitude] forKey:@"lat"];
     [mDict setObject:[NSString stringWithFormat:@"%lf", _userLocation.coordinate.longitude] forKey:@"lng"];
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
 
-    
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
@@ -105,31 +127,44 @@
     }];
 }
 
+
+//实现逆地理编码的回调函数
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    if(response.regeocode != nil)
+    {
+        //通过AMapReGeocodeSearchResponse对象处理搜索结果
+        AMapReGeocode *regeoCode = response.regeocode;
+        NSString *address = regeoCode.formattedAddress;
+        if ([[UserManager shareUserManager] isLogin]) {
+            [UserManager shareUserManager].userInfo.address = address;
+            [UserManager shareUserManager].userInfo.adcode = regeoCode.addressComponent.adcode;
+            _userCityCode = regeoCode.addressComponent.citycode;
+            [[UserManager shareUserManager] saveUserData2Cache];
+
+        }
+        if (_userLocationCompletionBlock) {
+            _userLocationCompletionBlock(_userLocation, address);
+        }
+
+    }
+}
 - (void)getAddressByLocation:(CLLocation *)location
 {
-    [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        CLPlacemark *placemark = [placemarks firstObject];
-        
-        NSDictionary *dic = placemark.addressDictionary;
-        NSString *address = placemark.name;
-        NSString *addressTwo = [NSString stringWithFormat:@"%@%@%@", dic[@"City"], dic[@"SubLocality"], dic[@"Street"]];
-
-        _userCityCode = dic[@"City"];
-        if ([[UserManager shareUserManager] isLogin]) {
-            [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
-            [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
-            if (address.length > addressTwo.length) {
-                [UserManager shareUserManager].userInfo.address = address;
-            } else {
-                [UserManager shareUserManager].userInfo.address = addressTwo;
-            }
-            [[UserManager shareUserManager] saveUserData2Cache];
-        }
-        
-        if (_userLocationCompletionBlock) {
-            _userLocationCompletionBlock(_userLocation, [UserManager shareUserManager].userInfo.address);
-        }
-    }];
+    [AMapSearchServices sharedServices].apiKey = @"75dc15efbb50d8a0cbffacb86bbd9ce8";
+    
+    //初始化检索对象
+    _search = [[AMapSearchAPI alloc] init];
+    _search.delegate = self;
+    
+    //构造AMapReGeocodeSearchRequest对象
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+    regeo.location = [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+    regeo.radius = 10000;
+    regeo.requireExtension = YES;
+    
+    //发起逆地理编码
+    [_search AMapReGoecodeSearch: regeo];
 }
 
 @end

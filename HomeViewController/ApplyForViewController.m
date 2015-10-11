@@ -68,9 +68,14 @@
             {
                 NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
                 NSDictionary *dict = [jsonString objectFromJSONString];
-//                NSArray *tempList = dict[@"data"];
+                NSString *status = dict[@"status"];
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:dict[@"info"] message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-                [alertView show];
+                [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                    if ([status intValue] == 1) {
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                }];
+                
             }
             else
             {
