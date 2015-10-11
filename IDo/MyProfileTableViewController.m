@@ -284,6 +284,7 @@
                     [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                     if ([aType integerValue] == 1) {
                         _userInfo.nickName = aContent;
+                        _myprofileHeaderView.nickNameLabel.text = _userInfo.nickName;
                     } else if ([aType integerValue] == 4) {
                         _userInfo.zhifubao = aContent;
                     }

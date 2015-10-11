@@ -39,7 +39,14 @@
         frame.size.height -= 20;
         ctl.view.frame = frame;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(change2InprogressOrderList) name:kSendOrderSuccess object:nil];
+    
+}
 
+- (void)change2InprogressOrderList
+{
+    [self changePage:0];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -46,30 +46,39 @@
         if ([[json objectForKey:@"status"] intValue] == 3) {
             if ([[json objectForKey:@"haspay"] intValue] == 0) {
                 _orderStatus = kOrderGrabSuccess;
-                _orderStatusDesc = @"已经接单，等待付款";
+                if (!_isSendOrder) {
+                    _orderStatusDesc = @"已抢单，等待对方付款";
+                } else {
+                    _orderStatusDesc = @"订单已被抢，请您付款";
+                    
+                }
             } else if ([[json objectForKey:@"haspay"] intValue] == 1) {
                 if ([[json objectForKey:@"hasconfpay"] intValue] == 0) {
                     _orderStatus = kOrderPayed;
-                    _orderStatusDesc = @"已经付款，等待验收";
+                    if (_isSendOrder) {
+                        _orderStatusDesc = @"已经付款，请验收";
+                    } else {
+                        _orderStatusDesc = @"对方已付款，任务进行中";
+                    }
                 } else {
                     if (_isSendOrder) {
                         if ([[json objectForKey:@"hascommenttoperson"] intValue] == 1) {
                             _orderStatus = kOrderCompletion;
-                            _orderStatusDesc = @"订单已经完成";
+                            _orderStatusDesc = @"任务完成，订单已结束";
                             
                         } else {
                             _orderStatus = kOrderCheckDone;
-                            _orderStatusDesc = @"已经验收，等待评价";
+                            _orderStatusDesc = @"已验收，请评价";
                             
                         }
                     } else {
                         if ([[json objectForKey:@"hascommentfromperson"] intValue] == 1) {
                             _orderStatus = kOrderCompletion;
-                            _orderStatusDesc = @"订单已经完成";
+                            _orderStatusDesc = @"任务完成，订单已结束";
                             
                         } else {
                             _orderStatus = kOrderCheckDone;
-                            _orderStatusDesc = @"已经验收，等待评价";
+                            _orderStatusDesc = @"已验收，请评价";
                             
                         }
                         
@@ -80,7 +89,7 @@
         } else if ([[json objectForKey:@"status"] intValue] == 1) {
             if ([[json objectForKey:@"tomemberid"] intValue] == 0) {
                 _orderStatus = kOrderInProgress;
-                _orderStatusDesc = @"等待活宝抢单";
+                _orderStatusDesc = @"等待活儿宝抢单";
                 
             }
         } else if ([[json objectForKey:@"status"] intValue] == 2) {
@@ -124,11 +133,11 @@
             break;
             
         case kOrderCheckDone:
-            _orderStatusDesc = @"已经验收，等待评价";
+            _orderStatusDesc = @"已验收，请评价";
             break;
             
         case kOrderCompletion:
-            _orderStatusDesc = @"订单已经完成";
+            _orderStatusDesc = @"任务完成，订单已结束";
             break;
             
         case kOrderGrabSuccess:

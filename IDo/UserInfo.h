@@ -27,6 +27,8 @@
 @property (nonatomic, copy) NSString *complainCount;
 @property (nonatomic, copy) NSString *rating;
 
+@property (nonatomic) BOOL isSendingOrder;  //当前用户是抢单状态还是派单状态
+
 @property (nonatomic) BOOL isVip;
 @property (nonatomic) BOOL isMute;
 @property (nonatomic, copy) NSString *pushType;  //1是全部订单  2标签订单

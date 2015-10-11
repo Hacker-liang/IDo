@@ -37,6 +37,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     _isShowing = NO;
+    [SVProgressHUD dismiss];
 }
 
 - (void)goBack

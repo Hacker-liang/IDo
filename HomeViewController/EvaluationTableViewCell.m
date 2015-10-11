@@ -28,7 +28,7 @@
 
     if (self.evaluationType == 1) {
         _nickLabel.text = contentDic[@"guzhumes"][@"nikename"];
-        NSString *str = [NSString stringWithFormat:@"成功发%@次", contentDic[@"guzhumes"][@"fadannumber"]];
+        NSString *str = [NSString stringWithFormat:@"成功发单%@次", contentDic[@"guzhumes"][@"fadannumber"]];
         NSString *sex = contentDic[@"guzhumes"][@"sex"];
         if ([sex isEqualToString:@"1"]) {
             [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];

@@ -32,6 +32,7 @@
     self.content.delegate=self;
     self.content.scrollEnabled=YES;
     self.content.text=@"意见建议";
+    self.content.textColor = [UIColor grayColor];
     self.content.autoresizingMask=UIViewAutoresizingFlexibleHeight;
     self.content.font=[UIFont systemFontOfSize:17];
     [self.view addSubview:self.content];

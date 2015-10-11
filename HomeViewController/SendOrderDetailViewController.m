@@ -117,7 +117,7 @@
     //    获取系统的当前时间
     NSDate *now = [NSDate date];
     
-    NSDate *nextday=[NSDate dateWithTimeInterval:20*60 sinceDate:now];
+    NSDate *nextday=[NSDate dateWithTimeInterval:10*60 sinceDate:now];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
@@ -215,6 +215,7 @@
                 if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];
                     [self.navigationController popViewControllerAnimated:YES];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kSendOrderSuccess object:nil];
                 } else {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"向VIP用户派单成功" message:@"可到正在进行的订单中关注状态" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                     [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
@@ -355,7 +356,11 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"悬赏金额" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
-        tf.text = _orderDetail.price;
+        if ([_orderDetail.price intValue] == 0) {
+            tf.text = @"";
+        } else {
+            tf.text = _orderDetail.price;
+        }
         tf.keyboardType = UIKeyboardTypeNumberPad;
         
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {

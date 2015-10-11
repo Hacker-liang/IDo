@@ -53,6 +53,14 @@
 
         }
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(change2InprogressOrderList) name:kSendOrderSuccess object:nil];
+    
 }
+
+- (void)change2InprogressOrderList
+{
+    [self changePage:1];
+}
+
 
 @end

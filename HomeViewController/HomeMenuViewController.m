@@ -65,25 +65,16 @@
 
 - (void)gotoMyWallet
 {
-    if ([[UserManager shareUserManager] isLogin]) {
-        [self.frostedViewController hideMenuViewController];
-        MyWalletViewController *ctl = [[MyWalletViewController alloc] init];
-        [_mainViewController.navigationController pushViewController:ctl animated:YES];
-
-    } else {
-        [self gotoLogin];
-    }
+    [self.frostedViewController hideMenuViewController];
+    MyWalletViewController *ctl = [[MyWalletViewController alloc] init];
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
 - (void)gotoMyProfile
 {
-    if ([[UserManager shareUserManager] isLogin]) {
-        [self.frostedViewController hideMenuViewController];
-        MyProfileTableViewController *ctl = [[MyProfileTableViewController alloc] init];
-        [_mainViewController.navigationController pushViewController:ctl animated:YES];
-    } else {
-        [self gotoLogin];
-    }
+    [self.frostedViewController hideMenuViewController];
+    MyProfileTableViewController *ctl = [[MyProfileTableViewController alloc] init];
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
 - (void)gotoAbout
@@ -94,16 +85,8 @@
     [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
-- (void)gotoLogin
-{
-    [self.frostedViewController hideMenuViewController];
-    
-    LoginViewController *ctl = [[LoginViewController alloc] init];
-    [_mainViewController.navigationController pushViewController:ctl animated:YES];
-}
-
-
 - (void)get_version{
+    
     [SVProgressHUD showWithStatus:@"正在检查新版本"];
     [SVHTTPRequest POST:@"https://itunes.apple.com/lookup?id=983842433" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [SVProgressHUD dismiss];
@@ -147,7 +130,6 @@
         }
     }];
 }
-
 
 #pragma mark - TableViewDataSource
 

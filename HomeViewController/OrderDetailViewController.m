@@ -143,6 +143,7 @@
 
     _orderTimeLabel.text = _orderDetail.tasktime;
     _orderContentLabel.text = _orderDetail.content;
+    _orderContentLabel.adjustsFontSizeToFitWidth = YES;
     
     NSString *str = [NSString stringWithFormat:@"%@元", _orderDetail.price];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
@@ -233,11 +234,22 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ((NSNull *)tempStatus != [NSNull null]&&[tempStatus isEqualToString:@"1"]) {
-                [SVProgressHUD showSuccessWithStatus:@"恭喜你，抢单成功"];
+
                 [self updateDetailViewWithStatus:kOrderGrabSuccess andShouldReloadOrderDetail:YES];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"恭喜抢单成功！" message:@"恭喜抢单成功！" delegate:self cancelButtonTitle:@"关注此订单" otherButtonTitles:@"继续抢单", nil];
+                [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [self.navigationController popViewControllerAnimated:YES];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kGrabOrderSuccess object:nil];
+                    }
+                }];
                 
             } else{
-                [SVProgressHUD showErrorWithStatus:@"抢单失败了"];
+                if ([[dict objectForKey:@"info"] length]) {
+                    [SVProgressHUD showErrorWithStatus:[dict objectForKey:@"info"]];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"抢单失败了"];
+                }
             }
             
         } else {
@@ -250,9 +262,7 @@
 {
     PayViewController *vc = [[PayViewController alloc] initWithPaySuccessBlock:^(BOOL success, NSString *errorStr) {
         if (success) {
-            _orderDetail.orderStatus = kOrderPayed;
-            [self updateView];
-            [self setupFooterView];
+            [self updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
         }
     }];
     vc.price = _orderDetail.price;
@@ -325,8 +335,6 @@
     NSString *statusString;
 
     if (_orderDetail.orderStatus == kOrderCancelGrabTimeOut) {
-        _addressConstraint.constant = 70;
-        _complainBtn.hidden = NO;
         statusString =  _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
@@ -378,6 +386,8 @@
         [_footerView addSubview:orderBtn];
         
     } else if (_orderDetail.orderStatus == kOrderPayed && !_isSendOrder) {
+        _complainBtn.hidden = NO;
+        _addressConstraint.constant = 70;
         tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         statusString = _orderDetail.orderStatusDesc;
         
@@ -392,33 +402,30 @@
         [orderBtn setTitle:str forState:UIControlStateNormal];
         [orderBtn addTarget:self action:@selector(reminderUserPay:) forControlEvents:UIControlEventTouchUpInside];
         [_footerView addSubview:orderBtn];
-
+ 
     } else if (_orderDetail.orderStatus == kOrderCancelPayTimeOut) {
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     } else if (_orderDetail.orderStatus == kOrderGrabSuccess && !_isSendOrder) {
+        
         _addressConstraint.constant = 70;
-        _complainBtn.hidden = NO;
+        _cancelBtn.hidden = NO;
+        _addressConstraint.constant = 70;
+        _cancelBtnConstraint.constant = 12;
 
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
-    } else if (_orderDetail.orderStatus == kOrderCancelDispute) {
-        statusString = _orderDetail.orderStatusDesc;
-        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
-
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
-        
-    } else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
+    }  else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
         tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
-        _addressConstraint.constant = 100;
-        _complainBtn.hidden = NO;
         _cancelBtn.hidden = NO;
+        _addressConstraint.constant = 70;
+        _cancelBtnConstraint.constant = 12;
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
@@ -451,6 +458,17 @@
     } else if (_orderDetail.orderStatus == kOrderCompletion) {
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"保持良好记录有助于快速成交订单";
+        
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+    }   else if (_orderDetail.orderStatus == kOrderCancelDispute) {
+        statusString = _orderDetail.orderStatusDesc;
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
+        
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
+        
+    } else if (_orderDetail.orderStatus == kOrderNotBelongYou) {
+        statusString = _orderDetail.orderStatusDesc;
+        tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
     }
@@ -507,19 +525,14 @@
     }];
 }
 
--(void)datouzhen
+- (void)datouzhen
 {
     [self.mapview.layer removeAllAnimations];
     [self.mapview removeOverlays:self.mapview.overlays];;
     [self.mapview removeAnnotations:self.mapview.annotations];
-    
-    UserInfo *userInfo;
-    if (_isSendOrder) {
-        userInfo = _orderDetail.grabOrderUser;
-    } else {
-        userInfo = _orderDetail.sendOrderUser;
-    }
-    
+   
+    UserInfo *userInfo = _orderDetail.grabOrderUser;
+   
     FYAnnotation *tag2 = [[FYAnnotation alloc]init];
     tag2.coordinate = _missionLocation;
     tag2.icon = @"ic_location_marker.png";
@@ -528,13 +541,16 @@
     [self adjustMapViewWithLocation:_missionLocation];
    
     if ([userInfo.userid integerValue] == 0) {
-
-        return;
+        if (_isSendOrder) {
+            return;
+        } else {
+            _userLocation = CLLocationCoordinate2DMake([UserManager shareUserManager].userInfo.lat, [UserManager shareUserManager].userInfo.lng);
+            userInfo = [UserManager shareUserManager].userInfo;
+        }
     } else {
-        _userLocation = CLLocationCoordinate2DMake(userInfo.lat, userInfo.lng);
+        _userLocation = CLLocationCoordinate2DMake(_orderDetail.grabOrderUser.lat, _orderDetail.grabOrderUser.lng);
     }
     
-
     FYAnnotation *tg = [[FYAnnotation alloc]init];
     tg.coordinate = _userLocation;
     
@@ -671,9 +687,9 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([tempStatus integerValue] == 1) {
-                UIAlertView * alertV = [[UIAlertView alloc]initWithTitle:@"恭喜，任务验收成功!" message:@"订单金额已向抢单人实时支付!您可以对抢单人的服务进行评价。" delegate:self cancelButtonTitle:@"稍后评价" otherButtonTitles:@"去评价", nil];
+                UIAlertView * alertV = [[UIAlertView alloc]initWithTitle:@"恭喜，任务验收成功!" message:@"订单金额已向抢单人实时支付!您可以对抢单人的服务进行评价。" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去评价", nil];
 
-                [self updateDetailViewWithStatus:kOrderCheckDone andShouldReloadOrderDetail:NO];
+                [self updateDetailViewWithStatus:kOrderCheckDone andShouldReloadOrderDetail:YES];
                 [alertV showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
                         [self ratingAction:nil];

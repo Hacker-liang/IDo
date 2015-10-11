@@ -126,7 +126,11 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSInteger status = [[dict objectForKey:@"status"] integerValue];
             if (status == 1) {
-                
+                if (index == 0) {
+                    [UserManager shareUserManager].userInfo.isSendingOrder = NO;
+                } else {
+                    [UserManager shareUserManager].userInfo.isSendingOrder = YES;
+                }
             } else {
             }
             

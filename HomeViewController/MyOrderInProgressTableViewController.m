@@ -157,6 +157,27 @@
     ctl.orderId = model.orderId;
     ctl.isSendOrder = !_isGrabOrder;
     [self.navigationController pushViewController:ctl animated:YES];
-    
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"scrollViewDidScroll: %lf", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y < 64 && [scrollView isEqual:self.tableView] && scrollView.contentOffset.y > 0) {
+        if (_isGrabOrder) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Buttom object:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSendShouldSroll2Buttom object:nil];
+
+        }
+    } else if (scrollView.contentOffset.y < 0) {
+        if (_isGrabOrder) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Top object:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSendShouldSroll2Top object:nil];
+            
+        }
+    }
+}
+
+
 @end

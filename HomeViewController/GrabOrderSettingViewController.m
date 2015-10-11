@@ -334,4 +334,14 @@
     [self addTag:cell.textField.text];
     cell.textField.text = @"";
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"scrollViewDidScroll: %lf", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y < 64 && [scrollView isEqual:self.tableView] && scrollView.contentOffset.y > 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Buttom object:nil];
+    } else if (scrollView.contentOffset.y < 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Top object:nil];
+    }
+}
 @end

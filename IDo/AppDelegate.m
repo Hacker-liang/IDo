@@ -64,8 +64,53 @@
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [APService setBadge:0];
+    [self get_version];
     
     return YES;
+}
+
+- (void)get_version{
+    [SVHTTPRequest POST:@"https://itunes.apple.com/lookup?id=983842433" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if (dict)
+            {
+                NSInteger resultCount = [[dict objectForKey:@"resultCount"] integerValue];
+                if (resultCount == 1) {
+                    NSArray *arr = [dict objectForKey:@"results"];
+                    if (arr.count) {
+                        NSDictionary *arrDict = arr[0];
+                        if (arrDict) {
+                            NSString *version = [arrDict objectForKey:@"version"];
+                            
+                            NSString *appUrl = [arrDict objectForKey:@"trackViewUrl"];
+                            NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
+                            NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
+                            if ([versionNum compare:version] == -1) {
+                                NSString *meaasge = [NSString stringWithFormat:@"发现新版本%@，是否更新?",version];
+                                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:meaasge delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+                                [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                                    if (buttonIndex == 1) {
+                                        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:appUrl]];
+                                    }
+                                }];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [APService setBadge:0];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNewOrderNoti object:nil];
 }
 
 - (void)receiveJPushMessage:(NSNotification *)noti
@@ -88,22 +133,20 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    if (application.applicationState != UIApplicationStateActive) {
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-        [APService setBadge:0];
-        [self receiveRemoteNotification:userInfo];
-        
-    }else{
-        SystemSoundID myAlertSound;
-        
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/sms-received1.caf"]];
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &myAlertSound);
-        AudioServicesPlaySystemSound(myAlertSound);
-        [self receiveRemoteNotification:userInfo];
-    }
-    
-    [APService handleRemoteNotification:userInfo];
-    NSLog(@"RemoteNote userInfo:%@",userInfo);
+//    if (application.applicationState != UIApplicationStateActive) {
+//        [self receiveRemoteNotification:userInfo];
+//        
+//    }else{
+//        SystemSoundID myAlertSound;
+//        
+//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/sms-received1.caf"]];
+//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &myAlertSound);
+//        AudioServicesPlaySystemSound(myAlertSound);
+//        [self receiveRemoteNotification:userInfo];
+//    }
+//    
+//    [APService handleRemoteNotification:userInfo];
+//    NSLog(@"RemoteNote userInfo:%@",userInfo);
 }
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -182,8 +225,10 @@
 - (void)receiveRemoteNotification:(NSDictionary*)userInfo
 {
     NSLog(@"userInfo = %@",userInfo);
+    NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
+    NSString *orderId = userInfo[@"extras"][@"orderid"];
     
-    if (![UserManager shareUserManager].userInfo.isMute) {
+    if ((![UserManager shareUserManager].userInfo.isMute && ![UserManager shareUserManager].userInfo.isSendingOrder) || ![notificationType isEqualToString:@"gettzpersonnum"]) {
         SystemSoundID myAlertSound;
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/sms-received1.caf"]];
@@ -201,8 +246,6 @@
         
     }
     
-      NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
-    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
     [[NSUserDefaults standardUserDefaults] setObject:orderId forKey:OrderidMark];
     [[NSUserDefaults standardUserDefaults] synchronize];
     if (![notificationType isEqualToString:@"gettzpersonnum"] && ![notificationType isEqualToString:@"comment"]) {
@@ -246,8 +289,6 @@
                 }
             }
         }];
-
-        
     }
     if ([notificationType isEqualToString:@"gettzpersonnum"])
     {
@@ -368,12 +409,13 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderPieStatusChange];
         
     } else if([notificationType isEqualToString:@"confpay" ]) { //发单方已确认付款
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"对方已成功验收任务！" delegate:self cancelButtonTitle:@"稍后评价" otherButtonTitles:@"去评价", nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"对方已成功验收任务！" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去评价", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-            if (buttonIndex == 1) {
+            if (buttonIndex == 0) {
                 //进入去评价
+                NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
                 EvaluationViewController *control = [[EvaluationViewController alloc] init];
-                control.evaluationType = 2;
+                control.evaluationType = 1;
                 control.orderid = orderId;
                 [self.homeViewController.navigationController pushViewController:control animated:YES];
                 
@@ -466,59 +508,5 @@
     }
 }
 
-#pragma mark - app完全对出 在推送进入
-- (void)receiveRemoteNotificationStart:(NSDictionary*)userInfo
-{
-    NSString *notificationType = userInfo[@"type"];
-    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"orderid"]];
-    NSLog(@"receiveRemoteNotificationStart 收到推送消息%@", notificationType);
-    
-//    if([notificationType isEqualToString:@"scrambleorder"]) { //发单被抢通知
-//        OrderDetailedViewController *control = [[OrderDetailedViewController alloc] init];
-//        control.orderId = orderId;
-//        control.fromType = OrderIngPie;
-//        [self.navController pushViewController:control animated:YES];
-//    }else if([notificationType isEqualToString:@"orderpayover" ]) { //发单方已经付款完成，确定开始干活
-//        OrderDetailedViewController *control = [[OrderDetailedViewController alloc] init];
-//        control.orderId = orderId;
-//        control.fromType = OrderIngGrab;
-//        [self.navController pushViewController:control animated:YES];
-//    }else if([notificationType isEqualToString:@"dept" ]) { //接单方 催款
-//        OrderDetailedViewController *control = [[OrderDetailedViewController alloc] init];
-//        control.orderId = orderId;
-//        control.fromType = OrderIngPie;
-//        [self.navController pushViewController:control animated:YES];
-//    }else if([notificationType isEqualToString:@"confpay" ]) { //发单方已确认付款
-//        EvaluationViewController *control = [[EvaluationViewController alloc] init];
-//        control.evaluationType = 2;
-//        control.orderid = orderId;
-//        [self.navController pushViewController:control animated:YES];
-//    }else if([notificationType isEqualToString:@"askCancelOrder" ]) { //发单方 请求取消订单 //已付款
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];
-//        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-//            if (buttonIndex == 1) {
-//                [self.homeController agreeCancelOrderGrab:orderId];
-//            }
-//        }];
-//    }else if([notificationType isEqualToString:@"tomemberAskCancelOrder" ]) { //接单方请求取消
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];
-//        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-//            if (buttonIndex == 1) {
-//                [self.homeController agreeCancelOrderPie:orderId];
-//            }
-//        }];
-//    }else if([notificationType isEqualToString:@"FrommemberAllowCancelOrder" ]) { //发单方同意取消
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-//        }];
-//    }else if([notificationType isEqualToString:@"allowCancelOrder" ]) { //接单方同意取消
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-//        }];
-//    }else if([notificationType isEqualToString:@"gettzpersonnum" ]) { //收到新订单 通知
-//        GrabOrderViewController *control = [[GrabOrderViewController alloc] init];
-//        [self.navController pushViewController:control animated:YES];
-//    }
-}
 
 @end

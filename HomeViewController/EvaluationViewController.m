@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
+@property (nonatomic, strong) UserInfo *userInfo;
+
 @end
 
 @implementation EvaluationViewController
@@ -24,13 +26,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (self.evaluationType == 1) {
+        _userInfo = _orderDetail.grabOrderUser;
+
+    }else{
+        _userInfo = _orderDetail.sendOrderUser;
+    }
+
     // Do any additional setup after loading the view.
     self.title = @"评价";
     self.view.backgroundColor=[UIColor groupTableViewBackgroundColor];
     
     NSString *url = [NSString stringWithFormat:@"%@getorderdetails",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:self.orderDetail.orderId forKey:@"orderid"];
+    if (_orderDetail.orderId) {
+        [mDict safeSetObject:self.orderDetail.orderId forKey:@"orderid"];
+    } else {
+        [mDict safeSetObject:self.orderid forKey:@"orderid"];
+    }
     if (self.evaluationType == 1){
         [mDict setObject:@"1" forKey:@"type"];
     }else{
@@ -45,6 +58,11 @@
             
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if([tempStatus integerValue] == 1) {
+                if (self.evaluationType == 1) {
+                    _userInfo = [[UserInfo alloc] initWithJson:dict[@"data"][@"jiedanren"]];
+                } else {
+                    _userInfo = [[UserInfo alloc] initWithJson:dict[@"data"][@"member"]];
+                }
                 [self buildView];
             }
         }
@@ -142,7 +160,12 @@
         url = [NSString stringWithFormat:@"%@commentFromPerson",baseUrl];
     }
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:self.orderDetail.orderId forKey:@"orderid"];
+    if (_orderDetail.orderId) {
+        [mDict safeSetObject:self.orderDetail.orderId forKey:@"orderid"];
+    } else {
+        [mDict safeSetObject:self.orderid forKey:@"orderid"];
+    }
+
     [mDict setObject:[NSString stringWithFormat:@"%ld",self.ratingBar.starNumber] forKey:@"commentstar"];
     [mDict setObject:self.textView.text forKey:@"commentcontent"];
     

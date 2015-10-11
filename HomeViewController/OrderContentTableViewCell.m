@@ -15,6 +15,7 @@
     _contentTextView.layer.borderWidth = 0.5;
     _contentTextView.layer.cornerRadius = 3.0;
     _contentTextView.delegate = self;
+    _contentTextView.returnKeyType = UIReturnKeyDone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -44,5 +45,16 @@
 {
     _placeholderTextField.hidden = !(textView.text.length == 0);
 }
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        
+        [self.contentTextView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
 
 @end

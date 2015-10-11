@@ -10,6 +10,7 @@
 #import "FYAnnotationView.h"
 #import "FYAnnotation.h"
 #import "MyAnnotation.h"
+#import <MapKit/MapKit.h>
 
 @interface SendOrderDetailHeaderView ()<MKMapViewDelegate, CLLocationManagerDelegate>
 
@@ -51,19 +52,25 @@
     _missionLocation = CLLocationCoordinate2DMake(_lat, _lng);
 
     [_locationBtn setTitle:_address forState:UIControlStateNormal];
+    
+//    MKPointAnnotation *ann = [[MKPointAnnotation alloc] init];
+////    tg.icon = @"ic_location_marker.png";
+//    ann.coordinate = _missionLocation;
+//    [self.mapView addAnnotation:ann];
 
     [self adjustMapViewWithLocation:_missionLocation];
     
     [locationManager getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
         [self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
+        self.mapView.showsUserLocation = YES;
+        NSLog(@"%@", self.mapView.userLocation);
         _lat = userLocation.coordinate.latitude;
         _lng = userLocation.coordinate.longitude;
         _address = address;
         _city = locationManager.userCityCode;
         [_locationBtn setTitle:_address forState:UIControlStateNormal];
         [_locationBtn setTitle:address forState:UIControlStateNormal];
-        _missionLocation = CLLocationCoordinate2DMake(_lat, _lng);
-        [self datouzhen];
+        _missionLocation = userLocation.coordinate;
     }];
 }
 
@@ -80,7 +87,7 @@
 
 - (void)adjustMapViewWithLocation:(CLLocationCoordinate2D)location
 {
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.05, 0.05);
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.005, 0.005);
     MKCoordinateRegion region = MKCoordinateRegionMake(location,span);
     MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:region];
     [_mapView setRegion:adjustedRegion animated:YES];
@@ -105,6 +112,9 @@
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     NSLog(@"view tag: %ld", view.tag);
+    if (view.tag > _userList.count-1) {
+        return;
+    }
     MyAnnotation *an = _userList[view.tag];
     if ([an.level integerValue] == 1) {
         return;
@@ -135,6 +145,7 @@
     [self.mapView.layer removeAllAnimations];
     [self.mapView removeOverlays:self.mapView.overlays];;
     [self.mapView removeAnnotations:self.mapView.annotations];
+    
     _annotationList = [[NSMutableArray alloc] init];
     for (MyAnnotation *an in self.userList)
     {
@@ -160,10 +171,12 @@
         tg.coordinate=CLLocationCoordinate2DMake([an.lat doubleValue], [an.lng doubleValue]);
         [self.mapView addAnnotation:tg];
     }
+ 
     FYAnnotation *tg=[[FYAnnotation alloc]init];
     tg.icon = @"ic_location_marker.png";
     tg.coordinate = _missionLocation;
     [self.mapView addAnnotation:tg];
+    
     [self adjustMapViewWithLocation:_missionLocation];
 }
 

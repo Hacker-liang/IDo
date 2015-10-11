@@ -32,6 +32,9 @@ typedef enum : NSUInteger {
     //订单取消，因为纠纷
     kOrderCancelDispute,
     
+    //订单不属于你
+    kOrderNotBelongYou,
+    
     
 } OrderStatus;
 

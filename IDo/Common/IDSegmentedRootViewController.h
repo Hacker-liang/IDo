@@ -38,4 +38,6 @@
 
 @property (nonatomic, strong) NSArray *viewControllers;
 
+- (void)changePage:(NSInteger)pageIndex;
+
 @end

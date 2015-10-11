@@ -41,7 +41,17 @@
         if ([[json objectForKey:@"status"] intValue] == 3) {
             if ([[json objectForKey:@"haspay"] intValue] == 0) {
                 _orderStatus = kOrderGrabSuccess;
-                _orderStatusDesc = @"已抢单，等待对方付款";
+                if (!_isSendOrder) {
+                    if ([_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
+                        _orderStatusDesc = @"已抢单，等待对方付款";
+                    } else {
+                        _orderStatus = kOrderNotBelongYou;
+                        _orderStatusDesc = @"订单已被抢";
+                    }
+                } else {
+                    _orderStatusDesc = @"订单已被抢，请您付款";
+
+                }
                 NSInteger shouldPayTime = [[json objectForKey:@"countdown"] intValue] + 1200;
                 NSTimeInterval timeNow = [NSDate date].timeIntervalSince1970;
                 _payCountdown = shouldPayTime - timeNow;
@@ -50,30 +60,40 @@
                 if ([[json objectForKey:@"hasconfpay"] intValue] == 0) {
                     _orderStatus = kOrderPayed;
                     if (!_isSendOrder) {
-                        _orderStatusDesc = @"对方已付款,任务进行中";
+                        if ([_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
+                            _orderStatusDesc = @"对方已付款,任务进行中";
+                        } else {
+                            _orderStatus = kOrderNotBelongYou;
+                            _orderStatusDesc = @"订单已被抢";
+                        }
                     } else {
                         _orderStatusDesc = [NSString stringWithFormat:@"已付款，请验收(被催单%@)", _reminderCount];
                     }
                     
                 } else {
-                    if (_isSendOrder) {
-                        if ([[json objectForKey:@"hascommenttoperson"] intValue] == 1) {
-                            _orderStatus = kOrderCompletion;
-                            _orderStatusDesc = @"订单已经完成";
-
-                        } else {
-                            _orderStatus = kOrderCheckDone;
-                            _orderStatusDesc = @"已经验收，等待评价";
-                        }
+                    if (![_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
+                        _orderStatus = kOrderNotBelongYou;
+                        _orderStatusDesc = @"订单已被抢";
                     } else {
-                        if ([[json objectForKey:@"hascommentfromperson"] intValue] == 1) {
-                            _orderStatus = kOrderCompletion;
-                            _orderStatusDesc = @"订单已经完成";
+                        if (_isSendOrder) {
+                            if ([[json objectForKey:@"hascommenttoperson"] intValue] == 1) {
+                                _orderStatus = kOrderCompletion;
+                                _orderStatusDesc = @"任务完成，订单已结束";
 
+                            } else {
+                                _orderStatus = kOrderCheckDone;
+                                _orderStatusDesc = @"已验收，请评价";
+                            }
                         } else {
-                            _orderStatus = kOrderCheckDone;
-                            _orderStatusDesc = @"已经验收，等待评价";
+                            if ([[json objectForKey:@"hascommentfromperson"] intValue] == 1) {
+                                _orderStatus = kOrderCompletion;
+                                _orderStatusDesc = @"任务完成，订单已结束";
 
+                            } else {
+                                _orderStatus = kOrderCheckDone;
+                                _orderStatusDesc = @"已验收，请评价";
+
+                            }
                         }
                     }
                 }
@@ -127,11 +147,11 @@
             break;
             
         case kOrderCheckDone:
-            _orderStatusDesc = @"已经验收，等待评价";
+            _orderStatusDesc = @"已验收，请评价";
             break;
             
         case kOrderCompletion:
-            _orderStatusDesc = @"订单已经完成";
+            _orderStatusDesc = @"任务完成，订单已结束";
             break;
             
         case kOrderGrabSuccess:

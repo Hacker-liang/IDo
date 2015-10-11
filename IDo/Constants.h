@@ -64,7 +64,14 @@
 #define UserStatusMark @"setUserStatus"  ///设置当前用户身份
 #define kNewOrderNoti @"kNewOrder"     //新订单
 #define kNewRating @"newRating"     //新评价
+#define kSendOrderSuccess @"sendOrderSuccess"     //派单成功
+#define kGrabOrderSuccess @"grabOrderSuccess"     //抢单成功
 
+#define kGrabShouldSroll2Top @"grabShouldSroll2Top"
+#define kGrabShouldSroll2Buttom @"grabShouldSroll2Buttom"
+
+#define kSendShouldSroll2Top @"sendShouldSroll2Top"
+#define kSendShouldSroll2Buttom @"sendShouldSroll2Buttom"
 
 #define messageError @"网络貌似出问题了，等一会儿再试试吧…"
 

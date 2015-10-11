@@ -33,7 +33,29 @@
     self.segementedController.view.frame = CGRectMake(0, 214, self.view.bounds.size.width, self.view.bounds.size.height-214);
     self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height+150);
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scroll2Buttom) name:kGrabShouldSroll2Buttom object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scroll2Top) name:kGrabShouldSroll2Top object:nil];
+}
 
+- (void)scroll2Buttom
+{
+    self.view.userInteractionEnabled = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.scrollView setContentOffset:CGPointMake(0, 214)];
+
+    } completion:^(BOOL finished) {
+        self.view.userInteractionEnabled = YES;
+    }];
+}
+
+- (void)scroll2Top
+{
+    self.view.userInteractionEnabled = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.scrollView setContentOffset:CGPointZero];
+    } completion:^(BOOL finished) {
+        self.view.userInteractionEnabled = YES;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

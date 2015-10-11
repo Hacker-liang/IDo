@@ -111,17 +111,23 @@
         CLPlacemark *placemark = [placemarks firstObject];
         
         NSDictionary *dic = placemark.addressDictionary;
-        NSString *address = [NSString stringWithFormat:@"%@%@%@%@", dic[@"City"], dic[@"SubLocality"], dic[@"Street"], dic[@"Name"]];
+        NSString *address = placemark.name;
+        NSString *addressTwo = [NSString stringWithFormat:@"%@%@%@", dic[@"City"], dic[@"SubLocality"], dic[@"Street"]];
+
         _userCityCode = dic[@"City"];
         if ([[UserManager shareUserManager] isLogin]) {
             [UserManager shareUserManager].userInfo.lat = location.coordinate.latitude;
             [UserManager shareUserManager].userInfo.lng = location.coordinate.longitude;
-            [UserManager shareUserManager].userInfo.address = address;
+            if (address.length > addressTwo.length) {
+                [UserManager shareUserManager].userInfo.address = address;
+            } else {
+                [UserManager shareUserManager].userInfo.address = addressTwo;
+            }
             [[UserManager shareUserManager] saveUserData2Cache];
         }
         
         if (_userLocationCompletionBlock) {
-            _userLocationCompletionBlock(_userLocation, address);
+            _userLocationCompletionBlock(_userLocation, [UserManager shareUserManager].userInfo.address);
         }
     }];
 }

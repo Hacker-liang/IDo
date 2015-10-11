@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     _headerImageView.layer.cornerRadius = 17.0;
     _headerImageView.clipsToBounds = YES;
+    _orderStatusLabel.adjustsFontSizeToFitWidth = YES;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
