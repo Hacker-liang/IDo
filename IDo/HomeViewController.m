@@ -37,12 +37,12 @@
     
     _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
     [_titleBtn addTarget:self action:@selector(switchPage:) forControlEvents:UIControlEventTouchUpInside];
-    [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
+    [_titleBtn setTitle:@"干活儿     抢单" forState:UIControlStateNormal];
     _titleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
     [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.titleView = _titleBtn;
     
-    _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(42.5, 11, 15, 13)];
+    _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 11, 15, 13)];
     _refreshImageView.image = [UIImage imageNamed:@"icon_refresh.png"];
     [_titleBtn addSubview:_refreshImageView];
     
@@ -95,10 +95,10 @@
     NSUInteger index = [_viewControllers indexOfObject:_currentViewController];
     [self changePage:1-index];
     if (index == 0) {
-        [_titleBtn setTitle:@"我干     派单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:@"干活儿     派单" forState:UIControlStateNormal];
         
     } else {
-        [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:@"干活儿     抢单" forState:UIControlStateNormal];
     }
 }
 
