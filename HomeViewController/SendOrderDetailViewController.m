@@ -181,7 +181,7 @@
         [mDict safeSetObject:_orderDetail.price forKey:@"money"];
         [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
         [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
-        [mDict safeSetObject:[UserManager shareUserManager].userInfo.adcode forKey:@"adcode"];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
         [mDict safeSetObject:@"0" forKey:@"sex"];
         [mDict safeSetObject:@"0" forKey:@"range"];
         [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.longitude] forKey:@"lng"];
@@ -195,7 +195,7 @@
         [mDict safeSetObject:_orderDetail.price forKey:@"money"];
         [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
         [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
-        [mDict safeSetObject:[UserManager shareUserManager].userInfo.adcode forKey:@"adcode"];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
         [mDict safeSetObject:@"0" forKey:@"sex"];
         [mDict safeSetObject:@"0" forKey:@"range"];
         [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];

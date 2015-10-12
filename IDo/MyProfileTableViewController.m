@@ -232,11 +232,11 @@
     UISwitch *switchButton = (UISwitch*)sender;
     BOOL isButtonOn = [switchButton isOn];
     if (!isButtonOn) {
-        _userInfo.isMute = YES;
+        [[UserManager shareUserManager] setNotiMute:YES];
         [self changeUserSet:@"1" Type:@"6"];
 
     }else {
-        _userInfo.isMute= NO;
+        [[UserManager shareUserManager] setNotiMute:NO];
         [self changeUserSet:@"0" Type:@"6"];
     }
     

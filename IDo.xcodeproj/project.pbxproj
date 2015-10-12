@@ -2473,7 +2473,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f9af8f95-a27d-4081-ae06-863a09855678";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};

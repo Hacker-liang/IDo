@@ -22,4 +22,5 @@
 
 - (void)saveUserData2Cache;
 
+- (void)setNotiMute:(BOOL)isMute;
 @end

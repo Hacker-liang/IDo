@@ -62,6 +62,14 @@
     [_cancelBtn addTarget:self action:@selector(cancelOrder) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)dealloc
+{
+    _mapview.showsUserLocation = NO;
+    _mapview.delegate = nil;
+    _mapview = nil;
+    [_mapview removeFromSuperview];
+}
+
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload
 {
     _orderDetail.orderStatus = status;
@@ -132,9 +140,9 @@
     CLLocationDistance meters=[current distanceFromLocation:before];
 
     if (!_isSendOrder && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%d米", userInfo.sendOrderCount, (int)meters];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%.3f公里", userInfo.sendOrderCount, (int)meters/1000.0];
     } else if (userInfo.userid != 0 && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%d米", userInfo.grabOrderCount, (int)meters];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%.3f公里", userInfo.grabOrderCount, (int)meters/1000.0];
     } else {
         _userDescLabel.text = nil;
     }
@@ -266,7 +274,7 @@
         }
     }];
     vc.price = _orderDetail.price;
-    vc.orderid = _orderDetail.orderId;
+    vc.orderid = _orderDetail.orderNumber;
     vc.huoerbaoID = _orderDetail.grabOrderUser.userid;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -517,9 +525,9 @@
             if([tempStatus integerValue] == 1) {
                 _orderDetail = [[OrderDetailModel alloc] initWithJson:[dict objectForKey:@"data"] andIsSendOrder:_isSendOrder];
                 _missionLocation = CLLocationCoordinate2DMake([_orderDetail.lat floatValue], [_orderDetail.lng floatValue]);
-                [self datouzhen];
-                [self drawRoute];
-                [self updateView];
+//                [self datouzhen];
+//                [self drawRoute];
+//                [self updateView];
             }
         }
     }];

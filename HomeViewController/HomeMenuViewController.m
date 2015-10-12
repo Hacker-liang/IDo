@@ -55,7 +55,7 @@
         _dataSource = @[@{@"icon": @"icon_menu_wallet.png", @"title": @"我的钱包"},
                         @{@"icon": @"icon_menu_mine.png", @"title": @"个人中心"},
                         @{@"icon": @"icon_menu_message.png", @"title": @"关于我们"},
-                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
+//                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
                         ];
     }
     return _dataSource;
@@ -151,7 +151,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
