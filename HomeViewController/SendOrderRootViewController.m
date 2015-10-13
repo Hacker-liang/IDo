@@ -14,6 +14,7 @@
 @interface SendOrderRootViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) AutoSlideScrollView *galleryView;
+@property (nonatomic, strong) UIImageView *galleryImageView;
 @property (nonatomic, strong) SendOrderSegmentedViewController *segementedController;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -26,7 +27,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
-
+    [self.scrollView addSubview:self.galleryImageView];
+    [self.galleryImageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"banner_default.png"]];
     [self addChildViewController:self.segementedController];
     [self.scrollView addSubview:self.segementedController.view];
     self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height+150);
@@ -40,6 +42,14 @@
 {
     [super viewWillAppear:animated];
     [_galleryView.scrollView setContentOffset:CGPointZero];
+}
+
+- (UIImageView *)galleryImageView
+{
+    if (!_galleryImageView) {
+        _galleryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 150)];
+    }
+    return _galleryImageView;
 }
 
 - (void)scroll2Buttom
@@ -79,7 +89,7 @@
 - (void)setAdArray:(NSArray *)adArray
 {
     _adArray = adArray;
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 150) animationDuration:5];
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 150) animationDuration:10];
     [self.scrollView addSubview:_galleryView];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
