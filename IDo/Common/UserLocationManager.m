@@ -136,13 +136,18 @@
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
         AMapReGeocode *regeoCode = response.regeocode;
         NSString *address = regeoCode.formattedAddress;
+        _userCityCode = regeoCode.addressComponent.citycode;
+        _userCityName = regeoCode.addressComponent.city;
+        _userProvinceName = regeoCode.addressComponent.province;
+        if (!_userCityName) {
+            _userCityName = _userProvinceName;
+        }
+        _districtid = regeoCode.addressComponent.adcode;
+        
         if ([[UserManager shareUserManager] isLogin]) {
             [UserManager shareUserManager].userInfo.address = address;
-            _districtid = regeoCode.addressComponent.adcode;
             [UserManager shareUserManager].userInfo.districtid = regeoCode.addressComponent.adcode;
-            _userCityCode = regeoCode.addressComponent.citycode;
-            _userCityName = regeoCode.addressComponent.city;
-            _userProvinceName = regeoCode.addressComponent.province;
+           
             if (_userCityName) {
                 [UserManager shareUserManager].userInfo.cityName = _userCityName;
             } else {

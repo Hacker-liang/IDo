@@ -85,8 +85,14 @@
 - (void)loadAD
 {
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict safeSetObject:[UserManager shareUserManager].userInfo.provinceName forKey:@"provincename"];
-    [mDict safeSetObject:[UserManager shareUserManager].userInfo.cityName forKey:@"cityname"];
+    if ([UserManager shareUserManager].userInfo.provinceName) {
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.provinceName forKey:@"provincename"];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.cityName forKey:@"cityname"];
+    } else {
+        [mDict safeSetObject:[UserLocationManager shareInstance].userProvinceName forKey:@"provincename"];
+        [mDict safeSetObject:[UserLocationManager shareInstance].userCityName forKey:@"cityname"];
+    }
+    
     [mDict safeSetObject:@"adarea" forKey:@"action"];
     [SVHTTPRequest GET:baseServer parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 

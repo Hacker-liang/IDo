@@ -12,6 +12,7 @@
 #import "ComplaintViewController.h"
 #import "FYAnnotation.h"
 #import "FYAnnotationView.h"
+#import "MoreTextViewController.h"
 #import "OtherUserProfileTableViewController.h"
 
 @interface OrderDetailViewController () <MKMapViewDelegate>
@@ -46,6 +47,12 @@
     _cancelBtn.layer.cornerRadius = 3.0;
     _cancelBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _cancelBtn.layer.borderWidth = 0.5;
+    
+    UITapGestureRecognizer *tapGestureTwo = [[UITapGestureRecognizer alloc] init];
+    tapGestureTwo.numberOfTapsRequired = 1;
+    tapGestureTwo.numberOfTouchesRequired = 1;
+    [tapGestureTwo addTarget:self action:@selector(gotoMoreContent)];
+    [_orderContentLabel addGestureRecognizer:tapGestureTwo];
     
     _avatarImageView.layer.cornerRadius = 20.0;
     _avatarImageView.clipsToBounds = YES;
@@ -95,6 +102,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)gotoMoreContent
+{
+    MoreTextViewController *ctl = [[MoreTextViewController alloc] initWithNibName:@"MoreTextViewController" bundle:nil];
+    [self.navigationController pushViewController:ctl animated:YES];
+    ctl.content = _orderDetail.content;
 }
 
 - (void)gotoUserProfile

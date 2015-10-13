@@ -145,6 +145,8 @@
 		D969DA0D1BCCB22A00281D02 /* SVWebViewControllerActivitySafari@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D969D9F71BCCB22A00281D02 /* SVWebViewControllerActivitySafari@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D969DA0E1BCCB22A00281D02 /* SVWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D969D9F91BCCB22A00281D02 /* SVWebViewControllerActivity.m */; settings = {ASSET_TAGS = (); }; };
 		D969DA101BCCD07500281D02 /* banner_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D969DA0F1BCCD07500281D02 /* banner_default@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D969DA5F1BCCD81100281D02 /* MoreTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D969DA5D1BCCD81100281D02 /* MoreTextViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D969DA601BCCD81100281D02 /* MoreTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D969DA5E1BCCD81100281D02 /* MoreTextViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		D96AFC3D1BC6AAFF00817EDB /* b27_icon_star_white_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC3B1BC6AAFF00817EDB /* b27_icon_star_white_gray@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D96AFC421BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC411BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D96AFC451BC6C90E00817EDB /* b27_icon_star_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC431BC6C90E00817EDB /* b27_icon_star_gray@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -605,6 +607,9 @@
 		D969D9FA1BCCB22A00281D02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SVWebViewController.strings"; sourceTree = "<group>"; };
 		D969D9FB1BCCB22A00281D02 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SVWebViewController.strings"; sourceTree = "<group>"; };
 		D969DA0F1BCCD07500281D02 /* banner_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_default@2x.png"; sourceTree = "<group>"; };
+		D969DA5C1BCCD81100281D02 /* MoreTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTextViewController.h; sourceTree = "<group>"; };
+		D969DA5D1BCCD81100281D02 /* MoreTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTextViewController.m; sourceTree = "<group>"; };
+		D969DA5E1BCCD81100281D02 /* MoreTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreTextViewController.xib; sourceTree = "<group>"; };
 		D96AFC3B1BC6AAFF00817EDB /* b27_icon_star_white_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_white_gray@2x.png"; sourceTree = "<group>"; };
 		D96AFC411BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_white_yellow@2x.png"; sourceTree = "<group>"; };
 		D96AFC431BC6C90E00817EDB /* b27_icon_star_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_gray@2x.png"; sourceTree = "<group>"; };
@@ -1460,6 +1465,9 @@
 				D96EAA361BB5337F00360ED8 /* CustomTableViewCell.h */,
 				D96EAA371BB5337F00360ED8 /* CustomTableViewCell.m */,
 				D96EAA381BB5337F00360ED8 /* CustomTableViewCell.xib */,
+				D969DA5C1BCCD81100281D02 /* MoreTextViewController.h */,
+				D969DA5D1BCCD81100281D02 /* MoreTextViewController.m */,
+				D969DA5E1BCCD81100281D02 /* MoreTextViewController.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2239,6 +2247,7 @@
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,
 				D9777D4C1BB65E1900A7A64C /* xx@3x.png in Resources */,
 				D916A5E01BC58AEF005F5286 /* bt_star_a.png in Resources */,
+				D969DA601BCCD81100281D02 /* MoreTextViewController.xib in Resources */,
 				D916A5B21BC37306005F5286 /* common_icon_navigation_back_normal@3x.png in Resources */,
 				D9777D4B1BB65E1900A7A64C /* nan@3x.png in Resources */,
 				D90E2E361BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib in Resources */,
@@ -2368,6 +2377,7 @@
 				D96EAA901BB5964F00360ED8 /* MJRefreshHeader.m in Sources */,
 				D96EAA0D1BB40EA200360ED8 /* GrabOrderListTableViewController.m in Sources */,
 				D946C91A1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m in Sources */,
+				D969DA5F1BCCD81100281D02 /* MoreTextViewController.m in Sources */,
 				D96EA9C91BB3D24700360ED8 /* NSData+ImageContentType.m in Sources */,
 				D96EA9141BB292BB00360ED8 /* HomeMenuViewController.m in Sources */,
 				D96EAA971BB5964F00360ED8 /* MJRefreshGifHeader.m in Sources */,
