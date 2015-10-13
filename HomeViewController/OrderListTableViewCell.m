@@ -47,7 +47,7 @@
     } else {
         _sexImageView.hidden = NO;
     }
-    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.avatar] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     _titleLabel.text = userInfo.nickName;
 
     if (_isGrabOrder && userInfo.userid != 0) {

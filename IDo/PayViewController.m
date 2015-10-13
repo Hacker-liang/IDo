@@ -182,7 +182,7 @@
     [SVProgressHUD showWithStatus:@"正在加载"];
     AliPayTool *ali=[[AliPayTool alloc]init];
     __weak PayViewController *wSelf = self;
-    [ali aliPayWithProductName:@"佣金" productDescription:@"我干佣金-iOS 客户端" andAmount:self.price orderId:self.orderNumber MoneyBao:price AliPayMoney:price shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
+    [ali aliPayWithProductName:@"佣金" productDescription:@"我干佣金-iOS 客户端" andAmount:self.price orderId:self.orderid orderNumber:self.orderNumber MoneyBao:price AliPayMoney:price shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
         [wSelf aliPayCallBackWithSuccessed:success errorString:errorStr];
     }];
 }

@@ -30,6 +30,7 @@ typedef void(^RequestCompleteBlock)(BOOL success, NSString *errorStr);
            productDescription:(NSString *)description
                     andAmount:(NSString *)amount
                       orderId:(NSString *)orderId
+                      orderNumber:(NSString *)orderNumber
                      MoneyBao:(NSString *)qianbao
                   AliPayMoney:(NSString *)aliMoney
                    shouKuanID:(NSString *)shoukuanID
