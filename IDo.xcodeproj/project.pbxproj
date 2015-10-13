@@ -144,7 +144,7 @@
 		D969DA0C1BCCB22A00281D02 /* SVWebViewControllerActivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = D969D9F61BCCB22A00281D02 /* SVWebViewControllerActivitySafari.m */; settings = {ASSET_TAGS = (); }; };
 		D969DA0D1BCCB22A00281D02 /* SVWebViewControllerActivitySafari@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D969D9F71BCCB22A00281D02 /* SVWebViewControllerActivitySafari@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D969DA0E1BCCB22A00281D02 /* SVWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = D969D9F91BCCB22A00281D02 /* SVWebViewControllerActivity.m */; settings = {ASSET_TAGS = (); }; };
-		D96AFC3A1BC6A55C00817EDB /* banner_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC391BC6A55C00817EDB /* banner_default@2x.png */; settings = {ASSET_TAGS = (); }; };
+		D969DA101BCCD07500281D02 /* banner_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D969DA0F1BCCD07500281D02 /* banner_default@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D96AFC3D1BC6AAFF00817EDB /* b27_icon_star_white_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC3B1BC6AAFF00817EDB /* b27_icon_star_white_gray@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D96AFC421BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC411BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png */; settings = {ASSET_TAGS = (); }; };
 		D96AFC451BC6C90E00817EDB /* b27_icon_star_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC431BC6C90E00817EDB /* b27_icon_star_gray@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -604,7 +604,7 @@
 		D969D9F91BCCB22A00281D02 /* SVWebViewControllerActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewControllerActivity.m; sourceTree = "<group>"; };
 		D969D9FA1BCCB22A00281D02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SVWebViewController.strings"; sourceTree = "<group>"; };
 		D969D9FB1BCCB22A00281D02 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SVWebViewController.strings"; sourceTree = "<group>"; };
-		D96AFC391BC6A55C00817EDB /* banner_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_default@2x.png"; sourceTree = "<group>"; };
+		D969DA0F1BCCD07500281D02 /* banner_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_default@2x.png"; sourceTree = "<group>"; };
 		D96AFC3B1BC6AAFF00817EDB /* b27_icon_star_white_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_white_gray@2x.png"; sourceTree = "<group>"; };
 		D96AFC411BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_white_yellow@2x.png"; sourceTree = "<group>"; };
 		D96AFC431BC6C90E00817EDB /* b27_icon_star_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_gray@2x.png"; sourceTree = "<group>"; };
@@ -1647,6 +1647,7 @@
 		D96EA9DF1BB3D91200360ED8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D969DA0F1BCCD07500281D02 /* banner_default@2x.png */,
 				D916A5B31BC37317005F5286 /* common_icon_navigation_back_hilighted@2x.png */,
 				D916A5B41BC37317005F5286 /* common_icon_navigation_back_hilighted@3x.png */,
 				D916A5AF1BC37306005F5286 /* common_icon_navigation_back_normal@2x.png */,
@@ -1657,7 +1658,6 @@
 				D946C90D1BC29C9F00AAD3A3 /* icon_male@2x.png */,
 				D9B289EE1BBCEDE600FB97E5 /* icon_order@3x.png */,
 				D9B289EF1BBCEDE600FB97E5 /* icon_rating@3x.png */,
-				D96AFC391BC6A55C00817EDB /* banner_default@2x.png */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -2186,7 +2186,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D96AFC3A1BC6A55C00817EDB /* banner_default@2x.png in Resources */,
 				D946C91B1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib in Resources */,
 				D969DA0B1BCCB22A00281D02 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				D91F2F381BC2196A002CE690 /* icon_setting_newmsg@3x.png in Resources */,
@@ -2247,6 +2246,7 @@
 				D946C90F1BC29C9F00AAD3A3 /* icon_male@2x.png in Resources */,
 				D90E2E311BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib in Resources */,
 				D969DA021BCCB22A00281D02 /* h5_labar_right_disabled@3x.png in Resources */,
+				D969DA101BCCD07500281D02 /* banner_default@2x.png in Resources */,
 				D91F2F211BC2140F002CE690 /* icon_rule_def@3x.png in Resources */,
 				D969D9FD1BCCB22A00281D02 /* h5_labar_brush_default@3x.png in Resources */,
 				D969D9FF1BCCB22A00281D02 /* h5_labar_left_default@3x.png in Resources */,
