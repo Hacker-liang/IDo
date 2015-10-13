@@ -34,7 +34,6 @@
     [self changePage:0];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

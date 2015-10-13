@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) UserInfo *userInfo;
 
+
 + (id)homeMenuTableViewHeaderView;
 
 @end

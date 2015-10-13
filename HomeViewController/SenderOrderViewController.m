@@ -72,4 +72,5 @@
     SendOrderDetailViewController *ctl = [[SendOrderDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:ctl animated:YES];
 }
+
 @end

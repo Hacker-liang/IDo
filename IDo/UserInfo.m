@@ -48,6 +48,8 @@
             _complainCount = [dict objectForKey:@"totalComplaintTimes"];
         }
 
+        _cityName = [dict objectForKey:@"cityName"];
+        _provinceName = [dict objectForKey:@"provinceName"];
 
     }
     return self;

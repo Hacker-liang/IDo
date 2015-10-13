@@ -14,10 +14,14 @@
 #import "MyProfileTableViewController.h"
 #import "LoginViewController.h"
 #import "AboutViewController.h"
+#import "AutoSlideScrollView.h"
+#import "SuperWebViewController.h"
 
 @interface HomeMenuViewController ()
 
 @property (nonatomic, strong) HomeMenuTableViewHeaderView *headerView;
+@property (nonatomic, strong) AutoSlideScrollView *galleryView;
+
 @property (nonatomic, strong) NSArray *dataSource;
 
 @end
@@ -59,6 +63,35 @@
                         ];
     }
     return _dataSource;
+}
+
+- (void)setAdArray:(NSArray *)adArray
+{
+    _adArray = adArray;
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, 64, self.tableView.bounds.size.width, 100) animationDuration:5];
+    _galleryView.totalPagesCount = ^NSInteger(void){
+        return adArray.count;
+    };
+    NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in _adArray) {
+        NSString *imageUrl = [dic objectForKey:@"img"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"nil"]];
+        [viewsArray addObject:imageView];
+    }
+    
+    _galleryView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+        return viewsArray[pageIndex];
+    };
+    
+    __weak typeof(self)weakSelf = self;
+    _galleryView.TapActionBlock = ^void (NSInteger pageIndex) {
+        [weakSelf.frostedViewController hideMenuViewController];
+        SuperWebViewController *ctl = [[SuperWebViewController alloc] init];
+        ctl.urlStr = [[adArray objectAtIndex:pageIndex] objectForKey:@"link"];
+        [weakSelf.mainViewController.navigationController pushViewController:ctl animated:YES];
+    };
+    self.tableView.tableFooterView = _galleryView;
 }
 
 #pragma mark - IBAction Methods

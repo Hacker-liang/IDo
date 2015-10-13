@@ -14,6 +14,9 @@
 @property (nonatomic, strong) CLLocation *userLocation;
 @property (nonatomic, copy) NSString *userAddress;
 @property (nonatomic, copy) NSString *userCityCode;
+@property (nonatomic, copy) NSString *userCityName;
+@property (nonatomic, copy) NSString *userProvinceName;
+
 
 
 + (UserLocationManager *)shareInstance;

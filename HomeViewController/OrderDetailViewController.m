@@ -525,9 +525,9 @@
             if([tempStatus integerValue] == 1) {
                 _orderDetail = [[OrderDetailModel alloc] initWithJson:[dict objectForKey:@"data"] andIsSendOrder:_isSendOrder];
                 _missionLocation = CLLocationCoordinate2DMake([_orderDetail.lat floatValue], [_orderDetail.lng floatValue]);
-//                [self datouzhen];
-//                [self drawRoute];
-//                [self updateView];
+                [self datouzhen];
+                [self drawRoute];
+                [self updateView];
             }
         }
     }];

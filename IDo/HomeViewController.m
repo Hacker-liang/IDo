@@ -10,14 +10,21 @@
 #import "REFrostedViewController.h"
 #import "GrabOrderRootViewController.h"
 #import "SendOrderRootViewController.h"
+#import "HomeMenuViewController.h"
 
 @interface HomeViewController ()
 
 @property (nonatomic, strong) UIButton *titleBtn;
 @property (nonatomic, strong) UIImageView *refreshImageView;
 
+@property (nonatomic, strong) NSArray *ADProvince;
+@property (nonatomic, strong) NSArray *ADCity;
+
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) UIViewController *currentViewController;
+@property (nonatomic, strong) GrabOrderRootViewController *grabOrederCtl;
+@property (nonatomic, strong) SendOrderRootViewController *sendOrderCtl;
+
 
 @end
 
@@ -56,6 +63,7 @@
     
     [self setupContentViewContrller];
     [self changeProfileStatusWithPageIndex:0];
+    [self loadAD];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,9 +72,9 @@
 
 - (void)setupContentViewContrller
 {
-    GrabOrderRootViewController *grabOrederCtl = [[GrabOrderRootViewController alloc] init];
-    SendOrderRootViewController *sendOrderCtl = [[SendOrderRootViewController alloc] init];
-    _viewControllers = @[grabOrederCtl, sendOrderCtl];
+    _grabOrederCtl = [[GrabOrderRootViewController alloc] init];
+    _sendOrderCtl = [[SendOrderRootViewController alloc] init];
+    _viewControllers = @[_grabOrederCtl, _sendOrderCtl];
     
     UIViewController *firstCtl = [_viewControllers firstObject];
     _currentViewController = firstCtl;
@@ -74,7 +82,46 @@
     [self.view addSubview:firstCtl.view];
 }
 
+- (void)loadAD
+{
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.provinceName forKey:@"provincename"];
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.cityName forKey:@"cityname"];
+    [mDict safeSetObject:@"adarea" forKey:@"action"];
+    [SVHTTPRequest GET:baseServer parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSDictionary *adData = dict[@"data"];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
+                NSMutableArray *cityArray = [[NSMutableArray alloc] init];
+                for (NSDictionary *dict in [adData objectForKey:@"city"]) {
+                    [cityArray addObject:dict];
+                }
+                _ADCity = cityArray;
+                _grabOrederCtl.adArray = _ADCity;
+                _sendOrderCtl.adArray = _ADCity;
+                
+                NSMutableArray *provinceArray = [[NSMutableArray alloc] init];
+                for (NSDictionary *dict in [adData objectForKey:@"province"]) {
+                    [provinceArray addObject:dict];
+                }
+                _ADProvince = provinceArray;
+                ((HomeMenuViewController *)self.frostedViewController.menuViewController).adArray = _ADProvince;
+
+            } else {
+
+            }
+        }
+    }];
+
+}
+
 #pragma mark - IBAction Methods
+
 - (void)showMenu
 {
     [self.view endEditing:YES];

@@ -140,6 +140,15 @@
             [UserManager shareUserManager].userInfo.address = address;
             [UserManager shareUserManager].userInfo.districtid = regeoCode.addressComponent.adcode;
             _userCityCode = regeoCode.addressComponent.citycode;
+            _userCityName = regeoCode.addressComponent.city;
+            _userProvinceName = regeoCode.addressComponent.province;
+            if (_userCityName) {
+                [UserManager shareUserManager].userInfo.cityName = _userCityName;
+            } else {
+                [UserManager shareUserManager].userInfo.cityName = _userProvinceName;
+            }
+            [UserManager shareUserManager].userInfo.provinceName = _userProvinceName;
+
             [[UserManager shareUserManager] saveUserData2Cache];
 
         }

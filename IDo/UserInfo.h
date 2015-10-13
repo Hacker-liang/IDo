@@ -18,6 +18,9 @@
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *districtid;
+@property (nonatomic, copy) NSString *cityName;
+@property (nonatomic, copy) NSString *provinceName;
+
 
 @property (nonatomic, copy) NSString *userLabel;
 @property (nonatomic, copy) NSString *level;

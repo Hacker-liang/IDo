@@ -135,6 +135,9 @@
     [mDict safeSetObject:_userInfo.sendOrderCount forKey:@"fadannumber"];
     [mDict safeSetObject:_userInfo.grabOrderCount forKey:@"jiedannumber"];
     [mDict safeSetObject:_userInfo.complainCount forKey:@"totalComplaintTimes"];
+    [mDict safeSetObject:_userInfo.cityName forKey:@"cityName"];
+    [mDict safeSetObject:_userInfo.provinceName forKey:@"provinceName"];
+
     if (_userInfo.isMute) {
         [mDict setObject:@"1" forKey:@"isMute"];
     } else {
