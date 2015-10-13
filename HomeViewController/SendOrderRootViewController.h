@@ -10,4 +10,6 @@
 
 @interface SendOrderRootViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *adArray;
+
 @end

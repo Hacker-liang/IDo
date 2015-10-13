@@ -36,7 +36,7 @@
 
 - (BOOL)isLogin
 {
-    return self.userInfo;
+    return self.userInfo != nil;
 }
 
 - (void)asyncLogout:(void (^)(BOOL))completion
@@ -71,8 +71,12 @@
             
         }
     }];
+}
 
-    
+- (void)setNotiMute:(BOOL)isMute
+{
+    _userInfo.isMute = isMute;
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:isMute] forKey:[NSString stringWithFormat:@"%@_isMute", _userInfo.userid]];
 }
 
 //读取配置文件，加载数据
@@ -81,6 +85,8 @@
     id dict = [[NSUserDefaults standardUserDefaults] objectForKey:LoginInfoMark];
     if ([dict isKindOfClass:[NSDictionary class]]) {
         _userInfo = [[UserInfo alloc] initWithJson:dict];
+        _userInfo.isMute = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_isMute", _userInfo.userid]] boolValue];
+
         [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
             _userInfo.address = address;
             _userInfo.lat = userLocation.coordinate.latitude;
@@ -125,10 +131,13 @@
     [mDict safeSetObject:_userInfo.zhifubao forKey:@"zhifubao"];
     [mDict safeSetObject:_userInfo.weixin forKey:@"weixin"];
     [mDict safeSetObject:_userInfo.rating forKey:@"star"];
-    [mDict safeSetObject:_userInfo.adcode forKey:@"adcode"];
+    [mDict safeSetObject:_userInfo.districtid forKey:@"districtid"];
     [mDict safeSetObject:_userInfo.sendOrderCount forKey:@"fadannumber"];
     [mDict safeSetObject:_userInfo.grabOrderCount forKey:@"jiedannumber"];
     [mDict safeSetObject:_userInfo.complainCount forKey:@"totalComplaintTimes"];
+    [mDict safeSetObject:_userInfo.cityName forKey:@"cityName"];
+    [mDict safeSetObject:_userInfo.provinceName forKey:@"provinceName"];
+
     if (_userInfo.isMute) {
         [mDict setObject:@"1" forKey:@"isMute"];
     } else {

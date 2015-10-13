@@ -12,6 +12,7 @@
 #import "ComplaintViewController.h"
 #import "FYAnnotation.h"
 #import "FYAnnotationView.h"
+#import "MoreTextViewController.h"
 #import "OtherUserProfileTableViewController.h"
 
 @interface OrderDetailViewController () <MKMapViewDelegate>
@@ -36,6 +37,7 @@
     _cancelBtn.hidden = YES;
     _complainBtn.hidden = YES;
     _mapview.delegate = self;
+    _orderContentLabel.adjustsFontSizeToFitWidth = YES;
     _conteViewConstraint.constant = 14;
     _addressBtn.titleLabel.numberOfLines = 0;
     _complainBtn.layer.cornerRadius = 3.0;
@@ -45,6 +47,12 @@
     _cancelBtn.layer.cornerRadius = 3.0;
     _cancelBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _cancelBtn.layer.borderWidth = 0.5;
+    
+    UITapGestureRecognizer *tapGestureTwo = [[UITapGestureRecognizer alloc] init];
+    tapGestureTwo.numberOfTapsRequired = 1;
+    tapGestureTwo.numberOfTouchesRequired = 1;
+    [tapGestureTwo addTarget:self action:@selector(gotoMoreContent)];
+    [_orderContentLabel addGestureRecognizer:tapGestureTwo];
     
     _avatarImageView.layer.cornerRadius = 20.0;
     _avatarImageView.clipsToBounds = YES;
@@ -60,6 +68,14 @@
     [_phoneLabel addTarget:self action:@selector(callClick) forControlEvents:UIControlEventTouchUpInside];
     [_complainBtn addTarget:self action:@selector(complainAction) forControlEvents:UIControlEventTouchUpInside];
     [_cancelBtn addTarget:self action:@selector(cancelOrder) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)dealloc
+{
+    _mapview.showsUserLocation = NO;
+    _mapview.delegate = nil;
+    _mapview = nil;
+    [_mapview removeFromSuperview];
 }
 
 - (void)updateDetailViewWithStatus:(OrderStatus)status andShouldReloadOrderDetail:(BOOL)isReload
@@ -86,6 +102,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)gotoMoreContent
+{
+    MoreTextViewController *ctl = [[MoreTextViewController alloc] initWithNibName:@"MoreTextViewController" bundle:nil];
+    [self.navigationController pushViewController:ctl animated:YES];
+    ctl.content = _orderDetail.content;
 }
 
 - (void)gotoUserProfile
@@ -132,9 +155,9 @@
     CLLocationDistance meters=[current distanceFromLocation:before];
 
     if (!_isSendOrder && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%d米", userInfo.sendOrderCount, (int)meters];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%.3f公里", userInfo.sendOrderCount, (int)meters/1000.0];
     } else if (userInfo.userid != 0 && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%d米", userInfo.grabOrderCount, (int)meters];
+        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%.3f公里", userInfo.grabOrderCount, (int)meters/1000.0];
     } else {
         _userDescLabel.text = nil;
     }
@@ -265,6 +288,7 @@
             [self updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
         }
     }];
+    vc.orderNumber = _orderDetail.orderNumber;
     vc.price = _orderDetail.price;
     vc.orderid = _orderDetail.orderId;
     vc.huoerbaoID = _orderDetail.grabOrderUser.userid;

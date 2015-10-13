@@ -164,7 +164,7 @@
     }
 
     [mDict setObject:[NSString stringWithFormat:@"%ld",self.ratingBar.starNumber] forKey:@"commentstar"];
-    [mDict setObject:self.textView.text forKey:@"commentcontent"];
+    [mDict safeSetObject:self.textView.text forKey:@"commentcontent"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)

@@ -10,4 +10,5 @@
 
 @interface GrabOrderRootViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *adArray;
 @end

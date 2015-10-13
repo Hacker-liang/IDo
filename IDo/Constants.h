@@ -11,7 +11,7 @@
 
 #ifdef __OBJC__
 
-
+#define baseServer @"http://58.30.16.58/"
 #define baseUrl @"http://58.30.16.58/?action="
 //#define baseUrl @"http://112.124.51.74/?action="
 

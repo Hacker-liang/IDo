@@ -8,13 +8,14 @@
 
 #import "GrabOrderRootViewController.h"
 #import "GrabOrderSegmentedViewController.h"
+#import "AutoSlideScrollView.h"
+#import "SuperWebViewController.h"
 
 @interface GrabOrderRootViewController () <UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIImageView *galleryImageView;
+@property (nonatomic, strong) AutoSlideScrollView *galleryView;
 @property (nonatomic, strong) GrabOrderSegmentedViewController *segementedController;
 @property (nonatomic, strong) UIScrollView *scrollView;
-
 
 @end
 
@@ -24,8 +25,6 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.scrollView];
-    [self.galleryImageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"banner_default.png"]];
-    [self.scrollView addSubview:self.galleryImageView];
     
     [self addChildViewController:self.segementedController];
     [self.scrollView addSubview:self.segementedController.view];
@@ -35,6 +34,13 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scroll2Buttom) name:kGrabShouldSroll2Buttom object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scroll2Top) name:kGrabShouldSroll2Top object:nil];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_galleryView.scrollView setContentOffset:CGPointZero];
 }
 
 - (void)scroll2Buttom
@@ -71,12 +77,32 @@
     return _scrollView;
 }
 
-- (UIImageView *)galleryImageView
+- (void)setAdArray:(NSArray *)adArray
 {
-    if (!_galleryImageView) {
-        _galleryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 150)];
+    _adArray = adArray;
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 150) animationDuration:5];
+    [self.scrollView addSubview:_galleryView];
+    _galleryView.totalPagesCount = ^NSInteger(void){
+        return adArray.count;
+    };
+    NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in _adArray) {
+        NSString *imageUrl = [dic objectForKey:@"img"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"banner_default.png"]];
+        [viewsArray addObject:imageView];
     }
-    return _galleryImageView;
+   
+    _galleryView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+        return viewsArray[pageIndex];
+    };
+    
+    __weak typeof(self)weakSelf = self;
+    _galleryView.TapActionBlock = ^void (NSInteger pageIndex) {
+        SuperWebViewController *ctl = [[SuperWebViewController alloc] init];
+        ctl.urlStr = [[adArray objectAtIndex:pageIndex] objectForKey:@"link"];
+        [weakSelf.navigationController pushViewController:ctl animated:YES];
+    };
 }
 
 - (GrabOrderSegmentedViewController *)segementedController

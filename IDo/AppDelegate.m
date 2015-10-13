@@ -16,6 +16,7 @@
 #import "APService.h"
 #import "OrderDetailViewController.h"
 #import "EvaluationViewController.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 @interface AppDelegate ()
 
@@ -31,8 +32,24 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    //如果极简SDK不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            if ([[resultDic objectForKey:@"resultStatus"] intValue] == 9000) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"paySuccessNotification" object:nil];
+            }else{
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"payErrorNotification" object:nil];
+            }
+        }];
+    }
+    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+        }];
+    }
+    
     return YES;
 }
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -64,7 +81,6 @@
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [APService setBadge:0];
-    [self get_version];
     
     return YES;
 }

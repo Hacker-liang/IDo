@@ -12,4 +12,6 @@
 
 @property (nonatomic, weak) UIViewController *mainViewController;
 
+@property (nonatomic, strong) NSArray *adArray;
+
 @end

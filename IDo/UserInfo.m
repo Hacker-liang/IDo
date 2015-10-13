@@ -29,7 +29,7 @@
         _userLabel = [dict objectForKey:@"label"];
         _lat = [[dict objectForKey:@"lat"] doubleValue];
         _lng = [[dict objectForKey:@"lng"] doubleValue];
-        _adcode = [dict objectForKey:@"adcode"];
+        _districtid = [dict objectForKey:@"districtid"];
        
         _rating = [dict objectForKey:@"star"];
         if (![dict objectForKey:@"jiedannumber"] || [dict objectForKey:@"jiedannumber"] == [NSNull null]) {
@@ -48,15 +48,12 @@
             _complainCount = [dict objectForKey:@"totalComplaintTimes"];
         }
 
-        _isMute = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_isMute", _userid]] boolValue];
+        _cityName = [dict objectForKey:@"cityName"];
+        _provinceName = [dict objectForKey:@"provinceName"];
 
     }
     return self;
 }
 
-- (void)setIsMute:(BOOL)isMute
-{
-    _isMute = isMute;
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_isMute] forKey:[NSString stringWithFormat:@"%@_isMute", _userid]];
-}
+
 @end

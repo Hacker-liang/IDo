@@ -15,6 +15,8 @@ typedef void(^PaySuccessBlock)(BOOL success,NSString *errorStr);
 @property(strong,nonatomic)UITableView *payTab;
 @property(strong,nonatomic)NSString *price;
 @property(strong,nonatomic)NSString *orderid;
+@property(strong,nonatomic)NSString *orderNumber;
+
 @property(strong,nonatomic)NSString * huoerbaoID;
 
 @property(copy,nonatomic)PaySuccessBlock paySuccessBlock;

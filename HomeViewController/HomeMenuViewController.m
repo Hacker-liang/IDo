@@ -14,10 +14,14 @@
 #import "MyProfileTableViewController.h"
 #import "LoginViewController.h"
 #import "AboutViewController.h"
+#import "AutoSlideScrollView.h"
+#import "SuperWebViewController.h"
 
 @interface HomeMenuViewController ()
 
 @property (nonatomic, strong) HomeMenuTableViewHeaderView *headerView;
+@property (nonatomic, strong) AutoSlideScrollView *galleryView;
+
 @property (nonatomic, strong) NSArray *dataSource;
 
 @end
@@ -55,10 +59,39 @@
         _dataSource = @[@{@"icon": @"icon_menu_wallet.png", @"title": @"我的钱包"},
                         @{@"icon": @"icon_menu_mine.png", @"title": @"个人中心"},
                         @{@"icon": @"icon_menu_message.png", @"title": @"关于我们"},
-                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
+//                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
                         ];
     }
     return _dataSource;
+}
+
+- (void)setAdArray:(NSArray *)adArray
+{
+    _adArray = adArray;
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, 64, self.tableView.bounds.size.width, 100) animationDuration:5];
+    _galleryView.totalPagesCount = ^NSInteger(void){
+        return adArray.count;
+    };
+    NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in _adArray) {
+        NSString *imageUrl = [dic objectForKey:@"img"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"nil"]];
+        [viewsArray addObject:imageView];
+    }
+    
+    _galleryView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+        return viewsArray[pageIndex];
+    };
+    
+    __weak typeof(self)weakSelf = self;
+    _galleryView.TapActionBlock = ^void (NSInteger pageIndex) {
+        [weakSelf.frostedViewController hideMenuViewController];
+        SuperWebViewController *ctl = [[SuperWebViewController alloc] init];
+        ctl.urlStr = [[adArray objectAtIndex:pageIndex] objectForKey:@"link"];
+        [weakSelf.mainViewController.navigationController pushViewController:ctl animated:YES];
+    };
+    self.tableView.tableFooterView = _galleryView;
 }
 
 #pragma mark - IBAction Methods
@@ -151,7 +184,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
