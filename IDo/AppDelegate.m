@@ -56,6 +56,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveJPushMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jpushDidClose) name:kJPFNetworkDidCloseNotification object:nil];
+
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:@"userLogout" object:nil];
     [self setupHomeView];
@@ -83,6 +85,11 @@
     [APService setBadge:0];
     
     return YES;
+}
+
+- (void)jpushDidClose
+{
+    NSLog(@"jpushDidClose");
 }
 
 - (void)get_version{
@@ -147,8 +154,14 @@
     [self resgisterToken];
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
+    NSLog(@"didReceiveRemoteNotification %@", userInfo);
+    [APService handleRemoteNotification:userInfo];
 //    if (application.applicationState != UIApplicationStateActive) {
 //        [self receiveRemoteNotification:userInfo];
 //        
@@ -161,7 +174,6 @@
 //        [self receiveRemoteNotification:userInfo];
 //    }
 //    
-//    [APService handleRemoteNotification:userInfo];
 //    NSLog(@"RemoteNote userInfo:%@",userInfo);
 }
 
