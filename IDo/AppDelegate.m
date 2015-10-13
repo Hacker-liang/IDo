@@ -36,10 +36,9 @@
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             if ([[resultDic objectForKey:@"resultStatus"] intValue] == 9000) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"paySureNotification" object:nil];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"paySuccessNotification" object:nil];
             }else{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"支付失败" message:@"支付成功" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                [alert show];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"payErrorNotification" object:nil];
             }
         }];
     }

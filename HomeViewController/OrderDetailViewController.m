@@ -273,8 +273,9 @@
             [self updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
         }
     }];
+    vc.orderNumber = _orderDetail.orderNumber;
     vc.price = _orderDetail.price;
-    vc.orderid = _orderDetail.orderNumber;
+    vc.orderid = _orderDetail.orderId;
     vc.huoerbaoID = _orderDetail.grabOrderUser.userid;
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -31,7 +31,9 @@
 //    Appdelegate.viewisWhere = PiePayView;
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PayStatusSure) name:@"paySureNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PayStatusSure) name:@"paySuccessNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PayError) name:@"payErrorNotification" object:nil];
+
     
     self.payTab = [[UITableView alloc]initWithFrame:CGRectMake(0.0f,0,kWindowWidth,kWindowHeight-100) style:UITableViewStylePlain];
     self.payTab.delegate = self;
@@ -180,7 +182,7 @@
     [SVProgressHUD showWithStatus:@"正在加载"];
     AliPayTool *ali=[[AliPayTool alloc]init];
     __weak PayViewController *wSelf = self;
-    [ali aliPayWithProductName:@"佣金" productDescription:@"我干佣金-iOS 客户端" andAmount:self.price orderId:self.orderid MoneyBao:price AliPayMoney:price shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
+    [ali aliPayWithProductName:@"佣金" productDescription:@"我干佣金-iOS 客户端" andAmount:self.price orderId:self.orderNumber MoneyBao:price AliPayMoney:price shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
         [wSelf aliPayCallBackWithSuccessed:success errorString:errorStr];
     }];
 }
@@ -196,6 +198,11 @@
     }  else {
         [SVProgressHUD showErrorWithStatus:@"支付失败"];
     }
+}
+
+- (void)PayError
+{
+    [SVProgressHUD showErrorWithStatus:@"支付失败"];
 }
 
 - (void)PayStatusSure
