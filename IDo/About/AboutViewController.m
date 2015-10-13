@@ -38,7 +38,7 @@
     img.image=[UIImage imageNamed:@"Icon.png"];
     [self.view addSubview:img];
     UILabel *banben=[[UILabel alloc]initWithFrame:CGRectMake(0, 164, self.view.frame.size.width, 20)];
-    banben.text=@"干活儿1.5.5";
+    banben.text=@"我干1.5.7";
     banben.textAlignment=1;
     [self.view addSubview:banben];
     
