@@ -36,6 +36,7 @@
     _cancelBtn.hidden = YES;
     _complainBtn.hidden = YES;
     _mapview.delegate = self;
+    _orderContentLabel.adjustsFontSizeToFitWidth = YES;
     _conteViewConstraint.constant = 14;
     _addressBtn.titleLabel.numberOfLines = 0;
     _complainBtn.layer.cornerRadius = 3.0;

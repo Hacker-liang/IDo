@@ -196,7 +196,9 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="222.5" translatesAutoresizingMaskIntoConstraints="NO" id="TNN-Kb-wWO">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="39.5" id="fqN-4R-My5"/>
+                                <constraint firstAttribute="height" constant="39.5" id="fqN-4R-My5">
+                                    <variation key="widthClass=compact" constant="48.5"/>
+                                </constraint>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -410,7 +412,9 @@
                         <constraint firstItem="wOv-Ff-JJd" firstAttribute="leading" secondItem="cxp-Qe-bFf" secondAttribute="trailing" constant="8" id="4xf-Es-ms4">
                             <variation key="widthClass=compact" constant="6"/>
                         </constraint>
-                        <constraint firstItem="TNN-Kb-wWO" firstAttribute="top" secondItem="DDx-jE-9QC" secondAttribute="bottom" constant="4.5" id="659-ft-sU2"/>
+                        <constraint firstItem="TNN-Kb-wWO" firstAttribute="top" secondItem="DDx-jE-9QC" secondAttribute="bottom" constant="4.5" id="659-ft-sU2">
+                            <variation key="widthClass=compact" constant="1.5"/>
+                        </constraint>
                         <constraint firstItem="2NZ-DP-0wI" firstAttribute="leading" secondItem="ZLf-Be-lkB" secondAttribute="trailing" constant="24" id="6gD-Zd-EQg">
                             <variation key="widthClass=compact" constant="1.5"/>
                         </constraint>
