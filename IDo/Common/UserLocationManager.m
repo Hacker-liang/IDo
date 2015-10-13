@@ -138,6 +138,7 @@
         NSString *address = regeoCode.formattedAddress;
         if ([[UserManager shareUserManager] isLogin]) {
             [UserManager shareUserManager].userInfo.address = address;
+            _districtid = regeoCode.addressComponent.adcode;
             [UserManager shareUserManager].userInfo.districtid = regeoCode.addressComponent.adcode;
             _userCityCode = regeoCode.addressComponent.citycode;
             _userCityName = regeoCode.addressComponent.city;

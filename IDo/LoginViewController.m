@@ -100,9 +100,7 @@
     NSString *url = [NSString stringWithFormat:@"%@login",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict safeSetObject:self.phoneTextField.text forKey:@"tel"];
-//    [mDict setObject:@"" forKey:@"provinceid"];
-//    [mDict setObject:@"" forKey:@"cityid"];
-//    [mDict setObject:@"" forKey:@"districtid"];
+    [mDict safeSetObject:[UserLocationManager shareInstance].districtid forKey:@"districtid"];
     [mDict safeSetObject:address forKey:@"address"];
     [mDict safeSetObject:[NSString stringWithFormat:@"%f", _location.coordinate.longitude] forKey:@"lng"];
     [mDict safeSetObject:[NSString stringWithFormat:@"%f", _location.coordinate.latitude] forKey:@"lat"];

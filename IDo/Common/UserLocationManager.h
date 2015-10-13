@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString *userCityCode;
 @property (nonatomic, copy) NSString *userCityName;
 @property (nonatomic, copy) NSString *userProvinceName;
+@property (nonatomic, copy) NSString *districtid;
 
 
 
