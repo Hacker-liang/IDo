@@ -13,7 +13,7 @@
 /*手机号码验证 MODIFIED BY HELENSONG*/
 +(BOOL) isValidateMobile:(NSString *)mobile
 {
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[0235-9])\\d{8}$";
     
     NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
     

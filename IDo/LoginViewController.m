@@ -115,7 +115,8 @@
             if (status == 1) {
                 [SVProgressHUD showSuccessWithStatus:@"登录成功"];
                 NSDictionary *dataDict = [dict objectForKey:@"data"];
-                [[UserManager shareUserManager] updateUserDataFromServer:dataDict];
+                [UserManager shareUserManager].userInfo = [[UserInfo alloc] initWithJson:dataDict];
+                [[UserManager shareUserManager] saveUserData2Cache];
                 if (_completionBlock) {
                     _completionBlock(YES, nil);
                 }

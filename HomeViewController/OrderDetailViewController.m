@@ -259,7 +259,7 @@
             if ((NSNull *)tempStatus != [NSNull null]&&[tempStatus isEqualToString:@"1"]) {
 
                 [self updateDetailViewWithStatus:kOrderGrabSuccess andShouldReloadOrderDetail:YES];
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"恭喜抢单成功！" message:@"恭喜抢单成功！" delegate:self cancelButtonTitle:@"关注此订单" otherButtonTitles:@"继续抢单", nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"恭喜抢单成功！" message:@"抢单成功，请耐心等待发单人付款确认" delegate:self cancelButtonTitle:@"关注此订单" otherButtonTitles:@"继续抢单", nil];
                 [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
                         [self.navigationController popViewControllerAnimated:YES];
@@ -391,9 +391,8 @@
     } else if (_orderDetail.orderStatus == kOrderPayed && _isSendOrder) {
         
         statusString = _orderDetail.orderStatusDesc;
-        _addressConstraint.constant = 100;
+        _addressConstraint.constant = 70;
         _complainBtn.hidden = NO;
-        _cancelBtn.hidden = NO;
         
         tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
@@ -447,9 +446,6 @@
     }  else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
         tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
-        _cancelBtn.hidden = NO;
-        _addressConstraint.constant = 70;
-        _cancelBtnConstraint.constant = 12;
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];

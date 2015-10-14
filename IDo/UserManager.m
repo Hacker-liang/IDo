@@ -39,6 +39,33 @@
     return self.userInfo != nil;
 }
 
+- (void)asyncLoadAccountInfoFromServer:(void (^) (BOOL isSuccess))completion
+{
+    NSString *url = [NSString stringWithFormat:@"%@getmembermes",baseUrl];
+
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+   
+    [mDict setObject:_userInfo.userid forKey:@"memberid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([tempStatus integerValue] == 1) {
+                _userInfo = [[UserInfo alloc] initWithJson:dict[@"data"]];
+                [self saveUserData2Cache];
+                completion(YES);
+            } else {
+                completion(NO);
+            }
+        } else {
+            completion(NO);
+        }
+    }];
+}
+
 - (void)asyncLogout:(void (^)(BOOL))completion
 {
     NSString *url = [NSString stringWithFormat:@"%@editMemberLoginStatus",baseUrl];
@@ -94,27 +121,6 @@
         }];
 
     }
-}
-
-//设置 用户数据
-- (void)updateUserDataFromServer:(NSDictionary*)dict
-{
-    if (_userInfo) {
-        _userInfo.userid = [dict objectForKey:@"id"];
-        _userInfo.nickName = [dict objectForKey:@"nikename"];
-        _userInfo.tel = [dict objectForKey:@"tel"];
-        _userInfo.sex = [dict objectForKey:@"sex"];
-        _userInfo.avatar = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
-        _userInfo.level = [dict objectForKey:@"level"];
-        _userInfo.lock = [dict objectForKey:@"lock"];
-        _userInfo.zhifubao = [dict objectForKey:@"zhifubao"];
-        _userInfo.weixin = [dict objectForKey:@"weixin"];
-
-    } else {
-        _userInfo = [[UserInfo alloc] initWithJson:dict];
-    }
-   
-    [self saveUserData2Cache];
 }
 
 - (void)saveUserData2Cache

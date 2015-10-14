@@ -31,6 +31,13 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"MyProfileTableViewCell" bundle:nil] forCellReuseIdentifier:@"myProfileCell"];
     [self setupTableViewFooterView];
     self.navigationItem.title = @"个人中心";
+    [[UserManager shareUserManager] asyncLoadAccountInfoFromServer:^(BOOL isSuccess) {
+        if (isSuccess) {
+            _userInfo = [UserManager shareUserManager].userInfo;
+            _myprofileHeaderView.userInfo = _userInfo;
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
