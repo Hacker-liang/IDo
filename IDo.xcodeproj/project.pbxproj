@@ -2662,7 +2662,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d329acac-92fe-445f-bac6-799f8453f6b5";
-
 			};
 			name = Debug;
 		};
