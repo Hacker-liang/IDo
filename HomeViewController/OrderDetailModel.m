@@ -42,7 +42,7 @@
             if ([[json objectForKey:@"haspay"] intValue] == 0) {
                 _orderStatus = kOrderGrabSuccess;
                 if (!_isSendOrder) {
-                    if ([_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
+                    if ([_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid] && ![_sendOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
                         _orderStatusDesc = @"已抢单，等待对方付款";
                     } else {
                         _orderStatus = kOrderNotBelongYou;
@@ -60,7 +60,7 @@
                 if ([[json objectForKey:@"hasconfpay"] intValue] == 0) {
                     _orderStatus = kOrderPayed;
                     if (!_isSendOrder) {
-                        if ([_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
+                        if ([_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]  && ![_sendOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
                             _orderStatusDesc = @"对方已付款,任务进行中";
                         } else {
                             _orderStatus = kOrderNotBelongYou;
@@ -71,7 +71,7 @@
                     }
                     
                 } else {
-                    if (![_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
+                    if (![_grabOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]  &&![_sendOrderUser.userid isEqualToString:[UserManager shareUserManager].userInfo.userid]) {
                         _orderStatus = kOrderNotBelongYou;
                         _orderStatusDesc = @"订单已被抢";
                     } else {

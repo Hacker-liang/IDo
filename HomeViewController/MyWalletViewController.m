@@ -68,6 +68,11 @@
         [alertView show];
         return;
     }
+    if ([UserManager shareUserManager].userInfo.zhifubao.length ==0 || ![UserManager shareUserManager].userInfo.zhifubao) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"无支付宝账号，请到账号中心修改" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     
     ApplyForViewController * receive = [[ApplyForViewController alloc]init];
     receive.yueStr = wallet.remainingMoney;

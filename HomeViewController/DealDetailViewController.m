@@ -185,6 +185,7 @@
     titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(titleLabel.frame)+10, 200, 20)];
     titleLabel.text = [NSString stringWithFormat:@"财务流水号：%@",dic[@"id"]];
     titleLabel.font = [UIFont systemFontOfSize:15];
+    titleLabel.adjustsFontSizeToFitWidth = YES;
     [cell.contentView addSubview:titleLabel];
     
     UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame)+15, 15, self.view.frame.size.width-CGRectGetMaxX(titleLabel.frame)-15*2, 20)];
@@ -196,6 +197,7 @@
     
     contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, CGRectGetMaxY(contentLabel.frame)+10, self.view.frame.size.width-210, 20)];
     contentLabel.text = dic[@"time"];
+    contentLabel.adjustsFontSizeToFitWidth = YES;
     contentLabel.font = [UIFont systemFontOfSize:15];
     contentLabel.textAlignment = NSTextAlignmentRight;
     contentLabel.textColor = UIColorFromRGB(0xbcbcbc);

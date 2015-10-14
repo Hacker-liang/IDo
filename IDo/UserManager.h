@@ -18,9 +18,10 @@
 
 - (void)asyncLogout:(void (^) (BOOL isSuccess))completion;
 
-- (void)updateUserDataFromServer:(NSDictionary*)dict;
-
 - (void)saveUserData2Cache;
 
 - (void)setNotiMute:(BOOL)isMute;
+
+- (void)asyncLoadAccountInfoFromServer:(void (^) (BOOL isSuccess))completion;
+
 @end
