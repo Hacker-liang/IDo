@@ -68,14 +68,17 @@
 - (void)setAdArray:(NSArray *)adArray
 {
     _adArray = adArray;
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, 64, self.tableView.bounds.size.width, 100) animationDuration:5];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 150)];
+    
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(20, 0, 275-40, 100) animationDuration:5];
+    _galleryView.backgroundColor = [UIColor blackColor];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };
     NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
     for (NSDictionary *dic in _adArray) {
         NSString *imageUrl = [dic objectForKey:@"img"];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _galleryView.bounds.size.width, 150)];
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"nil"]];
         [viewsArray addObject:imageView];
     }
@@ -91,7 +94,8 @@
         ctl.urlStr = [[adArray objectAtIndex:pageIndex] objectForKey:@"link"];
         [weakSelf.mainViewController.navigationController pushViewController:ctl animated:YES];
     };
-    self.tableView.tableFooterView = _galleryView;
+    [view addSubview:_galleryView];
+    self.tableView.tableFooterView = view;
 }
 
 #pragma mark - IBAction Methods
