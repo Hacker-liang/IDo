@@ -13,30 +13,37 @@
 /*手机号码验证 MODIFIED BY HELENSONG*/
 +(BOOL) isValidateMobile:(NSString *)mobile
 {
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[0235-9])\\d{8}$";
-    
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
-    
-    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
-    
-    NSString * CT = @"^1((77|33|53|8[09])[0-9]|349)\\d{7}$";
-    
-    
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
-    if (([regextestmobile evaluateWithObject:mobile] == YES)
-        || ([regextestcm evaluateWithObject:mobile] == YES)
-        || ([regextestct evaluateWithObject:mobile] == YES)
-        || ([regextestcu evaluateWithObject:mobile] == YES))
-    {
+//    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[0235-9])\\d{8}$";
+//    
+//    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+//    
+//    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
+//    
+//    NSString * CT = @"^1((77|33|53|8[09])[0-9]|349)\\d{7}$";
+//    
+//    
+//    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+//    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+//    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+//    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+//    if (([regextestmobile evaluateWithObject:mobile] == YES)
+//        || ([regextestcm evaluateWithObject:mobile] == YES)
+//        || ([regextestct evaluateWithObject:mobile] == YES)
+//        || ([regextestcu evaluateWithObject:mobile] == YES))
+//    {
+//        return YES;
+//    }
+//    else
+//    {
+//        return NO;
+//    }
+    NSString *regex = @"^1\\d{10}";
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if ([regextestmobile evaluateWithObject:mobile] == YES) {
         return YES;
     }
-    else
-    {
-        return NO;
-    }
+    return NO;
+
 }
 
 //替换UIWebView背景

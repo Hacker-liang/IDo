@@ -101,13 +101,13 @@
 -(void)payforSure
 {
 
-    AliPayTool *ali=[[AliPayTool alloc]init];
-    NSString *status=[ali AliPayWithProductName:@"充值" AndproductDescription:@"给活儿宝的充值" andAmount:@"0" Orderid:@"0" MoneyBao:contentTextF.text AliPayMoney:contentTextF.text ShouKuanID:[UserManager shareUserManager].userInfo.userid];
-    if ([status isEqualToString:@"1"])
-    {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您已成功付款" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-    }
+//    AliPayTool *ali=[[AliPayTool alloc]init];
+//    NSString *status=[ali AliPayWithProductName:@"充值" AndproductDescription:@"给活儿宝的充值" andAmount:@"0" Orderid:@"0" MoneyBao:contentTextF.text AliPayMoney:contentTextF.text ShouKuanID:[UserManager shareUserManager].userInfo.userid];
+//    if ([status isEqualToString:@"1"])
+//    {
+//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您已成功付款" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+//    }
 }
 
 -(void)creatMainView

@@ -20,7 +20,7 @@ typedef void(^RequestCompleteBlock)(BOOL success, NSString *errorStr);
 @interface AliPayTool : NSObject
 // xuebao start
 // drop by xuebao
--(NSString *)AliPayWithProductName:(NSString *)productname AndproductDescription:(NSString *)description andAmount:(NSString *)amount Orderid:(NSString *)orderid MoneyBao:(NSString *)qianbao AliPayMoney:(NSString *)aliMoney ShouKuanID:(NSString *)shoukuanID;
+//-(NSString *)AliPayWithProductName:(NSString *)productname AndproductDescription:(NSString *)description andAmount:(NSString *)amount Orderid:(NSString *)orderid MoneyBao:(NSString *)qianbao AliPayMoney:(NSString *)aliMoney ShouKuanID:(NSString *)shoukuanID;
 @property(copy,nonatomic)NSString *zhuangtai;
 @property(copy,nonatomic)NSString *m_isFromAli;
 // xuebao end
@@ -36,4 +36,6 @@ typedef void(^RequestCompleteBlock)(BOOL success, NSString *errorStr);
                    shouKuanID:(NSString *)shoukuanID
                 completeBlock:(AliPayToolBlock)completedBlock;
 // xuebao end
+ 
+
 @end
