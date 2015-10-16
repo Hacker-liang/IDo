@@ -194,7 +194,10 @@
 {
     if (success) {
         // 确定派单推送订单成功(只是发送一个推送消息)
-        [self PayStatusSure];
+//        [self PayStatusSure];
+        [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+        [self backAfterPayed];
+
     }  else {
         [SVProgressHUD showErrorWithStatus:@"支付失败"];
     }

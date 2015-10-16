@@ -71,7 +71,6 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 150)];
     
     _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(20, 0, 275-40, 100) animationDuration:5];
-    _galleryView.backgroundColor = [UIColor blackColor];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };
