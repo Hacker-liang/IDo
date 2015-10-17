@@ -32,7 +32,7 @@
         [_requestBtn setTitle:@"恭喜，您是VIP用户，享受VIP特权" forState:UIControlStateNormal];
 
     } else {
-        _contentLabel.text = @"成为VIP，享受VIP专属特权，VIP会员在软件首页地图页头像将加“Ｖ”显示，并能直接点击头像指定下单，让您的抢单无须排队，优先抢单，从而满足您在《干活儿》专业抢单诉求。\n    凡《干活儿》注册用户，均可在此提交申请，《干活儿》将在1-7个工作日内安排专人与您取得联系，您也可拨打400-611-8091转人工客服进行咨询。谢谢！";
+        _contentLabel.text = @"成为VIP，享受VIP专属特权，VIP会员在软件首页地图页头像将加“Ｖ”显示，并能直接点击头像指定下单，让您的抢单无须排队，优先抢单，从而满足您在《我干活儿》专业抢单诉求。\n    凡《我干活儿》注册用户，均可在此提交申请，《我干活儿》将在1-7个工作日内安排专人与您取得联系，您也可拨打400-611-8091转人工客服进行咨询。谢谢！";
         [_requestBtn setTitle:@"VIP 申请提交" forState:UIControlStateNormal];
         [_requestBtn setTitle:@"您的申请已提交，请等待客服与您联系" forState:UIControlStateDisabled];
 
