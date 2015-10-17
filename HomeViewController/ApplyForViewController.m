@@ -59,6 +59,8 @@
         NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
         [mDict setObject:[UserManager shareUserManager].userInfo.zhifubao forKey:@"alipay"];
         [mDict setObject:[UserManager shareUserManager].userInfo.nickName forKey:@"nickname"];
+        [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+
         [mDict setObject:contentTextF.text forKey:@"money"];
         
         [SVProgressHUD showWithStatus:@"正在提现"];

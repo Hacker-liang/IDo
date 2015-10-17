@@ -69,9 +69,11 @@
 
 - (void)loginClick
 {
-    if (!_addressLabel.text) {
+    if (!_addressLabel.text || _addressLabel.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];
+        return;
     }
+    
     if ([self.phoneTextField.text isEqual:@""]) {
         [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
 

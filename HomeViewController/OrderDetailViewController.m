@@ -312,36 +312,71 @@
 
 - (void)cancelOrder
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认取消订单吗？" message:@"很抱歉我们的活儿宝未能向您提供完善的服务" delegate:nil cancelButtonTitle:@"再等等"otherButtonTitles:@"取消订单", nil];
-    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            [SVProgressHUD showWithStatus:@"正在取消"];
-            NSString *url = [NSString stringWithFormat:@"%@delorder",baseUrl];
-            NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-            [mDict safeSetObject:_orderDetail.orderId forKey:@"orderid"];
-            
-            [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-                [SVProgressHUD dismiss];
-                if (response)
-                {
-                    NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-                    NSDictionary *dict = [jsonString objectFromJSONString];
-                    NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
-                    if ([tempStatus integerValue] == 1) {
-                        UIAlertView *canclealert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"订单取消成功。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                        [canclealert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                            if (buttonIndex == 0) {
-                                [self.navigationController popToRootViewControllerAnimated:YES];
-                            }
-                        }];
-                        
-                        
-                    }
-                }
+    if (_orderDetail.orderStatus == kOrderPayed) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认取消订单吗？" message:@"将会向接单人发送取消确认信息" delegate:nil cancelButtonTitle:@"再等等"otherButtonTitles:@"取消订单", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [SVProgressHUD showWithStatus:@"正在取消"];
+                NSString *url = [NSString stringWithFormat:@"%@askCancelOrder",baseUrl];
+                NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+                [mDict safeSetObject:_orderDetail.orderId forKey:@"orderid"];
+                [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
 
-            }];
-        }
-    }];
+                
+                [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                    [SVProgressHUD dismiss];
+                    if (response)
+                    {
+                        NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                        NSDictionary *dict = [jsonString objectFromJSONString];
+                        NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+                        if ([tempStatus integerValue] == 1) {
+                            UIAlertView *canclealert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"取消订单申请发送成功。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                            [canclealert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                                if (buttonIndex == 0) {
+                                    [self.navigationController popToRootViewControllerAnimated:YES];
+                                }
+                            }];
+                        }
+                    }
+                    
+                }];
+            }
+        }];
+
+        
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认取消订单吗？" message:@"很抱歉我们的活儿宝未能向您提供完善的服务" delegate:nil cancelButtonTitle:@"再等等"otherButtonTitles:@"取消订单", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [SVProgressHUD showWithStatus:@"正在取消"];
+                NSString *url = [NSString stringWithFormat:@"%@delorder",baseUrl];
+                NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+                [mDict safeSetObject:_orderDetail.orderId forKey:@"orderid"];
+                
+                [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                    [SVProgressHUD dismiss];
+                    if (response)
+                    {
+                        NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                        NSDictionary *dict = [jsonString objectFromJSONString];
+                        NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+                        if ([tempStatus integerValue] == 1) {
+                            UIAlertView *canclealert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"订单取消成功。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                            [canclealert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                                if (buttonIndex == 0) {
+                                    [self.navigationController popToRootViewControllerAnimated:YES];
+                                }
+                            }];
+                            
+                            
+                        }
+                    }
+
+                }];
+            }
+        }];
+    }
 }
 
 - (void)setupFooterView
@@ -391,8 +426,9 @@
     } else if (_orderDetail.orderStatus == kOrderPayed && _isSendOrder) {
         
         statusString = _orderDetail.orderStatusDesc;
-        _addressConstraint.constant = 70;
+        _addressConstraint.constant = 100;
         _complainBtn.hidden = NO;
+        _cancelBtn.hidden = NO;
         
         tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
@@ -432,18 +468,18 @@
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     } else if (_orderDetail.orderStatus == kOrderGrabSuccess && !_isSendOrder) {
-        
-        _addressConstraint.constant = 70;
-        _cancelBtn.hidden = NO;
-        _addressConstraint.constant = 70;
-        _cancelBtnConstraint.constant = 12;
-
+    
         statusString = _orderDetail.orderStatusDesc;
         tipsString = @"小提示：所示金额系统已自动扣减8%佣金";
         
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-60, kWindowWidth, 60)];
         
     }  else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
+        _addressConstraint.constant = 70;
+        _cancelBtn.hidden = NO;
+        _addressConstraint.constant = 70;
+        _cancelBtnConstraint.constant = 12;
+
         tipsString = @"保持良好记录有助于快速成交订单";
         statusString = _orderDetail.orderStatusDesc;
         

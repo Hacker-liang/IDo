@@ -284,7 +284,7 @@
     if ([notificationType isEqualToString:@"commentFromPerson"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewRating object:nil];
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"订单提醒" message:@"发单人已经对您进行评价" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"订单提醒" message:@"抢单人已经对您进行评价" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
                 UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
@@ -296,13 +296,13 @@
                     } else {
                         OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
                         ctl.orderId = orderId;
-                        ctl.isSendOrder = NO;
+                        ctl.isSendOrder = YES;
                         [self.homeViewController.navigationController pushViewController:ctl animated:YES];
                     }
                 } else {
                     OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
                     ctl.orderId = orderId;
-                    ctl.isSendOrder = NO;
+                    ctl.isSendOrder = YES;
                     [self.homeViewController.navigationController pushViewController:ctl animated:YES];
                 }
                 
