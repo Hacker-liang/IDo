@@ -41,6 +41,7 @@
     _conteViewConstraint.constant = 14;
     _addressBtn.titleLabel.numberOfLines = 0;
     _complainBtn.layer.cornerRadius = 3.0;
+    _orderTimeLabel.adjustsFontSizeToFitWidth = YES;
     _complainBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _complainBtn.layer.borderWidth = 0.5;
     
@@ -155,13 +156,22 @@
     CLLocationDistance meters=[current distanceFromLocation:before];
 
     if (!_isSendOrder && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%.3f公里", userInfo.sendOrderCount, (int)meters/1000.0];
+        if (meters>1000) {
+            _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%.1f公里", userInfo.sendOrderCount, (int)meters/1000.0];
+        } else {
+            _userDescLabel.text = [NSString stringWithFormat:@"成功发单%@笔  距离%d米", userInfo.sendOrderCount, (int)meters];
+        }
     } else if (userInfo.userid != 0 && userInfo.userid != 0) {
-        _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%.3f公里", userInfo.grabOrderCount, (int)meters/1000.0];
+        if (meters>1000) {
+            _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%.1f公里", userInfo.grabOrderCount, (int)meters/1000.0];
+
+        } else {
+            _userDescLabel.text = [NSString stringWithFormat:@"成功接单%@笔  距离%d米", userInfo.grabOrderCount, (int)meters];
+        }
     } else {
         _userDescLabel.text = nil;
     }
-    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:userInfo.avatar] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     _nickNameLabel.text = userInfo.nickName;
 
     _orderTimeLabel.text = _orderDetail.tasktime;
@@ -201,7 +211,7 @@
         }
         _timeLeftLabel.text = nil;
     }
-    if (_orderDetail.orderStatus == kOrderPayed) {
+    if ((_orderDetail.orderStatus == kOrderPayed || _orderDetail.orderStatus == kOrderGrabSuccess || _orderDetail.orderStatus == kOrderCheckDone)) {
         _phoneLabel.enabled = YES;
     } else {
         _phoneLabel.enabled = NO;

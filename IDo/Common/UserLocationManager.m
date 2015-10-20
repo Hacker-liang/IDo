@@ -159,6 +159,7 @@
 
         }
         if (_userLocationCompletionBlock) {
+            NSLog(@"%@", address);
             _userLocationCompletionBlock(_userLocation, address);
         }
 

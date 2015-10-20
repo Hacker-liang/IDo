@@ -28,7 +28,7 @@
 - (void)setUserInfo:(UserInfo *)userInfo
 {
     _userInfo = userInfo;
-    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     _nickNameLabel.text = _userInfo.nickName;
 }
 

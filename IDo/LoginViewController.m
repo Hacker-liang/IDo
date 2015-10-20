@@ -69,7 +69,7 @@
 
 - (void)loginClick
 {
-    if (!_addressLabel.text || _addressLabel.text.length == 0) {
+    if (!_addressLabel.text || _addressLabel.text.length == 0 || [[UserLocationManager shareInstance].districtid integerValue] == 0) {
         [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];
         return;
     }
