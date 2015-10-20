@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _userInfo = [UserManager shareUserManager].userInfo;
-    _dataSource = @[@"我的手机号", @"昵称", @"性别", @"我的支付宝", @"VIP 申请", @"声音控制"];
+    _dataSource = @[@"我的手机号", @"昵称", @"性别", @"我的支付宝", @"声音控制"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MyProfileTableViewCell" bundle:nil] forCellReuseIdentifier:@"myProfileCell"];
     [self setupTableViewFooterView];
     self.navigationItem.title = @"个人中心";
@@ -123,7 +123,7 @@
     if (indexPath.row == 0) {
         cell.accessoryType = UITableViewCellAccessoryNone;
 
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 4) {
         UISwitch *switchView;
         if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
             switchView = (UISwitch *)cell.accessoryView;
@@ -227,10 +227,6 @@
         tf.keyboardType = UIKeyboardTypeDefault;
         thAlertView.tag = 501;
         [thAlertView show];
-    }
-    if (indexPath.row == 4) {
-        Requtst2BeVIPViewController *ctl = [[Requtst2BeVIPViewController alloc] init];
-        [self.navigationController pushViewController:ctl animated:YES];
     }
 }
 

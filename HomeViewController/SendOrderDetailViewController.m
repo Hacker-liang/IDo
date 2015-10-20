@@ -159,7 +159,7 @@
         return;
     }
     
-    if (_orderDetail.lat == 0) {
+    if (!_orderDetail.address || _orderDetail.address.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];
         return;
     }

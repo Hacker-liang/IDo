@@ -41,7 +41,7 @@
     _nickNameLabel.text = _userInfo.nickName;
     _ratingView.scorePercent = [_userInfo.rating intValue]/5.0;;
     _ratingView.userInteractionEnabled = NO;
-    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"icon_avatar_default.png"]];
+    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     
     {
         _sendOrderCountBtn.titleLabel.numberOfLines = 0;
