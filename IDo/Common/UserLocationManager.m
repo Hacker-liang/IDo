@@ -167,7 +167,7 @@
 }
 - (void)getAddressByLocation:(CLLocation *)location
 {
-    [AMapSearchServices sharedServices].apiKey = @"75dc15efbb50d8a0cbffacb86bbd9ce8";
+    [AMapSearchServices sharedServices].apiKey = @"6a7ece2e9426d1dba4deea411bf64dcc";
     
     //初始化检索对象
     _search = [[AMapSearchAPI alloc] init];
