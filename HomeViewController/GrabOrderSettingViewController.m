@@ -88,7 +88,7 @@
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
             [self.allTagArray removeAllObjects];
-            if ([dict[@"data"] isKindOfClass:[NSDictionary class]]) {
+            if ([dict isKindOfClass:[NSDictionary class]]) {
                 for (NSDictionary *d in dict[@"data"]) {
                     [self.allTagArray addObject:d[@"name"]];
                 }
@@ -146,6 +146,7 @@
                     cell.allOrderBtn.selected = NO;
                     cell.tagOrderBtn.selected = YES;
                     [UserManager shareUserManager].userInfo.pushType = @"2";
+                    [self getALLabData];
                     self.rowCount = 6;
                     
                 } else {

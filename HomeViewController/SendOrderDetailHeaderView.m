@@ -128,7 +128,7 @@
             _nickNameLabel.text = an.nickName;
             _subtitleLabel.text = an.subtitle;
             NSString *sex = an.sex;
-            if ([sex isEqualToString:@"1"]) {
+            if ([sex isEqualToString:@"1"] || [sex isEqualToString:@"0"]) {
                 [_vipSexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
             } else {
                 [_vipSexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
@@ -152,11 +152,11 @@
         FYAnnotation *tg=[[FYAnnotation alloc]init];
         [_annotationList addObject:tg];
         
-        if ( [an.sex isEqualToString:@"1"] &&[an.level isEqualToString:@"1"])
+        if ( ([an.sex isEqualToString:@"1"] || [an.sex isEqualToString:@"0"]) &&[an.level isEqualToString:@"1"])
         {
             tg.icon=@"men1.png";
         }
-        else if ([an.sex isEqualToString:@"1"]&&[an.level isEqualToString:@"2"])
+        else if (([an.sex isEqualToString:@"1"] || [an.sex isEqualToString:@"0"])&&[an.level isEqualToString:@"2"])
         {
             tg.icon=@"men_vip1.png";
         }

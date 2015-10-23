@@ -134,6 +134,9 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [APService setBadge:0];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNewOrderNoti object:nil];
+    [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
+        
+    }];
 }
 
 - (void)receiveJPushMessage:(NSNotification *)noti

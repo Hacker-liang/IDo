@@ -178,10 +178,11 @@
     _orderContentLabel.text = _orderDetail.content;
     _orderContentLabel.adjustsFontSizeToFitWidth = YES;
     
-    NSString *str = [NSString stringWithFormat:@"%@元", _orderDetail.price];
+    NSString *str = [NSString stringWithFormat:@"悬赏金额\n%@元", _orderDetail.price];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
-    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(0,str.length-1)];
-    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, str.length-1)];
+    
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(4,str.length-5)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(4, str.length-5)];
     _priceLabel.attributedText = attStr;
     _priceLabel.adjustsFontSizeToFitWidth = YES;
 
@@ -620,11 +621,11 @@
     FYAnnotation *tg = [[FYAnnotation alloc]init];
     tg.coordinate = _userLocation;
     
-    if ( [userInfo.sex isEqualToString:@"1"] &&[userInfo.level isEqualToString:@"1"])
+    if ( ([userInfo.sex isEqualToString:@"1"] || [userInfo.sex isEqualToString:@"0"]) &&[userInfo.level isEqualToString:@"1"])
     {
         tg.icon=@"men1.png";
     }
-    else if ([userInfo.sex isEqualToString:@"1"]&&[userInfo.level isEqualToString:@"2"])
+    else if (([userInfo.sex isEqualToString:@"1"] || [userInfo.sex isEqualToString:@"0"])&&[userInfo.level isEqualToString:@"2"])
     {
         tg.icon=@"men_vip1.png";
     }

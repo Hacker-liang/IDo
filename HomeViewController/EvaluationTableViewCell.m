@@ -30,7 +30,7 @@
         _nickLabel.text = contentDic[@"guzhumes"][@"nikename"];
         NSString *str = [NSString stringWithFormat:@"成功发单%@次", contentDic[@"guzhumes"][@"fadannumber"]];
         NSString *sex = contentDic[@"guzhumes"][@"sex"];
-        if ([sex isEqualToString:@"1"]) {
+        if ([sex isEqualToString:@"1"] || [sex isEqualToString:@"0"]) {
             [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
         } else {
             [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
@@ -44,7 +44,7 @@
         NSString *str = [NSString stringWithFormat:@"成功接单%@次", contentDic[@"huobaomes"][@"jiedannumber"]];
         _subtitleLabel.text = str;
         NSString *sex = contentDic[@"huobaomes"][@"sex"];
-        if ([sex isEqualToString:@"1"]) {
+        if ([sex isEqualToString:@"1"] || [sex isEqualToString:@"0"]) {
             [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
         } else {
             [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];
