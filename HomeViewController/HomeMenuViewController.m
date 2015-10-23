@@ -68,9 +68,14 @@
 - (void)setAdArray:(NSArray *)adArray
 {
     _adArray = adArray;
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 150)];
+    UIView *view;
+    if (360+150 >= kWindowHeight) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 150)];
+    } else {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, kWindowHeight-360)];
+    }
     
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(20, 0, 275-40, 100) animationDuration:5];
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(20, view.bounds.size.height-150, 275-40, 100) animationDuration:5];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };

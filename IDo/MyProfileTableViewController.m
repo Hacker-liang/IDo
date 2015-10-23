@@ -159,7 +159,7 @@
             break;
             
         case 2:
-            if ([_userInfo.sex integerValue] == 1) {
+            if ([_userInfo.sex integerValue] == 1 || [_userInfo.sex isEqualToString:@"0"]) {
                 cell.subtitleLabel.text = @"男";
             } else {
                 cell.subtitleLabel.text = @"女";

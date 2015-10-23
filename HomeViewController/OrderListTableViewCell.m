@@ -37,7 +37,7 @@
         userInfo = _orderDetail.grabOrderUser;
     }
     NSString *sex = userInfo.sex;
-    if ([sex isEqualToString:@"1"]) {
+    if ([sex isEqualToString:@"1"] || [sex isEqualToString:@"0"]) {
         [_sexImageView setImage:[UIImage imageNamed:@"icon_male.png"]];
     } else {
         [_sexImageView setImage:[UIImage imageNamed:@"icon_female.png"]];

@@ -18,8 +18,8 @@
 @implementation GrabOrderSegmentedViewController
 
 - (void)viewDidLoad {
-    self.segmentedNormalImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
-    self.segmentedSelectedImages = @[@"icon_order.png", @"icon_order.png", @"icon_rating.png"];
+    self.segmentedNormalImages = @[@"icon_qiangdan.png", @"icon_order.png", @"icon_rating.png"];
+    self.segmentedSelectedImages = @[@"icon_qiangdan.png", @"icon_order.png", @"icon_rating.png"];
     self.indictorWidth = 70;
     self.segmentedTitles = @[@"立即抢单", @"我的订单", @"我的评价"];
     GrabOrderDetailSegmentViewController *ctl = [[GrabOrderDetailSegmentViewController alloc] init];

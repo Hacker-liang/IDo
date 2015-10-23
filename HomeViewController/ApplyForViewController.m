@@ -161,9 +161,9 @@
     contentLabel.textAlignment = NSTextAlignmentRight;
     [backView addSubview:contentLabel];
     
-    UILabel * la = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(backView.frame) + 10, [UIScreen mainScreen].bounds.size.width, 44)];
-    la.text = @"小提示：单笔提现金额应该大于50元，每天仅能提现一次，单月累计不能超过10次";
-    la.textAlignment = NSTextAlignmentCenter;
+    UILabel * la = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(backView.frame) + 10, [UIScreen mainScreen].bounds.size.width-20, 80)];
+    la.text = @"*请确保您的支付宝账号输入正确，如因支付宝错误导致的资金损失由您自行承担。\n*单笔提现金额应大于30元，每天仅能提现一次，单月累计不得超过10次";
+    la.textAlignment = NSTextAlignmentLeft;
     la.numberOfLines = 0;
     la.textColor = [UIColor grayColor];
     la.font = [UIFont systemFontOfSize:11];

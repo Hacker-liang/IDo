@@ -151,7 +151,7 @@
 
 - (void)sendOrder:(id)sender
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:1 inSection:1];
     OrderContentTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     self.orderDetail.content = cell.contentTextView.text;
     if (self.orderDetail.content.length < 1) {
@@ -292,27 +292,57 @@
     if (section == 0) {
         return 250;
     }
-    return 0;
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 30;
+    }
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return self.headerView;
+    if (section == 0) {
+        return self.headerView;
+    } else {
+        return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 30)];
+        label.backgroundColor = APP_PAGE_COLOR;
+        label.text = @"*代买商品金额由活儿宝先垫付，不包含在悬赏金额中";
+        label.font = [UIFont systemFontOfSize:11.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = UIColorFromRGB(0x858585);
+        return label;
+    }
+    return nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    if (section == 0) {
+        return 1;
+    } else {
+        return self.dataSource.count - 1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1 && indexPath.section == 1) {
         return 100;
     }
     return 50;
@@ -321,7 +351,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *imageName = [[self.dataSource objectAtIndex:indexPath.row] objectForKey:@"icon"];
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1 && indexPath.section == 1) {
         OrderContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderContentCell" forIndexPath:indexPath];
         cell.indicateImageView.image = [UIImage imageNamed: imageName];
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -329,20 +359,21 @@
         return cell;
         
     } else {
+
         CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.indicateImageView.image = [UIImage imageNamed: imageName];
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0 && indexPath.section == 0) {
             NSString *str = [NSString stringWithFormat:@"悬赏金额 %@ 元", _orderDetail.price];
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
             [attStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:NSMakeRange(5,str.length-7)];
             [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(5, str.length-7)];
             cell.titleLabel.attributedText = attStr;
 
-        } else if (indexPath.row == 1) {
+        } else if (indexPath.row == 0 && indexPath.section == 1) {
             cell.titleLabel.text = _showtime;
 
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 2 && indexPath.section == 1) {
             cell.titleLabel.text = [NSString stringWithFormat:@"发单范围  %@公里", _orderDetail.distance];
 
         }
@@ -354,7 +385,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.view endEditing:YES];
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0 && indexPath.section == 0) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"悬赏金额" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
@@ -378,7 +409,7 @@
             }
         }];
         
-    } else if (indexPath.row == 1) {
+    } else if (indexPath.row == 0 && indexPath.section == 1) {
         FYTimeViewController *control = [[FYTimeViewController alloc] init];
         control.postValue=^(NSString *aShowTime,NSString *aTaskTime)
         {
@@ -389,7 +420,7 @@
         };
         [self.navigationController pushViewController:control animated:YES];
         
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == 2 && indexPath.section == 1) {
         UIActionSheet * editActionSheet = [[UIActionSheet alloc] initWithTitle:@"发单范围" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"5公里",@"10公里",@"15公里",nil];
         [editActionSheet addButtonWithTitle:@"取消"];
         editActionSheet.delegate = self;
