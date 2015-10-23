@@ -138,7 +138,7 @@
     cell.isGrabOrder = _isGrabOrder;
     OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
     cell.orderDetail = model;
-    
+    cell.orderStatusLabel.textColor = UIColorFromRGB(0x858585);
     return cell;
 }
 
