@@ -61,11 +61,11 @@
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@{@"icon": @"icon_money.png"},
-                        @{@"icon": @"icon_time"},
+        _dataSource = @[@[@{@"icon": @"icon_money.png"}],
+                        @[@{@"icon": @"icon_time"},
                         @{@"icon": @"icon_content.png"},
                         @{@"icon": @"icon_distance.png"}
-                        ];
+                        ]];
     }
     return _dataSource;
 }
@@ -333,12 +333,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    } else {
-        return self.dataSource.count - 1;
-    }
-}
+    return [[self.dataSource objectAtIndex:section] count];
+  }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -350,7 +346,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *imageName = [[self.dataSource objectAtIndex:indexPath.row] objectForKey:@"icon"];
+    NSString *imageName = [[[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"icon"];
     if (indexPath.row == 1 && indexPath.section == 1) {
         OrderContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderContentCell" forIndexPath:indexPath];
         cell.indicateImageView.image = [UIImage imageNamed: imageName];

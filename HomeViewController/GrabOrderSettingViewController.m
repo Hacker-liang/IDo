@@ -285,8 +285,7 @@
     NSString *url = [NSString stringWithFormat:@"%@addlabel",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-    
-    [mDict setObject:@"送水" forKey:@"labelname"];
+    [mDict safeSetObject:tag forKey:@"labelname"];
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
         {

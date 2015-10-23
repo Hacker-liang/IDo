@@ -488,7 +488,6 @@
     }  else if (_orderDetail.orderStatus == kOrderGrabSuccess && _isSendOrder) {
         _addressConstraint.constant = 70;
         _cancelBtn.hidden = NO;
-        _addressConstraint.constant = 70;
         _cancelBtnConstraint.constant = 12;
 
         tipsString = @"保持良好记录有助于快速成交订单";
