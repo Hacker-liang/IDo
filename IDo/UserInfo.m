@@ -27,6 +27,7 @@
         _zhifubao = [dict objectForKey:@"zhifubao"];
         _weixin = [dict objectForKey:@"weixin"];
         _userLabel = [dict objectForKey:@"label"];
+        _address = [dict objectForKey:@"address"];
         _lat = [[dict objectForKey:@"lat"] doubleValue];
         _lng = [[dict objectForKey:@"lng"] doubleValue];
         _districtid = [dict objectForKey:@"districtid"];
