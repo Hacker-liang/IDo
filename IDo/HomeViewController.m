@@ -49,7 +49,7 @@
     [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.titleView = _titleBtn;
     
-    _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 11, 15, 13)];
+    _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(65, 11, 15, 13)];
     _refreshImageView.image = [UIImage imageNamed:@"icon_refresh.png"];
     [_titleBtn addSubview:_refreshImageView];
     
