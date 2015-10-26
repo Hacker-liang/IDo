@@ -131,6 +131,7 @@
     [mDict safeSetObject:_userInfo.nickName forKey:@"nikename"];
     [mDict safeSetObject:_userInfo.tel forKey:@"tel"];
     [mDict safeSetObject:_userInfo.sex forKey:@"sex"];
+    [mDict safeSetObject:_userInfo.address forKey:@"address"];
     [mDict safeSetObject:_userInfo.avatar forKey:@"img"];
     [mDict safeSetObject:_userInfo.level forKey:@"level"];
     [mDict safeSetObject:_userInfo.lock forKey:@"lock"];
