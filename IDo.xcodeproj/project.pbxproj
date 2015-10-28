@@ -152,6 +152,8 @@
 		D96AFC421BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC411BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png */; };
 		D96AFC451BC6C90E00817EDB /* b27_icon_star_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC431BC6C90E00817EDB /* b27_icon_star_gray@2x.png */; };
 		D96AFC461BC6C90E00817EDB /* b27_icon_star_yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96AFC441BC6C90E00817EDB /* b27_icon_star_yellow@2x.png */; };
+		D96CC39F1BE04BDB00BDBCDD /* ChangeAlipayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96CC39D1BE04BDA00BDBCDD /* ChangeAlipayViewController.m */; };
+		D96CC3A01BE04BDB00BDBCDD /* ChangeAlipayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96CC39E1BE04BDA00BDBCDD /* ChangeAlipayViewController.xib */; };
 		D96EA9141BB292BB00360ED8 /* HomeMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9121BB292BB00360ED8 /* HomeMenuViewController.m */; };
 		D96EA9151BB292BB00360ED8 /* HomeMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EA9131BB292BB00360ED8 /* HomeMenuViewController.xib */; };
 		D96EA9191BB2980E00360ED8 /* SendOrderRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9181BB2980E00360ED8 /* SendOrderRootViewController.m */; };
@@ -619,6 +621,9 @@
 		D96AFC411BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_white_yellow@2x.png"; sourceTree = "<group>"; };
 		D96AFC431BC6C90E00817EDB /* b27_icon_star_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_gray@2x.png"; sourceTree = "<group>"; };
 		D96AFC441BC6C90E00817EDB /* b27_icon_star_yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b27_icon_star_yellow@2x.png"; sourceTree = "<group>"; };
+		D96CC39C1BE04BDA00BDBCDD /* ChangeAlipayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeAlipayViewController.h; sourceTree = "<group>"; };
+		D96CC39D1BE04BDA00BDBCDD /* ChangeAlipayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeAlipayViewController.m; sourceTree = "<group>"; };
+		D96CC39E1BE04BDA00BDBCDD /* ChangeAlipayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeAlipayViewController.xib; sourceTree = "<group>"; };
 		D96EA9111BB292BB00360ED8 /* HomeMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuViewController.h; sourceTree = "<group>"; };
 		D96EA9121BB292BB00360ED8 /* HomeMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuViewController.m; sourceTree = "<group>"; };
 		D96EA9131BB292BB00360ED8 /* HomeMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMenuViewController.xib; sourceTree = "<group>"; };
@@ -1521,6 +1526,9 @@
 				D96EA9441BB2EB7300360ED8 /* MyWalletViewController.h */,
 				D96EA9451BB2EB7300360ED8 /* MyWalletViewController.m */,
 				D96EA9461BB2EB7300360ED8 /* MyWalletViewController.xib */,
+				D96CC39C1BE04BDA00BDBCDD /* ChangeAlipayViewController.h */,
+				D96CC39D1BE04BDA00BDBCDD /* ChangeAlipayViewController.m */,
+				D96CC39E1BE04BDA00BDBCDD /* ChangeAlipayViewController.xib */,
 			);
 			name = MyWallet;
 			path = ../HomeViewController;
@@ -2308,6 +2316,8 @@
 				D96EAA401BB5372100360ED8 /* icon_content@3x.png in Resources */,
 				D946C8FC1BC23B8200AAD3A3 /* remenbiaoqian01@2x.png in Resources */,
 				D91F2F351BC21965002CE690 /* icon_setting_2@3x.png in Resources */,
+				D96CC3A01BE04BDB00BDBCDD /* ChangeAlipayViewController.xib in Resources */,
+				D975CB9E1BD9B5EF0058A95F /* icon_paidan@2x.png in Resources */,
 				D92B5C0A1BB8F3B600E3AC93 /* AlipaySDK.bundle in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D91F2F311BC218A2002CE690 /* GrabSettingNotiTableViewCell.xib in Resources */,
@@ -2501,6 +2511,7 @@
 				D969D9D51BCCB18B00281D02 /* NJKWebViewProgressView.m in Sources */,
 				D96EA9A01BB3D22100360ED8 /* AFNetworkReachabilityManager.m in Sources */,
 				D969DA031BCCB22A00281D02 /* SVModalWebViewController.m in Sources */,
+				D96CC39F1BE04BDB00BDBCDD /* ChangeAlipayViewController.m in Sources */,
 				D99EAD111BBA851D005A02D3 /* Reachability.m in Sources */,
 				D96EAA9B1BB5964F00360ED8 /* MJRefreshConst.m in Sources */,
 				D92B5C0F1BB8F3B600E3AC93 /* base64.m in Sources */,

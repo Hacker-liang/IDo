@@ -11,6 +11,7 @@
 #import "MyProfileTableViewCell.h"
 #import "ASIFormDataRequest.h"
 #import "Requtst2BeVIPViewController.h"
+#import "ChangeAlipayViewController.h"
 
 @interface MyProfileTableViewController () <UIImagePickerControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -38,6 +39,12 @@
             [self.tableView reloadData];
         }
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -216,17 +223,19 @@
     }
     
     if (indexPath.section == 0 && indexPath.row == 3) {
-        UIAlertView *thAlertView = [[UIAlertView alloc] initWithTitle:@"支付宝"
-                                                              message:@"请输入支付宝账户"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"取消"
-                                                    otherButtonTitles:@"确定",nil];
-        thAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        UITextField *tf=[thAlertView textFieldAtIndex:0];
-        tf.text = _userInfo.zhifubao;
-        tf.keyboardType = UIKeyboardTypeDefault;
-        thAlertView.tag = 501;
-        [thAlertView show];
+//        UIAlertView *thAlertView = [[UIAlertView alloc] initWithTitle:@"支付宝"
+//                                                              message:@"请输入支付宝账户"
+//                                                             delegate:self
+//                                                    cancelButtonTitle:@"取消"
+//                                                    otherButtonTitles:@"确定",nil];
+//        thAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+//        UITextField *tf=[thAlertView textFieldAtIndex:0];
+//        tf.text = _userInfo.zhifubao;
+//        tf.keyboardType = UIKeyboardTypeDefault;
+//        thAlertView.tag = 501;
+//        [thAlertView show];
+        ChangeAlipayViewController *ctl = [[ChangeAlipayViewController alloc] init];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
 }
 
