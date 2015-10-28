@@ -59,6 +59,10 @@ typedef enum : NSUInteger {
 @property(copy, nonatomic) NSString *distance; //范围
 @property(copy, nonatomic) NSString *reminderCount; //范围
 
+@property (nonatomic)BOOL isAsk2CancelFromFadanren; //由发单人取消订单
+@property (nonatomic)BOOL isAsk2CancelFromQiangdanren; //由抢单人取消订单
+
+
 @property (nonatomic) int payCountdown;  //付款倒计时
 @property (nonatomic) int grabCountdown;  //付款倒计时
 

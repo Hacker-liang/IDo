@@ -134,9 +134,12 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [APService setBadge:0];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNewOrderNoti object:nil];
-    [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
-        
-    }];
+    if ([[UserManager shareUserManager] isLogin]) {
+        [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
+            
+        }];
+    }
+    
 }
 
 - (void)receiveJPushMessage:(NSNotification *)noti
@@ -455,32 +458,41 @@
             }
         }];
     } else if([notificationType isEqualToString:@"askCancelOrder" ]) { //发单方 请求取消订单
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"请求取消订单" message:@"您有一笔订单，发单人请求取消，请确认，如同意，资金将返回对方账户。" delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"请求取消订单" message:@"您有一笔订单，发单人请求取消，请确认，如同意，资金将返回对方账户。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-            if (buttonIndex == 1) {
-                [SVProgressHUD showWithStatus:@"正在提交"];
-                NSString *url = [NSString stringWithFormat:@"%@allowCancelOrder",baseUrl];
-                NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-                [mDict setObject:orderId forKey:@"orderid"];
-                [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-                
-                [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-                    if (response)
-                    {
-                        NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-                        NSDictionary *dict = [jsonString objectFromJSONString];
-                        NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
-                        if ([tempStatus integerValue] == 1) {
-                            [SVProgressHUD showSuccessWithStatus:@"请求成功"];
-                        } else {
-                            [SVProgressHUD showSuccessWithStatus:@"请求失败"];
-                        }
+            if(buttonIndex == 1){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
                     } else {
-                        [SVProgressHUD showSuccessWithStatus:@"请求失败"];
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.orderId = orderId;
+                        ctl.isSendOrder = NO;
+                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
                     }
-                }];
+                } else {
+                    OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                    ctl.orderId = orderId;
+                    ctl.isSendOrder = NO;
+                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                }
+                
+            } else if(buttonIndex == 0){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
+                    }
+                }
             }
         }];
+        
+
         
     } else if([notificationType isEqualToString:@"tomemberAskCancelOrder" ]) { //接单方请求取消
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];

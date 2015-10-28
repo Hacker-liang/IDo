@@ -36,7 +36,9 @@
         _reminderCount = [json objectForKey:@"ask_money_times"];
         _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
         _grabOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"jiedanren"]];
-        
+        _isAsk2CancelFromFadanren = ([[json objectForKey:@"fromMemberAskCancel"]intValue] == 1);
+        _isAsk2CancelFromQiangdanren = ([[json objectForKey:@"tomemberAskCancel"]intValue] == 1);
+
         //订单被抢
         if ([[json objectForKey:@"status"] intValue] == 3) {
             if ([[json objectForKey:@"haspay"] intValue] == 0) {
