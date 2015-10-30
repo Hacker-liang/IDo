@@ -2168,7 +2168,7 @@
 				TargetAttributes = {
 					D95394E11BB2694900CB6746 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 6A8PL5G3FA;
+						DevelopmentTeam = D8ME4YHUXS;
 					};
 					D95394FA1BB2694900CB6746 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2317,7 +2317,6 @@
 				D946C8FC1BC23B8200AAD3A3 /* remenbiaoqian01@2x.png in Resources */,
 				D91F2F351BC21965002CE690 /* icon_setting_2@3x.png in Resources */,
 				D96CC3A01BE04BDB00BDBCDD /* ChangeAlipayViewController.xib in Resources */,
-				D975CB9E1BD9B5EF0058A95F /* icon_paidan@2x.png in Resources */,
 				D92B5C0A1BB8F3B600E3AC93 /* AlipaySDK.bundle in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D91F2F311BC218A2002CE690 /* GrabSettingNotiTableViewCell.xib in Resources */,
@@ -2684,7 +2683,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d329acac-92fe-445f-bac6-799f8453f6b5";
+				PROVISIONING_PROFILE = "f1ab2e44-3708-4895-bacb-707306231e42";
 			};
 			name = Debug;
 		};
@@ -2718,7 +2717,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c7496fe-5ec3-4b9a-bdde-1edb770c0911";
+				PROVISIONING_PROFILE = "c91a29a6-55d0-4d85-98ca-35e49316c14d";
 			};
 			name = Release;
 		};

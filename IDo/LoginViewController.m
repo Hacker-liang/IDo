@@ -74,6 +74,9 @@
         _addressLabel.text = @"北京市海淀区中关村街道知春路121";
         [UserLocationManager shareInstance].userLocation = [[CLLocation alloc] initWithLatitude:39.974473 longitude:116.316357];
         [UserLocationManager shareInstance].districtid = @"110108";
+        
+        [self loginWithApple];
+        return;
     }
     if (!_addressLabel.text || _addressLabel.text.length == 0 || [[UserLocationManager shareInstance].districtid integerValue] == 0) {
         [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];
@@ -94,7 +97,7 @@
     
     if ([self.codeNumY integerValue] == 0 && !([self.captchaTextField.text isEqualToString:@"123456"] && [self.phoneTextField.text isEqualToString:@"18810261020"])) {
         [SVProgressHUD showErrorWithStatus:@"请获取验证码"];
-
+        
         return;
     }
     if (![self.captchaTextField.text isEqualToString:self.codeNumY] && !([self.captchaTextField.text isEqualToString:@"123456"] && [self.phoneTextField.text isEqualToString:@"18810261020"])) {
@@ -145,6 +148,45 @@
 
         }
     }];
+
+}
+
+
+- (void)loginWithApple
+{
+    NSDictionary *userDict = @{
+                               @"address" : @"北京市海淀区中关村街道知春路121",
+
+
+                               @"districtid" : @"110115",
+                               @"id" : @"2272",
+                               @"img" : @"/2015-10-29/ilxzgauiti.jpg",
+
+                               @"lat" : @"39.975815",
+
+                               @"lng" : @"116.32258",
+
+                               @"nikename" : @"小侯侯",
+                               @"reg_lat" :@"39.762814",
+                               @"reg_lng" :@"116.33121",
+
+                               @"sex" : @"1",
+                               @"star" : @"3.0",
+                               @"tel" : @"18810261020",
+
+                               @"totalCommentedStar" : @"11",
+                               @"zhifubao" : @"dhhdhshu",
+                               };
+    
+    [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+    [UserManager shareUserManager].userInfo = [[UserInfo alloc] initWithJson:userDict];
+    [[UserManager shareUserManager] saveUserData2Cache];
+    if (_completionBlock) {
+        _completionBlock(YES, nil);
+    }
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 
 }
 
