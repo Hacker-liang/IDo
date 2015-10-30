@@ -17,7 +17,7 @@
         _nickName = [dict objectForKey:@"nikename"];
         _tel = [dict objectForKey:@"tel"];
         _sex = [dict objectForKey:@"sex"];
-        if ([[dict objectForKey:@"img"] containsString:@"http"]) {
+        if ([[dict objectForKey:@"img"] rangeOfString:@"http"].location != NSNotFound) {
             _avatar = [dict objectForKey:@"img"];
         } else {
             _avatar = [NSString stringWithFormat:@"%@%@",headURL,[dict objectForKey:@"img"]];
