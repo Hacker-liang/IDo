@@ -83,6 +83,7 @@
     for (NSDictionary *dic in _adArray) {
         NSString *imageUrl = [dic objectForKey:@"img"];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _galleryView.bounds.size.width, 150)];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"nil"]];
         [viewsArray addObject:imageView];
     }

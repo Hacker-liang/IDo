@@ -2679,7 +2679,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f9af8f95-a27d-4081-ae06-863a09855678";
+				PROVISIONING_PROFILE = "5f3ea3ff-521a-4614-b05d-2a1f105c669a";
 			};
 			name = Debug;
 		};
@@ -2713,7 +2713,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxin.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a99ca5c9-d7d2-452a-992a-86f80054300d";
+				PROVISIONING_PROFILE = "a4a5e6ce-e8f0-467d-8e07-da065c59d95d";
 			};
 			name = Release;
 		};
