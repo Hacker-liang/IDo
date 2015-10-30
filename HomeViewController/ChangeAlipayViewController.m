@@ -44,6 +44,16 @@
             NSLog(@"jsonString = %@",jsonString);
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSInteger status = [[dict objectForKey:@"status"] integerValue];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                                        [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
             if (status == 1) {
                 [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                 [UserManager shareUserManager].userInfo.zhifubao = aContent;

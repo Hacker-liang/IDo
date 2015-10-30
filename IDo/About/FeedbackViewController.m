@@ -80,6 +80,16 @@
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                                        [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
             if ([dict[@"info"] isEqualToString:@"提交成功"]) {
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的意见已经成功提交！\n我们会根据您的意见提升自己" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {

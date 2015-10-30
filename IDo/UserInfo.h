@@ -20,8 +20,7 @@
 @property (nonatomic, copy) NSString *districtid;
 @property (nonatomic, copy) NSString *cityName;
 @property (nonatomic, copy) NSString *provinceName;
-
-
+@property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy) NSString *userLabel;
 @property (nonatomic, copy) NSString *level;
 @property (nonatomic, copy) NSString *lock;

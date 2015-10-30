@@ -52,6 +52,16 @@
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                                        [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([tempStatus integerValue] == 1) {
                 _userInfo = [[UserInfo alloc] initWithJson:dict[@"data"]];
@@ -78,6 +88,7 @@
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            
             NSInteger status = [[dict objectForKey:@"status"] integerValue];
             if (status == 1) {
                 self.userInfo = nil;
@@ -144,7 +155,7 @@
     [mDict safeSetObject:_userInfo.complainCount forKey:@"totalComplaintTimes"];
     [mDict safeSetObject:_userInfo.cityName forKey:@"cityName"];
     [mDict safeSetObject:_userInfo.provinceName forKey:@"provinceName"];
-
+    [mDict safeSetObject:_userInfo.token forKey:@"token"];
     if (_userInfo.isMute) {
         [mDict setObject:@"1" forKey:@"isMute"];
     } else {
