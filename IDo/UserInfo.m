@@ -26,6 +26,7 @@
         _lock = [dict objectForKey:@"lock"];
         _zhifubao = [dict objectForKey:@"zhifubao"];
         _weixin = [dict objectForKey:@"weixin"];
+        _token = [dict objectForKey:@"token"];
         _userLabel = [dict objectForKey:@"label"];
         _address = [dict objectForKey:@"address"];
         _lat = [[dict objectForKey:@"lat"] doubleValue];

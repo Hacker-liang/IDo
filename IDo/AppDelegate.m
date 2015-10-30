@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong) HomeViewController *homeViewController;
 @property (nonatomic, strong) HomeMenuViewController *leftController;
+@property (nonatomic, copy) NSString *userId;
 
 @end
 
@@ -59,7 +60,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jpushDidClose) name:kJPFNetworkDidCloseNotification object:nil];
 
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:@"userLogout" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:@"userLogout" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoError) name:@"userInfoError" object:nil];
+
     [self setupHomeView];
     
     // Required
@@ -83,6 +86,8 @@
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [APService setBadge:0];
+    
+    _userId = [UserManager shareUserManager].userInfo.userid;
     
     return YES;
 }
@@ -208,11 +213,39 @@
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
+            
         } else {
         }
     }];
 }
 
+- (void)userInfoError
+{
+    [self userDidLogout];
+    if (_userId) {
+        _userId = [UserManager shareUserManager].userInfo.userid;
+    }
+    if (_userId) {
+        NSString *url = [NSString stringWithFormat:@"%@editMemberLoginStatus",baseUrl];
+        
+        NSMutableDictionary *mDict=  [[NSMutableDictionary alloc] init];
+        [mDict safeSetObject:_userId forKey:@"memberid"];
+        [mDict setObject:@"0" forKey:@"content"];
+        
+        [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+            if (response) {
+                NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                NSDictionary *dict = [jsonString objectFromJSONString];
+                
+                NSInteger status = [[dict objectForKey:@"status"] integerValue];
+                if (status == 1) {
+                    _userId = nil;
+                }
+            }
+        }];
+    }
+   
+}
 
 - (void)userDidLogout
 {

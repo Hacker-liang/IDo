@@ -63,6 +63,16 @@
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                                        [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
             if ([dict[@"status"] integerValue] == 1) {
                 [UserManager shareUserManager].userInfo.pushType = [NSString stringWithFormat:@"%@",dict[@"data"][@"tsstatic"]];
                 if ([[UserManager shareUserManager].userInfo.pushType isEqualToString:@"1"]) {
@@ -87,8 +97,19 @@
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+
             [self.allTagArray removeAllObjects];
             if ([dict isKindOfClass:[NSDictionary class]]) {
+                if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                    if ([UserManager shareUserManager].isLogin) {
+                                            [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                        [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                        }];
+                    }
+                    return;
+                }
                 for (NSDictionary *d in dict[@"data"]) {
                     [self.allTagArray addObject:d[@"name"]];
                 }
@@ -110,6 +131,16 @@
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                                        [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
             if ([dict[@"status"] integerValue] == 1) {
                 NSArray *arr = dict[@"data"];
                 NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -139,8 +170,18 @@
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSDictionary *dic = [jsonString objectFromJSONString];
-            NSString *str=[NSString stringWithFormat:@"%@",dic[@"status"]];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                                        [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *str=[NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([str isEqualToString:@"1"]) {
                 if (cell.allOrderBtn.selected) {
                     cell.allOrderBtn.selected = NO;
@@ -291,6 +332,16 @@
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                                        [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
                 [SVProgressHUD showSuccessWithStatus:@"添加成功"];
@@ -316,6 +367,16 @@
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         NSDictionary *dict = [jsonString objectFromJSONString];
+        if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+            if ([UserManager shareUserManager].isLogin) {
+                                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                }];
+            }
+            return;
+        }
         NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
         if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
             [[UserManager shareUserManager].userInfo.tagArray removeObjectAtIndex:indexPath.row];

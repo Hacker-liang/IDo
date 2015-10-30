@@ -116,6 +116,9 @@ static NSString *defaultUserAgent;
 
 + (SVHTTPRequest*)GET:(NSString *)address parameters:(NSDictionary *)parameters completion:(SVHTTPRequestCompletionHandler)block {
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodGET parameters:parameters saveToPath:nil progress:nil completion:block];
+    if ([UserManager shareUserManager].userInfo.token) {
+        [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+    } 
     [requestObject start];
     
     return requestObject;
@@ -130,6 +133,9 @@ static NSString *defaultUserAgent;
 
 + (SVHTTPRequest*)POST:(NSString *)address parameters:(NSObject *)parameters completion:(SVHTTPRequestCompletionHandler)block {
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodPOST parameters:parameters saveToPath:nil progress:nil completion:block];
+    if ([UserManager shareUserManager].userInfo.token) {
+        [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+    }
     [requestObject start];
     
     return requestObject;

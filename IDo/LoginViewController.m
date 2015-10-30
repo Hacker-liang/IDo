@@ -112,6 +112,7 @@
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+           
             NSInteger status = [[dict objectForKey:@"status"] integerValue];
             if (status == 1) {
                 [SVProgressHUD showSuccessWithStatus:@"登录成功"];
