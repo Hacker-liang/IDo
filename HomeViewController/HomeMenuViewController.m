@@ -75,15 +75,15 @@
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, kWindowHeight-360)];
     }
     
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(20, view.bounds.size.height-150, 275-40, 100) animationDuration:5];
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, view.bounds.size.height-150, 275-20, 100) animationDuration:5];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };
     NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
     for (NSDictionary *dic in _adArray) {
         NSString *imageUrl = [dic objectForKey:@"img"];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _galleryView.bounds.size.width, 150)];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _galleryView.bounds.size.width, 100)];
+        imageView.contentMode = UIViewContentModeScaleToFill;
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"nil"]];
         [viewsArray addObject:imageView];
     }

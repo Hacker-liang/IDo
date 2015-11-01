@@ -11,24 +11,24 @@
 
 #ifdef __OBJC__
 
-#define baseServer @"http://112.124.51.74/"
-#define baseUrl @"http://112.124.51.74/?action="
-
-#define kYzmURL @"http://112.124.51.74/SMS.php"
-#define severURL @"http://112.124.51.74/"
-
-#define uploadheadImgURL @"http://photo.bjwogan.com/upload/upload.php"
-#define headURL @"http://photo.bjwogan.com/image"
-
-
-//#define baseServer @"http://api.bjwogan.com/"
-//#define baseUrl @"http://api.bjwogan.com/?action="
+//#define baseServer @"http://112.124.51.74/"
+//#define baseUrl @"http://112.124.51.74/?action="
 //
-//#define kYzmURL @"http://api.bjwogan.com/SMS.php"
-//#define severURL @"http://api.bjwogan.com/"
+//#define kYzmURL @"http://112.124.51.74/SMS.php"
+//#define severURL @"http://112.124.51.74/"
 //
 //#define uploadheadImgURL @"http://photo.bjwogan.com/upload/upload.php"
 //#define headURL @"http://photo.bjwogan.com/image"
+
+
+#define baseServer @"http://api.bjwogan.com/"
+#define baseUrl @"http://api.bjwogan.com/?action="
+
+#define kYzmURL @"http://api.bjwogan.com/SMS.php"
+#define severURL @"http://api.bjwogan.com/"
+
+#define uploadheadImgURL @"http://photo.bjwogan.com/upload/upload.php"
+#define headURL @"http://photo.bjwogan.com/image"
 
 /*
 #define baseServer @"http://58.30.16.58/"

@@ -36,7 +36,7 @@
                   moduleName = "IDo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liangpengshuai/Documents/IDo/IDo/Common/AliPayTool.m"
-                  timestampString = "467909975.808128"
+                  timestampString = "468041313.596011"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "223"
@@ -51,7 +51,7 @@
                   moduleName = "IDo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liangpengshuai/Documents/IDo/IDo/Common/AliPayTool.m"
-                  timestampString = "467909975.808545"
+                  timestampString = "468041313.596406"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "223"
@@ -106,6 +106,38 @@
             startingLineNumber = "192"
             endingLineNumber = "192"
             landmarkName = "-changeProfileStatusWithPageIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IDo/Libs/SVHTTPRequest/SVHTTPRequest.m"
+            timestampString = "468041242.178462"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "+GET:parameters:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IDo/Libs/SVHTTPRequest/SVHTTPRequest.m"
+            timestampString = "468041245.700814"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "+POST:parameters:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

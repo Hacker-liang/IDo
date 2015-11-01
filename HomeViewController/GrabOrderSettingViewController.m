@@ -16,7 +16,7 @@
 @interface GrabOrderSettingViewController () <HotTagTableViewCellDelegate, GrabSetTagTableViewCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *allTagArray;
-
+@property (nonatomic) BOOL hasScroll2Top;
 @property (nonatomic) NSInteger rowCount;
 
 @end
@@ -398,11 +398,12 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"scrollViewDidScroll: %lf", scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y < 64 && [scrollView isEqual:self.tableView] && scrollView.contentOffset.y > 0) {
+    if (scrollView.contentOffset.y < 64 && [scrollView isEqual:self.tableView] && scrollView.contentOffset.y > 0 && !_hasScroll2Top) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Buttom object:nil];
+        _hasScroll2Top = YES;
     } else if (scrollView.contentOffset.y < 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Top object:nil];
+        _hasScroll2Top = NO;
     }
 }
 @end
