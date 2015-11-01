@@ -118,6 +118,16 @@ static NSString *defaultUserAgent;
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodGET parameters:parameters saveToPath:nil progress:nil completion:block];
     if ([UserManager shareUserManager].userInfo.token) {
         [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+        [requestObject setValue: @"2" forHTTPHeaderField:@"deviceType"];
+        NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
+        NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
+        NSArray *array = [versionNum componentsSeparatedByString:@"."];
+        NSMutableString *mutableStr;
+        for (NSString *i in array) {
+            [mutableStr appendString:i];
+        }
+        
+        [requestObject setValue: mutableStr forHTTPHeaderField:@"version"];
     } 
     [requestObject start];
     
@@ -135,6 +145,17 @@ static NSString *defaultUserAgent;
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodPOST parameters:parameters saveToPath:nil progress:nil completion:block];
     if ([UserManager shareUserManager].userInfo.token) {
         [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+        [requestObject setValue: @"2" forHTTPHeaderField:@"deviceType"];
+        NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
+        NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
+        NSArray *array = [versionNum componentsSeparatedByString:@"."];
+        NSMutableString *mutableStr = [[NSMutableString alloc] init];
+        for (NSString *i in array) {
+            [mutableStr appendString:i];
+        }
+
+        [requestObject setValue: mutableStr forHTTPHeaderField:@"version"];
+
     }
     [requestObject start];
     

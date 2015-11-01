@@ -258,6 +258,8 @@
 		D96EAA9D1BB5964F00360ED8 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA891BB5964F00360ED8 /* UIScrollView+MJRefresh.m */; };
 		D96EAA9E1BB5964F00360ED8 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA8B1BB5964F00360ED8 /* UIView+MJExtension.m */; };
 		D96EAAA11BB59C2B00360ED8 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAAA01BB59C2B00360ED8 /* OrderListModel.m */; };
+		D975CB9C1BD9B5E30058A95F /* icon_qiangdan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D975CB9B1BD9B5E30058A95F /* icon_qiangdan@3x.png */; };
+		D975CB9E1BD9B5EF0058A95F /* icon_paidan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D975CB9D1BD9B5EF0058A95F /* icon_paidan@3x.png */; };
 		D9777D491BB65E1900A7A64C /* icon_phone_disable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D451BB65E1900A7A64C /* icon_phone_disable@3x.png */; };
 		D9777D4A1BB65E1900A7A64C /* icon_orderDetail_address@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D461BB65E1900A7A64C /* icon_orderDetail_address@3x.png */; };
 		D9777D4B1BB65E1900A7A64C /* nan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D471BB65E1900A7A64C /* nan@3x.png */; };
@@ -814,6 +816,8 @@
 		D96EAA8B1BB5964F00360ED8 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		D96EAA9F1BB59C2B00360ED8 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		D96EAAA01BB59C2B00360ED8 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
+		D975CB9B1BD9B5E30058A95F /* icon_qiangdan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_qiangdan@3x.png"; sourceTree = "<group>"; };
+		D975CB9D1BD9B5EF0058A95F /* icon_paidan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_paidan@3x.png"; sourceTree = "<group>"; };
 		D9777D451BB65E1900A7A64C /* icon_phone_disable@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_phone_disable@3x.png"; sourceTree = "<group>"; };
 		D9777D461BB65E1900A7A64C /* icon_orderDetail_address@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_orderDetail_address@3x.png"; sourceTree = "<group>"; };
 		D9777D471BB65E1900A7A64C /* nan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nan@3x.png"; sourceTree = "<group>"; };
@@ -1676,6 +1680,7 @@
 				D9A092831BDDEF09007E0E89 /* icon_qiangdan@2x.png */,
 				D9A092841BDDEF09007E0E89 /* icon_setting_rul_bg.png */,
 				D969DA0F1BCCD07500281D02 /* banner_default@2x.png */,
+				D975CB9B1BD9B5E30058A95F /* icon_qiangdan@3x.png */,
 				D916A5B31BC37317005F5286 /* common_icon_navigation_back_hilighted@2x.png */,
 				D916A5B41BC37317005F5286 /* common_icon_navigation_back_hilighted@3x.png */,
 				D916A5AF1BC37306005F5286 /* common_icon_navigation_back_normal@2x.png */,
@@ -1684,6 +1689,7 @@
 				D946C9101BC2C20C00AAD3A3 /* icon_right_dot@3x.png */,
 				D946C90C1BC29C9F00AAD3A3 /* icon_female@2x.png */,
 				D946C90D1BC29C9F00AAD3A3 /* icon_male@2x.png */,
+				D975CB9D1BD9B5EF0058A95F /* icon_paidan@3x.png */,
 				D9B289EE1BBCEDE600FB97E5 /* icon_order@3x.png */,
 				D9B289EF1BBCEDE600FB97E5 /* icon_rating@3x.png */,
 			);
@@ -2257,6 +2263,7 @@
 				D96AFC451BC6C90E00817EDB /* b27_icon_star_gray@2x.png in Resources */,
 				D92B5ADA1BB815F100E3AC93 /* callbtn@2x.png in Resources */,
 				D916A5E41BC590D2005F5286 /* mapMark_GPS@3x.png in Resources */,
+				D975CB9C1BD9B5E30058A95F /* icon_qiangdan@3x.png in Resources */,
 				D916A5CD1BC560CE005F5286 /* Icon.png in Resources */,
 				D91F2F3B1BC21B6E002CE690 /* icon_myself@3x.png in Resources */,
 				D9B289F01BBCEDE600FB97E5 /* icon_order@3x.png in Resources */,
@@ -2317,6 +2324,7 @@
 				D946C8FC1BC23B8200AAD3A3 /* remenbiaoqian01@2x.png in Resources */,
 				D91F2F351BC21965002CE690 /* icon_setting_2@3x.png in Resources */,
 				D96CC3A01BE04BDB00BDBCDD /* ChangeAlipayViewController.xib in Resources */,
+				D975CB9E1BD9B5EF0058A95F /* icon_paidan@3x.png in Resources */,
 				D92B5C0A1BB8F3B600E3AC93 /* AlipaySDK.bundle in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D91F2F311BC218A2002CE690 /* GrabSettingNotiTableViewCell.xib in Resources */,
