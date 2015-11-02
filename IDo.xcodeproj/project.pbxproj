@@ -274,8 +274,6 @@
 		D99EAD471BBCD3C0005A02D3 /* Requtst2BeVIPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99EAD451BBCD3C0005A02D3 /* Requtst2BeVIPViewController.m */; };
 		D99EAD481BBCD3C0005A02D3 /* Requtst2BeVIPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99EAD461BBCD3C0005A02D3 /* Requtst2BeVIPViewController.xib */; };
 		D99EAD4A1BBCD4CE005A02D3 /* ic_vip_set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99EAD491BBCD4CE005A02D3 /* ic_vip_set@2x.png */; };
-		D9A092851BDDEF09007E0E89 /* icon_paidan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A092821BDDEF09007E0E89 /* icon_paidan@2x.png */; };
-		D9A092861BDDEF09007E0E89 /* icon_qiangdan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A092831BDDEF09007E0E89 /* icon_qiangdan@2x.png */; };
 		D9A092871BDDEF09007E0E89 /* icon_setting_rul_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A092841BDDEF09007E0E89 /* icon_setting_rul_bg.png */; };
 		D9ADC3F91BBA603100B1B7E1 /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ADC3F61BBA603100B1B7E1 /* RatingBar.m */; };
 		D9ADC4011BBA670A00B1B7E1 /* CWStarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ADC3FE1BBA670A00B1B7E1 /* CWStarRateView.m */; };
@@ -844,8 +842,6 @@
 		D99EAD451BBCD3C0005A02D3 /* Requtst2BeVIPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Requtst2BeVIPViewController.m; sourceTree = "<group>"; };
 		D99EAD461BBCD3C0005A02D3 /* Requtst2BeVIPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Requtst2BeVIPViewController.xib; sourceTree = "<group>"; };
 		D99EAD491BBCD4CE005A02D3 /* ic_vip_set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_vip_set@2x.png"; sourceTree = "<group>"; };
-		D9A092821BDDEF09007E0E89 /* icon_paidan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_paidan@2x.png"; sourceTree = "<group>"; };
-		D9A092831BDDEF09007E0E89 /* icon_qiangdan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_qiangdan@2x.png"; sourceTree = "<group>"; };
 		D9A092841BDDEF09007E0E89 /* icon_setting_rul_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_setting_rul_bg.png; sourceTree = "<group>"; };
 		D9ADC3F51BBA603100B1B7E1 /* RatingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingBar.h; sourceTree = "<group>"; };
 		D9ADC3F61BBA603100B1B7E1 /* RatingBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingBar.m; sourceTree = "<group>"; };
@@ -1676,8 +1672,6 @@
 		D96EA9DF1BB3D91200360ED8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D9A092821BDDEF09007E0E89 /* icon_paidan@2x.png */,
-				D9A092831BDDEF09007E0E89 /* icon_qiangdan@2x.png */,
 				D9A092841BDDEF09007E0E89 /* icon_setting_rul_bg.png */,
 				D969DA0F1BCCD07500281D02 /* banner_default@2x.png */,
 				D975CB9B1BD9B5E30058A95F /* icon_qiangdan@3x.png */,
@@ -2236,7 +2230,6 @@
 				D946C91D1BC2C4E800AAD3A3 /* icon_search_bg@2x.png in Resources */,
 				D96EA95A1BB37FE300360ED8 /* icon_menu@2x.png in Resources */,
 				D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@3x.png in Resources */,
-				D9A092851BDDEF09007E0E89 /* icon_paidan@2x.png in Resources */,
 				D96AFC421BC6ACE800817EDB /* b27_icon_star_white_yellow@2x.png in Resources */,
 				D9A092871BDDEF09007E0E89 /* icon_setting_rul_bg.png in Resources */,
 				D99EAD4A1BBCD4CE005A02D3 /* ic_vip_set@2x.png in Resources */,
@@ -2247,7 +2240,6 @@
 				D9B2F6BF1BB28D7A00ED7DDF /* icon_menu_wallet@3x.png in Resources */,
 				D9B28A021BBD816400FB97E5 /* PushConfig.plist in Resources */,
 				D946C8EA1BC21EE400AAD3A3 /* GrabTagCollectionViewCell.xib in Resources */,
-				D9A092861BDDEF09007E0E89 /* icon_qiangdan@2x.png in Resources */,
 				D916A5CB1BC5539D005F5286 /* ic_location_marker@2x.png in Resources */,
 				D96EAA511BB55DAC00360ED8 /* OrderContentTableViewCell.xib in Resources */,
 				D96EAA411BB5372100360ED8 /* icon_distance@3x.png in Resources */,

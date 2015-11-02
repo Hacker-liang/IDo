@@ -115,7 +115,11 @@
     [mDict safeSetObject:[NSString stringWithFormat:@"%f", _location.coordinate.longitude] forKey:@"lng"];
     [mDict safeSetObject:[NSString stringWithFormat:@"%f", _location.coordinate.latitude] forKey:@"lat"];
     [mDict safeSetObject:@"2" forKey:@"devicetype"];
-    [mDict safeSetObject:[APService registrationID] forKey:@"devicenumber"];
+    if ([APService registrationID].length == 0) {
+        [mDict safeSetObject:@"1" forKey:@"devicenumber"];
+    } else {
+        [mDict safeSetObject:[APService registrationID] forKey:@"devicenumber"];
+    }
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
