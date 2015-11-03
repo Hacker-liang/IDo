@@ -41,7 +41,7 @@
     NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
     NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
     NSString *text =[NSString stringWithFormat:@"v%@",versionNum];
-    banben.text = [NSString stringWithFormat:@"我干活儿 %@", text];
+    banben.text = [NSString stringWithFormat:@"我干 %@", text];
     banben.textAlignment=1;
     [self.view addSubview:banben];
     

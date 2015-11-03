@@ -44,7 +44,7 @@
     
     _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
     [_titleBtn addTarget:self action:@selector(switchPage:) forControlEvents:UIControlEventTouchUpInside];
-    [_titleBtn setTitle:@"我干活儿     抢单" forState:UIControlStateNormal];
+    [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
     _titleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
     [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.titleView = _titleBtn;
@@ -158,10 +158,10 @@
     NSUInteger index = [_viewControllers indexOfObject:_currentViewController];
     [self changePage:1-index];
     if (index == 0) {
-        [_titleBtn setTitle:@"我干活儿     派单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:@"我干     派单" forState:UIControlStateNormal];
         
     } else {
-        [_titleBtn setTitle:@"我干活儿     抢单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
     }
 }
 

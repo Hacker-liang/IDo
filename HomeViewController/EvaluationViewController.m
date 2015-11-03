@@ -192,7 +192,7 @@
             }
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([tempStatus integerValue] == 1) {
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜,已完成评价" message:@"感谢使用《我干活儿》" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜,已完成评价" message:@"感谢使用《我干》" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
