@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [AMapSearchServices sharedServices].apiKey = @"75dc15efbb50d8a0cbffacb86bbd9ce8";
+    [AMapSearchServices sharedServices].apiKey = @"6a7ece2e9426d1dba4deea411bf64dcc";
     _searchApi = [[AMapSearchAPI alloc] init];
     _searchApi.delegate = self;
     
