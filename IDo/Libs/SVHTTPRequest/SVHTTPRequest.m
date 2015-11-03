@@ -117,7 +117,9 @@ static NSString *defaultUserAgent;
 + (SVHTTPRequest*)GET:(NSString *)address parameters:(NSDictionary *)parameters completion:(SVHTTPRequestCompletionHandler)block {
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodGET parameters:parameters saveToPath:nil progress:nil completion:block];
     if ([UserManager shareUserManager].userInfo.token) {
-        [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+        if ([[UserManager shareUserManager].userInfo.token length] > 1) {
+            [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+        }
         [requestObject setValue: @"2" forHTTPHeaderField:@"deviceType"];
         NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
         NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
@@ -144,7 +146,9 @@ static NSString *defaultUserAgent;
 + (SVHTTPRequest*)POST:(NSString *)address parameters:(NSObject *)parameters completion:(SVHTTPRequestCompletionHandler)block {
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodPOST parameters:parameters saveToPath:nil progress:nil completion:block];
     if ([UserManager shareUserManager].userInfo.token) {
-        [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+        if ([[UserManager shareUserManager].userInfo.token length] > 1) {
+            [requestObject setValue:[UserManager shareUserManager].userInfo.token forHTTPHeaderField:@"token"];
+        }
         [requestObject setValue: @"2" forHTTPHeaderField:@"deviceType"];
         NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
         NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
