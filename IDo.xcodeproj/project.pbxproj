@@ -310,6 +310,10 @@
 		D9B2F6C11BB28D7A00ED7DDF /* icon_menu_message@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6BD1BB28D7A00ED7DDF /* icon_menu_message@3x.png */; };
 		D9B2F6C51BB28E8E00ED7DDF /* HomeMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B2F6C31BB28E8E00ED7DDF /* HomeMenuTableViewCell.m */; };
 		D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B2F6C41BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib */; };
+		D9FFD1DD1BE8E984001F2D94 /* pay_wogan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */; };
+		D9FFD1DE1BE8E984001F2D94 /* pay_wogan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */; };
+		D9FFD1E11BE8FBDE001F2D94 /* ic_pay_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */; };
+		D9FFD1E21BE8FBDE001F2D94 /* ic_pay_uncheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1E01BE8FBDE001F2D94 /* ic_pay_uncheck@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -894,6 +898,10 @@
 		D9B2F6C21BB28E8E00ED7DDF /* HomeMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuTableViewCell.h; sourceTree = "<group>"; };
 		D9B2F6C31BB28E8E00ED7DDF /* HomeMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuTableViewCell.m; sourceTree = "<group>"; };
 		D9B2F6C41BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMenuTableViewCell.xib; sourceTree = "<group>"; };
+		D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@2x.png"; sourceTree = "<group>"; };
+		D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@3x.png"; sourceTree = "<group>"; };
+		D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_pay_check@2x.png"; sourceTree = "<group>"; };
+		D9FFD1E01BE8FBDE001F2D94 /* ic_pay_uncheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_pay_uncheck@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1109,6 +1117,10 @@
 		D92B5AD61BB8122A00E3AC93 /* Pay */ = {
 			isa = PBXGroup;
 			children = (
+				D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */,
+				D9FFD1E01BE8FBDE001F2D94 /* ic_pay_uncheck@2x.png */,
+				D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */,
+				D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */,
 				D92B5AD91BB815F100E3AC93 /* callbtn@2x.png */,
 				D92B5AD71BB812A900E3AC93 /* ali_pay@2x.png */,
 			);
@@ -2214,6 +2226,7 @@
 				D946C91B1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.xib in Resources */,
 				D969DA0B1BCCB22A00281D02 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				D91F2F381BC2196A002CE690 /* icon_setting_newmsg@3x.png in Resources */,
+				D9FFD1DD1BE8E984001F2D94 /* pay_wogan@2x.png in Resources */,
 				D9B289ED1BBCEBC500FB97E5 /* s.png in Resources */,
 				D96EA9E91BB3D9E300360ED8 /* LoginViewController.xib in Resources */,
 				D969DA041BCCB22A00281D02 /* SVWebViewController.bundle in Resources */,
@@ -2262,6 +2275,7 @@
 				D969DA001BCCB22A00281D02 /* h5_labar_left_disabled@3x.png in Resources */,
 				D9777D4A1BB65E1900A7A64C /* icon_orderDetail_address@3x.png in Resources */,
 				D91F2F1E1BC21179002CE690 /* GrabSettingPushTableViewCell.xib in Resources */,
+				D9FFD1DE1BE8E984001F2D94 /* pay_wogan@3x.png in Resources */,
 				D96EAA301BB5242A00360ED8 /* SendOrderDetailHeaderView.xib in Resources */,
 				D9B2F6C61BB28E8E00ED7DDF /* HomeMenuTableViewCell.xib in Resources */,
 				D9777D4C1BB65E1900A7A64C /* xx@3x.png in Resources */,
@@ -2274,6 +2288,7 @@
 				D946C90F1BC29C9F00AAD3A3 /* icon_male@2x.png in Resources */,
 				D90E2E311BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.xib in Resources */,
 				D969DA021BCCB22A00281D02 /* h5_labar_right_disabled@3x.png in Resources */,
+				D9FFD1E11BE8FBDE001F2D94 /* ic_pay_check@2x.png in Resources */,
 				D969DA101BCCD07500281D02 /* banner_default@2x.png in Resources */,
 				D91F2F211BC2140F002CE690 /* icon_rule_def@3x.png in Resources */,
 				D969D9FD1BCCB22A00281D02 /* h5_labar_brush_default@3x.png in Resources */,
@@ -2294,6 +2309,7 @@
 				D96EA94E1BB2F01E00360ED8 /* MyProfileTableViewController.xib in Resources */,
 				D916A5DE1BC58AB6005F5286 /* bt_star_b.png in Resources */,
 				D91F2F231BC2143E002CE690 /* icon_rule_sel@3x.png in Resources */,
+				D9FFD1E21BE8FBDE001F2D94 /* ic_pay_uncheck@2x.png in Resources */,
 				D969D9FE1BCCB22A00281D02 /* h5_labar_brush_stop@3x.png in Resources */,
 				D946C8FA1BC23B2900AAD3A3 /* HotTagTableViewCell.xib in Resources */,
 				D916A5A41BC3627A005F5286 /* AutoSlideScrollView.bundle in Resources */,
