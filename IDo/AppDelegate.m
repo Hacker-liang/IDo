@@ -143,6 +143,9 @@
         [[UserLocationManager shareInstance] getUserLocationWithCompletionBlcok:^(CLLocation *userLocation, NSString *address) {
             
         }];
+        [[UserManager shareUserManager] asyncLoadUserWalletFromServer:^(BOOL isSuccess) {
+            
+        }];
     }
     
 }

@@ -11,6 +11,8 @@
 
 @interface PayViewController ()
 
+@property (nonatomic) BOOL isPayWithAccountRemainingMoney;  //通过账户余额支付
+
 @end
 
 @implementation PayViewController
@@ -26,12 +28,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    price = @"10";
+    [[UserManager shareUserManager] asyncLoadUserWalletFromServer:^(BOOL isSuccess) {
+        if (isSuccess) {
+            if ([price floatValue]>[[UserManager shareUserManager].userInfo.wallet.remainingMoney floatValue]) {
+                _isPayWithAccountRemainingMoney = NO;
+            }
+            [self.payTab reloadData];
+        }
+    }];
     // Do any additional setup after loading the view.
     self.title = @"支付";
 //    Appdelegate.viewisWhere = PiePayView;
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PayStatusSure) name:@"paySuccessNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backAfterPayed) name:@"paySuccessNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(PayError) name:@"payErrorNotification" object:nil];
 
     
@@ -61,7 +72,7 @@
     [btn setTintColor:[UIColor whiteColor]];
     [btn setBackgroundImage:[UIImage imageNamed:@"callbtn.png"] forState:UIControlStateNormal];
     [btn setTitle:@"确认支付" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(payforSure) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(payOrder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
 }
 
@@ -92,14 +103,15 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
+    if ([price floatValue]<=[[UserManager shareUserManager].userInfo.wallet.remainingMoney floatValue]) {
+        return 2;
+    }
     return 1;
 }
 
@@ -134,63 +146,221 @@
         imageView.tag = 990;
         [cell addSubview:imageView];
         
-        UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(56.0f, 0, kWindowWidth-66, 44)];
+        UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(46.0f, 0, kWindowWidth-166, 44)];
         titleLab.tag = 991;
-        titleLab.font = [UIFont systemFontOfSize:16];
+        titleLab.font = [UIFont systemFontOfSize:15];
         titleLab.textColor = COLOR(79, 79,79);
         titleLab.backgroundColor = [UIColor clearColor];
         [cell addSubview:titleLab];
         
-        cell.accessoryType=UITableViewCellAccessoryCheckmark;
+        if (indexPath.section == 1) {
+            UIButton *checkBox = [[UIButton alloc] initWithFrame:CGRectMake(kWindowWidth-30, 15, 15, 15)];
+            checkBox.tag = 100;
+            checkBox.userInteractionEnabled = NO;
+            [checkBox setImage:[UIImage imageNamed:@"ic_pay_uncheck.png"] forState:UIControlStateNormal];
+            [checkBox setImage:[UIImage imageNamed:@"ic_pay_check.png"] forState:UIControlStateSelected];
+            [cell addSubview:checkBox];
+            
+            UILabel *moneyLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kWindowWidth-146, 0, 100, 44)];
+            moneyLeftLabel.tag = 992;
+            moneyLeftLabel.font = [UIFont systemFontOfSize:13];
+            moneyLeftLabel.textColor = COLOR(97, 97,97);
+            moneyLeftLabel.adjustsFontSizeToFitWidth = YES;
+            moneyLeftLabel.textAlignment = NSTextAlignmentRight;
+            moneyLeftLabel.backgroundColor = [UIColor clearColor];
+            [cell addSubview:moneyLeftLabel];
+        }
+        cell.tintColor = [UIColor colorWithRed:(48)/255.0 green:(167)/255.0 blue:(59)/255.0 alpha:1];
     }
     
-    UIImageView *imageView = (UIImageView*)[cell viewWithTag:990];
-    imageView.image = [UIImage imageNamed:@"ali_pay.png"];
-    UILabel *titleLab = (UILabel*)[cell viewWithTag:991];
-    titleLab.text = @"使用支付宝支付";
-    
+    if (indexPath.section == 0) {
+        if (!_isPayWithAccountRemainingMoney) {
+            cell.accessoryType=UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType=UITableViewCellAccessoryNone;
+        }
+
+        UIImageView *imageView = (UIImageView*)[cell viewWithTag:990];
+        imageView.image = [UIImage imageNamed:@"ali_pay.png"];
+        UILabel *titleLab = (UILabel*)[cell viewWithTag:991];
+        titleLab.text = @"使用支付宝支付";
+        
+    } else {
+        cell.accessoryType=UITableViewCellAccessoryNone;
+        UIButton *check = (UIButton*)[cell viewWithTag:100];
+        check.selected = _isPayWithAccountRemainingMoney;
+        
+        UIImageView *imageView = (UIImageView*)[cell viewWithTag:990];
+        imageView.image = [UIImage imageNamed:@"pay_wogan.png"];
+        UILabel *titleLab = (UILabel*)[cell viewWithTag:991];
+        titleLab.text = @"使用账户余额支付";
+        
+        UILabel *moneyLeftLabel = (UILabel*)[cell viewWithTag:992];
+        moneyLeftLabel.text = [UserManager shareUserManager].userInfo.wallet.remainingMoney;
+    }
+   
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 35;
+    if (section == 0) {
+        return 35;
+    }
+    return 8;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, kWindowWidth, 35)];
-    view.backgroundColor = [UIColor clearColor];
-   
-    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 30)];
-    titleLab.text = @"   请选择支付方式";
-    titleLab.backgroundColor = [UIColor whiteColor];
-    titleLab.font = [UIFont systemFontOfSize:15];
-    titleLab.textColor = COLOR(49, 49, 49);
-    [view addSubview:titleLab];
-    return view;
+    if (section == 0) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, kWindowWidth, 35)];
+        view.backgroundColor = [UIColor clearColor];
+        
+        UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 30)];
+        titleLab.text = @"   请选择支付方式";
+        titleLab.backgroundColor = [UIColor whiteColor];
+        titleLab.font = [UIFont systemFontOfSize:15];
+        titleLab.textColor = COLOR(49, 49, 49);
+        [view addSubview:titleLab];
+        return view;
+    } else {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, kWindowWidth, 10)];
+        view.backgroundColor = APP_PAGE_COLOR;
+        return view;
+    }
 }
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableViews didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 1) {
+        UITableViewCell *cell = [tableViews cellForRowAtIndexPath:indexPath];
+        for (UIView *view in cell.subviews) {
+            if (view.tag == 100) {
+                UIButton *btn = (UIButton *)view;
+                btn.selected = !btn.selected;
+                _isPayWithAccountRemainingMoney = btn.isSelected;
+                [self.payTab reloadData];
+            }
+        }
+    }
+    if (indexPath.section == 0) {
+        _isPayWithAccountRemainingMoney = NO;
+        [self.payTab reloadData];
+    }
+}
+
+- (void)payOrder
+{
+    if (_isPayWithAccountRemainingMoney) {
+        [self payWithAccountWallet];
+    } else {
+        [self getAlipayInfoFromServer];
+    }
+}
+
+//通过余额支付
+- (void)payWithAccountWallet
+{
+    [SVProgressHUD showWithStatus:@"正在付款"];
+    NSString *url = [NSString stringWithFormat:@"%@payByWallet",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:orderid forKey:@"orderId"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *status = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([status isEqualToString:@"1"]) {
+                [[UserManager shareUserManager] userInfo].wallet.remainingMoney = [NSString stringWithFormat:@"%f", ([[[UserManager shareUserManager] userInfo].wallet.remainingMoney floatValue] - [price floatValue])];
+                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
+            }
+            else{
+                [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
+        }
+    }];
 
 }
 
--(void)payforSure
+-(void)getAlipayInfoFromServer
 {
-    [SVProgressHUD showWithStatus:@"正在加载"];
-    AliPayTool *ali=[[AliPayTool alloc]init];
-    __weak PayViewController *wSelf = self;
-    [ali aliPayWithProductName:@"佣金" productDescription:@"我干佣金-iOS 客户端" andAmount:self.price orderId:self.orderid orderNumber:self.orderNumber MoneyBao:price AliPayMoney:price shouKuanID:self.huoerbaoID completeBlock:^(BOOL success, NSString *errorStr) {
-        [wSelf aliPayCallBackWithSuccessed:success errorString:errorStr];
+    [SVProgressHUD showWithStatus:@"正在付款"];
+    NSString *url = [NSString stringWithFormat:@"%@alipay",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:orderid forKey:@"orderId"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *status = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([status isEqualToString:@"1"]) {
+                [self payWithAliPay:[dict[@"data"] objectForKey:@"aliPayParam"]];
+            }
+            else{
+                [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
+        }
     }];
+}
+
+- (void)payWithAliPay:(NSString *)alipayParam
+{
+    NSString *appScheme = @"xianne";
+
+    [[AlipaySDK defaultService] payOrder:alipayParam fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        NSString *status=[NSString stringWithFormat:@"%@",resultDic[@"resultStatus"]];
+        if ([status isEqualToString:@"9000"])
+        {
+            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+            [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
+        }
+        else{
+            [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
+
+        }
+    }];
+
 }
 
 // xuebao start
 // 支付宝支付是否成功，服务器记录是否成功回调
 // if success = YES 说明支付宝支付成功并且服务器记录成功，否则，支付不成功
-- (void)aliPayCallBackWithSuccessed:(BOOL)success errorString:(NSString *)errorStr
+- (void)aliPayCallBackWithSuccessed:(BOOL)success
 {
     if (success) {
         // 确定派单推送订单成功(只是发送一个推送消息)

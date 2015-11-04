@@ -111,6 +111,39 @@
     }];
 }
 
+- (void)asyncLoadUserWalletFromServer:(void (^)(BOOL))completion
+{
+    NSString *url = [NSString stringWithFormat:@"%@getmyqianbo",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *str=[NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([str isEqualToString:@"1"])
+            {
+                [UserManager shareUserManager].userInfo.wallet = [[WalletModel alloc] initWithJson:dict[@"data"]];
+                completion(YES);
+
+            }
+        }
+    }];
+}
+
 - (void)setNotiMute:(BOOL)isMute
 {
     _userInfo.isMute = isMute;
@@ -130,7 +163,6 @@
             _userInfo.lat = userLocation.coordinate.latitude;
             _userInfo.lng = userLocation.coordinate.longitude;
         }];
-
     }
 }
 

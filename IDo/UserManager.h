@@ -24,4 +24,7 @@
 
 - (void)asyncLoadAccountInfoFromServer:(void (^) (BOOL isSuccess))completion;
 
+- (void)asyncLoadUserWalletFromServer:(void (^) (BOOL isSuccess))completion;
+
+
 @end
