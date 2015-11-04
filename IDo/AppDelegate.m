@@ -60,7 +60,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jpushDidClose) name:kJPFNetworkDidCloseNotification object:nil];
 
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:@"userLogout" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout) name:@"userDidLogout" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoError) name:@"userInfoError" object:nil];
 
     [self setupHomeView];
@@ -224,7 +224,7 @@
 
 - (void)userInfoError
 {
-    [self userDidLogout];
+    [self userLogout];
     if (_userId) {
         _userId = [UserManager shareUserManager].userInfo.userid;
     }
@@ -250,7 +250,7 @@
    
 }
 
-- (void)userDidLogout
+- (void)userLogout
 {
     [self setupHomeView];
 }

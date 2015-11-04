@@ -90,7 +90,7 @@
             [[UserManager shareUserManager] asyncLogout:^(BOOL isSuccess) {
                 if (isSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"退出登录成功"];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userLogout" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userDidLogout" object:nil userInfo:nil];
                 } else {
                     [SVProgressHUD showErrorWithStatus:@"退出登录失败"];
                 }
