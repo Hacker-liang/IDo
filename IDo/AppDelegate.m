@@ -78,6 +78,8 @@
                                                        UIRemoteNotificationTypeSound |
                                                        UIRemoteNotificationTypeAlert)
                                            categories:nil];
+        
+
     }
     
     // Required
