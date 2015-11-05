@@ -26,7 +26,6 @@
     
     _dataSource = @[@"我干,一款派活接活的神器!", @"把琐事交给别人去做\n自己去做更有价值的事情", @"全民抢单,我干,我赚!"];
     _sendOrderBtn.titleLabel.numberOfLines = 2.0;
-    [_sendOrderBtn setTitle:@"立即\n派单" forState:UIControlStateNormal];
     self.view.backgroundColor = APP_PAGE_COLOR;
     _mainView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-100, kWindowWidth, 80) animationDuration:3];
     [self.view addSubview:_mainView];

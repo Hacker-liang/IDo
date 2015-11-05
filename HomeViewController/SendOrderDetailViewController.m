@@ -241,7 +241,8 @@
                 }
                
             } else {
-                [SVProgressHUD showErrorWithStatus:@"派单失败"];
+                NSString *info = [dict objectForKey:@"info"];
+                [SVProgressHUD showErrorWithStatus:info];
             }
         } else {
             [SVProgressHUD showErrorWithStatus:@"派单失败"];
