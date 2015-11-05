@@ -195,7 +195,7 @@
         titleLab.text = @"使用账户余额支付";
         
         UILabel *moneyLeftLabel = (UILabel*)[cell viewWithTag:992];
-        moneyLeftLabel.text = [UserManager shareUserManager].userInfo.wallet.remainingMoney;
+        moneyLeftLabel.text = [NSString stringWithFormat:@"可用余额:%@", [UserManager shareUserManager].userInfo.wallet.remainingMoney];
     }
    
     return cell;
