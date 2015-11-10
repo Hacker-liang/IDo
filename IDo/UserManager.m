@@ -54,7 +54,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
-                                        [UserManager shareUserManager].userInfo = nil;
+                    [UserManager shareUserManager].userInfo = nil;
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                     [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
@@ -64,7 +64,9 @@
             }
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([tempStatus integerValue] == 1) {
+                NSString *token = _userInfo.token;
                 _userInfo = [[UserInfo alloc] initWithJson:dict[@"data"]];
+                _userInfo.token = token;
                 [self saveUserData2Cache];
                 completion(YES);
             } else {
