@@ -124,7 +124,7 @@ static NSString *defaultUserAgent;
         NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
         NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
         NSArray *array = [versionNum componentsSeparatedByString:@"."];
-        NSMutableString *mutableStr;
+        NSMutableString *mutableStr = [[NSMutableString alloc] init];
         for (NSString *i in array) {
             [mutableStr appendString:i];
         }
