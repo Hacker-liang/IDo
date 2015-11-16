@@ -17,7 +17,6 @@
 		D90B8ED41BEA43A20014D434 /* icon_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8ED31BEA43A20014D434 /* icon_content@2x.png */; };
 		D90B8ED61BEA43AD0014D434 /* icon_distance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8ED51BEA43AD0014D434 /* icon_distance@2x.png */; };
 		D90B8ED81BEA43BE0014D434 /* icon_money@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8ED71BEA43BE0014D434 /* icon_money@2x.png */; };
-		D90B8EDA1BEA43CC0014D434 /* icon_sendorder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8ED91BEA43CC0014D434 /* icon_sendorder@3x.png */; };
 		D90B8EDC1BEA43DB0014D434 /* icon_menu_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8EDB1BEA43DB0014D434 /* icon_menu_mine@2x.png */; };
 		D90B8EDE1BEA43E80014D434 /* icon_menu_wallet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8EDD1BEA43E80014D434 /* icon_menu_wallet@2x.png */; };
 		D90B8EE01BEA43F60014D434 /* icon_menu_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8EDF1BEA43F60014D434 /* icon_menu_setting@2x.png */; };
@@ -30,7 +29,6 @@
 		D90E2E361BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E341BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib */; };
 		D90E2E3A1BB647BA00C2E6F3 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E2E381BB647BA00C2E6F3 /* OrderDetailViewController.m */; };
 		D90E2E3B1BB647BA00C2E6F3 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */; };
-		D916A5971BC36092005F5286 /* icon_sendOrder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D916A5961BC36092005F5286 /* icon_sendOrder@2x.png */; };
 		D916A5A11BC3627A005F5286 /* AutoSlideScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A59A1BC3627A005F5286 /* AutoSlideScrollView.m */; };
 		D916A5A21BC3627A005F5286 /* MyPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A59C1BC3627A005F5286 /* MyPageControl.m */; };
 		D916A5A31BC3627A005F5286 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D916A59E1BC3627A005F5286 /* NSTimer+Addition.m */; };
@@ -368,7 +366,6 @@
 		D90B8ED31BEA43A20014D434 /* icon_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_content@2x.png"; sourceTree = "<group>"; };
 		D90B8ED51BEA43AD0014D434 /* icon_distance@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_distance@2x.png"; sourceTree = "<group>"; };
 		D90B8ED71BEA43BE0014D434 /* icon_money@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_money@2x.png"; sourceTree = "<group>"; };
-		D90B8ED91BEA43CC0014D434 /* icon_sendorder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sendorder@3x.png"; sourceTree = "<group>"; };
 		D90B8EDB1BEA43DB0014D434 /* icon_menu_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_mine@2x.png"; sourceTree = "<group>"; };
 		D90B8EDD1BEA43E80014D434 /* icon_menu_wallet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_wallet@2x.png"; sourceTree = "<group>"; };
 		D90B8EDF1BEA43F60014D434 /* icon_menu_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_setting@2x.png"; sourceTree = "<group>"; };
@@ -385,7 +382,6 @@
 		D90E2E371BB647BA00C2E6F3 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		D90E2E381BB647BA00C2E6F3 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		D90E2E391BB647BA00C2E6F3 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
-		D916A5961BC36092005F5286 /* icon_sendOrder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sendOrder@2x.png"; sourceTree = "<group>"; };
 		D916A5991BC3627A005F5286 /* AutoSlideScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoSlideScrollView.h; sourceTree = "<group>"; };
 		D916A59A1BC3627A005F5286 /* AutoSlideScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoSlideScrollView.m; sourceTree = "<group>"; };
 		D916A59B1BC3627A005F5286 /* MyPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageControl.h; sourceTree = "<group>"; };
@@ -1563,8 +1559,6 @@
 				D96EAA3D1BB5372100360ED8 /* icon_distance@3x.png */,
 				D90B8ED71BEA43BE0014D434 /* icon_money@2x.png */,
 				D96EAA3E1BB5372100360ED8 /* icon_money@3x.png */,
-				D90B8ED91BEA43CC0014D434 /* icon_sendorder@3x.png */,
-				D916A5961BC36092005F5286 /* icon_sendOrder@2x.png */,
 			);
 			name = senderOrder;
 			sourceTree = "<group>";
@@ -2308,7 +2302,6 @@
 				D9B289ED1BBCEBC500FB97E5 /* s.png in Resources */,
 				D96EA9E91BB3D9E300360ED8 /* LoginViewController.xib in Resources */,
 				D969DA041BCCB22A00281D02 /* SVWebViewController.bundle in Resources */,
-				D916A5971BC36092005F5286 /* icon_sendOrder@2x.png in Resources */,
 				D916A5B11BC37306005F5286 /* common_icon_navigation_back_normal@2x.png in Resources */,
 				D96EA9481BB2EB7300360ED8 /* MyWalletViewController.xib in Resources */,
 				D96AFC3D1BC6AAFF00817EDB /* b27_icon_star_white_gray@2x.png in Resources */,
@@ -2395,7 +2388,6 @@
 				D969DA071BCCB22A00281D02 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
 				D96EA9581BB3776200360ED8 /* MyProfileTableViewCell.xib in Resources */,
 				D96042D31BEA41F700E8EA93 /* icon_phone_disable@2x.png in Resources */,
-				D90B8EDA1BEA43CC0014D434 /* icon_sendorder@3x.png in Resources */,
 				D96EA92C1BB2D54B00360ED8 /* SenderOrderViewController.xib in Resources */,
 				D916A5DA1BC57A30005F5286 /* icon_empty@3x.png in Resources */,
 				D946C8F51BC2347100AAD3A3 /* InputTagTableViewCell.xib in Resources */,
