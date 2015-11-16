@@ -28,7 +28,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    price = @"10";
     [[UserManager shareUserManager] asyncLoadUserWalletFromServer:^(BOOL isSuccess) {
         if (isSuccess) {
             if ([price floatValue]>[[UserManager shareUserManager].userInfo.wallet.remainingMoney floatValue]) {
