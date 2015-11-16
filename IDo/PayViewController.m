@@ -12,6 +12,7 @@
 @interface PayViewController ()
 
 @property (nonatomic) BOOL isPayWithAccountRemainingMoney;  //通过账户余额支付
+@property (nonatomic, strong) UIButton *remainMoneyButton;
 
 @end
 
@@ -158,6 +159,7 @@
             checkBox.userInteractionEnabled = NO;
             [checkBox setImage:[UIImage imageNamed:@"ic_pay_uncheck.png"] forState:UIControlStateNormal];
             [checkBox setImage:[UIImage imageNamed:@"ic_pay_check.png"] forState:UIControlStateSelected];
+            _remainMoneyButton = checkBox;
             [cell addSubview:checkBox];
             
             UILabel *moneyLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kWindowWidth-146, 0, 100, 44)];
@@ -234,15 +236,9 @@
 - (void)tableView:(UITableView *)tableViews didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        UITableViewCell *cell = [tableViews cellForRowAtIndexPath:indexPath];
-        for (UIView *view in cell.subviews) {
-            if (view.tag == 100) {
-                UIButton *btn = (UIButton *)view;
-                btn.selected = !btn.selected;
-                _isPayWithAccountRemainingMoney = btn.isSelected;
-                [self.payTab reloadData];
-            }
-        }
+        _remainMoneyButton.selected = !_remainMoneyButton.selected;
+        _isPayWithAccountRemainingMoney = _remainMoneyButton.isSelected;
+        [self.payTab reloadData];
     }
     if (indexPath.section == 0) {
         _isPayWithAccountRemainingMoney = NO;

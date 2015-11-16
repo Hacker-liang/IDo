@@ -359,31 +359,36 @@
 
 - (void)setTagDidSelectItemAtIndex:(NSIndexPath *)indexPath
 {
-    NSString *tag = [[UserManager shareUserManager].userInfo.tagArray objectAtIndex:indexPath.row];
-    NSString *url = [NSString stringWithFormat:@"%@removelabel",baseUrl];
-    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-    [mDict setObject:tag forKey:@"labelname"];
-    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        NSDictionary *dict = [jsonString objectFromJSONString];
-        if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
-            if ([UserManager shareUserManager].isLogin) {
-                                    [UserManager shareUserManager].userInfo = nil;
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
-                }];
-            }
-            return;
-        }
-        NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
-        if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
-            [[UserManager shareUserManager].userInfo.tagArray removeObjectAtIndex:indexPath.row];
-            [self.tableView reloadData];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认删除标签吗" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            NSString *tag = [[UserManager shareUserManager].userInfo.tagArray objectAtIndex:indexPath.row];
+            NSString *url = [NSString stringWithFormat:@"%@removelabel",baseUrl];
+            NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+            [mDict setObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+            [mDict setObject:tag forKey:@"labelname"];
+            [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                NSDictionary *dict = [jsonString objectFromJSONString];
+                if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                    if ([UserManager shareUserManager].isLogin) {
+                        [UserManager shareUserManager].userInfo = nil;
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                        [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                        }];
+                    }
+                    return;
+                }
+                NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+                if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
+                    [[UserManager shareUserManager].userInfo.tagArray removeObjectAtIndex:indexPath.row];
+                    [self.tableView reloadData];
+                }
+            }];
         }
     }];
-}
+   }
 
 - (void)addTagAction:(UIButton *)btn
 {
