@@ -201,16 +201,17 @@
 
 - (void)resgisterToken
 {
+    NSString *registrationID = [APService registrationID];
+    NSLog(@"registrationID = %@",registrationID);
+
     if (![[UserManager shareUserManager] isLogin]) {
         return;
     }
-    NSString *registrationID = [APService registrationID];
     
     if (![registrationID length]) {
         return;
     }
     
-    NSLog(@"registrationID = %@",registrationID);
     NSString *url = [NSString stringWithFormat:@"%@reSetDeviceNumber",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict safeSetObject: [UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
