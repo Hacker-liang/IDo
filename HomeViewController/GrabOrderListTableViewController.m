@@ -77,12 +77,14 @@
 
 - (void)getOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
+    NSString *url = [NSString stringWithFormat:@"baseUrl   %@getorderlist",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
     [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
 
+    
+    NSLog(@"url %@  mdic %@",url,mDict);
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [self.tableView.header endRefreshing];
         if (response)
