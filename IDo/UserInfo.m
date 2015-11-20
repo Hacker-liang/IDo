@@ -31,6 +31,7 @@
         _address = [dict objectForKey:@"address"];
         _lat = [[dict objectForKey:@"lat"] doubleValue];
         _lng = [[dict objectForKey:@"lng"] doubleValue];
+        _pushType = [dict objectForKey:@"tsstatic"];
         _districtid = [dict objectForKey:@"districtid"];
        
         _rating = [dict objectForKey:@"star"];
