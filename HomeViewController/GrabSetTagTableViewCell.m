@@ -103,7 +103,8 @@
 
 - (CGFloat)tzcollectionLayoutWidth
 {
-    return self.bounds.size.width-20;
+    NSLog(@"%f", self.bounds.size.width);
+    return self.bounds.size.width-40;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

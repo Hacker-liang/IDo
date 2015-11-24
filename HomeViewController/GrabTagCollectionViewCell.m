@@ -16,7 +16,7 @@
 - (void)setTabBkgImage:(NSString *)tabBkgImage
 {
     _tabBkgImage = tabBkgImage;
-    [_grabTagBtn setBackgroundImage:[UIImage imageNamed:_tabBkgImage] forState:UIControlStateNormal];
+    [_grabTagBtn setBackgroundImage:[[UIImage imageNamed:_tabBkgImage] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 5, 5, 20)] forState:UIControlStateNormal];
 }
 
 @end
