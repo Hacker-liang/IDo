@@ -44,14 +44,14 @@
 
     if ([self.titleStr isEqualToString:@"申请提现"]) {
         int yue = [self.yueStr intValue];
-        if (num!=0) {
+        if (num >= 30) {
             if (num>yue) {
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提现金额不能大于您的余额" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
                 [alertView show];
                 return;
             }
-        }else{
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提现金额不能为0" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提现金额不能少于30元" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
             [alertView show];
             return;
         }
@@ -81,12 +81,14 @@
                     return;
                 }
                 NSString *status = dict[@"status"];
-                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"恭喜你，你的申请已成功" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-                [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                    if ([status intValue] == 1) {
+                if ([status intValue] == 1) {
+                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"恭喜你，你的申请已成功" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                         [self.navigationController popViewControllerAnimated:YES];
-                    }
-                }];
+                    }];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"提现失败"];
+                }
                 
             }
             else
