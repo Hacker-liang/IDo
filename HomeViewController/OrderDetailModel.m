@@ -104,7 +104,7 @@
             if ([[json objectForKey:@"tomemberid"] intValue] == 0) {
                 _orderStatus = kOrderInProgress;
                 _orderStatusDesc = @"等待活宝抢单";
-                NSInteger shouldGrabTime = [[json objectForKey:@"submittime"] intValue] + 1200;
+                NSInteger shouldGrabTime = [[json objectForKey:@"submittime"] intValue] + 2400;
                 NSTimeInterval timeNow = [NSDate date].timeIntervalSince1970;
                 _grabCountdown = shouldGrabTime - timeNow;
 
