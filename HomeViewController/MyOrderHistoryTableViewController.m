@@ -11,12 +11,13 @@
 #import "OrderListTableViewCell.h"
 #import "OrderDetailViewController.h"
 #import "OrderListEmptyView.h"
-
+#import "OrderManager.h"
 
 @interface MyOrderHistoryTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) OrderListEmptyView *emptyView;
+@property (nonatomic) NSInteger currentPage;
 
 @end
 
@@ -24,11 +25,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _currentPage = 1;
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderListCell"];
     self.tableView.backgroundColor = APP_PAGE_COLOR;
     
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _currentPage = 1;
+        [self getOrder];
+    }];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        _currentPage++;
         [self getOrder];
     }];
     
@@ -73,47 +80,35 @@
 
 - (void)getOrder
 {
-    NSString *url;
     if (_isGrabOrder) {
-        url = [NSString stringWithFormat:@"%@historyqiangdan",baseUrl];
-
-    } else {
-        url = [NSString stringWithFormat:@"%@historyfadan",baseUrl];
-    }
-    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-    
-    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        [self.tableView.header endRefreshing];
-        if (response)
-        {
-            [self.dataSource removeAllObjects];
-            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSDictionary *dict = [jsonString objectFromJSONString];
-            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
-                if ([UserManager shareUserManager].isLogin) {
-                                        [UserManager shareUserManager].userInfo = nil;
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
-                    }];
+       
+        [OrderManager asyncLoadMyGrabHistoryOrderListWithPage:_currentPage pageSize:15 completionBlock:^(BOOL isSuccess, NSArray *orderList) {
+            if (isSuccess) {
+                if (_currentPage == 1) {
+                    [_dataSource removeAllObjects];
                 }
-                return;
-            }
-            NSArray *tempList = dict[@"data"];
-            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
-            if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
-                for (NSDictionary *dic in tempList) {
-                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:!_isGrabOrder];
-                    [self.dataSource addObject:order];
-                }
-            } else {
+                [_dataSource addObjectsFromArray:orderList];
             }
             [self.tableView reloadData];
-        }
-        [self setupEmptyView];
-    }];
-    
+            [self setupEmptyView];
+            [self.tableView.header endRefreshing];
+            [self.tableView.footer endRefreshing];
+        }];
+
+    } else {
+        [OrderManager asyncLoadMySendHistoryOrderListWithPage:_currentPage pageSize:15 completionBlock:^(BOOL isSuccess, NSArray *orderList) {
+            if (isSuccess) {
+                if (_currentPage == 1) {
+                    [_dataSource removeAllObjects];
+                }
+                [_dataSource addObjectsFromArray:orderList];
+            }
+            [self.tableView reloadData];
+            [self setupEmptyView];
+            [self.tableView.header endRefreshing];
+            [self.tableView.footer endRefreshing];
+        }];
+    }
 }
 
 #pragma mark - Table view data source
@@ -163,7 +158,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"scrollViewDidScroll: %lf", scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < 64 && [scrollView isEqual:self.tableView] && scrollView.contentOffset.y > 0) {
         if (_isGrabOrder) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Buttom object:nil];

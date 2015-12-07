@@ -38,7 +38,11 @@
         _grabOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"jiedanren"]];
         _isAsk2CancelFromFadanren = ([[json objectForKey:@"fromMemberAskCancel"]intValue] == 1);
         _isAsk2CancelFromQiangdanren = ([[json objectForKey:@"tomemberAskCancel"]intValue] == 1);
-
+        if (_isAsk2CancelFromFadanren) {
+            NSInteger shouldCancelTime = [[json objectForKey:@"fromMemberAskCancelTime"] integerValue]/1000+3*24*3600;//加上3天的时间
+            NSTimeInterval timeNow = [NSDate date].timeIntervalSince1970;
+            _cancelCountdown = shouldCancelTime - timeNow;
+        }
         //订单被抢
         if ([[json objectForKey:@"status"] intValue] == 3) {
             if ([[json objectForKey:@"haspay"] intValue] == 0) {

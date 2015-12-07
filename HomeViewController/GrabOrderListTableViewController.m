@@ -11,11 +11,14 @@
 #import "OrderListModel.h"
 #import "OrderDetailViewController.h"
 #import "OrderListEmptyView.h"
+#import "OrderManager.h"
 
 @interface GrabOrderListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) OrderListEmptyView *emptyView;
+@property (nonatomic) NSInteger currentPage;
+
 
 @end
 
@@ -23,15 +26,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _currentPage = 1;
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderListCell"];
     self.tableView.backgroundColor = APP_PAGE_COLOR;
     [self.tableView.header beginRefreshing];
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self getOrder];
+        _currentPage = 1;
+        [self getOrderWithPage:_currentPage];
+    }];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        _currentPage++;
+        [self getOrderWithPage:_currentPage];
     }];
 
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView.header selector:@selector(beginRefreshing) name:kNewOrderNoti object:nil];
     
+}
+
+- (NSMutableArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    return _dataSource;
 }
 
 - (OrderListEmptyView *)emptyView
@@ -57,14 +75,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (NSMutableArray *)dataSource
-{
-    if (!_dataSource) {
-        _dataSource = [[NSMutableArray alloc] init];
-    }
-    return _dataSource;
-}
-
 - (void)setupEmptyView
 {
     if (!_dataSource.count) {
@@ -75,48 +85,22 @@
     }
 }
 
-- (void)getOrder
+- (void)getOrderWithPage:(NSInteger)page
 {
-    NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
-    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
-    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
-
-    
-    NSLog(@"url %@  mdic %@",url,mDict);
-    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        [self.tableView.header endRefreshing];
-        if (response)
-        {
-            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSDictionary *dict = [jsonString objectFromJSONString];
-            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
-                if ([UserManager shareUserManager].isLogin) {
-                                        [UserManager shareUserManager].userInfo = nil;
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
-                    }];
-                }
-                return;
-            }
-            NSArray *tempList = dict[@"data"];
-            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
-            if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
-                [self.dataSource removeAllObjects];
-                for (NSDictionary *dic in tempList) {
-                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:NO];
-                    [self.dataSource addObject:order];
-                }
-                [self setupEmptyView];
-                
-            } else {
-                [self.dataSource removeAllObjects];
-            }
-            
-            [self.tableView reloadData];
+    if (page == 1) {  //如果是加载第一页
+        [_dataSource removeAllObjects];
+    }
+    [OrderManager asyncLoadNearByOrderListWithPage:page pageSize:15 completionBlock:^(BOOL isSuccess, NSArray *orderList) {
+        if (isSuccess) {
+            [self.dataSource addObjectsFromArray:orderList];
+        } else {
+            [self.dataSource removeAllObjects];
         }
+        [self setupEmptyView];
+
+        [self.tableView reloadData];
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
     }];
 }
 
@@ -167,7 +151,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"scrollViewDidScroll: %lf", scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < 64 && [scrollView isEqual:self.tableView] && scrollView.contentOffset.y > 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Buttom object:nil];
     } else if (scrollView.contentOffset.y < 0) {

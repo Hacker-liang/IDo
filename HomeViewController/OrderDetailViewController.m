@@ -21,6 +21,7 @@
 }
 
 @property (nonatomic, strong) UIView *footerView;
+@property (nonatomic, strong) UILabel *cancelTimeLabel;  //取消订单的倒计时 label
 @property (nonatomic) CLLocationCoordinate2D userLocation;
 @property (nonatomic) CLLocationCoordinate2D missionLocation;
 
@@ -205,7 +206,16 @@
         } else {
             [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:NO];
         }
-    } else {
+    } else if (_orderDetail.orderStatus == kOrderPayed && _orderDetail.isAsk2CancelFromFadanren) {
+        _countdown = _orderDetail.cancelCountdown;
+        if (_countdown > 0) {
+            [self startCountdown];
+        } else {
+            [self updateDetailViewWithStatus:kOrderCancelDispute andShouldReloadOrderDetail:YES];
+        }
+        
+    }
+    else {
         if (timer) {
             [timer invalidate];
             timer = nil;
@@ -221,12 +231,32 @@
 
 - (void)startCountdown
 {
-    int min = _countdown/60;
-    int sec = _countdown%60;
-    if (sec < 10) {
-        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
+    if (_orderDetail.orderStatus == kOrderPayed && _orderDetail.isAsk2CancelFromFadanren) {
+        NSInteger days = _countdown/24/60/60;
+        NSInteger hours = (_countdown - days*24*3600)/3600;
+        NSInteger minute = (_countdown - days*24*3600 - hours*3600)/60;
+        NSMutableString *str = [[NSMutableString alloc] init];
+        [str appendFormat:@"还剩"];
+        if (days) {
+            [str appendFormat:@"%ld天", days];
+        }
+        if (hours) {
+            [str appendFormat:@"%ld时", hours];
+        }
+        if (minute) {
+            [str appendFormat:@"%ld分", minute];
+        }
+        [str appendString:@" 超时订单将自动取消"];
+        _cancelTimeLabel.text = str;
+        
     } else {
-        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
+        int min = _countdown/60;
+        int sec = _countdown%60;
+        if (sec < 10) {
+            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
+        } else {
+            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
+        }
     }
     timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateLeftTime) userInfo:nil repeats:YES];
 }
@@ -238,19 +268,40 @@
         timer = nil;
     }
     _countdown--;
-    int min = _countdown/60;
-    int sec = _countdown%60;
-    if (sec < 10) {
-        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
-    } else if (sec > 0){
-        _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
+    
+    if (_orderDetail.orderStatus == kOrderPayed && _orderDetail.isAsk2CancelFromFadanren) {
+        NSInteger days = _countdown/24/60/60;
+        NSInteger hours = (_countdown - days*24*3600)/3600;
+        NSInteger minute = (_countdown - days*24*3600 - hours*3600)/60;
+        NSMutableString *str = [[NSMutableString alloc] init];
+        [str appendFormat:@"还剩"];
+        if (days) {
+            [str appendFormat:@"%ld天", days];
+        }
+        if (hours) {
+            [str appendFormat:@"%ld时", hours];
+        }
+        if (minute) {
+            [str appendFormat:@"%ld分", minute];
+        }
+        [str appendString:@" 超时订单将自动取消"];
+        _cancelTimeLabel.text = str;
     } else {
-        if (_orderDetail.orderStatus == kOrderGrabSuccess) {
-            [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:YES];
+        int min = _countdown/60;
+        int sec = _countdown%60;
+        if (sec < 10) {
+            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
+        } else if (sec > 0){
+            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
         } else {
-            [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:YES];
+            if (_orderDetail.orderStatus == kOrderGrabSuccess) {
+                [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:YES];
+            } else {
+                [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:YES];
+            }
         }
     }
+   
 }
 
 - (void)grabOrder:(UIButton *)sender
@@ -362,7 +413,7 @@
                         }
                         NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
                         if ([tempStatus integerValue] == 1) {
-                            UIAlertView *canclealert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"取消订单申请发送成功。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                            UIAlertView *canclealert=[[UIAlertView alloc]initWithTitle:@"取消订单申请已发送给活儿宝" message:@"3天内活儿宝未确认，订单会自动取消" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
                             [canclealert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                                 if (buttonIndex == 0) {
                                     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -466,34 +517,41 @@
         
     } else if (_orderDetail.orderStatus == kOrderPayed && _isSendOrder) {
         
+
         statusString = _orderDetail.orderStatusDesc;
         
         if (_orderDetail.isAsk2CancelFromFadanren) {
+            _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-90, kWindowWidth, 90)];
             _complainBtn.hidden = NO;
             _addressConstraint.constant = 70;
             tipsString = @"订单如有纠纷，可在7日后申请客服介入";
             _orderDetail.orderStatusDesc = @"请求取消订单，等待对方取消";
+            UILabel *countdownLabel = [[UILabel alloc] initWithFrame:CGRectMake(11, 60, _footerView.bounds.size.width-22, 20)];
+            countdownLabel.textColor = UIColorFromRGB(0x727272);
+            countdownLabel.textAlignment = NSTextAlignmentCenter;
+            countdownLabel.font = [UIFont systemFontOfSize:14.0];
+            _cancelTimeLabel = countdownLabel;
+            [_footerView addSubview:_cancelTimeLabel];
 
         } else {
+            _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
             _addressConstraint.constant = 100;
             _complainBtn.hidden = NO;
             _cancelBtn.hidden = NO;
             tipsString = @"保持良好记录有助于快速成交订单";
-
+            
+            UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+            orderBtn.layer.cornerRadius = 5.0;
+            orderBtn.backgroundColor = APP_THEME_COLOR;
+            [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+            [orderBtn setTitle:@"立即验收" forState:UIControlStateNormal];
+            [orderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
+            [_footerView addSubview:orderBtn];
         }
         
-        statusString = _orderDetail.orderStatusDesc;
 
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
         
-        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
-        orderBtn.layer.cornerRadius = 5.0;
-        orderBtn.backgroundColor = APP_THEME_COLOR;
-        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
-        [orderBtn setTitle:@"立即验收" forState:UIControlStateNormal];
-        [orderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
-        [_footerView addSubview:orderBtn];
         
     } else if (_orderDetail.orderStatus == kOrderPayed && !_isSendOrder) {
         _complainBtn.hidden = NO;
