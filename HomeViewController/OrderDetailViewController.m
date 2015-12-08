@@ -203,14 +203,14 @@
         _countdown = _orderDetail.grabCountdown;
         if (_countdown > 0) {
             [self startCountdown];
-        } else {
+        } else if (_countdown == 0) {
             [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:NO];
         }
     } else if (_orderDetail.orderStatus == kOrderPayed && _orderDetail.isAsk2CancelFromFadanren) {
         _countdown = _orderDetail.cancelCountdown;
         if (_countdown > 0) {
             [self startCountdown];
-        } else {
+        } else if (_countdown == 0) {
             [self updateDetailViewWithStatus:kOrderCancelDispute andShouldReloadOrderDetail:YES];
         }
         
@@ -293,7 +293,7 @@
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
         } else if (sec > 0){
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
-        } else {
+        } else if (_countdown == 0) {
             if (_orderDetail.orderStatus == kOrderGrabSuccess) {
                 [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:YES];
             } else {
