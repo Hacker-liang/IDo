@@ -545,12 +545,50 @@
 //        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:orderId];
 //        }];
-    }else if([notificationType isEqualToString:@"allowCancelOrder" ]) { //接单方同意取消
+    } else if([notificationType isEqualToString:@"allowCancelOrder" ]) { //接单方同意取消
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:orderId];
         }];
-    }else if([notificationType isEqualToString:@"gettzpersonnum" ]) { //收到新订单 通知
+    } else if([notificationType isEqualToString:@"refuseCancelOrder"]) { //接单方拒绝取消订单
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"您的订单取消申请被拒绝" message:@"活儿宝表示已经完成任务，并希望得到您的验收。如果有异议您可以直接和活儿宝取得联系，或申请客服介入。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看次订单", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if(buttonIndex == 1){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
+                    } else {
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.orderId = orderId;
+                        ctl.isSendOrder = YES;
+                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                    }
+                } else {
+                    OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                    ctl.orderId = orderId;
+                    ctl.isSendOrder = YES;
+                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                }
+                
+            } else if(buttonIndex == 0){
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[OrderDetailViewController class]]) {
+                    NSString *orderId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"orderid"]];
+                    if ([((OrderDetailViewController *)ctl).orderId isEqualToString:orderId]) {
+                        [((OrderDetailViewController *)ctl) updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
+                        return;
+                    }
+                }
+            }
+        }];
+        
+
+
+        
+    } else if([notificationType isEqualToString:@"gettzpersonnum" ]) { //收到新订单 通知
 //        self.homeController.isHaveGrabOrder.hidden = NO;
         
     }else if([notificationType isEqualToString:@"delorder" ]) { //发单方未付款时，单方直接取消订单

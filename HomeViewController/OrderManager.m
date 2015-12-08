@@ -128,7 +128,7 @@
             if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
                 NSMutableArray *retArray = [[NSMutableArray alloc] init];
                 for (NSDictionary *dic in tempList) {
-                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:NO];
+                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:YES];
                     [retArray addObject:order];
                 }
                 completion(YES, retArray);
@@ -144,7 +144,7 @@
 
 + (void)asyncLoadMyGrabInProgressOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
 {
-    NSString *url = [NSString stringWithFormat:@"%@orderfadaning",baseUrl];
+    NSString *url = [NSString stringWithFormat:@"%@orderpaidaning",baseUrl];
 
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
@@ -181,7 +181,6 @@
             }
         } else {
             completion(NO, nil);
-            
         }
     }];
 
@@ -189,7 +188,7 @@
 
 + (void)asyncLoadMySendInProgressOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
 {
-    NSString *url = [NSString stringWithFormat:@"%@orderpaidaning",baseUrl];
+    NSString *url = [NSString stringWithFormat:@"%@orderfadaning",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
     [mDict setObject:[NSNumber numberWithInteger:size] forKey:@"pageSize"];
@@ -216,7 +215,7 @@
             if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
                 NSMutableArray *retArray = [[NSMutableArray alloc] init];
                 for (NSDictionary *dic in tempList) {
-                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:NO];
+                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:YES];
                     [retArray addObject:order];
                 }
                 completion(YES, retArray);

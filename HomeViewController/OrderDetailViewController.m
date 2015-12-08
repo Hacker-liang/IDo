@@ -560,30 +560,47 @@
         
         if (_orderDetail.isAsk2CancelFromFadanren) {
             _orderDetail.orderStatusDesc = @"对方请求取消订单";
-        }
+        } 
         statusString = _orderDetail.orderStatusDesc;
 
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight-110, kWindowWidth, 110)];
         
-        UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
-        orderBtn.layer.cornerRadius = 5.0;
-        orderBtn.backgroundColor = APP_THEME_COLOR;
-        [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
-        NSString *str = [NSString stringWithFormat:@"请派单人验收任务(%@次)", _orderDetail.reminderCount];
-        [orderBtn setTitle:str forState:UIControlStateNormal];
-        [orderBtn addTarget:self action:@selector(reminderUserPay:) forControlEvents:UIControlEventTouchUpInside];
-        [_footerView addSubview:orderBtn];
-        
         if (_orderDetail.isAsk2CancelFromFadanren) {
-            UIButton *allowCancelBtn = [[UIButton alloc] initWithFrame:CGRectMake( _footerView.bounds.size.width-50, 30, 30, 20)];
+            UILabel *countdownLabel = [[UILabel alloc] initWithFrame:CGRectMake(11, 35, _footerView.bounds.size.width-22, 20)];
+            countdownLabel.textColor = UIColorFromRGB(0x727272);
+            countdownLabel.textAlignment = NSTextAlignmentCenter;
+            countdownLabel.font = [UIFont systemFontOfSize:14.0];
+            _cancelTimeLabel = countdownLabel;
+            [_footerView addSubview:_cancelTimeLabel];
+            
+            UIButton *allowCancelBtn = [[UIButton alloc] initWithFrame:CGRectMake( 30, 60, (kWindowWidth-90)/2, 35)];
             allowCancelBtn.backgroundColor = UIColorFromRGB(0x38b34b);
-            allowCancelBtn.layer.cornerRadius = 3.0;
+            allowCancelBtn.layer.cornerRadius = 6.0;
             [allowCancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            allowCancelBtn.titleLabel.font = [UIFont systemFontOfSize:10.0];
-            [allowCancelBtn setTitle:@"同意" forState: UIControlStateNormal];
+            allowCancelBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            [allowCancelBtn setTitle:@"同意取消订单" forState: UIControlStateNormal];
             [allowCancelBtn addTarget:self action:@selector(allowCancelOrder) forControlEvents:UIControlEventTouchUpInside];
             [_footerView addSubview:allowCancelBtn];
+            
+            UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake((kWindowWidth-90)/2+60, 60,(kWindowWidth-90)/2, 35)];
+            orderBtn.layer.cornerRadius = 6.0;
+            orderBtn.backgroundColor = [UIColor grayColor];
+            [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            orderBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
+            NSString *str = @"任务完成请验收";
+            [orderBtn setTitle:str forState:UIControlStateNormal];
+            [orderBtn addTarget:self action:@selector(refuseCancelOrder) forControlEvents:UIControlEventTouchUpInside];
+            [_footerView addSubview:orderBtn];
+        } else {
+            UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 60, _footerView.bounds.size.width-40, 35)];
+            orderBtn.layer.cornerRadius = 5.0;
+            orderBtn.backgroundColor = APP_THEME_COLOR;
+            [orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            orderBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+            NSString *str = [NSString stringWithFormat:@"请派单人验收任务(%@次)", _orderDetail.reminderCount];
+            [orderBtn setTitle:str forState:UIControlStateNormal];
+            [orderBtn addTarget:self action:@selector(reminderUserPay:) forControlEvents:UIControlEventTouchUpInside];
+            [_footerView addSubview:orderBtn];
         }
  
     } else if (_orderDetail.orderStatus == kOrderCancelPayTimeOut) {
@@ -653,23 +670,40 @@
     }
     
     _footerView.backgroundColor = [UIColor whiteColor];
-    UILabel *tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _footerView.bounds.size.width, 25)];
-    tipsLabel.text = tipsString;
-    tipsLabel.textColor = UIColorFromRGB(0x727272);
-    tipsLabel.textAlignment = NSTextAlignmentCenter;
-    tipsLabel.font = [UIFont systemFontOfSize:14.0];
-    [_footerView addSubview:tipsLabel];
-    
-    UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, _footerView.bounds.size.width, 25)];
-    NSString *statusStr = [NSString stringWithFormat:@"状态: %@", statusString];
-    NSMutableAttributedString *statusAttr = [[NSMutableAttributedString alloc] initWithString:statusStr];
-    [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0], NSForegroundColorAttributeName: APP_THEME_COLOR} range:NSMakeRange(3, statusStr.length-3)];
-    [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13.0], NSForegroundColorAttributeName: UIColorFromRGB(0x727272)} range:NSMakeRange(0, 3)];
 
-    statusLabel.attributedText = statusAttr;
-    statusLabel.textAlignment = NSTextAlignmentCenter;
-    [_footerView addSubview:statusLabel];
+    if (_orderDetail.isAsk2CancelFromFadanren && _orderDetail.orderStatus == kOrderPayed && !_isSendOrder) {
+        UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 8, _footerView.bounds.size.width, 25)];
+        NSString *statusStr = [NSString stringWithFormat:@"状态: %@", statusString];
+        NSMutableAttributedString *statusAttr = [[NSMutableAttributedString alloc] initWithString:statusStr];
+        [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0], NSForegroundColorAttributeName: APP_THEME_COLOR} range:NSMakeRange(3, statusStr.length-3)];
+        [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13.0], NSForegroundColorAttributeName: UIColorFromRGB(0x727272)} range:NSMakeRange(0, 3)];
+        
+        statusLabel.attributedText = statusAttr;
+        statusLabel.textAlignment = NSTextAlignmentCenter;
+        [_footerView addSubview:statusLabel];
+
+        
+    } else {
+        UILabel *tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _footerView.bounds.size.width, 25)];
+        tipsLabel.text = tipsString;
+        tipsLabel.textColor = UIColorFromRGB(0x727272);
+        tipsLabel.textAlignment = NSTextAlignmentCenter;
+        tipsLabel.font = [UIFont systemFontOfSize:14.0];
+        [_footerView addSubview:tipsLabel];
+        
+        UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, _footerView.bounds.size.width, 25)];
+        NSString *statusStr = [NSString stringWithFormat:@"状态: %@", statusString];
+        NSMutableAttributedString *statusAttr = [[NSMutableAttributedString alloc] initWithString:statusStr];
+        [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0], NSForegroundColorAttributeName: APP_THEME_COLOR} range:NSMakeRange(3, statusStr.length-3)];
+        [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13.0], NSForegroundColorAttributeName: UIColorFromRGB(0x727272)} range:NSMakeRange(0, 3)];
+        
+        statusLabel.attributedText = statusAttr;
+        statusLabel.textAlignment = NSTextAlignmentCenter;
+        [_footerView addSubview:statusLabel];
+    }
+   
     [self.view addSubview:_footerView];
+
 
 }
 
@@ -847,15 +881,56 @@
                 [SVProgressHUD showSuccessWithStatus:@"您的催款信息已发送"];
                 
             }else{
-                [SVProgressHUD showErrorWithStatus:@"付款给活儿宝失败，请重试!"];
+                [SVProgressHUD showErrorWithStatus:@"请求失败"];
             }
         }
         else{
-            [SVProgressHUD showErrorWithStatus:@"付款给活儿宝失败，请重试!"];
+            [SVProgressHUD showErrorWithStatus:@"请求失败"];
 
         }
     }];
+}
 
+//接单方拒绝取消任务
+- (void)refuseCancelOrder
+{
+    [SVProgressHUD showWithStatus:@"正在请求验收"];
+    NSString *url = [NSString stringWithFormat:@"%@refuseCancelOrder",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    [mDict setObject:_orderDetail.orderId forKey:@"orderid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSLog(@"jsonString = %@",jsonString);
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([tempStatus integerValue] == 1) {
+                int number = [_orderDetail.reminderCount intValue] + 1;
+                _orderDetail.reminderCount = [NSString stringWithFormat:@"%d", number];
+                [self updateDetailViewWithStatus:_orderDetail.orderStatus andShouldReloadOrderDetail:NO];
+                [SVProgressHUD showSuccessWithStatus:@"您的请求验收信息已发送"];
+                
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"请求验收信息发送失败，请重试!"];
+            }
+        }
+        else{
+            [SVProgressHUD showErrorWithStatus:@"请求验收信息发送失败，请重试!"];
+            
+        }
+    }];
 }
 
 - (void)allowCancelOrder
