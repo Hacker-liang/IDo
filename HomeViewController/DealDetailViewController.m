@@ -54,7 +54,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
-                                        [UserManager shareUserManager].userInfo = nil;
+                    [UserManager shareUserManager].userInfo = nil;
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                     [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
@@ -133,7 +133,7 @@
             case 2:
                 typeStr = @"收入";
                 break;
-            case 4:
+            case 3:
                 typeStr = @"退款";
                 break;
                 

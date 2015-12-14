@@ -303,19 +303,24 @@
                 return;
             }
             NSInteger status = [[dict objectForKey:@"status"] integerValue];
-                if (status == 1) {
-                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-                    if ([aType integerValue] == 1) {
-                        _userInfo.nickName = aContent;
-                        _myprofileHeaderView.nickNameLabel.text = _userInfo.nickName;
-                    } else if ([aType integerValue] == 4) {
-                        _userInfo.zhifubao = aContent;
-                    }
-                    [[UserManager shareUserManager] saveUserData2Cache];
-                    [self.tableView reloadData];
+            if (status == 1) {
+                [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                if ([aType integerValue] == 1) {
+                    _userInfo.nickName = aContent;
+                    _myprofileHeaderView.nickNameLabel.text = _userInfo.nickName;
+                } else if ([aType integerValue] == 4) {
+                    _userInfo.zhifubao = aContent;
+                }
+                [[UserManager shareUserManager] saveUserData2Cache];
+                [self.tableView reloadData];
+            } else {
+                NSString *info = [dict objectForKey:@"info"];
+                if (info) {
+                    [SVProgressHUD showErrorWithStatus:info];
                 } else {
                     [SVProgressHUD showErrorWithStatus:@"修改失败"];
                 }
+            }
         } else {
             [SVProgressHUD showErrorWithStatus:@"修改失败"];
         }

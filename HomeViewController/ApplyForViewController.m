@@ -87,8 +87,8 @@
                         [self.navigationController popViewControllerAnimated:YES];
                     }];
                 } else {
-                    [SVProgressHUD showErrorWithStatus:@"提现失败"];
-                }
+                    NSString *info = [dict objectForKey:@"info"];
+                    [SVProgressHUD showErrorWithStatus:info];                }
                 
             }
             else

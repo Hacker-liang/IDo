@@ -87,14 +87,13 @@
 
 - (void)getOrderWithPage:(NSInteger)page
 {
-    if (page == 1) {  //如果是加载第一页
-        [_dataSource removeAllObjects];
-    }
+  
     [OrderManager asyncLoadNearByOrderListWithPage:page pageSize:15 completionBlock:^(BOOL isSuccess, NSArray *orderList) {
         if (isSuccess) {
-            [self.dataSource addObjectsFromArray:orderList];
-        } else {
-            [self.dataSource removeAllObjects];
+            if (_currentPage == 1) {
+                [_dataSource removeAllObjects];
+            }
+            [_dataSource addObjectsFromArray:orderList];
         }
         [self setupEmptyView];
 

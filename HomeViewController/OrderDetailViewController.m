@@ -50,6 +50,8 @@
     _cancelBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _cancelBtn.layer.borderWidth = 0.5;
     
+    _timeLeftLabel.adjustsFontSizeToFitWidth = YES;
+    
     UITapGestureRecognizer *tapGestureTwo = [[UITapGestureRecognizer alloc] init];
     tapGestureTwo.numberOfTapsRequired = 1;
     tapGestureTwo.numberOfTouchesRequired = 1;
@@ -203,15 +205,15 @@
         _countdown = _orderDetail.grabCountdown;
         if (_countdown > 0) {
             [self startCountdown];
-        } else if (_countdown == 0) {
+        } else {
             [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:NO];
         }
     } else if (_orderDetail.orderStatus == kOrderPayed && _orderDetail.isAsk2CancelFromFadanren) {
         _countdown = _orderDetail.cancelCountdown;
         if (_countdown > 0) {
             [self startCountdown];
-        } else if (_countdown == 0) {
-            [self updateDetailViewWithStatus:kOrderCancelDispute andShouldReloadOrderDetail:YES];
+        } else if (_countdown <= 0) {
+            [self updateDetailViewWithStatus:kOrderCancelDispute andShouldReloadOrderDetail:NO];
         }
         
     }
@@ -289,11 +291,11 @@
     } else {
         int min = _countdown/60;
         int sec = _countdown%60;
-        if (sec < 10) {
-            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
-        } else if (sec > 0){
+        if (sec > 10) {
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
-        } else if (_countdown == 0) {
+        } else if (sec > 0){
+            _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
+        } else {
             if (_orderDetail.orderStatus == kOrderGrabSuccess) {
                 [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:YES];
             } else {
@@ -415,9 +417,7 @@
                         if ([tempStatus integerValue] == 1) {
                             UIAlertView *canclealert=[[UIAlertView alloc]initWithTitle:@"取消订单申请已发送给活儿宝" message:@"3天内活儿宝未确认，订单会自动取消" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
                             [canclealert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                                if (buttonIndex == 0) {
-                                    [self.navigationController popToRootViewControllerAnimated:YES];
-                                }
+                                [self updateDetailViewWithStatus:kOrderPayed andShouldReloadOrderDetail:YES];
                             }];
                         }
                     }
@@ -728,7 +728,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
-                                        [UserManager shareUserManager].userInfo = nil;
+                    [UserManager shareUserManager].userInfo = nil;
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                     [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
@@ -877,7 +877,7 @@
             if ([tempStatus integerValue] == 1) {
                 int number = [_orderDetail.reminderCount intValue] + 1;
                 _orderDetail.reminderCount = [NSString stringWithFormat:@"%d", number];
-                [self updateDetailViewWithStatus:_orderDetail.orderStatus andShouldReloadOrderDetail:NO];
+                [self updateDetailViewWithStatus:_orderDetail.orderStatus andShouldReloadOrderDetail:YES];
                 [SVProgressHUD showSuccessWithStatus:@"您的催款信息已发送"];
                 
             }else{
@@ -919,7 +919,7 @@
             if ([tempStatus integerValue] == 1) {
                 int number = [_orderDetail.reminderCount intValue] + 1;
                 _orderDetail.reminderCount = [NSString stringWithFormat:@"%d", number];
-                [self updateDetailViewWithStatus:_orderDetail.orderStatus andShouldReloadOrderDetail:NO];
+                [self updateDetailViewWithStatus:_orderDetail.orderStatus andShouldReloadOrderDetail:YES];
                 [SVProgressHUD showSuccessWithStatus:@"您的请求验收信息已发送"];
                 
             }else{
