@@ -881,7 +881,12 @@
                 [SVProgressHUD showSuccessWithStatus:@"您的催款信息已发送"];
                 
             }else{
-                [SVProgressHUD showErrorWithStatus:@"请求失败"];
+                NSString *info = [dict objectForKey:@"info"];
+                if (info) {
+                    [SVProgressHUD showErrorWithStatus:info];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"修改失败"];
+                }
             }
         }
         else{
