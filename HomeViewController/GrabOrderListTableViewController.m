@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _currentPage = 1;
+    _dataSource = [[NSMutableArray alloc] init];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderListCell"];
     self.tableView.backgroundColor = APP_PAGE_COLOR;
     [self.tableView.header beginRefreshing];
@@ -87,11 +88,11 @@
 
 - (void)getOrderWithPage:(NSInteger)page
 {
-  
     [OrderManager asyncLoadNearByOrderListWithPage:page pageSize:15 completionBlock:^(BOOL isSuccess, NSArray *orderList) {
         if (isSuccess) {
             if (_currentPage == 1) {
                 [_dataSource removeAllObjects];
+
             }
             [_dataSource addObjectsFromArray:orderList];
         }
