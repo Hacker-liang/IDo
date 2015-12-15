@@ -62,9 +62,9 @@ typedef enum : NSUInteger {
 @property (nonatomic)BOOL isAsk2CancelFromFadanren; //由发单人取消订单
 @property (nonatomic)BOOL isAsk2CancelFromQiangdanren; //由抢单人取消订单
 
-@property (nonatomic) int payCountdown;  //付款倒计时
-@property (nonatomic) int grabCountdown;  //付款倒计时
-@property (nonatomic) int cancelCountdown;  //取消倒计时
+@property (nonatomic) long payCountdown;  //付款倒计时
+@property (nonatomic) long grabCountdown;  //付款倒计时
+@property (nonatomic) long cancelCountdown;  //取消倒计时
 
 
 @property (nonatomic) BOOL isSendOrder;
