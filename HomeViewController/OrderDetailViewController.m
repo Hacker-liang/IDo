@@ -268,6 +268,13 @@
     if (_countdown == 0) {
         [timer invalidate];
         timer = nil;
+        if (_orderDetail.orderStatus == kOrderGrabSuccess) {
+            [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:NO];
+        } else if (_orderDetail.orderStatus == kOrderInProgress){
+            [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:NO];
+        } else {
+            [self updateDetailViewWithStatus:kOrderCancelDispute andShouldReloadOrderDetail:NO];
+        }
     }
     _countdown--;
     
@@ -291,16 +298,10 @@
     } else {
         int min = _countdown/60;
         int sec = _countdown%60;
-        if (sec > 10) {
+        if (sec >= 10) {
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
         } else if (sec > 0){
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
-        } else {
-            if (_orderDetail.orderStatus == kOrderGrabSuccess) {
-                [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:NO];
-            } else {
-                [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:NO];
-            }
         }
     }
    
