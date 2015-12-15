@@ -297,9 +297,9 @@
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
         } else {
             if (_orderDetail.orderStatus == kOrderGrabSuccess) {
-                [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:YES];
+                [self updateDetailViewWithStatus:kOrderCancelPayTimeOut andShouldReloadOrderDetail:NO];
             } else {
-                [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:YES];
+                [self updateDetailViewWithStatus:kOrderCancelGrabTimeOut andShouldReloadOrderDetail:NO];
             }
         }
     }
