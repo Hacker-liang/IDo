@@ -300,7 +300,7 @@
         int sec = _countdown%60;
         if (sec >= 10) {
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
-        } else if (sec > 0){
+        } else if (sec >= 0){
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:0%d)", min, sec];
         }
     }
