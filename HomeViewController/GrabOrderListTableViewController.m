@@ -32,13 +32,12 @@
     self.tableView.backgroundColor = APP_PAGE_COLOR;
     [self.tableView.header beginRefreshing];
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _currentPage = 1;
-        [self getOrderWithPage:_currentPage];
+        _currentPage = 0;
+        [self getOrderWithPage:_currentPage+1];
     }];
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        _currentPage++;
-        [self getOrderWithPage:_currentPage];
+        [self getOrderWithPage:_currentPage+1];
     }];
 
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView.header selector:@selector(beginRefreshing) name:kNewOrderNoti object:nil];
@@ -90,9 +89,9 @@
 {
     [OrderManager asyncLoadNearByOrderListWithPage:page pageSize:15 completionBlock:^(BOOL isSuccess, NSArray *orderList) {
         if (isSuccess) {
+            _currentPage = page;
             if (_currentPage == 1) {
                 [_dataSource removeAllObjects];
-
             }
             [_dataSource addObjectsFromArray:orderList];
         }
