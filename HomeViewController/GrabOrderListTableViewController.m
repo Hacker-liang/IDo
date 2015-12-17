@@ -36,9 +36,9 @@
         [self getOrderWithPage:_currentPage+1];
     }];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self getOrderWithPage:_currentPage+1];
-    }];
+//    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        [self getOrderWithPage:_currentPage+1];
+//    }];
 
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView.header selector:@selector(beginRefreshing) name:kNewOrderNoti object:nil];
     
