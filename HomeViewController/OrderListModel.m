@@ -56,9 +56,17 @@
                 if ([[json objectForKey:@"hasconfpay"] intValue] == 0) {
                     _orderStatus = kOrderPayed;
                     if (_isSendOrder) {
-                        _orderStatusDesc = @"已经付款，请验收";
+                        if ([[json objectForKey:@"fromMemberAskCancel"]intValue] == 1) {
+                            _orderStatusDesc = @"您已取消订单，等待对方确认";
+                        } else {
+                            _orderStatusDesc = @"已经付款，请验收";
+                        }
                     } else {
-                        _orderStatusDesc = @"对方已付款，任务进行中";
+                        if ([[json objectForKey:@"fromMemberAskCancel"]intValue] == 1) {
+                            _orderStatusDesc = @"对方请求取消订单";
+                        } else {
+                            _orderStatusDesc = @"对方已付款，任务进行中";
+                        }
                     }
                 } else {
                     if (_isSendOrder) {

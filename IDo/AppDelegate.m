@@ -547,7 +547,7 @@
 //        }];
     } else if([notificationType isEqualToString:@"allowCancelOrder" ]) { //接单方同意取消
        
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"订单状态" message:userInfo[@"content"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看次订单", nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"订单状态" message:userInfo[@"content"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看此订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
                 UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
@@ -582,7 +582,7 @@
         }];
 
     } else if([notificationType isEqualToString:@"refuseCancelOrder"]) { //接单方拒绝取消订单
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"您的订单取消申请被拒绝" message:@"活儿宝表示已经完成任务，并希望得到您的验收。如果有异议您可以直接和活儿宝取得联系，或申请客服介入。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看次订单", nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"您的订单取消申请被拒绝" message:@"活儿宝表示已经完成任务，并希望得到您的验收。如果有异议您可以直接和活儿宝取得联系，或申请客服介入。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看此订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
                 UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
