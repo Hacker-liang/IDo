@@ -33,6 +33,7 @@
         _lng = [[dict objectForKey:@"lng"] doubleValue];
         _pushType = [dict objectForKey:@"tsstatic"];
         _districtid = [dict objectForKey:@"districtid"];
+        _tagArray = [[_userLabel componentsSeparatedByString:@","] mutableCopy];
        
         _rating = [dict objectForKey:@"star"];
         if (![dict objectForKey:@"jiedannumber"] || [dict objectForKey:@"jiedannumber"] == [NSNull null]) {
