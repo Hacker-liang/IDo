@@ -678,6 +678,7 @@
 
     if (_orderDetail.isAsk2CancelFromFadanren && _orderDetail.orderStatus == kOrderPayed && !_isSendOrder) {
         UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 8, _footerView.bounds.size.width, 25)];
+        statusString = @"您已取消订单，等待对方确认";
         NSString *statusStr = [NSString stringWithFormat:@"状态: %@", statusString];
         NSMutableAttributedString *statusAttr = [[NSMutableAttributedString alloc] initWithString:statusStr];
         [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0], NSForegroundColorAttributeName: APP_THEME_COLOR} range:NSMakeRange(3, statusStr.length-3)];
