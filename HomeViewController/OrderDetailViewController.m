@@ -216,13 +216,13 @@
             [self updateDetailViewWithStatus:kOrderCancelDispute andShouldReloadOrderDetail:NO];
         }
         
-    }
-    else {
+    } else {
         if (timer) {
             [timer invalidate];
             timer = nil;
         }
         _timeLeftLabel.text = nil;
+        _cancelTimeLabel.text = nil;
     }
     if ((_orderDetail.orderStatus == kOrderPayed || _orderDetail.orderStatus == kOrderGrabSuccess || _orderDetail.orderStatus == kOrderCheckDone)) {
         _phoneLabel.enabled = YES;
@@ -259,6 +259,10 @@
         } else {
             _timeLeftLabel.text = [NSString stringWithFormat:@"剩余(%d:%d)", min, sec];
         }
+    }
+    if (timer) {
+        [timer invalidate];
+        timer = nil;
     }
     timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateLeftTime) userInfo:nil repeats:YES];
 }
@@ -475,6 +479,9 @@
 - (void)setupFooterView
 {
     if (_footerView) {
+        for (UIView *subView in _footerView.subviews) {
+            [subView removeFromSuperview];
+        }
         [_footerView removeFromSuperview];
         _footerView = nil;
     }
@@ -550,9 +557,6 @@
             [orderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
             [_footerView addSubview:orderBtn];
         }
-        
-
-        
         
     } else if (_orderDetail.orderStatus == kOrderPayed && !_isSendOrder) {
         _complainBtn.hidden = NO;
