@@ -90,8 +90,13 @@
                 }
                 return;
             }
-            if ([dict[@"info"] isEqualToString:@"提交成功"]) {
+            if ([dict[@"status"] integerValue] == 1) {
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:@"您的意见已经成功提交！\n我们会根据您的意见提升自己" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            } else {
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                     [self.navigationController popViewControllerAnimated:YES];
                 }];
