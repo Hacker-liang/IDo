@@ -88,7 +88,11 @@
                     }];
                 } else {
                     NSString *info = [dict objectForKey:@"info"];
-                    [SVProgressHUD showErrorWithStatus:info];                }
+                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:info delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }];
+                }
                 
             }
             else
