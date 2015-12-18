@@ -14,8 +14,8 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-//    [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
-//    [mDict setObject:[NSNumber numberWithInteger:size] forKey:@"pageSize"];
+    [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
+    [mDict setObject:[NSNumber numberWithInteger:size] forKey:@"pageSize"];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
     [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
     [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
