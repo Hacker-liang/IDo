@@ -533,7 +533,7 @@
             _complainBtn.hidden = NO;
             _addressConstraint.constant = 70;
             tipsString = @"订单如有纠纷，可在7日后申请客服介入";
-            _orderDetail.orderStatusDesc = @"请求取消订单，等待对方取消";
+            _orderDetail.orderStatusDesc = @"您已取消订单，等待对方确认";
             UILabel *countdownLabel = [[UILabel alloc] initWithFrame:CGRectMake(11, 60, _footerView.bounds.size.width-22, 20)];
             countdownLabel.textColor = UIColorFromRGB(0x727272);
             countdownLabel.textAlignment = NSTextAlignmentCenter;
@@ -678,7 +678,7 @@
 
     if (_orderDetail.isAsk2CancelFromFadanren && _orderDetail.orderStatus == kOrderPayed && !_isSendOrder) {
         UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 8, _footerView.bounds.size.width, 25)];
-        statusString = @"您已取消订单，等待对方确认";
+        statusString = @"对方申请取消订单";
         NSString *statusStr = [NSString stringWithFormat:@"状态: %@", statusString];
         NSMutableAttributedString *statusAttr = [[NSMutableAttributedString alloc] initWithString:statusStr];
         [statusAttr addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0], NSForegroundColorAttributeName: APP_THEME_COLOR} range:NSMakeRange(3, statusStr.length-3)];
