@@ -534,6 +534,7 @@
             _addressConstraint.constant = 70;
             tipsString = @"订单如有纠纷，可在7日后申请客服介入";
             _orderDetail.orderStatusDesc = @"您已取消订单，等待对方确认";
+            statusString = _orderDetail.orderStatusDesc;
             UILabel *countdownLabel = [[UILabel alloc] initWithFrame:CGRectMake(11, 60, _footerView.bounds.size.width-22, 20)];
             countdownLabel.textColor = UIColorFromRGB(0x727272);
             countdownLabel.textAlignment = NSTextAlignmentCenter;
