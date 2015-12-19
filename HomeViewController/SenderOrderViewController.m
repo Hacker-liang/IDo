@@ -11,6 +11,9 @@
 #import "AutoSlideScrollView.h"
 
 @interface SenderOrderViewController ()
+{
+    NSString *APPTITTLE;
+}
 @property (weak, nonatomic) IBOutlet UIButton *sendOrderBtn;
 
 @property (strong, nonatomic) AutoSlideScrollView *mainView;
@@ -24,7 +27,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _dataSource = @[@"我干,一款派活接活的神器!", @"把琐事交给别人去做\n自己去做更有价值的事情", @"全民抢单,我干,我赚!"];
+    NSUserDefaults *APPTittleDefaults=[NSUserDefaults standardUserDefaults];
+    
+    APPTITTLE =[APPTittleDefaults objectForKey:@"APPTittle"];
+    
+    NSString *messag=[NSString stringWithFormat:@"%@,一款派活接活的神器!",APPTITTLE];
+    
+    NSString *messag1=[NSString stringWithFormat:@"全民抢单,%@,我赚!",APPTITTLE];
+    
+    _dataSource = @[messag, @"把琐事交给别人去做\n自己去做更有价值的事情",messag1];
     _sendOrderBtn.titleLabel.numberOfLines = 2.0;
     self.view.backgroundColor = APP_PAGE_COLOR;
     _mainView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-100, kWindowWidth, 80) animationDuration:3];

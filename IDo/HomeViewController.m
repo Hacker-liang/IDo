@@ -13,7 +13,9 @@
 #import "HomeMenuViewController.h"
 
 @interface HomeViewController ()
-
+{
+    NSString *APPTITTLE;
+}
 @property (nonatomic, strong) UIButton *titleBtn;
 @property (nonatomic, strong) UIImageView *refreshImageView;
 
@@ -35,6 +37,10 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
+    NSUserDefaults *APPTittleDefaults=[NSUserDefaults standardUserDefaults];
+    
+    APPTITTLE =[APPTittleDefaults objectForKey:@"APPTittle"];
+    
     UIButton *menu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 44)];
     [menu setImage:[UIImage imageNamed:@"icon_menu.png"] forState:UIControlStateNormal];
     menu.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -44,12 +50,19 @@
     
     _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
     [_titleBtn addTarget:self action:@selector(switchPage:) forControlEvents:UIControlEventTouchUpInside];
-    [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
+    
+    [_titleBtn setTitle:[NSString stringWithFormat:@"%@     抢单",APPTITTLE] forState:UIControlStateNormal];
     _titleBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
     [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.titleView = _titleBtn;
     
-    _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(42, 11, 15, 13)];
+    
+    if (APPTITTLE.length==2) {
+        _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(42, 11, 15, 13)];
+    } else {
+        _refreshImageView = [[UIImageView alloc] initWithFrame:CGRectMake(72, 11, 15, 13)];
+    }
+    
     _refreshImageView.image = [UIImage imageNamed:@"icon_refresh.png"];
     [_titleBtn addSubview:_refreshImageView];
     
@@ -158,10 +171,10 @@
     NSUInteger index = [_viewControllers indexOfObject:_currentViewController];
     [self changePage:1-index];
     if (index == 0) {
-        [_titleBtn setTitle:@"我干     派单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:[NSString stringWithFormat:@"%@     派单",APPTITTLE] forState:UIControlStateNormal];
         
     } else {
-        [_titleBtn setTitle:@"我干     抢单" forState:UIControlStateNormal];
+        [_titleBtn setTitle:[NSString stringWithFormat:@"%@     抢单",APPTITTLE] forState:UIControlStateNormal];
     }
 }
 
