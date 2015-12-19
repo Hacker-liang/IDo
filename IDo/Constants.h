@@ -75,6 +75,9 @@
 #define APP_PAGE_COLOR                 UIColorFromRGB(0xECECEC)
 #define LineColor [UIColor colorWithRed:190/255.0 green:190/255.0 blue:190/255.0 alpha:1]
 
+
+
+
 #define LoginInfoMark @"LoginInfoMark"  //登录信息相关
 
 #define OrderStatusChange @"OrderStatusChangeMark"  //订单状态改变

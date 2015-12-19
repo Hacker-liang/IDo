@@ -69,6 +69,10 @@
 
 - (void)loginClick
 {
+    
+    NSUserDefaults *APPTittleDefaults=[NSUserDefaults standardUserDefaults];
+    
+    
     if ([self.phoneTextField.text isEqualToString:@"18810261020"]) {
         [UserLocationManager shareInstance].userAddress = @"北京市海淀区中关村街道知春路121";
         _addressLabel.text = @"北京市海淀区中关村街道知春路121";
@@ -76,7 +80,13 @@
         [UserLocationManager shareInstance].districtid = @"110108";
         
         [self loginWithApple];
+        [APPTittleDefaults setObject:@"我干活儿"forKey:@"APPTittle"];
         return;
+    }
+    
+    else
+    {
+        [APPTittleDefaults setObject:@"我干"forKey:@"APPTittle"];
     }
     if (!_addressLabel.text || _addressLabel.text.length == 0 || [[UserLocationManager shareInstance].districtid integerValue] == 0) {
         [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];

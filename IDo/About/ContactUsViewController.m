@@ -9,7 +9,9 @@
 #import "ContactUsViewController.h"
 
 @interface ContactUsViewController ()
-
+{
+    NSString *APPTITTLE;
+}
 @end
 
 @implementation ContactUsViewController
@@ -25,7 +27,11 @@
     [super viewDidLoad];
     self.view.backgroundColor = APP_PAGE_COLOR;
     
-    NSArray *arr=@[@"产品名称: 我干",@"开发公司: 北京意能行科技有限公司",@"客服电话: 400-611-8091",@"商务合作: bjyinengxing@163.com",@"媒体网络: bjwogan@163.com"];
+    NSUserDefaults *APPTittleDefaults=[NSUserDefaults standardUserDefaults];
+    
+    APPTITTLE =[APPTittleDefaults objectForKey:@"APPTittle"];
+    
+    NSArray *arr=@[[NSString stringWithFormat:@"产品名称: %@",APPTITTLE],@"开发公司: 北京意能行科技有限公司",@"客服电话: 400-611-8091",@"商务合作: bjyinengxing@163.com",@"媒体网络: bjwogan@163.com"];
     for (int i=0; i<5; i++) {
         UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(40, 90+40*i, self.view.frame.size.width-30, 40)];
         lable.text=arr[i];

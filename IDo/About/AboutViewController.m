@@ -11,7 +11,9 @@
 #import "ContactUsViewController.h"
 
 @interface AboutViewController ()
-
+{
+    NSString *APPTITTLE;
+}
 @end
 
 @implementation AboutViewController
@@ -33,6 +35,10 @@
     self.title = @"关于我们";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    NSUserDefaults *APPTittleDefaults=[NSUserDefaults standardUserDefaults];
+    
+    APPTITTLE =[APPTittleDefaults objectForKey:@"APPTittle"];
+    
     self.view.backgroundColor=[UIColor groupTableViewBackgroundColor];
     UIImageView *img=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-30, 84, 60, 60)];
     img.image=[UIImage imageNamed:@"Icon.png"];
@@ -41,7 +47,7 @@
     NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
     NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
     NSString *text =[NSString stringWithFormat:@"v%@",versionNum];
-    banben.text = [NSString stringWithFormat:@"我干 %@", text];
+    banben.text = [NSString stringWithFormat:@"%@ %@",APPTITTLE, text];
     banben.textAlignment=1;
     [self.view addSubview:banben];
     
