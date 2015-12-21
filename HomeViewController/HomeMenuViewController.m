@@ -16,11 +16,13 @@
 #import "AboutViewController.h"
 #import "AutoSlideScrollView.h"
 #import "SuperWebViewController.h"
+#import "ShareViewController.h"
 
 @interface HomeMenuViewController ()
 
 @property (nonatomic, strong) HomeMenuTableViewHeaderView *headerView;
 @property (nonatomic, strong) AutoSlideScrollView *galleryView;
+@property (nonatomic, strong) UIView *footerView;
 
 @property (nonatomic, strong) NSArray *dataSource;
 
@@ -36,6 +38,15 @@
     [_headerView.headerBtn addTarget:self action:@selector(gotoMyProfile) forControlEvents:UIControlEventTouchUpInside];
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"homeMenuCell"];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView.tableFooterView = self.footerView;
+
+
+//    if (360+150 >= kWindowHeight) {
+//        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 150)];
+//    } else {
+//        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, kWindowHeight-360)];
+//    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,6 +58,23 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+}
+
+- (UIView *)footerView
+{
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 190)];
+        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectMake((_footerView.bounds.size.width-120)/2, 0, 120, 25)];
+        [shareBtn setTitle:@"分享我干给好友" forState:UIControlStateNormal];
+        shareBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        shareBtn.layer.borderColor = LineColor.CGColor;
+        shareBtn.layer.borderWidth = 0.5;
+        shareBtn.layer.cornerRadius = 3.0;
+        [shareBtn addTarget:self action:@selector(shareApp) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_footerView addSubview:shareBtn];
+    }
+    return _footerView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,14 +96,8 @@
 - (void)setAdArray:(NSArray *)adArray
 {
     _adArray = adArray;
-    UIView *view;
-    if (360+150 >= kWindowHeight) {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 150)];
-    } else {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, kWindowHeight-360)];
-    }
     
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, view.bounds.size.height-150, 275-20, 100) animationDuration:5];
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-150, 275-20, 100) animationDuration:5];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };
@@ -99,11 +121,17 @@
         ctl.urlStr = [[adArray objectAtIndex:pageIndex] objectForKey:@"link"];
         [weakSelf.mainViewController.navigationController pushViewController:ctl animated:YES];
     };
-    [view addSubview:_galleryView];
-    self.tableView.tableFooterView = view;
+    [self.footerView addSubview:_galleryView];
 }
 
 #pragma mark - IBAction Methods
+
+- (void)shareApp
+{
+    [self.frostedViewController hideMenuViewController];
+    ShareViewController *ctl = [[ShareViewController alloc] init];
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
+}
 
 - (void)gotoMyWallet
 {
