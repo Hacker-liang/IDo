@@ -17,6 +17,9 @@
 #import "OrderDetailViewController.h"
 #import "EvaluationViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 
 @interface AppDelegate ()
 
@@ -90,6 +93,14 @@
     [APService setBadge:0];
     
     _userId = [UserManager shareUserManager].userInfo.userid;
+    
+    /** 设置友盟分享**/
+    [UMSocialData openLog:NO];
+    [UMSocialData setAppKey:UMENSOCIALKEY];
+    //设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:SHARE_WEIXIN_APPID appSecret:SHARE_WEIXIN_SECRET url:@"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&"];
+    [UMSocialQQHandler setQQWithAppId:SHARE_QQ_APPID appKey:SHARE_QQ_KEY url:@"http://www.umeng.com/social"];
+
     
     return YES;
 }

@@ -76,7 +76,11 @@
 #define LineColor [UIColor colorWithRed:190/255.0 green:190/255.0 blue:190/255.0 alpha:1]
 
 
-
+#define UMENSOCIALKEY           @ "56767da367e58e0c3c007170"
+#define SHARE_WEIXIN_APPID      @ "wx79d65a16a6c98392"
+#define SHARE_WEIXIN_SECRET     @ "f674439d89dc1908a5aaf7af234090da"
+#define SHARE_QQ_APPID          @ "1104698281"
+#define SHARE_QQ_KEY            @ "pzZ3kvbtjCDdtQhL"
 
 #define LoginInfoMark @"LoginInfoMark"  //登录信息相关
 
