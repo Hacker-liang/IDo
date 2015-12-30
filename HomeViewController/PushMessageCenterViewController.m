@@ -49,8 +49,7 @@
 
 - (void)loadPushMessage
 {
-//    NSString *url = @"http://a.bjwogan.com/Api/News";
-    NSString *url = @"http://agent.aikaoen.com/Api/News";
+    NSString *url = @"http://a.bjwogan.com/Api/News";
 
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSNumber numberWithInteger:_currentPage] forKey:@"page"];
@@ -126,6 +125,7 @@
 
 - (void)tableView:(UITableView *)tableViews didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableViews deselectRowAtIndexPath:indexPath animated:YES];
     PushMessageWebViewController *ctl = [[PushMessageWebViewController alloc] init];
     ctl.pushMessageData = [_dateSource objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:ctl animated:YES];

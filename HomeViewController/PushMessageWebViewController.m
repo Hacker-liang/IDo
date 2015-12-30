@@ -49,7 +49,7 @@
     ShareViewController *ctl = [[ShareViewController alloc] init];
     ctl.shareTitle = [_pushMessageData objectForKey:@"title"];
     ctl.shareContent = [_pushMessageData objectForKey:@"description"];
-    ctl.shareUrl = [_pushMessageData objectForKey:@"url"];
+    ctl.shareUrl = [_pushMessageData objectForKey:@"share_url"];
     ctl.shareImageUrl = [_pushMessageData objectForKey:@"img_content_url"];
     [self.navigationController pushViewController:ctl animated:YES];
 
