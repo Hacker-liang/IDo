@@ -100,6 +100,9 @@
 #define kSendShouldSroll2Top @"sendShouldSroll2Top"
 #define kSendShouldSroll2Buttom @"sendShouldSroll2Buttom"
 
+#define kPushUnreadNotiCacheKey @"pushUnreadNotiCacheKey"  //未读 push 消息 key
+
+
 #define messageError @"网络貌似出问题了，等一会儿再试试吧…"
 
 #endif

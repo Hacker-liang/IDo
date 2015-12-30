@@ -28,6 +28,7 @@
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [self loadPushMessage];
     }];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kPushUnreadNotiCacheKey];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -62,7 +62,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveJPushMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jpushDidClose) name:kJPFNetworkDidCloseNotification object:nil];
 
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout) name:@"userDidLogout" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoError) name:@"userInfoError" object:nil];
 
@@ -88,6 +87,9 @@
     // Required
     [APService setupWithOption:launchOptions];
     [APService crashLogON];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
+    [set addObject:@"news"];
+    [APService setTags:set alias:nil callbackSelector:nil object:nil];
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [APService setBadge:0];
@@ -171,7 +173,6 @@
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-    //register to receive notifications
     [application registerForRemoteNotifications];
 }
 
@@ -182,26 +183,22 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"didReceiveRemoteNotification %@", userInfo);
     [APService handleRemoteNotification:userInfo];
+    NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
+    if ([notificationType isEqualToString:@"news"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPushUnreadNotiCacheKey];
+    }
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"didReceiveRemoteNotification %@", userInfo);
+    NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
+    if ([notificationType isEqualToString:@"news"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPushUnreadNotiCacheKey];
+    }
     [APService handleRemoteNotification:userInfo];
-//    if (application.applicationState != UIApplicationStateActive) {
-//        [self receiveRemoteNotification:userInfo];
-//        
-//    }else{
-//        SystemSoundID myAlertSound;
-//        
-//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/sms-received1.caf"]];
-//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &myAlertSound);
-//        AudioServicesPlaySystemSound(myAlertSound);
-//        [self receiveRemoteNotification:userInfo];
-//    }
-//    
-//    NSLog(@"RemoteNote userInfo:%@",userInfo);
 }
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -337,6 +334,9 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderStatusChange];
     }
     
+    if ([notificationType isEqualToString:@"news"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPushUnreadNotiCacheKey];
+    }
     if ([notificationType isEqualToString:@"commentFromPerson"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewRating object:nil];

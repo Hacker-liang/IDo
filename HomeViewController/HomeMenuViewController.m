@@ -259,8 +259,23 @@
     NSDictionary *dic = self.dataSource[indexPath.row];
     cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:@"icon"]];
     cell.titleLabel.text = [dic objectForKey:@"title"];
+    for (UIView *view in cell.subviews) {
+        if (view.tag == 101) {
+            [view removeFromSuperview];
+        }
+    }
+    if (indexPath.row == 2) {
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kPushUnreadNotiCacheKey]) {
+            UIView *tagView = [[UIView alloc] initWithFrame:CGRectMake(125, 22.5, 5, 5)];
+            tagView.tag = 101;
+            tagView.layer.cornerRadius = 2.5;
+            tagView.backgroundColor = [UIColor redColor];
+            [cell addSubview:tagView];
+        }
+    }
     
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         NSDictionary *infoDict =[[NSBundle mainBundle] infoDictionary];
         NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
         NSString *text =[NSString stringWithFormat:@"v%@",versionNum];
@@ -284,7 +299,7 @@
     } else if (indexPath.row == 3) {
         [self gotoAbout];
         
-    } else if (indexPath.row ==3) {
+    } else if (indexPath.row ==4) {
         [self get_version];
     }
 }
