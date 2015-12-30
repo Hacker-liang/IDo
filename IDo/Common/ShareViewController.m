@@ -86,7 +86,7 @@
 
     NSString *url = @"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&";
     NSString *shareContentWithoutUrl = [NSString stringWithFormat:@"你有活儿，我来干！一款基于LBS定位功能的O2O互助服务类手机移动客户端"];
-    NSString *imageUrl = @"http://a.bjwogan.com/uploads/u=2640391802,3679448217&fm=58.jpeg";
+    NSString *imageUrl = @"http://a.bjwogan.com/uploads/58.jpg";
 
     UMSocialUrlResource *resource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:imageUrl];
     
@@ -114,7 +114,7 @@
 
 - (void)share2WeiChat
 {
-    [UMSocialData defaultData].extConfig.wechatFavoriteData.title = @"我干，一款派活接活神器！";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"我干，一款派活接活神器！";
     [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&";
     
     UIImage *shareImage = [UIImage imageNamed:@"Icon.png"];
