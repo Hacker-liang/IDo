@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"消息中心";
+    self.navigationItem.title = @"信息中心";
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"PushMessageTableViewCell" bundle:nil] forCellReuseIdentifier:@"pushMessageTableViewCell"];
     _currentPage = 1;

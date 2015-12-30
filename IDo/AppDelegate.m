@@ -101,7 +101,7 @@
     [UMSocialData setAppKey:UMENSOCIALKEY];
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:SHARE_WEIXIN_APPID appSecret:SHARE_WEIXIN_SECRET url:@"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&"];
-    [UMSocialQQHandler setQQWithAppId:SHARE_QQ_APPID appKey:SHARE_QQ_KEY url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:SHARE_QQ_APPID appKey:SHARE_QQ_KEY url:@"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&"];
 
     
     return YES;

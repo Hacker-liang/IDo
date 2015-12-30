@@ -41,7 +41,7 @@
 {
     _pushMessageData = pushMessageData;
     self.urlStr = [pushMessageData objectForKey:@"url"];
-    self.titleStr = [pushMessageData objectForKey:@"title"];
+    self.titleStr = @"信息详情";
 }
 
 - (void)shareMessage

@@ -105,7 +105,7 @@
     } else {
         shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_shareImageUrl]]];
     }
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:_shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:_shareTitle image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
     }];
 }
 
