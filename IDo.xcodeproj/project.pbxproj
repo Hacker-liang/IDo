@@ -289,6 +289,10 @@
 		D9777D4A1BB65E1900A7A64C /* icon_orderDetail_address@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D461BB65E1900A7A64C /* icon_orderDetail_address@2x.png */; };
 		D9777D4B1BB65E1900A7A64C /* nan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D471BB65E1900A7A64C /* nan@2x.png */; };
 		D9777D4C1BB65E1900A7A64C /* xx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9777D481BB65E1900A7A64C /* xx@2x.png */; };
+		D998F6B01C335D5500AB9F76 /* PushMessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D998F6AE1C335D5500AB9F76 /* PushMessageCenterViewController.m */; };
+		D998F6B51C335DAC00AB9F76 /* PushMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D998F6B31C335DAC00AB9F76 /* PushMessageTableViewCell.m */; };
+		D998F6B61C335DAC00AB9F76 /* PushMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D998F6B41C335DAC00AB9F76 /* PushMessageTableViewCell.xib */; };
+		D998F6B91C337C1D00AB9F76 /* PushMessageWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D998F6B81C337C1D00AB9F76 /* PushMessageWebViewController.m */; };
 		D99EAD081BBA8213005A02D3 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D99EACF61BBA8213005A02D3 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D99EAD091BBA8213005A02D3 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D99EACF91BBA8213005A02D3 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D99EAD0A1BBA8213005A02D3 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D99EACFB1BBA8213005A02D3 /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -899,6 +903,13 @@
 		D9777D461BB65E1900A7A64C /* icon_orderDetail_address@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_orderDetail_address@2x.png"; sourceTree = "<group>"; };
 		D9777D471BB65E1900A7A64C /* nan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nan@2x.png"; sourceTree = "<group>"; };
 		D9777D481BB65E1900A7A64C /* xx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xx@2x.png"; sourceTree = "<group>"; };
+		D998F6AD1C335D5500AB9F76 /* PushMessageCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageCenterViewController.h; sourceTree = "<group>"; };
+		D998F6AE1C335D5500AB9F76 /* PushMessageCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageCenterViewController.m; sourceTree = "<group>"; };
+		D998F6B21C335DAC00AB9F76 /* PushMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageTableViewCell.h; sourceTree = "<group>"; };
+		D998F6B31C335DAC00AB9F76 /* PushMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageTableViewCell.m; sourceTree = "<group>"; };
+		D998F6B41C335DAC00AB9F76 /* PushMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D998F6B71C337C1D00AB9F76 /* PushMessageWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageWebViewController.h; sourceTree = "<group>"; };
+		D998F6B81C337C1D00AB9F76 /* PushMessageWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageWebViewController.m; sourceTree = "<group>"; };
 		D99EACF51BBA8213005A02D3 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		D99EACF61BBA8213005A02D3 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		D99EACF71BBA8213005A02D3 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -2075,6 +2086,20 @@
 			name = OrderDetail;
 			sourceTree = "<group>";
 		};
+		D998F6AC1C335D3200AB9F76 /* PushMessageCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D998F6AD1C335D5500AB9F76 /* PushMessageCenterViewController.h */,
+				D998F6AE1C335D5500AB9F76 /* PushMessageCenterViewController.m */,
+				D998F6B21C335DAC00AB9F76 /* PushMessageTableViewCell.h */,
+				D998F6B31C335DAC00AB9F76 /* PushMessageTableViewCell.m */,
+				D998F6B41C335DAC00AB9F76 /* PushMessageTableViewCell.xib */,
+				D998F6B71C337C1D00AB9F76 /* PushMessageWebViewController.h */,
+				D998F6B81C337C1D00AB9F76 /* PushMessageWebViewController.m */,
+			);
+			name = PushMessageCenter;
+			sourceTree = "<group>";
+		};
 		D99EACF41BBA8213005A02D3 /* ASIHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -2300,6 +2325,7 @@
 		D9B2F6961BB280AE00ED7DDF /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D998F6AC1C335D3200AB9F76 /* PushMessageCenter */,
 				D916A5BD1BC4E781005F5286 /* ComplaintViewController */,
 				D96EAA591BB588F300360ED8 /* OrderList */,
 				D96EAA451BB53A3F00360ED8 /* Model */,
@@ -2622,6 +2648,7 @@
 				D91F2F351BC21965002CE690 /* icon_setting_2@3x.png in Resources */,
 				D96CC3A01BE04BDB00BDBCDD /* ChangeAlipayViewController.xib in Resources */,
 				D92B5C0A1BB8F3B600E3AC93 /* AlipaySDK.bundle in Resources */,
+				D998F6B61C335DAC00AB9F76 /* PushMessageTableViewCell.xib in Resources */,
 				D90B8ED81BEA43BE0014D434 /* icon_money@2x.png in Resources */,
 				D90B8ED61BEA43AD0014D434 /* icon_distance@2x.png in Resources */,
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
@@ -2744,6 +2771,7 @@
 				D96EA9CB1BB3D24700360ED8 /* SDWebImageCompat.m in Sources */,
 				D96EAA481BB53A5400360ED8 /* OrderDetailModel.m in Sources */,
 				D96EA9D31BB3D24700360ED8 /* UIImage+MultiFormat.m in Sources */,
+				D998F6B91C337C1D00AB9F76 /* PushMessageWebViewController.m in Sources */,
 				D96EA97B1BB3D13000360ED8 /* AppTools.m in Sources */,
 				D953951A1BB26B0200CB6746 /* HomeViewController.m in Sources */,
 				D96EA9D41BB3D24700360ED8 /* UIImage+WebP.m in Sources */,
@@ -2751,6 +2779,7 @@
 				D916A5BC1BC4E77D005F5286 /* ComplaintViewController.m in Sources */,
 				D96EA9CF1BB3D24700360ED8 /* SDWebImageManager.m in Sources */,
 				D96EA9CA1BB3D24700360ED8 /* SDImageCache.m in Sources */,
+				D998F6B51C335DAC00AB9F76 /* PushMessageTableViewCell.m in Sources */,
 				D99EAD0A1BBA8213005A02D3 /* ASIFormDataRequest.m in Sources */,
 				D9ADC3F91BBA603100B1B7E1 /* RatingBar.m in Sources */,
 				D96EAA031BB3F55500360ED8 /* JSONKit.m in Sources */,
@@ -2806,6 +2835,7 @@
 				D916A5D31BC5684E005F5286 /* OtherUserProfileTableViewController.m in Sources */,
 				D96EAA981BB5964F00360ED8 /* MJRefreshNormalHeader.m in Sources */,
 				D96EAA941BB5964F00360ED8 /* MJRefreshBackGifFooter.m in Sources */,
+				D998F6B01C335D5500AB9F76 /* PushMessageCenterViewController.m in Sources */,
 				D946C8F41BC2347100AAD3A3 /* InputTagTableViewCell.m in Sources */,
 				D96EA9A11BB3D22100360ED8 /* AFSecurityPolicy.m in Sources */,
 				D96EA9CD1BB3D24700360ED8 /* SDWebImageDownloader.m in Sources */,

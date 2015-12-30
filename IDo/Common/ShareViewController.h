@@ -10,4 +10,10 @@
 
 @interface ShareViewController : UIViewController
 
+@property (nonatomic, copy) NSString *shareUrl;
+@property (nonatomic, copy) NSString *shareTitle;
+@property (nonatomic, copy) NSString *shareContent;
+@property (nonatomic, copy) NSString *shareImageUrl;
+@property (nonatomic, copy) NSString *shareLocalImageName;
+
 @end

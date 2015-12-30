@@ -77,21 +77,14 @@
 
 - (void)share2QQ
 {
-//    [UMSocialData defaultData].extConfig.qqData.url = @"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&";
-//    [UMSocialData defaultData].extConfig.qqData.title = @"我干，一款派活接活神器！";
-//    UIImage *shareImage = [UIImage imageNamed:@"Icon.png"];
-//
-//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"你有活儿，我来干！一款基于LBS定位功能的O2O互助服务类手机移动客户端" image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
-//    }];
-
-    NSString *url = @"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&";
-    NSString *shareContentWithoutUrl = [NSString stringWithFormat:@"你有活儿，我来干！一款基于LBS定位功能的O2O互助服务类手机移动客户端"];
-    NSString *imageUrl = @"http://a.bjwogan.com/uploads/58.jpg";
+    NSString *url = _shareUrl;
+    NSString *shareContentWithoutUrl = _shareContent;
+    NSString *imageUrl = _shareImageUrl;
 
     UMSocialUrlResource *resource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:imageUrl];
     
     [UMSocialData defaultData].extConfig.qqData.url = url;
-    [UMSocialData defaultData].extConfig.qqData.title = @"我干，一款派活接活神器";
+    [UMSocialData defaultData].extConfig.qqData.title = _shareTitle;
 
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContentWithoutUrl image:nil location:nil urlResource:resource presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
@@ -104,22 +97,31 @@
 
 - (void)share2Timeline
 {
-    [UMSocialData defaultData].extConfig.qqData.url = @"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&";
-    [UMSocialData defaultData].extConfig.qqData.title = @"我干，一款派活接活神器！";
-    UIImage *shareImage = [UIImage imageNamed:@"Icon.png"];
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"我干，一款派活接活神器" image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
+    [UMSocialData defaultData].extConfig.qqData.url = _shareUrl;
+    [UMSocialData defaultData].extConfig.qqData.title = _shareTitle;
+    UIImage *shareImage;
+    if (_shareLocalImageName) {
+        shareImage = [UIImage imageNamed:_shareLocalImageName];
+    } else {
+        shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_shareImageUrl]]];
+    }
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:_shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
     }];
 }
 
 - (void)share2WeiChat
 {
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"我干，一款派活接活神器！";
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title =_shareTitle;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = _shareUrl;
     
-    UIImage *shareImage = [UIImage imageNamed:@"Icon.png"];
+    UIImage *shareImage;
+    if (_shareLocalImageName) {
+        shareImage = [UIImage imageNamed:_shareLocalImageName];
+    } else {
+        shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_shareImageUrl]]];
+    }
     
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"你有活儿，我来干！一款基于LBS定位功能的O2O互助服务类手机移动客户端" image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:_shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response) {
     }];
 
    

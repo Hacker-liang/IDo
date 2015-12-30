@@ -17,6 +17,7 @@
 #import "AutoSlideScrollView.h"
 #import "SuperWebViewController.h"
 #import "ShareViewController.h"
+#import "PushMessageCenterViewController.h"
 
 @interface HomeMenuViewController ()
 
@@ -86,7 +87,8 @@
     if (!_dataSource) {
         _dataSource = @[@{@"icon": @"icon_menu_wallet.png", @"title": @"我的钱包"},
                         @{@"icon": @"icon_menu_mine.png", @"title": @"个人中心"},
-                        @{@"icon": @"icon_menu_message.png", @"title": @"关于我们"},
+                        @{@"icon": @"icon_menu_message.png", @"title": @"信息中心"},
+                        @{@"icon": @"icon_menu_setting.png", @"title": @"关于我们"},
 //                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
                         ];
     }
@@ -130,6 +132,10 @@
 {
     [self.frostedViewController hideMenuViewController];
     ShareViewController *ctl = [[ShareViewController alloc] init];
+    ctl.shareImageUrl = @"http://a.bjwogan.com/uploads/58.jpg";
+    ctl.shareLocalImageName = @"Icon";
+    ctl.shareTitle = @"我干，一款派活接活神器！";
+    ctl.shareContent = @"你有活儿，我来干！一款基于LBS定位功能的O2O互助服务类手机移动客户端";
     [_mainViewController.navigationController pushViewController:ctl animated:YES];
 }
 
@@ -145,6 +151,14 @@
     [self.frostedViewController hideMenuViewController];
     MyProfileTableViewController *ctl = [[MyProfileTableViewController alloc] init];
     [_mainViewController.navigationController pushViewController:ctl animated:YES];
+}
+
+- (void)gotoMessageCenter
+{
+    [self.frostedViewController hideMenuViewController];
+    PushMessageCenterViewController *ctl = [[PushMessageCenterViewController alloc] init];
+    [_mainViewController.navigationController pushViewController:ctl animated:YES];
+
 }
 
 - (void)gotoAbout
@@ -263,8 +277,13 @@
         
     } else if (indexPath.row == 1) {
         [self gotoMyProfile];
+        
     } else if (indexPath.row == 2) {
+        [self gotoMessageCenter];
+        
+    } else if (indexPath.row == 3) {
         [self gotoAbout];
+        
     } else if (indexPath.row ==3) {
         [self get_version];
     }
