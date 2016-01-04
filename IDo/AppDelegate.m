@@ -327,10 +327,7 @@
         
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:orderId forKey:OrderidMark];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     if (![notificationType isEqualToString:@"gettzpersonnum"] && ![notificationType isEqualToString:@"comment"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:orderId];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderStatusChange];
     }
     

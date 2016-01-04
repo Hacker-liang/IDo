@@ -97,8 +97,8 @@
 
 - (void)share2Timeline
 {
-    [UMSocialData defaultData].extConfig.qqData.url = _shareUrl;
-    [UMSocialData defaultData].extConfig.qqData.title = _shareTitle;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = _shareUrl;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = _shareTitle;
     UIImage *shareImage;
     if (_shareLocalImageName) {
         shareImage = [UIImage imageNamed:_shareLocalImageName];

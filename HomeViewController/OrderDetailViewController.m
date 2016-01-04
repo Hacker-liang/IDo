@@ -14,6 +14,7 @@
 #import "FYAnnotationView.h"
 #import "MoreTextViewController.h"
 #import "OtherUserProfileTableViewController.h"
+#import "ShareOrderViewController.h"
 
 @interface OrderDetailViewController () <MKMapViewDelegate>
 {
@@ -91,6 +92,7 @@
     }
 }
 
+
 - (void)viewDidLayoutSubviews
 {
     [self.view bringSubviewToFront:self.footerView];
@@ -113,6 +115,19 @@
     MoreTextViewController *ctl = [[MoreTextViewController alloc] initWithNibName:@"MoreTextViewController" bundle:nil];
     [self.navigationController pushViewController:ctl animated:YES];
     ctl.content = _orderDetail.content;
+}
+
+- (void)shareOrder
+{
+    ShareOrderViewController *ctl = [[ShareOrderViewController alloc] init];
+    ctl.isSender = _isSendOrder;
+    ctl.orderId = _orderDetail.orderId;
+    if (_isSendOrder) {
+        ctl.userId = _orderDetail.sendOrderUser.userid;
+    } else {
+        ctl.userId = _orderDetail.grabOrderUser.userid;
+    }
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 - (void)gotoUserProfile
@@ -145,6 +160,15 @@
         _conteViewConstraint.constant = 64;
     } else {
         _conteViewConstraint.constant = 14;
+    }
+    
+    if (_orderDetail.orderStatus == kOrderCompletion || _orderDetail.orderStatus == kOrderCheckDone) {
+        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [shareBtn addTarget:self action:@selector(shareOrder) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:@"icon_navi_share.png"] forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
     }
     NSString *sex = userInfo.sex;
     if ([sex isEqualToString:@"1"]) {

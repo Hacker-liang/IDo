@@ -7,6 +7,7 @@
 //
 
 #import "EvaluationViewController.h"
+#import "ShareOrderViewController.h"
 
 @interface EvaluationViewController ()
 {
@@ -203,9 +204,22 @@
             NSString *message1=[NSString stringWithFormat:@"感谢使用《%@》",APPTITTLE];
             
             if ([tempStatus integerValue] == 1) {
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜,已完成评价" message:message1 delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜,已完成评价" message:message1 delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"我要去晒单", nil];
+                [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 0) {
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    } else {
+                        ShareOrderViewController *ctl = [[ShareOrderViewController alloc] init];
+                        ctl.isSender = (evaluationType == 1);
+                        ctl.orderId = _orderDetail.orderId;
+                        if (evaluationType == 1) {
+                            ctl.userId = _orderDetail.sendOrderUser.userid;
+                        } else {
+                            ctl.userId = _orderDetail.grabOrderUser.userid;
+                        }
+                        [self.navigationController pushViewController:ctl animated:YES];
+                    }
+                }];
             } else {
                 NSString *info = [dict objectForKey:@"info"];
                 if (info) {
