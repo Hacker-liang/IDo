@@ -33,8 +33,9 @@
 @interface MissOrderModelUser : NSObject
 
 @property(copy, nonatomic) NSString *nickName;
-@property(copy, nonatomic) NSString *userId;
-@property(copy, nonatomic) NSString *sex;
+@property(nonatomic) NSInteger userId;
+@property(nonatomic) NSInteger sex;
 @property(copy, nonatomic) NSString *avatar;
+@property(nonatomic) NSInteger sendOrderCount;
 
 @end

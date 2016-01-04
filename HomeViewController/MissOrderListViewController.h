@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MissOrderListViewController : UIViewController
+@interface MissOrderListViewController : TZViewController
 
 @end

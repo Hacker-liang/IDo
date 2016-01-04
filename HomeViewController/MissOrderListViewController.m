@@ -10,7 +10,7 @@
 #import "MissOrderListTableViewCell.h"
 #import "OrderManager.h"
 
-@interface MissOrderListViewController ()
+@interface MissOrderListViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong)NSArray *dataSource;
@@ -21,6 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"错过的订单";
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
     [_tableView registerNib:[UINib nibWithNibName:@"MissOrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderListCell"];
     [OrderManager asyncLoadMissOrderListWithPage:-1 pageSize:-1 completionBlock:^(BOOL isSuccess, NSArray *orderList) {
         if (isSuccess) {

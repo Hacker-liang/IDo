@@ -14,7 +14,7 @@
 {
     if (self = [super init]) {
         _content = [json objectForKey:@"content"];
-        _orderId = [json objectForKey:@"id"];
+        _orderId = [NSString stringWithFormat:@"%@", [json objectForKey:@"id"]];
         _address = [json objectForKey:@"address"];
         _money = [json objectForKey:@"money"];
         
@@ -26,14 +26,17 @@
         }
         
         _orderNumber = [json objectForKey:@"ordernumber"];
-        _lat = [json objectForKey:@"lat"];
-        _lng = [json objectForKey:@"lng"];
-        _publishTime = [json objectForKey:@"publishTime"];
-        _updateTime = [json objectForKey:@"updateTime"];
+        _lat = [NSString stringWithFormat:@"%@", [json objectForKey:@"lat"]];
+        _lng = [NSString stringWithFormat:@"%@", [json objectForKey:@"lng"]];
         
+        
+        _publishTime = [ConvertMethods dateToString:[NSDate dateWithTimeIntervalSince1970:[[json objectForKey:@"publishTime"] integerValue]/1000] withFormat:@"MM-dd HH:mm" withTimeZone:[NSTimeZone systemTimeZone]];
+        _updateTime = [NSString stringWithFormat:@"%@", [json objectForKey:@"updateTime"]];
         _orderSender = [[MissOrderModelUser alloc] init];
         _orderSender.nickName = [[json objectForKey:@"member"] objectForKey:@"nickName"];
-        _orderSender.userId = [[json objectForKey:@"member"] objectForKey:@"id"];
+        _orderSender.userId = [[[json objectForKey:@"member"] objectForKey:@"id"] integerValue];
+        _orderSender.sex = [[[json objectForKey:@"member"] objectForKey:@"sex"] integerValue];
+        _orderSender.sendOrderCount = [[[json objectForKey:@"memberStat"] objectForKey:@"totalPublish"] integerValue];
         if ([[[json objectForKey:@"member"] objectForKey:@"img"] rangeOfString:@"http"].location != NSNotFound) {
             _orderSender.avatar = [[json objectForKey:@"member"] objectForKey:@"img"];
         } else {

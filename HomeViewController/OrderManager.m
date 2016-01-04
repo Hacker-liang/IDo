@@ -234,7 +234,10 @@
 
 + (void)asyncLoadMissOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
 {
-    NSString *url = [NSString stringWithFormat:@"%@lostoders",baseUrl];
+    NSString *url = [NSString stringWithFormat:@"%@lostOrders",baseUrl];
+    
+//    NSString *url = [NSString stringWithFormat:@"%@lostOrders",@"http://api.aikaoen.com/?action="];
+
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     if (page >= 0) {
         [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
@@ -244,10 +247,11 @@
     }
     UserManager *userManager = [UserManager shareUserManager];
     [mDict safeSetObject:userManager.userInfo.userid forKey:@"memberId"];
-    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lat] forKey:@"lat"];
-    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lng] forKey:@"lng"];
-
-    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+//    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lat] forKey:@"lat"];
+//    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lng] forKey:@"lng"];
+    
+    [mDict safeSetObject:[NSNumber numberWithFloat:39.889] forKey:@"lat"];
+    [mDict safeSetObject:[NSNumber numberWithFloat:116.341] forKey:@"lon"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)

@@ -243,8 +243,6 @@
 		D96EA9FF1BB3F46C00360ED8 /* SVHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EA9FD1BB3F46C00360ED8 /* SVHTTPRequest.m */; };
 		D96EAA031BB3F55500360ED8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA021BB3F55500360ED8 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D96EAA091BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA081BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m */; };
-		D96EAA0D1BB40EA200360ED8 /* GrabOrderListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA0B1BB40EA200360ED8 /* GrabOrderListTableViewController.m */; };
-		D96EAA0E1BB40EA200360ED8 /* GrabOrderListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA0C1BB40EA200360ED8 /* GrabOrderListTableViewController.xib */; };
 		D96EAA2B1BB5230000360ED8 /* SendOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA2A1BB5230000360ED8 /* SendOrderDetailViewController.m */; };
 		D96EAA2E1BB523D900360ED8 /* SendOrderDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D96EAA2D1BB523D900360ED8 /* SendOrderDetailHeaderView.m */; };
 		D96EAA301BB5242A00360ED8 /* SendOrderDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96EAA2F1BB5242A00360ED8 /* SendOrderDetailHeaderView.xib */; };
@@ -372,6 +370,8 @@
 		D9DB6EF21C396D6E00077E49 /* MissOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB6EF11C396D6E00077E49 /* MissOrderModel.m */; };
 		D9DB6EF61C3A186C00077E49 /* MissOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB6EF41C3A186C00077E49 /* MissOrderListTableViewCell.m */; };
 		D9DB6EF71C3A186C00077E49 /* MissOrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DB6EF51C3A186C00077E49 /* MissOrderListTableViewCell.xib */; };
+		D9DB6EFB1C3A1F1000077E49 /* GrabOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB6EF91C3A1F1000077E49 /* GrabOrderListViewController.m */; };
+		D9DB6EFC1C3A1F1000077E49 /* GrabOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DB6EFA1C3A1F1000077E49 /* GrabOrderListViewController.xib */; };
 		D9FFD1DD1BE8E984001F2D94 /* pay_wogan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */; };
 		D9FFD1DE1BE8E984001F2D94 /* pay_wogan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */; };
 		D9FFD1E11BE8FBDE001F2D94 /* ic_pay_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */; };
@@ -834,9 +834,6 @@
 		D96EAA021BB3F55500360ED8 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		D96EAA071BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderDetailSegmentViewController.h; sourceTree = "<group>"; };
 		D96EAA081BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderDetailSegmentViewController.m; sourceTree = "<group>"; };
-		D96EAA0A1BB40EA200360ED8 /* GrabOrderListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderListTableViewController.h; sourceTree = "<group>"; };
-		D96EAA0B1BB40EA200360ED8 /* GrabOrderListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderListTableViewController.m; sourceTree = "<group>"; };
-		D96EAA0C1BB40EA200360ED8 /* GrabOrderListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabOrderListTableViewController.xib; sourceTree = "<group>"; };
 		D96EAA291BB5230000360ED8 /* SendOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderDetailViewController.h; sourceTree = "<group>"; };
 		D96EAA2A1BB5230000360ED8 /* SendOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderDetailViewController.m; sourceTree = "<group>"; };
 		D96EAA2C1BB523D900360ED8 /* SendOrderDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderDetailHeaderView.h; sourceTree = "<group>"; };
@@ -1047,6 +1044,9 @@
 		D9DB6EF31C3A186C00077E49 /* MissOrderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissOrderListTableViewCell.h; sourceTree = "<group>"; };
 		D9DB6EF41C3A186C00077E49 /* MissOrderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissOrderListTableViewCell.m; sourceTree = "<group>"; };
 		D9DB6EF51C3A186C00077E49 /* MissOrderListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissOrderListTableViewCell.xib; sourceTree = "<group>"; };
+		D9DB6EF81C3A1F1000077E49 /* GrabOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderListViewController.h; sourceTree = "<group>"; };
+		D9DB6EF91C3A1F1000077E49 /* GrabOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderListViewController.m; sourceTree = "<group>"; };
+		D9DB6EFA1C3A1F1000077E49 /* GrabOrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabOrderListViewController.xib; sourceTree = "<group>"; };
 		D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@2x.png"; sourceTree = "<group>"; };
 		D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@3x.png"; sourceTree = "<group>"; };
 		D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_pay_check@2x.png"; sourceTree = "<group>"; };
@@ -1909,9 +1909,9 @@
 			children = (
 				D96EAA071BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.h */,
 				D96EAA081BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m */,
-				D96EAA0A1BB40EA200360ED8 /* GrabOrderListTableViewController.h */,
-				D96EAA0B1BB40EA200360ED8 /* GrabOrderListTableViewController.m */,
-				D96EAA0C1BB40EA200360ED8 /* GrabOrderListTableViewController.xib */,
+				D9DB6EF81C3A1F1000077E49 /* GrabOrderListViewController.h */,
+				D9DB6EF91C3A1F1000077E49 /* GrabOrderListViewController.m */,
+				D9DB6EFA1C3A1F1000077E49 /* GrabOrderListViewController.xib */,
 				D91F2F191BC20FE2002CE690 /* GrabOrderSetting */,
 			);
 			name = GrabOrderDetail;
@@ -2579,6 +2579,7 @@
 				D96042D11BEA419900E8EA93 /* icon_address@2x.png in Resources */,
 				D9DB6EE91C396AFC00077E49 /* icon_navi_share@2x.png in Resources */,
 				D99EAD4A1BBCD4CE005A02D3 /* ic_vip_set@2x.png in Resources */,
+				D9DB6EFC1C3A1F1000077E49 /* GrabOrderListViewController.xib in Resources */,
 				D96042D51BEA41FD00E8EA93 /* icon_phone_normal@2x.png in Resources */,
 				D969DA0D1BCCB22A00281D02 /* SVWebViewControllerActivitySafari@2x.png in Resources */,
 				D916A5C11BC4E7F0005F5286 /* login.png in Resources */,
@@ -2697,7 +2698,6 @@
 				D9B2F6B81BB2883200ED7DDF /* HomeMenuTableViewHeaderView.xib in Resources */,
 				D91F2F311BC218A2002CE690 /* GrabSettingNotiTableViewCell.xib in Resources */,
 				D9A15E8F1C26CA83008CE530 /* icon_app_QR@2x.png in Resources */,
-				D96EAA0E1BB40EA200360ED8 /* GrabOrderListTableViewController.xib in Resources */,
 				D90B8EC81BEA43080014D434 /* icon_paidan@2x.png in Resources */,
 				D9A15E8C1C26CA83008CE530 /* icon_share_wechat@2x.png in Resources */,
 				D9A15EB91C26D755008CE530 /* UMSCommentDetailController.xib in Resources */,
@@ -2786,7 +2786,6 @@
 				D96EA9A41BB3D22100360ED8 /* AFURLResponseSerialization.m in Sources */,
 				D92B5C151BB8F3B600E3AC93 /* RSADataSigner.m in Sources */,
 				D96EAA901BB5964F00360ED8 /* MJRefreshHeader.m in Sources */,
-				D96EAA0D1BB40EA200360ED8 /* GrabOrderListTableViewController.m in Sources */,
 				D946C91A1BC2C42B00AAD3A3 /* ChangeLocationTableViewController.m in Sources */,
 				D969DA5F1BCCD81100281D02 /* MoreTextViewController.m in Sources */,
 				D96EA9C91BB3D24700360ED8 /* NSData+ImageContentType.m in Sources */,
@@ -2892,6 +2891,7 @@
 				D9B289EA1BBCEA2300FB97E5 /* FeedbackViewController.m in Sources */,
 				D96EA9881BB3D1FB00360ED8 /* SVRadialGradientLayer.m in Sources */,
 				D96EAA5D1BB5890600360ED8 /* OrderListTableViewCell.m in Sources */,
+				D9DB6EFB1C3A1F1000077E49 /* GrabOrderListViewController.m in Sources */,
 				D969D9D41BCCB18B00281D02 /* NJKWebViewProgress.m in Sources */,
 				D96EA9DE1BB3D45300360ED8 /* UserManager.m in Sources */,
 				D96EA9471BB2EB7300360ED8 /* MyWalletViewController.m in Sources */,

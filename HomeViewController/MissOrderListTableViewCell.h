@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrderListModel.h"
+#import "MissOrderModel.h"
 
 @interface MissOrderListTableViewCell : UITableViewCell
 
@@ -25,6 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
 
-@property(nonatomic, strong) OrderListModel *orderDetail;
+@property(nonatomic, strong) MissOrderModel *orderDetail;
 
 @end
