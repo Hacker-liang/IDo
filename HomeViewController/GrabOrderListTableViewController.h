@@ -10,4 +10,6 @@
 
 @interface GrabOrderListTableViewController : UITableViewController
 
+@property (nonatomic, strong) UIButton *missOrderBtn;  //错过的订单按钮
+
 @end

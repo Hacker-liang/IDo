@@ -370,6 +370,8 @@
 		D9DB6EED1C396D2000077E49 /* MissOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB6EEB1C396D2000077E49 /* MissOrderListViewController.m */; };
 		D9DB6EEE1C396D2000077E49 /* MissOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DB6EEC1C396D2000077E49 /* MissOrderListViewController.xib */; };
 		D9DB6EF21C396D6E00077E49 /* MissOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB6EF11C396D6E00077E49 /* MissOrderModel.m */; };
+		D9DB6EF61C3A186C00077E49 /* MissOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB6EF41C3A186C00077E49 /* MissOrderListTableViewCell.m */; };
+		D9DB6EF71C3A186C00077E49 /* MissOrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DB6EF51C3A186C00077E49 /* MissOrderListTableViewCell.xib */; };
 		D9FFD1DD1BE8E984001F2D94 /* pay_wogan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */; };
 		D9FFD1DE1BE8E984001F2D94 /* pay_wogan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */; };
 		D9FFD1E11BE8FBDE001F2D94 /* ic_pay_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */; };
@@ -1042,6 +1044,9 @@
 		D9DB6EEC1C396D2000077E49 /* MissOrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissOrderListViewController.xib; sourceTree = "<group>"; };
 		D9DB6EF01C396D6E00077E49 /* MissOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissOrderModel.h; sourceTree = "<group>"; };
 		D9DB6EF11C396D6E00077E49 /* MissOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissOrderModel.m; sourceTree = "<group>"; };
+		D9DB6EF31C3A186C00077E49 /* MissOrderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissOrderListTableViewCell.h; sourceTree = "<group>"; };
+		D9DB6EF41C3A186C00077E49 /* MissOrderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissOrderListTableViewCell.m; sourceTree = "<group>"; };
+		D9DB6EF51C3A186C00077E49 /* MissOrderListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissOrderListTableViewCell.xib; sourceTree = "<group>"; };
 		D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@2x.png"; sourceTree = "<group>"; };
 		D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@3x.png"; sourceTree = "<group>"; };
 		D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_pay_check@2x.png"; sourceTree = "<group>"; };
@@ -2415,6 +2420,9 @@
 		D9DB6EEF1C396D3000077E49 /* MissOrderList */ = {
 			isa = PBXGroup;
 			children = (
+				D9DB6EF31C3A186C00077E49 /* MissOrderListTableViewCell.h */,
+				D9DB6EF41C3A186C00077E49 /* MissOrderListTableViewCell.m */,
+				D9DB6EF51C3A186C00077E49 /* MissOrderListTableViewCell.xib */,
 				D9DB6EEA1C396D2000077E49 /* MissOrderListViewController.h */,
 				D9DB6EEB1C396D2000077E49 /* MissOrderListViewController.m */,
 				D9DB6EEC1C396D2000077E49 /* MissOrderListViewController.xib */,
@@ -2618,6 +2626,7 @@
 				D916A5E01BC58AEF005F5286 /* bt_star_a.png in Resources */,
 				D969DA601BCCD81100281D02 /* MoreTextViewController.xib in Resources */,
 				D916A5B21BC37306005F5286 /* common_icon_navigation_back_normal@3x.png in Resources */,
+				D9DB6EF71C3A186C00077E49 /* MissOrderListTableViewCell.xib in Resources */,
 				D90B8EE41BEA457E0014D434 /* icon_rating@2x.png in Resources */,
 				D9777D4B1BB65E1900A7A64C /* nan@2x.png in Resources */,
 				D90E2E361BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.xib in Resources */,
@@ -2805,6 +2814,7 @@
 				D916A5AE1BC372EE005F5286 /* TZTableViewController.m in Sources */,
 				D9B2F6B61BB2882500ED7DDF /* HomeMenuTableViewHeaderView.m in Sources */,
 				D96EA9CB1BB3D24700360ED8 /* SDWebImageCompat.m in Sources */,
+				D9DB6EF61C3A186C00077E49 /* MissOrderListTableViewCell.m in Sources */,
 				D96EAA481BB53A5400360ED8 /* OrderDetailModel.m in Sources */,
 				D96EA9D31BB3D24700360ED8 /* UIImage+MultiFormat.m in Sources */,
 				D998F6B91C337C1D00AB9F76 /* PushMessageWebViewController.m in Sources */,

@@ -55,5 +55,14 @@
  */
 + (void)asyncLoadMySendInProgressOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^) (BOOL isSuccess, NSArray *orderList))completion;
 
+/**
+ *  加载错过的订单列表
+ *
+ *  @param page
+ *  @param size
+ *  @param completion
+ */
++ (void)asyncLoadMissOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^) (BOOL isSuccess, NSArray *orderList))completion;
+
 
 @end

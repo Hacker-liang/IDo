@@ -7,6 +7,7 @@
 //
 
 #import "OrderManager.h"
+#import "MissOrderModel.h"
 
 @implementation OrderManager
 
@@ -218,6 +219,57 @@
                 NSMutableArray *retArray = [[NSMutableArray alloc] init];
                 for (NSDictionary *dic in tempList) {
                     OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:YES];
+                    [retArray addObject:order];
+                }
+                completion(YES, retArray);
+            } else {
+                completion(NO, nil);
+            }
+        } else {
+            completion(NO, nil);
+            
+        }
+    }];
+}
+
++ (void)asyncLoadMissOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
+{
+    NSString *url = [NSString stringWithFormat:@"%@lostoders",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    if (page >= 0) {
+        [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
+    }
+    if (size>=0) {
+        [mDict setObject:[NSNumber numberWithInteger:size] forKey:@"pageSize"];
+    }
+    UserManager *userManager = [UserManager shareUserManager];
+    [mDict safeSetObject:userManager.userInfo.userid forKey:@"memberId"];
+    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lat] forKey:@"lat"];
+    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lng] forKey:@"lng"];
+
+    [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSArray *tempList = dict[@"data"];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
+                NSMutableArray *retArray = [[NSMutableArray alloc] init];
+                for (NSDictionary *dic in tempList) {
+                    MissOrderModel *order = [[MissOrderModel alloc] initWithJson:dic];
                     [retArray addObject:order];
                 }
                 completion(YES, retArray);

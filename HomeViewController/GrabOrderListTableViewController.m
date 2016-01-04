@@ -19,7 +19,6 @@
 @property (nonatomic, strong) OrderListEmptyView *emptyView;
 @property (nonatomic) NSInteger currentPage;
 
-
 @end
 
 @implementation GrabOrderListTableViewController
@@ -64,6 +63,20 @@
 {
     [super viewWillAppear:animated];
     [self.tableView.header beginRefreshing];
+    _missOrderBtn = [[UIButton alloc] initWithFrame:CGRectMake(kWindowWidth-60, kWindowHeight-70, 40, 40)];
+    _missOrderBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    [_missOrderBtn setTitle:@"错过\n订单" forState:UIControlStateNormal];
+    _missOrderBtn.titleLabel.numberOfLines = 2;
+    _missOrderBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+    _missOrderBtn.layer.cornerRadius = 20;
+    [self.navigationController.view addSubview:_missOrderBtn];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_missOrderBtn removeFromSuperview];
+    _missOrderBtn = nil;
 }
 
 - (void)dealloc
@@ -156,4 +169,5 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Top object:nil];
     }
 }
+
 @end

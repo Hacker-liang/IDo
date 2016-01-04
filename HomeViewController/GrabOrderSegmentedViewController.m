@@ -49,6 +49,11 @@
     [self changePage:0];
 }
 
+- (void)changePage:(NSInteger)pageIndex
+{
+    [super changePage:pageIndex];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

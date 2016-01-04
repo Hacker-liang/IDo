@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="orderListCell" rowHeight="150" id="KGk-i7-Jjw" customClass="OrderListTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="orderListCell" rowHeight="150" id="KGk-i7-Jjw" customClass="MissOrderListTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -164,17 +164,17 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="addressBtn" destination="ntX-Dy-N2s" id="IeU-Ti-Fso"/>
-                <outlet property="contentLabel" destination="arY-Wi-ipV" id="boy-aj-bnQ"/>
-                <outlet property="headerImageView" destination="0gm-Fl-aIE" id="wHe-Y2-0cG"/>
-                <outlet property="orderStatusLabel" destination="niB-zl-Rop" id="48M-6B-9JK"/>
-                <outlet property="priceLabel" destination="0Wp-g2-1TY" id="EXW-U3-1di"/>
-                <outlet property="sexImageView" destination="XAc-nG-LVk" id="6Uy-KH-dHI"/>
-                <outlet property="subtitleLabel" destination="woF-ur-raK" id="jVh-uY-53T"/>
-                <outlet property="timeLabel" destination="GwM-QF-rc2" id="boY-2I-BP6"/>
-                <outlet property="titleLabel" destination="JRM-jP-Ryt" id="6KT-GL-V9J"/>
+                <outlet property="addressBtn" destination="ntX-Dy-N2s" id="USy-9H-Hq4"/>
+                <outlet property="contentLabel" destination="arY-Wi-ipV" id="49L-zx-Mgb"/>
+                <outlet property="headerImageView" destination="0gm-Fl-aIE" id="H1T-Ak-ExJ"/>
+                <outlet property="orderStatusLabel" destination="niB-zl-Rop" id="Q2h-Vc-h0A"/>
+                <outlet property="priceLabel" destination="0Wp-g2-1TY" id="maL-mU-Mys"/>
+                <outlet property="sexImageView" destination="XAc-nG-LVk" id="kff-2Z-hj5"/>
+                <outlet property="subtitleLabel" destination="woF-ur-raK" id="pSa-cO-VnJ"/>
+                <outlet property="timeLabel" destination="GwM-QF-rc2" id="pj5-eL-EuV"/>
+                <outlet property="titleLabel" destination="JRM-jP-Ryt" id="ECT-aH-RHO"/>
             </connections>
-            <point key="canvasLocation" x="28" y="179"/>
+            <point key="canvasLocation" x="119" y="179"/>
         </tableViewCell>
     </objects>
     <resources>
