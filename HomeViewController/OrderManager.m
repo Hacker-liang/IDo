@@ -250,8 +250,8 @@
 //    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lat] forKey:@"lat"];
 //    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lng] forKey:@"lng"];
     
-    [mDict safeSetObject:[NSNumber numberWithFloat:39.889] forKey:@"lat"];
-    [mDict safeSetObject:[NSNumber numberWithFloat:116.341] forKey:@"lon"];
+//    [mDict safeSetObject:[NSNumber numberWithFloat:39.889] forKey:@"lat"];
+//    [mDict safeSetObject:[NSNumber numberWithFloat:116.341] forKey:@"lon"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
