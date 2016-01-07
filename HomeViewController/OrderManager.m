@@ -247,8 +247,8 @@
     }
     UserManager *userManager = [UserManager shareUserManager];
     [mDict safeSetObject:userManager.userInfo.userid forKey:@"memberId"];
-//    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lat] forKey:@"lat"];
-//    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lng] forKey:@"lng"];
+    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lat] forKey:@"lat"];
+    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lng] forKey:@"lng"];
     
 //    [mDict safeSetObject:[NSNumber numberWithFloat:39.889] forKey:@"lat"];
 //    [mDict safeSetObject:[NSNumber numberWithFloat:116.341] forKey:@"lon"];
