@@ -247,11 +247,11 @@
     }
     UserManager *userManager = [UserManager shareUserManager];
     [mDict safeSetObject:userManager.userInfo.userid forKey:@"memberId"];
-    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lat] forKey:@"lat"];
-    [mDict safeSetObject:[NSNumber numberWithFloat:userManager.userInfo.lng] forKey:@"lon"];
+    [mDict safeSetObject:[NSNumber numberWithDouble:userManager.userInfo.lat] forKey:@"lat"];
+    [mDict safeSetObject:[NSNumber numberWithDouble:userManager.userInfo.lng] forKey:@"lon"];
     
-//    [mDict safeSetObject:[NSNumber numberWithFloat:39.889] forKey:@"lat"];
-//    [mDict safeSetObject:[NSNumber numberWithFloat:116.341] forKey:@"lon"];
+//    [mDict safeSetObject:[NSNumber numberWithFloat:39.76313] forKey:@"lat"];
+//    [mDict safeSetObject:[NSNumber numberWithFloat:116.33054] forKey:@"lon"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)

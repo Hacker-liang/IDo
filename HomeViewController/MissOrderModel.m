@@ -36,7 +36,9 @@
         _orderSender.nickName = [[json objectForKey:@"member"] objectForKey:@"nickName"];
         _orderSender.userId = [[[json objectForKey:@"member"] objectForKey:@"id"] integerValue];
         _orderSender.sex = [[[json objectForKey:@"member"] objectForKey:@"sex"] integerValue];
-        _orderSender.sendOrderCount = [[[json objectForKey:@"memberStat"] objectForKey:@"totalPublish"] integerValue];
+        if ([[json objectForKey:@"memberStat"] isKindOfClass:[NSDictionary class]]) {
+            _orderSender.sendOrderCount = [[[json objectForKey:@"memberStat"] objectForKey:@"totalPublish"] integerValue];
+        }
         if ([[[json objectForKey:@"member"] objectForKey:@"img"] rangeOfString:@"http"].location != NSNotFound) {
             _orderSender.avatar = [[json objectForKey:@"member"] objectForKey:@"img"];
         } else {
