@@ -104,7 +104,7 @@
 
 - (void)updateSeaverLocation
 {
-    NSString *url = [NSString stringWithFormat:@"%@ ", baseUrl];
+    NSString *url = [NSString stringWithFormat:@"%@getapk", baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSString stringWithFormat:@"%lf", _userLocation.coordinate.latitude] forKey:@"lat"];
     [mDict setObject:[NSString stringWithFormat:@"%lf", _userLocation.coordinate.longitude] forKey:@"lng"];
