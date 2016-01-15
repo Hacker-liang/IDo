@@ -10,7 +10,6 @@
 #import "MissOrderModel.h"
 
 @implementation OrderManager
-
 + (void)asyncLoadNearByOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
 {
     NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];

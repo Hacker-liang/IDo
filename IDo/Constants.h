@@ -11,14 +11,14 @@
 
 #ifdef __OBJC__
 
-//#define baseServer @"http://112.124.51.74/"
-//#define baseUrl @"http://112.124.51.74/?action="
+//#define baseServer @"http://apitest.bjwogan.com/"
+//#define baseUrl @"http://apitest.bjwogan.com/?action="
 //
-//#define kYzmURL @"http://api.bjwogan.com/SMS.php"
-//#define severURL @"http://112.124.51.74/"
+//#define kYzmURL @"http://apitest.bjwogan.com/SMS.php"
+//#define severURL @"http://apitest.bjwogan.com/"
 //
-//#define uploadheadImgURL @"http://photo.bjwogan.com/upload/upload.php"
-//#define headURL @"http://photo.bjwogan.com/image"
+//#define uploadheadImgURL @"http://phototest.bjwogan.com/upload/upload.php"
+//#define headURL @"http://phototest.bjwogan.com/image"
 
 
 #define baseServer @"http://api.bjwogan.com/"
@@ -30,17 +30,10 @@
 #define uploadheadImgURL @"http://photo.bjwogan.com/upload/upload.php"
 #define headURL @"http://photo.bjwogan.com/image"
 
-/*
-#define baseServer @"http://58.30.16.58/"
-#define baseUrl @"http://58.30.16.58/?action="
-
-#define kYzmURL @"http://58.30.16.58/SMS.php"
-#define severURL @"http://58.30.16.58/"
-#define uploadheadImgURL @"http://58.30.16.59/upload/upload.php"
-#define headURL @"http://58.30.16.59/image"
-*/
-
 /***** 设备信息 *****/
+
+#define WIDTH [UIScreen mainScreen].bounds.size.width
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
 
 #define kWindowWidth   [UIApplication sharedApplication].keyWindow.frame.size.width
 #define kWindowHeight  [UIApplication sharedApplication].keyWindow.frame.size.height

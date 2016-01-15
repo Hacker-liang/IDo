@@ -14,6 +14,7 @@
 #import "MyProfileTableViewController.h"
 #import "LoginViewController.h"
 #import "AboutViewController.h"
+#import "HelpVC.h"
 #import "AutoSlideScrollView.h"
 #import "SuperWebViewController.h"
 #import "ShareViewController.h"
@@ -87,7 +88,7 @@
     if (!_dataSource) {
         _dataSource = @[@{@"icon": @"icon_menu_wallet.png", @"title": @"我的钱包"},
                         @{@"icon": @"icon_menu_mine.png", @"title": @"个人中心"},
-                        @{@"icon": @"icon_menu_message.png", @"title": @"信息中心"},
+                        @{@"icon": @"icon_menu_message.png", @"title": @"信息中心"},@{@"icon": @"help", @"title": @"帮助中心"},
                         @{@"icon": @"icon_menu_setting.png", @"title": @"关于我们"},
 //                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
                         ];
@@ -99,7 +100,8 @@
 {
     _adArray = adArray;
     
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-150, 275-20, 100) animationDuration:5];
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-105, 275-20, 100) animationDuration:5];
+//    _galleryView.backgroundColor=[UIColor yellowColor];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };
@@ -159,6 +161,14 @@
     PushMessageCenterViewController *ctl = [[PushMessageCenterViewController alloc] init];
     [_mainViewController.navigationController pushViewController:ctl animated:YES];
 
+}
+
+-(void)gotoHelp
+{
+    HelpVC *help=[[HelpVC alloc]init];
+    [self.frostedViewController hideMenuViewController];
+    
+    [_mainViewController.navigationController pushViewController:help animated:YES];
 }
 
 - (void)gotoAbout
@@ -297,10 +307,10 @@
         [self gotoMessageCenter];
         
     } else if (indexPath.row == 3) {
-        [self gotoAbout];
+        [self gotoHelp];
         
     } else if (indexPath.row ==4) {
-        [self get_version];
+        [self gotoAbout];
     }
 }
 

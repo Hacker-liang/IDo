@@ -802,7 +802,16 @@
             userInfo = [UserManager shareUserManager].userInfo;
         }
     } else {
-        _userLocation = CLLocationCoordinate2DMake(_orderDetail.grabOrderUser.lat, _orderDetail.grabOrderUser.lng);
+/*
+ 修改  客户端优先处理抢单后显示抢单人抢单时的位置，付款后显示抢单人的实时位置，验收后显示抢单人抢单时的位置进入历史订单不在变化。
+ */
+        
+        if (_orderDetail.orderStatus==kOrderPayed) {
+            _userLocation = CLLocationCoordinate2DMake(_orderDetail.grabOrderUser.lat, _orderDetail.grabOrderUser.lng);
+        } else {
+            _userLocation = CLLocationCoordinate2DMake(_orderDetail.latEmployee, _orderDetail.lngEmployee);
+        }
+        
     }
     
     FYAnnotation *tg = [[FYAnnotation alloc]init];

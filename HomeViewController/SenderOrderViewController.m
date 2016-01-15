@@ -10,6 +10,10 @@
 #import "SendOrderDetailViewController.h"
 #import "AutoSlideScrollView.h"
 
+//kenan start
+#import "SendMoneyVC.h"
+//kenan end
+
 @interface SenderOrderViewController ()
 {
     NSString *APPTITTLE;
@@ -20,12 +24,18 @@
 
 @property (nonatomic, strong) NSArray *dataSource;
 
+@property (nonatomic,strong) UIButton *sendOrderDecBtn;
+@property (nonatomic,strong) UIButton *hotOrderBtn;
+@property (nonatomic,strong) UIButton *sendMoneyBtn;
+
 @end
 
 @implementation SenderOrderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    [self creatUI];
     
     NSUserDefaults *APPTittleDefaults=[NSUserDefaults standardUserDefaults];
     
@@ -81,6 +91,36 @@
 - (IBAction)sendOrder:(id)sender {
     SendOrderDetailViewController *ctl = [[SendOrderDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:ctl animated:YES];
+}
+
+#pragma mark 柯南修改
+
+-(void)creatUI
+{
+    _sendOrderDecBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    _sendOrderDecBtn.frame=CGRectMake(0.5*WIDTH-100, 0.25*HEIGHT,86 , 16);
+    [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrder"] forState:UIControlStateNormal];
+    [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrderCh"] forState:UIControlStateHighlighted];
+    [self.view addSubview:_sendOrderDecBtn];
+    
+    _hotOrderBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    _hotOrderBtn.frame=CGRectMake(0.5*WIDTH+37, 0.25*HEIGHT,63, 16);
+    [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIcon"] forState:UIControlStateNormal];
+    [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIconCh"] forState:UIControlStateHighlighted];
+    [self.view addSubview:_hotOrderBtn];
+    
+    _sendMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    _sendMoneyBtn.frame=CGRectMake(0.25*WIDTH, 0.35*HEIGHT,0.5*WIDTH , 0.08*HEIGHT);
+    [_sendMoneyBtn setBackgroundImage:[UIImage imageNamed:@"SendMoneyImage"] forState:UIControlStateNormal];
+    [_sendMoneyBtn addTarget:self action:@selector(sendMoney) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_sendMoneyBtn];
+
+}
+
+-(void)sendMoney
+{
+    SendMoneyVC *sendMoneyVC=[[SendMoneyVC alloc]init];
+    [self.navigationController pushViewController:sendMoneyVC animated:NO];
 }
 
 @end

@@ -10,8 +10,8 @@
 
 @interface ShareOrderViewController : TZViewController
 
-@property (nonatomic, copy) NSString *orderId;
-@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, strong) NSString *orderId;
+@property (nonatomic, strong) NSString *userId;
 @property (nonatomic) BOOL isSender;
 
 @end

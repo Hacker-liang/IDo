@@ -52,12 +52,15 @@ typedef enum : NSUInteger {
 @property(copy, nonatomic) NSString *address; //地址
 @property(copy, nonatomic) NSString *lng;
 @property(copy, nonatomic) NSString *lat;
+@property (assign,nonatomic)double latEmployee;//抢单时的位置
+@property (assign,nonatomic)double lngEmployee;//抢单时的位置
 @property(copy, nonatomic) NSString *content;  //内容
 @property(copy, nonatomic) NSString *price;    //价格
 @property(copy, nonatomic) NSString *tasktime; //系统传输时间
-@property(copy, nonatomic) NSString *sex;      //性
+@property(copy, nonatomic) NSString *sex;      //性别
 @property(copy, nonatomic) NSString *distance; //范围
 @property(copy, nonatomic) NSString *reminderCount; //范围
+
 
 @property (nonatomic)BOOL isAsk2CancelFromFadanren; //由发单人取消订单
 @property (nonatomic)BOOL isAsk2CancelFromQiangdanren; //由抢单人取消订单

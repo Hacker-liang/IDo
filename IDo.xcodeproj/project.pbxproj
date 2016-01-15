@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB981B851C45E03500388E1C /* KenanImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB981B841C45E03500388E1C /* KenanImage.xcassets */; };
+		BB981B8C1C45F7D400388E1C /* SendMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */; };
+		BBC687251C48CBE300AE4FD1 /* HelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC687241C48CBE300AE4FD1 /* HelpVC.m */; };
+		BBC687271C48D03800AE4FD1 /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBC687261C48D03800AE4FD1 /* help@2x.png */; };
 		D903A62A1BFA121400F814F7 /* icon_sendOrder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D903A6281BFA121400F814F7 /* icon_sendOrder@2x.png */; };
 		D903A62B1BFA121400F814F7 /* icon_sendOrder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D903A6291BFA121400F814F7 /* icon_sendOrder@3x.png */; };
 		D90B8EC41BEA42E70014D434 /* icon_right_dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D90B8EC31BEA42E70014D434 /* icon_right_dot@2x.png */; };
@@ -396,6 +400,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB981B841C45E03500388E1C /* KenanImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KenanImage.xcassets; sourceTree = "<group>"; };
+		BB981B8A1C45F7D400388E1C /* SendMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMoneyVC.h; sourceTree = "<group>"; };
+		BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMoneyVC.m; sourceTree = "<group>"; };
+		BBC687231C48CBE300AE4FD1 /* HelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVC.h; sourceTree = "<group>"; };
+		BBC687241C48CBE300AE4FD1 /* HelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpVC.m; sourceTree = "<group>"; };
+		BBC687261C48D03800AE4FD1 /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
 		D903A6281BFA121400F814F7 /* icon_sendOrder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sendOrder@2x.png"; sourceTree = "<group>"; };
 		D903A6291BFA121400F814F7 /* icon_sendOrder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sendOrder@3x.png"; sourceTree = "<group>"; };
 		D90B8EC31BEA42E70014D434 /* icon_right_dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_right_dot@2x.png"; sourceTree = "<group>"; };
@@ -1107,6 +1117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB981B861C45E44A00388E1C /* kenanVC */ = {
+			isa = PBXGroup;
+			children = (
+				BB981B8A1C45F7D400388E1C /* SendMoneyVC.h */,
+				BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */,
+			);
+			path = kenanVC;
+			sourceTree = "<group>";
+		};
 		D90E2E291BB626A200C2E6F3 /* MySendOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1460,6 +1479,7 @@
 				D96EA9301BB2DAF100360ED8 /* Constants.h */,
 				D96EA9311BB2DB1700360ED8 /* PrefixHeader.pch */,
 				D95394F11BB2694900CB6746 /* Assets.xcassets */,
+				BB981B841C45E03500388E1C /* KenanImage.xcassets */,
 				D95394F61BB2694900CB6746 /* Info.plist */,
 				D95394E51BB2694900CB6746 /* Supporting Files */,
 			);
@@ -2331,6 +2351,8 @@
 				D9B289E31BBCEA2300FB97E5 /* ContactUsViewController.m */,
 				D9B289E41BBCEA2300FB97E5 /* FeedbackViewController.h */,
 				D9B289E51BBCEA2300FB97E5 /* FeedbackViewController.m */,
+				BBC687231C48CBE300AE4FD1 /* HelpVC.h */,
+				BBC687241C48CBE300AE4FD1 /* HelpVC.m */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -2338,6 +2360,7 @@
 		D9B2F6961BB280AE00ED7DDF /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				BB981B861C45E44A00388E1C /* kenanVC */,
 				D998F6AC1C335D3200AB9F76 /* PushMessageCenter */,
 				D916A5BD1BC4E781005F5286 /* ComplaintViewController */,
 				D96EAA591BB588F300360ED8 /* OrderList */,
@@ -2391,6 +2414,7 @@
 		D9B2F6B91BB28D2E00ED7DDF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BBC687261C48D03800AE4FD1 /* help@2x.png */,
 				D9A15E831C26CA79008CE530 /* share */,
 				D91F2F1F1BC21401002CE690 /* Setting */,
 				D9B289EC1BBCEBC500FB97E5 /* s.png */,
@@ -2651,6 +2675,7 @@
 				D916A5C91BC50819005F5286 /* ic_vip_order@2x.png in Resources */,
 				D90B8ED21BEA43990014D434 /* icon_address@2x.png in Resources */,
 				D916A5BF1BC4E7E5005F5286 /* login_selected.png in Resources */,
+				BB981B851C45E03500388E1C /* KenanImage.xcassets in Resources */,
 				D96EAA5E1BB5890600360ED8 /* OrderListTableViewCell.xib in Resources */,
 				D90E2E3B1BB647BA00C2E6F3 /* OrderDetailViewController.xib in Resources */,
 				D90B8ED41BEA43A20014D434 /* icon_content@2x.png in Resources */,
@@ -2714,6 +2739,7 @@
 				D9A15EB71C26D755008CE530 /* UMSocialLocalizable.strings in Resources */,
 				D96EA93E1BB2E36B00360ED8 /* MyWalletTableViewHeaderView.xib in Resources */,
 				D96EAA421BB5372100360ED8 /* icon_money@3x.png in Resources */,
+				BBC687271C48D03800AE4FD1 /* help@2x.png in Resources */,
 				D9DB6EE51C39620200077E49 /* ShareViewController.xib in Resources */,
 				D96EAA9A1BB5964F00360ED8 /* MJRefresh.bundle in Resources */,
 				D947D66F1BC2EFCB0061D609 /* men_vip1@2x.png in Resources */,
@@ -2847,6 +2873,7 @@
 				D96EAA541BB569BA00360ED8 /* FYTimeViewController.m in Sources */,
 				D96EAA391BB5337F00360ED8 /* CustomTableViewCell.m in Sources */,
 				D96EA9C81BB3D24700360ED8 /* MKAnnotationView+WebCache.m in Sources */,
+				BBC687251C48CBE300AE4FD1 /* HelpVC.m in Sources */,
 				D947D6661BC2EEDC0061D609 /* FYAnnotation.m in Sources */,
 				D946C8E91BC21EE400AAD3A3 /* GrabTagCollectionViewCell.m in Sources */,
 				D90E2E301BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m in Sources */,
@@ -2900,6 +2927,7 @@
 				D92B5C141BB8F3B600E3AC93 /* openssl_wrapper.m in Sources */,
 				D9B2F6AD1BB2838300ED7DDF /* UIImage+REFrostedViewController.m in Sources */,
 				D96EAA4C1BB53E6400360ED8 /* NSMutableDictionary+MyDictionary.m in Sources */,
+				BB981B8C1C45F7D400388E1C /* SendMoneyVC.m in Sources */,
 				D969D9D51BCCB18B00281D02 /* NJKWebViewProgressView.m in Sources */,
 				D96EA9A01BB3D22100360ED8 /* AFNetworkReachabilityManager.m in Sources */,
 				D969DA031BCCB22A00281D02 /* SVModalWebViewController.m in Sources */,

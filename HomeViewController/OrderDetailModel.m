@@ -12,6 +12,7 @@
 
 - (id)initWithJson:(id)json andIsSendOrder:(BOOL)isSendOrder
 {
+    
     if (self = [super init]) {
         _isSendOrder = isSendOrder;
         _content = [json objectForKey:@"content"];
@@ -29,9 +30,14 @@
         _orderNumber = [json objectForKey:@"ordernumber"];
         _sex = [json objectForKey:@"sex"];
         _tasktime = [json objectForKey:@"timelength"];
+        
         _address = [json objectForKey:@"serviceaddress"];
+        
         _lat = [json objectForKey:@"lat"];
         _lng = [json objectForKey:@"lng"];
+        
+        _latEmployee=[[json objectForKey:@"latEmployee"] doubleValue];
+        _lngEmployee=[[json objectForKey:@"lngEmployee"] doubleValue];
         
         _reminderCount = [json objectForKey:@"ask_money_times"];
         _sendOrderUser = [[UserInfo alloc] initWithJson:[json objectForKey:@"member"]];
