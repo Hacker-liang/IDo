@@ -20,6 +20,7 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
+#import "RCloudManager.h"
 
 @interface AppDelegate ()
 
@@ -103,6 +104,35 @@
     [UMSocialWechatHandler setWXAppId:SHARE_WEIXIN_APPID appSecret:SHARE_WEIXIN_SECRET url:@"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&"];
     [UMSocialQQHandler setQQWithAppId:SHARE_QQ_APPID appKey:SHARE_QQ_KEY url:@"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&"];
 
+    //初始化融云SDK
+    [[RCIM sharedRCIM] initWithAppKey:RONGCLOUD_IM_APPKEY];
+
+    //设置接收消息代理
+    [RCIM sharedRCIM].receiveMessageDelegate=self;
+    
+    [RCloudManager getRCloudTokenWithCompletionBlock:^(BOOL isSuccess, NSString *token) {
+        
+    }];
+
+    NSString *token = @"";
+    [[RCIM sharedRCIM] connectWithToken:token
+                                success:^(NSString *userId) {
+                                }
+                                error:^(RCConnectErrorCode status) {
+                                    
+                                }
+                         tokenIncorrect:^{
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 UIAlertView *alertView =
+                                 [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"Token已过期，请重新登录"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil, nil];
+                                 ;
+                                 [alertView show];
+                             });
+                         }];
     
     return YES;
 }
@@ -178,8 +208,17 @@
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     [APService registerDeviceToken:deviceToken];
-    NSLog(@"deviceToken %@", deviceToken);
     [self resgisterToken];
+    
+    NSString *token =
+    [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<"
+                                                           withString:@""]
+      stringByReplacingOccurrencesOfString:@">"
+      withString:@""]
+     stringByReplacingOccurrencesOfString:@" "
+     withString:@""];
+    
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {

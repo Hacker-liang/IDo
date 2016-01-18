@@ -31,6 +31,7 @@
 #import "TZViewController.h"
 #import "TZTableViewController.h"
 #import "ConvertMethods.h"
+#import <RongIMKit/RongIMKit.h>
 
 //#ifndef __OPTIMIZE__
 //#define NSLog(...) NSLog(__VA_ARGS__)

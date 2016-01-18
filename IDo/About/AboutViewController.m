@@ -51,7 +51,6 @@
     banben.textAlignment=1;
     [self.view addSubview:banben];
     
-    
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 190, self.view.frame.size.width, self.view.frame.size.height-160) style:UITableViewStyleGrouped];
     self.tableView.delegate= self;
     self.tableView.dataSource =self;
