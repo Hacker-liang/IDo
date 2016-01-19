@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		BB981B851C45E03500388E1C /* KenanImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB981B841C45E03500388E1C /* KenanImage.xcassets */; };
 		BB981B8C1C45F7D400388E1C /* SendMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */; };
+		BBB83A241C4C7C0800D3C9D0 /* SendRedMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */; };
+		BBB83A271C4C878300D3C9D0 /* SendMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A261C4C878300D3C9D0 /* SendMoneyView.m */; };
+		BBB83A2A1C4C87D800D3C9D0 /* SendRedMoneyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */; };
+		BBB83A2E1C4CBBA700D3C9D0 /* RedMoneyTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A2D1C4CBBA700D3C9D0 /* RedMoneyTableVC.m */; };
+		BBB83A311C4CC09C00D3C9D0 /* RedMoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A301C4CC09C00D3C9D0 /* RedMoneyDetailCell.m */; };
+		BBB83A341C4CC91300D3C9D0 /* RedMoneyDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A331C4CC91300D3C9D0 /* RedMoneyDetailModel.m */; };
 		BBC687251C48CBE300AE4FD1 /* HelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC687241C48CBE300AE4FD1 /* HelpVC.m */; };
 		BBC687271C48D03800AE4FD1 /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBC687261C48D03800AE4FD1 /* help@2x.png */; };
 		D903A62A1BFA121400F814F7 /* icon_sendOrder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D903A6281BFA121400F814F7 /* icon_sendOrder@2x.png */; };
@@ -403,6 +409,18 @@
 		BB981B841C45E03500388E1C /* KenanImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KenanImage.xcassets; sourceTree = "<group>"; };
 		BB981B8A1C45F7D400388E1C /* SendMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMoneyVC.h; sourceTree = "<group>"; };
 		BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMoneyVC.m; sourceTree = "<group>"; };
+		BBB83A221C4C7C0800D3C9D0 /* SendRedMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendRedMoneyCell.h; sourceTree = "<group>"; };
+		BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyCell.m; sourceTree = "<group>"; };
+		BBB83A251C4C878300D3C9D0 /* SendMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMoneyView.h; sourceTree = "<group>"; };
+		BBB83A261C4C878300D3C9D0 /* SendMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMoneyView.m; sourceTree = "<group>"; };
+		BBB83A281C4C87D700D3C9D0 /* SendRedMoneyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendRedMoneyModel.h; sourceTree = "<group>"; };
+		BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyModel.m; sourceTree = "<group>"; };
+		BBB83A2C1C4CBBA700D3C9D0 /* RedMoneyTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedMoneyTableVC.h; sourceTree = "<group>"; };
+		BBB83A2D1C4CBBA700D3C9D0 /* RedMoneyTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedMoneyTableVC.m; sourceTree = "<group>"; };
+		BBB83A2F1C4CC09C00D3C9D0 /* RedMoneyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedMoneyDetailCell.h; sourceTree = "<group>"; };
+		BBB83A301C4CC09C00D3C9D0 /* RedMoneyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedMoneyDetailCell.m; sourceTree = "<group>"; };
+		BBB83A321C4CC91300D3C9D0 /* RedMoneyDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedMoneyDetailModel.h; sourceTree = "<group>"; };
+		BBB83A331C4CC91300D3C9D0 /* RedMoneyDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedMoneyDetailModel.m; sourceTree = "<group>"; };
 		BBC687231C48CBE300AE4FD1 /* HelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVC.h; sourceTree = "<group>"; };
 		BBC687241C48CBE300AE4FD1 /* HelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpVC.m; sourceTree = "<group>"; };
 		BBC687261C48D03800AE4FD1 /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
@@ -1120,10 +1138,30 @@
 		BB981B861C45E44A00388E1C /* kenanVC */ = {
 			isa = PBXGroup;
 			children = (
+				BBB83A2B1C4CBA9200D3C9D0 /* RedMoneyDetail */,
 				BB981B8A1C45F7D400388E1C /* SendMoneyVC.h */,
 				BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */,
+				BBB83A251C4C878300D3C9D0 /* SendMoneyView.h */,
+				BBB83A261C4C878300D3C9D0 /* SendMoneyView.m */,
+				BBB83A221C4C7C0800D3C9D0 /* SendRedMoneyCell.h */,
+				BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */,
+				BBB83A281C4C87D700D3C9D0 /* SendRedMoneyModel.h */,
+				BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */,
 			);
 			path = kenanVC;
+			sourceTree = "<group>";
+		};
+		BBB83A2B1C4CBA9200D3C9D0 /* RedMoneyDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BBB83A2C1C4CBBA700D3C9D0 /* RedMoneyTableVC.h */,
+				BBB83A2D1C4CBBA700D3C9D0 /* RedMoneyTableVC.m */,
+				BBB83A2F1C4CC09C00D3C9D0 /* RedMoneyDetailCell.h */,
+				BBB83A301C4CC09C00D3C9D0 /* RedMoneyDetailCell.m */,
+				BBB83A321C4CC91300D3C9D0 /* RedMoneyDetailModel.h */,
+				BBB83A331C4CC91300D3C9D0 /* RedMoneyDetailModel.m */,
+			);
+			name = RedMoneyDetail;
 			sourceTree = "<group>";
 		};
 		D90E2E291BB626A200C2E6F3 /* MySendOrder */ = {
@@ -2782,9 +2820,11 @@
 				D96EAA351BB52A8C00360ED8 /* UserLocationManager.m in Sources */,
 				D92B5C191BB8F42E00E3AC93 /* AliPayTool.m in Sources */,
 				D969DA0C1BCCB22A00281D02 /* SVWebViewControllerActivitySafari.m in Sources */,
+				BBB83A2E1C4CBBA700D3C9D0 /* RedMoneyTableVC.m in Sources */,
 				D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */,
 				D9DB6EE41C39620200077E49 /* ShareViewController.m in Sources */,
 				D92B5C161BB8F3B600E3AC93 /* RSADataVerifier.m in Sources */,
+				BBB83A271C4C878300D3C9D0 /* SendMoneyView.m in Sources */,
 				D96EAAA11BB59C2B00360ED8 /* OrderListModel.m in Sources */,
 				D96EA92B1BB2D54B00360ED8 /* SenderOrderViewController.m in Sources */,
 				D96EA9D21BB3D24700360ED8 /* UIImage+GIF.m in Sources */,
@@ -2864,12 +2904,14 @@
 				D96EAA091BB40E7800360ED8 /* GrabOrderDetailSegmentViewController.m in Sources */,
 				D9B289E81BBCEA2300FB97E5 /* AboutViewController.m in Sources */,
 				D916A5D71BC579D3005F5286 /* OrderListEmptyView.m in Sources */,
+				BBB83A241C4C7C0800D3C9D0 /* SendRedMoneyCell.m in Sources */,
 				D99EAD091BBA8213005A02D3 /* ASIDownloadCache.m in Sources */,
 				D96EA99E1BB3D22100360ED8 /* AFHTTPRequestOperationManager.m in Sources */,
 				D91F2F1D1BC21179002CE690 /* GrabSettingPushTableViewCell.m in Sources */,
 				D90E2E351BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m in Sources */,
 				D92B5AD51BB8106F00E3AC93 /* PayViewController.m in Sources */,
 				D916A5A21BC3627A005F5286 /* MyPageControl.m in Sources */,
+				BBB83A341C4CC91300D3C9D0 /* RedMoneyDetailModel.m in Sources */,
 				D96EAA541BB569BA00360ED8 /* FYTimeViewController.m in Sources */,
 				D96EAA391BB5337F00360ED8 /* CustomTableViewCell.m in Sources */,
 				D96EA9C81BB3D24700360ED8 /* MKAnnotationView+WebCache.m in Sources */,
@@ -2879,6 +2921,7 @@
 				D90E2E301BB6270D00C2E6F3 /* MyOrderInProgressTableViewController.m in Sources */,
 				D9B2F6AC1BB2838300ED7DDF /* REFrostedViewController.m in Sources */,
 				D946C8F91BC23B2900AAD3A3 /* HotTagTableViewCell.m in Sources */,
+				BBB83A311C4CC09C00D3C9D0 /* RedMoneyDetailCell.m in Sources */,
 				D96EA9FE1BB3F46C00360ED8 /* SVHTTPClient.m in Sources */,
 				D96EAA2B1BB5230000360ED8 /* SendOrderDetailViewController.m in Sources */,
 				D96EAA2E1BB523D900360ED8 /* SendOrderDetailHeaderView.m in Sources */,
@@ -2900,6 +2943,7 @@
 				D96EA9191BB2980E00360ED8 /* SendOrderRootViewController.m in Sources */,
 				D96EA9A31BB3D22100360ED8 /* AFURLRequestSerialization.m in Sources */,
 				D9ADC4011BBA670A00B1B7E1 /* CWStarRateView.m in Sources */,
+				BBB83A2A1C4C87D800D3C9D0 /* SendRedMoneyModel.m in Sources */,
 				D96EA9D11BB3D24700360ED8 /* UIButton+WebCache.m in Sources */,
 				D92B5C0E1BB8F3B600E3AC93 /* Order.m in Sources */,
 				D99EAD471BBCD3C0005A02D3 /* Requtst2BeVIPViewController.m in Sources */,
