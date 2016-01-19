@@ -55,7 +55,6 @@
     return YES;
 }
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -75,6 +74,7 @@
                                                        UIUserNotificationTypeSound |
                                                        UIUserNotificationTypeAlert)
                                            categories:nil];
+        
     } else {
         //categories 必须为nil
         [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
@@ -111,29 +111,31 @@
     [RCIM sharedRCIM].receiveMessageDelegate=self;
     
     [RCloudManager getRCloudTokenWithCompletionBlock:^(BOOL isSuccess, NSString *token) {
+        if (isSuccess) {
+            [[RCIM sharedRCIM] connectWithToken:token
+                                        success:^(NSString *userId) {
+                                            NSLog(@"userid = %@", userId);
+                                        }
+                                          error:^(RCConnectErrorCode status) {
+                                              
+                                          }
+                                 tokenIncorrect:^{
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                         UIAlertView *alertView =
+                                         [[UIAlertView alloc] initWithTitle:nil
+                                                                    message:@"Token已过期，请重新登录"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil, nil];
+                                         ;
+                                         [alertView show];
+                                     });
+                                 }];
+            
+        }
         
     }];
 
-    NSString *token = @"";
-    [[RCIM sharedRCIM] connectWithToken:token
-                                success:^(NSString *userId) {
-                                }
-                                error:^(RCConnectErrorCode status) {
-                                    
-                                }
-                         tokenIncorrect:^{
-                             dispatch_async(dispatch_get_main_queue(), ^{
-                                 UIAlertView *alertView =
-                                 [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Token已过期，请重新登录"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"确定"
-                                                  otherButtonTitles:nil, nil];
-                                 ;
-                                 [alertView show];
-                             });
-                         }];
-    
     return YES;
 }
 
@@ -245,7 +247,7 @@
     NSLog(@"????????%@",error);
 }
 
-
+//向服务器注册极光的 regid
 - (void)resgisterToken
 {
     NSString *registrationID = [APService registrationID];
@@ -332,6 +334,7 @@
                 frostedViewController.limitMenuViewSize = YES;
                 frostedViewController.menuViewSize = CGSizeMake(275, kWindowHeight);
                 self.window.rootViewController = frostedViewController;
+                [self resgisterToken];
             }
         }];
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:ctl];
@@ -358,12 +361,15 @@
         //发送本地推送
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         notification.fireDate = [NSDate date]; //触发通知的时间
-        notification.alertBody = [userInfo objectForKey:@"content"];
+        if ([notificationType isEqualToString:@"gettzpersonnum"]) {
+            notification.alertBody = @"实时订单信息";
+        } else {
+            notification.alertBody = [userInfo objectForKey:@"content"];
+        }
         notification.soundName = UILocalNotificationDefaultSoundName;
         notification.alertAction = @"打开";
         notification.timeZone = [NSTimeZone defaultTimeZone];
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-        
     }
     
     if (![notificationType isEqualToString:@"gettzpersonnum"] && ![notificationType isEqualToString:@"comment"]) {
@@ -414,7 +420,8 @@
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewOrderNoti object:nil];
         
-    } else if([notificationType isEqualToString:@"scrambleorder"]) { //发单被抢通知
+    }
+    if([notificationType isEqualToString:@"scrambleorder"]) { //发单被抢通知
         [[NSNotificationCenter defaultCenter] postNotificationName:OrderGrabStatusChange object:nil];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderPieStatusChange];
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜，您已被抢单！" message:@"请在20分钟内尽快完成付款，超时订单将自动取消。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
@@ -451,7 +458,8 @@
             }
         }];
         
-    } else if([notificationType isEqualToString:@"orderpayover" ]) { //发单方已经付款完成，确定开始干活
+    }
+    if([notificationType isEqualToString:@"orderpayover" ]) { //发单方已经付款完成，确定开始干活
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜，对方已付款" message:@"对方已付款，请按照对方要求尽快完成订单任务。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
@@ -489,7 +497,8 @@
             }
         }];
         
-    } else if([notificationType isEqualToString:@"dept" ]) { //接单方 催款
+    }
+    if([notificationType isEqualToString:@"dept" ]) { //接单方 催款
         
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"确认任务验收" message:[userInfo objectForKey:@"content"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
@@ -528,7 +537,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:@"4"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:OrderPieStatusChange];
         
-    } else if([notificationType isEqualToString:@"confpay" ]) { //发单方已确认付款
+    }
+    if([notificationType isEqualToString:@"confpay" ]) { //发单方已确认付款
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"对方已成功验收任务！" delegate:self cancelButtonTitle:nil otherButtonTitles:@"去评价", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if (buttonIndex == 0) {
@@ -543,7 +553,8 @@
                 
             }
         }];
-    } else if([notificationType isEqualToString:@"askCancelOrder" ]) { //发单方 请求取消订单
+    }
+    if([notificationType isEqualToString:@"askCancelOrder" ]) { //发单方 请求取消订单
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"请求取消订单" message:@"您有一笔订单，发单人请求取消，请确认，如同意，资金将返回对方账户。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
@@ -580,19 +591,22 @@
         
 
         
-    } else if([notificationType isEqualToString:@"tomemberAskCancelOrder" ]) { //接单方请求取消
+    }
+    if([notificationType isEqualToString:@"tomemberAskCancelOrder" ]) { //接单方请求取消
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:@"不同意" otherButtonTitles:@"同意", nil];
 //        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
 //            if (buttonIndex == 1) {
 //                [self.homeController agreeCancelOrderPie:orderId];
 //            }
 //        }];
-    }else if([notificationType isEqualToString:@"FrommemberAllowCancelOrder" ]) { //发单方同意取消
+    }
+    if([notificationType isEqualToString:@"FrommemberAllowCancelOrder" ]) { //发单方同意取消
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"系统提示" message:userInfo[@"aps"][@"alert"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
 //        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderDetNotification" object:orderId];
 //        }];
-    } else if([notificationType isEqualToString:@"allowCancelOrder" ]) { //接单方同意取消
+    }
+    if([notificationType isEqualToString:@"allowCancelOrder" ]) { //接单方同意取消
        
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"订单状态" message:userInfo[@"content"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看此订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
@@ -628,7 +642,8 @@
             }
         }];
 
-    } else if([notificationType isEqualToString:@"refuseCancelOrder"]) { //接单方拒绝取消订单
+    }
+    if([notificationType isEqualToString:@"refuseCancelOrder"]) { //接单方拒绝取消订单
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"您的订单取消申请被拒绝" message:@"活儿宝表示已经完成任务，并希望得到您的验收。如果有异议您可以直接和活儿宝取得联系，或申请客服介入。" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看此订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
@@ -662,14 +677,8 @@
                 }
             }
         }];
-        
-
-
-        
-    } else if([notificationType isEqualToString:@"gettzpersonnum" ]) { //收到新订单 通知
-//        self.homeController.isHaveGrabOrder.hidden = NO;
-        
-    }else if([notificationType isEqualToString:@"delorder" ]) { //发单方未付款时，单方直接取消订单
+    }
+    if([notificationType isEqualToString:@"delorder" ]) { //发单方未付款时，单方直接取消订单
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"对不起，订单被取消" message:@"您有一笔订单被发单人取消" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看订单", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if(buttonIndex == 1){
@@ -706,5 +715,21 @@
     }
 }
 
+- (void)onRCIMReceiveMessage:(RCMessage *)message
+                        left:(int)left
+{
+    NSLog(@"收到融云消息:%@", message);
+
+    if ([message.content isKindOfClass:[RCCommandMessage class]]) {
+        if ([((RCCommandMessage *)message.content).name isEqualToString:@"NewOrder"]) {  //新订单推送
+            NSString *jsonString = ((RCCommandMessage *)message.content).data;
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self receiveRemoteNotification:@{@"extras": dict}];
+            });
+        }
+    }
+    
+}
 
 @end

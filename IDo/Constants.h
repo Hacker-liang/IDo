@@ -78,6 +78,7 @@
 #define RONGCLOUD_IM_APPKEY @"k51hidwq1m2yb" // 融云 key
 #define RONGCLOUD_IM_SECRET @"hwrk4kf52c" // 融云 secret
 
+#define RONGCLOUD_IM_TOKEN_KEY  @"RongTokenKey" // 融云 secret
 
 
 #define LoginInfoMark @"LoginInfoMark"  //登录信息相关

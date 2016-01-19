@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OrderDetailModel.h"
 
 @interface RCloudManager : NSObject
 
 + (void)getRCloudTokenWithCompletionBlock:(void (^) (BOOL isSuccess, NSString *token))completion;
-
 @end

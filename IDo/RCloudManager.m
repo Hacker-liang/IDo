@@ -14,8 +14,13 @@
 
 + (void)getRCloudTokenWithCompletionBlock:(void (^)(BOOL, NSString *))completion
 {
+    NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_%@", RONGCLOUD_IM_TOKEN_KEY, [UserManager shareUserManager].userInfo.userid]];
+    if (token) {
+        completion(YES, token);
+        completion = nil;
+    }
     NSMutableString *str = [[NSMutableString alloc] init];
-    [str appendFormat:RONGCLOUD_IM_SECRET];
+    [str appendString:RONGCLOUD_IM_SECRET];
     NSInteger nonce = arc4random()%100000;
     [str appendFormat:@"%ld", nonce];
     long timestamp = [[NSDate date] timeIntervalSince1970];
@@ -25,26 +30,41 @@
     [params safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"userId"];
     [params safeSetObject:[UserManager shareUserManager].userInfo.nickName forKey:@"name"];
     [params safeSetObject:[UserManager shareUserManager].userInfo.avatar forKey:@"portraitUri"];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setValue:signature forHTTPHeaderField:@"Signature"];
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    
+    [manager.requestSerializer setValue:signature forHTTPHeaderField:@"RC-Signature"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", timestamp] forHTTPHeaderField:@"RC-Timestamp"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", nonce] forHTTPHeaderField:@"RC-Nonce"];
+    [manager.requestSerializer setValue:RONGCLOUD_IM_APPKEY forHTTPHeaderField:@"RC-App-Key"];
     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", timestamp] forHTTPHeaderField:@"Timestamp"];
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", nonce] forHTTPHeaderField:@"Nonce"];
-    [manager.requestSerializer setValue:RONGCLOUD_IM_APPKEY forHTTPHeaderField:@"App-Key"];
-
-//    [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-
-    [manager POST:@"https://api.cn.ronghub.com/user/getToken.json" parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+    
+    [manager POST:@"http://api.cn.ronghub.com/user/getToken.json" parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([[responseObject objectForKey:@"code"] integerValue] == 200) {
+            NSString *token = [responseObject objectForKey:@"token"];
+            if (token) {
+                [[NSUserDefaults standardUserDefaults] setObject:token forKey:[NSString stringWithFormat:@"%@_%@", RONGCLOUD_IM_TOKEN_KEY, [UserManager shareUserManager].userInfo.userid]];
+                if (completion) {
+                    completion(YES, token);
+                }
+            } else {
+                if (completion) {
+                    completion(NO, nil);
+                }
+            }
+        } else {
+            if (completion) {
+                completion(NO, nil);
+            }
+        }
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-
+        if (completion) {
+            completion(NO, nil);
+        }
     }];
 }
-
 
 + (NSString *)sha1:(NSString *)str
 {

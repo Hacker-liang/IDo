@@ -17,13 +17,18 @@
 #import "OrderDetailViewController.h"
 #import "APService.h"
 
-@interface SendOrderDetailViewController () <UIActionSheetDelegate, ChangeLocationDelegate>
+@interface SendOrderDetailViewController () <UIActionSheetDelegate, ChangeLocationDelegate> {
+    NSTimer *sendMessageTimer;  //向附近融云用户发送消息的 timer
+    NSInteger messageLeft2Send; //还剩下多少个未发送的用户
+}
 
 @property (nonatomic ,strong) SendOrderDetailHeaderView *headerView;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
 @property (nonatomic, copy) NSString *showtime;
 @property (nonatomic, strong) NSMutableArray *userList;
+@property (nonatomic, strong) NSArray *rongCloudUserList;  //融云用户列表
+
 
 
 @end
@@ -49,11 +54,16 @@
     self.navigationItem.title = @"立即派单";
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderContentTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderContentCell"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendRongCloudMessageOver) name:@"sendRongCloudMessageOver" object:nil];
     [self Time];
     [self setupTableViewFooterView];
     [self getWoGanUserdata];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -98,7 +108,7 @@
     [logoutBtn setTitle:@"立即派单" forState:UIControlStateNormal];
     [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     logoutBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    [logoutBtn addTarget:self action:@selector(sendOrder:) forControlEvents:UIControlEventTouchUpInside];
+    [logoutBtn addTarget:self action:@selector(sendOrderWithRongCloud:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:logoutBtn];
     self.tableView.tableFooterView = footerView;
 }
@@ -135,6 +145,14 @@
     _showtime = [AppTools returnUploadTime:_orderDetail.tasktime isCurrentDay:YES];
 }
 
+//向附近的人发送融云消息成功
+- (void)sendRongCloudMessageOver
+{
+    [SVProgressHUD showSuccessWithStatus:@"派单成功"];
+    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSendOrderSuccess object:nil];
+}
+
 #pragma mark - ChangeLocationDelegate
 
 - (void)didChangeAddress:(float)lat lng:(float)lng address:(NSString *)address
@@ -148,6 +166,126 @@
 }
 
 #pragma mark - IBAction Methods
+
+- (void)sendOrderWithRongCloud:(id)sender
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:1 inSection:1];
+    OrderContentTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    self.orderDetail.content = cell.contentTextView.text;
+    if (self.orderDetail.content.length < 1) {
+        [SVProgressHUD showErrorWithStatus:@"请输入任务要求"];
+        return;
+    }
+    
+    if (!_orderDetail.address || _orderDetail.address.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请等待定位完成"];
+        return;
+    }
+    
+    if ([_orderDetail.price intValue] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"悬赏金额不得低于1元"];
+        return;
+    }
+    
+    NSString *url;
+    NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
+    
+    [SVProgressHUD showWithStatus:@"正在派单"];
+    
+    if (_headerView.vipContentView.hidden) {
+        url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
+        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
+        [mDict safeSetObject:_orderDetail.price forKey:@"money"];
+        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
+        [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
+        [mDict safeSetObject:@"0" forKey:@"sex"];
+        [mDict safeSetObject:@"0" forKey:@"range"];
+        [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.longitude] forKey:@"lng"];
+        [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.latitude] forKey:@"lat"];
+        [mDict safeSetObject:@"" forKey:@"img"];
+    } else {
+        url = [NSString stringWithFormat:@"%@surepublishorderToVip", baseUrl];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
+        [mDict safeSetObject:_headerView.vipAnnotation.userid forKey:@"tomemberid"];
+        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
+        [mDict safeSetObject:_orderDetail.price forKey:@"money"];
+        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
+        [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
+        [mDict safeSetObject:@"0" forKey:@"sex"];
+        [mDict safeSetObject:@"0" forKey:@"range"];
+        [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];
+        [mDict safeSetObject:_orderDetail.lat forKey:@"lat"];
+        [mDict safeSetObject:@"" forKey:@"img"];
+        
+    }
+    
+    [mDict safeSetObject:_orderDetail.distance forKey:@"distance_range"];
+    
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            if([tempStatus integerValue] == 1) {
+                /*
+                if (_headerView.vipContentView.hidden) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kSendOrderSuccess object:nil];
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"向VIP用户派单成功" message:@"可到正在进行的订单中关注状态" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
+                        ctl.isSendOrder = YES;
+                        ctl.orderId = [[dict objectForKey:@"data"] objectForKey:@"id"];
+                        NSMutableArray *ctls = [self.navigationController.viewControllers mutableCopy];
+                        [ctls replaceObjectAtIndex:ctls.count-1 withObject:ctl];
+                        self.navigationController.viewControllers = ctls;
+                    }];
+                }
+                 */
+                _orderDetail.orderId = [[dict objectForKey:@"data"] objectForKey:@"id"];
+
+                AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+                NSString *url = [NSString stringWithFormat:@"http://apitest.bjwogan.com/?action=aroundUsersRongyun&orderId=%@", _orderDetail.orderId];
+                [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                    if ([[responseObject objectForKey:@"status"] integerValue] == 1) {
+                        NSArray *userIdList = [responseObject objectForKey:@"data"];
+                        _rongCloudUserList = userIdList;
+                        [self startSendOrder2NearbyUser];
+                        
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:@"派单失败"];
+                    }
+                } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                    [SVProgressHUD showErrorWithStatus:@"派单失败"];
+                    
+                }];
+
+                
+            } else {
+                NSString *info = [dict objectForKey:@"info"];
+                [SVProgressHUD showErrorWithStatus:info];
+            }
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"派单失败"];
+        }
+    }];
+}
+
 
 - (void)sendOrder:(id)sender
 {
@@ -214,7 +352,7 @@
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
-                                        [UserManager shareUserManager].userInfo = nil;
+                    [UserManager shareUserManager].userInfo = nil;
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                     [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
@@ -280,6 +418,52 @@
 
 }
 
+
+//向附近的融云客户端发送订单消息
+- (void)startSendOrder2NearbyUser
+{
+    if (sendMessageTimer) {
+        [sendMessageTimer invalidate];
+        sendMessageTimer = nil;
+    }
+    messageLeft2Send = _rongCloudUserList.count;
+    sendMessageTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(sendMessage2UserNearByAction) userInfo:nil repeats:YES];
+
+}
+
+- (void)sendMessage2UserNearByAction
+{
+    if (messageLeft2Send>0) {
+        NSNumber *userId = [_rongCloudUserList objectAtIndex:messageLeft2Send-1];
+
+        RCCommandMessage *message = [[RCCommandMessage alloc] init];
+        message.name = @"NewOrder";
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic safeSetObject:_orderDetail.orderId forKey:@"orderid"];
+        [dic safeSetObject:@"gettzpersonnum" forKey:@"type"];
+        [dic safeSetObject:[NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]*1000] forKey:@"time"];
+
+        NSString *str = [dic JSONString];
+        message.data = str;
+        
+        [[RCIMClient sharedRCIMClient] sendMessage:ConversationType_PRIVATE targetId:[NSString stringWithFormat:@"1099"] content:message pushContent:@"你收到一条推送消息" success:^(long messageId) {
+            NSLog(@"向融云用户:%@ 发送订单成功", userId);
+            
+        } error:^(RCErrorCode nErrorCode, long messageId) {
+            
+        }];
+        
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendRongCloudMessageOver" object:nil];
+        if (sendMessageTimer) {
+            [sendMessageTimer invalidate];
+            sendMessageTimer = nil;
+        }
+    }
+    messageLeft2Send--;
+}
+
+//获取附近的抢单人
 - (void)getWoGanUserdata
 {
     NSString *url = [NSString stringWithFormat:@"%@getuserinfo",baseUrl];
@@ -293,7 +477,7 @@
             NSDictionary *dict = [jsonString objectFromJSONString];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
-                                        [UserManager shareUserManager].userInfo = nil;
+                    [UserManager shareUserManager].userInfo = nil;
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
                     [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
