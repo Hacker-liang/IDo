@@ -260,7 +260,7 @@
                 _orderDetail.orderId = [[dict objectForKey:@"data"] objectForKey:@"id"];
 
                 AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
-                NSString *url = [NSString stringWithFormat:@"http://apitest.bjwogan.com/?action=aroundUsersRongyun&orderId=%@", _orderDetail.orderId];
+                NSString *url = [NSString stringWithFormat:@"%@aroundUsersRongyun&orderId=%@",baseUrl, _orderDetail.orderId];
                 [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                     if ([[responseObject objectForKey:@"status"] integerValue] == 1) {
                         NSArray *userIdList = [responseObject objectForKey:@"data"];
