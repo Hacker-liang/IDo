@@ -100,9 +100,13 @@
 
 - (void)setupTableViewFooterView
 {
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
     
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
     UIButton *logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, footerView.bounds.size.width-20, 40)];
+
+    if (IS_IPHONE_6P) {
+        logoutBtn.frame = CGRectMake(10, 80, footerView.bounds.size.width-20, 40);
+    }
     logoutBtn.backgroundColor = APP_THEME_COLOR;
     logoutBtn.layer.cornerRadius = 5.0;
     [logoutBtn setTitle:@"立即派单" forState:UIControlStateNormal];
