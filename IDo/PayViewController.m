@@ -261,7 +261,12 @@
     [SVProgressHUD showWithStatus:@"正在付款"];
     NSString *url = [NSString stringWithFormat:@"%@payByWallet",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:orderid forKey:@"orderId"];
+    if (self.isRedMoney==YES) {
+        [mDict setObject:_redEnvelopeId forKey:@"redEnvelopeId"];
+    }else
+    {
+        [mDict setObject:orderid forKey:@"orderId"];
+    }
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
@@ -301,7 +306,13 @@
     [SVProgressHUD showWithStatus:@"正在付款"];
     NSString *url = [NSString stringWithFormat:@"%@alipay",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    [mDict setObject:orderid forKey:@"orderId"];
+    if (self.isRedMoney==YES) {
+        [mDict setObject:_redEnvelopeId forKey:@"redEnvelopeId"];
+    }else
+    {
+        [mDict setObject:orderid forKey:@"orderId"];
+    }
+
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)

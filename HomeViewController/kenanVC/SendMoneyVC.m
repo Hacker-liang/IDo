@@ -17,6 +17,8 @@
 #import "MyAnnotation.h"
 #import "OrderDetailViewController.h"
 #import "APService.h"
+#import "PayViewController.h"
+
 @interface SendMoneyVC ()<UIActionSheetDelegate, ChangeLocationDelegate>
 
 @property (nonatomic ,strong) SendOrderDetailHeaderView *headerView;
@@ -24,6 +26,14 @@
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
 @property (nonatomic, copy) NSString *showtime;
 @property (nonatomic, strong) NSMutableArray *userList;
+
+//发送红包的金额，个数，内容
+@property (nonatomic,strong) NSString *moneyTotal;
+@property (nonatomic,strong) NSString *moneyCount;
+@property (nonatomic,strong) NSString *moneyContent;
+
+@property (nonatomic,strong) NSString *RedMoneyID;
+
 
 @end
 
@@ -43,7 +53,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _orderDetail.price = @"0";
+    _moneyTotal = @"0";
+    _moneyCount = @"0";
+
     _orderDetail.distance = @"10";
     self.navigationItem.title = @"派红包";
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
@@ -171,53 +183,62 @@
         return;
     }
     
-    if ([_orderDetail.price intValue] == 0) {
+    if ([_moneyTotal floatValue] == 0) {
         [SVProgressHUD showErrorWithStatus:@"红包总金额不得低于0.01元"];
         return;
     }
     
+    if ([_moneyCount intValue] == 0) {
+        [SVProgressHUD showErrorWithStatus:@"红包总个数不得低于1"];
+        return;
+    }
+    
+    if ([_moneyTotal floatValue]/[_moneyCount floatValue] >=0.01 == NO ) {
+        [SVProgressHUD showErrorWithStatus:@"红包单个金额不得低于0.01"];
+        return;
+    }
+
+    
     NSString *url;
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     
-    [SVProgressHUD showWithStatus:@"正在派单"];
+    [SVProgressHUD showWithStatus:@"正在派红包"];
     
     if (_headerView.vipContentView.hidden) {
-        url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
-        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
-        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
-        [mDict safeSetObject:_orderDetail.price forKey:@"money"];
-        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
-        [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
-        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
-        [mDict safeSetObject:@"0" forKey:@"sex"];
-        [mDict safeSetObject:@"0" forKey:@"range"];
+        url = [NSString stringWithFormat:@"%@sendRedEnvelope",baseUrl];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"publisherMemberId"];
+        [mDict safeSetObject:_moneyTotal forKey:@"money"];
+        [mDict safeSetObject:_moneyCount forKey:@"totalCount"];
+        [mDict safeSetObject:_moneyContent forKey:@"content"];
+        //        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
+        [mDict safeSetObject:_orderDetail.address forKey:@"address"];
+        //        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
+
+
+    } else {
+        url = [NSString stringWithFormat:@"%@sendRedEnvelope",baseUrl];
+        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"publisherMemberId"];
         [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.longitude] forKey:@"lng"];
         [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.latitude] forKey:@"lat"];
-        [mDict safeSetObject:@"" forKey:@"img"];
-    } else {
-        url = [NSString stringWithFormat:@"%@surepublishorderToVip", baseUrl];
-        [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
-        [mDict safeSetObject:_headerView.vipAnnotation.userid forKey:@"tomemberid"];
-        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
-        [mDict safeSetObject:_orderDetail.price forKey:@"money"];
-        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
-        [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
-        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
-        [mDict safeSetObject:@"0" forKey:@"sex"];
-        [mDict safeSetObject:@"0" forKey:@"range"];
-        [mDict safeSetObject:_orderDetail.lng forKey:@"lng"];
-        [mDict safeSetObject:_orderDetail.lat forKey:@"lat"];
-        [mDict safeSetObject:@"" forKey:@"img"];
+        [mDict safeSetObject:_moneyTotal forKey:@"money"];
+        [mDict safeSetObject:_moneyCount forKey:@"totalCount"];
+        [mDict safeSetObject:_moneyContent forKey:@"content"];
+        //        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
+        [mDict safeSetObject:_orderDetail.address forKey:@"address"];
+        //        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
         
     }
     
-    [mDict safeSetObject:_orderDetail.distance forKey:@"distance_range"];
+//    [mDict safeSetObject:_orderDetail.distance forKey:@"distance_range"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            NSLog(@"kenan kenan %@",dict);
+            _RedMoneyID=[dict objectForKey:@"data"][@"id"];
+
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
@@ -230,21 +251,13 @@
                 return;
             }
             if([tempStatus integerValue] == 1) {
-                [self sendOrderPushWithOrderId:[[dict objectForKey:@"data"] objectForKey:@"id"]];
+//                [self sendOrderPushWithOrderId:[[dict objectForKey:@"data"] objectForKey:@"id"]];
                 if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];
-                    [self.navigationController popViewControllerAnimated:YES];
+//                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    [self payRedMoney];
                     [[NSNotificationCenter defaultCenter] postNotificationName:kSendOrderSuccess object:nil];
-                } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"向VIP用户派单成功" message:@"可到正在进行的订单中关注状态" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                    [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                        OrderDetailViewController *ctl = [[OrderDetailViewController alloc] init];
-                        ctl.isSendOrder = YES;
-                        ctl.orderId = [[dict objectForKey:@"data"] objectForKey:@"id"];
-                        NSMutableArray *ctls = [self.navigationController.viewControllers mutableCopy];
-                        [ctls replaceObjectAtIndex:ctls.count-1 withObject:ctl];
-                        self.navigationController.viewControllers = ctls;
-                    }];
                 }
                 
             } else {
@@ -257,34 +270,15 @@
     }];
 }
 
-- (void)sendOrderPushWithOrderId:(NSString *)orderId
+#pragma mark 红包支付
+- (void)payRedMoney
 {
-    NSString *url = [NSString stringWithFormat:@"%@gettzpersonnum", baseUrl];
-    
-    [SVHTTPRequest POST:url parameters:@{@"orderid": orderId, @"devnumber": [APService registrationID]} completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (response)
-        {
-            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSDictionary *dict = [jsonString objectFromJSONString];
-            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
-                if ([UserManager shareUserManager].isLogin) {
-                    [UserManager shareUserManager].userInfo = nil;
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
-                    }];
-                }
-                return;
-            }
-            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
-            if([tempStatus integerValue] == 1) {
-                
-            } else {
-            }
-        } else {
-        }
-    }];
-    
+    PayViewController *vc = [[PayViewController alloc] init];
+    vc.price = _moneyTotal;
+    vc.redEnvelopeId=_RedMoneyID;
+    vc.isRedMoney=YES;
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (void)getWoGanUserdata
@@ -405,14 +399,14 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.indicateImageView.image = [UIImage imageNamed: imageName];
         if (indexPath.row == 0 && indexPath.section == 0) {
-            NSString *str = [NSString stringWithFormat:@"红包总金额 %@ 元", _orderDetail.price];
+            NSString *str = [NSString stringWithFormat:@"红包总金额 %@ 元", _moneyTotal];
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
             [attStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:NSMakeRange(5,str.length-7)];
             [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(5, str.length-7)];
             cell.titleLabel.attributedText = attStr;
             
         } else if (indexPath.row == 0 && indexPath.section == 1) {
-            NSString *str = [NSString stringWithFormat:@"红包总数 %@ 个", _orderDetail.price];
+            NSString *str = [NSString stringWithFormat:@"红包总数 %@ 个", _moneyCount];
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
             [attStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:NSMakeRange(5,str.length-7)];
             [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(5, str.length-7)];
@@ -431,10 +425,10 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"悬赏金额" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
-        if ([_orderDetail.price intValue] == 0) {
+        if (_moneyTotal == 0) {
             tf.text = @"";
         } else {
-            tf.text = _orderDetail.price;
+            tf.text = _moneyTotal;
         }
         tf.keyboardType = UIKeyboardTypeNumberPad;
         
@@ -442,10 +436,10 @@
             if (buttonIndex == 1) {
                 //得到输入框
                 UITextField *tf=[alert textFieldAtIndex:0];
-                if (tf.text.length > 0 && [tf.text integerValue] > 0)
+                if (tf.text.length > 0 )
                 {
-                    NSInteger test = [tf.text integerValue];
-                    _orderDetail.price = [NSString stringWithFormat:@"%ld",test];
+                    _moneyTotal = [NSString stringWithFormat:@"%0.2f",[tf.text floatValue]];
+                    
                     [self.tableView reloadData];
                 }
             }
@@ -455,10 +449,10 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"悬赏个数" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
-        if ([_orderDetail.price intValue] == 0) {
+        if ([_moneyCount intValue] == 0) {
             tf.text = @"";
         } else {
-            tf.text = _orderDetail.price;
+            tf.text = _moneyCount;
         }
         tf.keyboardType = UIKeyboardTypeNumberPad;
         
@@ -469,7 +463,7 @@
                 if (tf.text.length > 0 && [tf.text integerValue] > 0)
                 {
                     NSInteger test = [tf.text integerValue];
-                    _orderDetail.price = [NSString stringWithFormat:@"%ld",test];
+                    _moneyCount = [NSString stringWithFormat:@"%ld",test];
                     [self.tableView reloadData];
                 }
             }

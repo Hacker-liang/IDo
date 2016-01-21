@@ -393,6 +393,7 @@
     }];
     vc.orderNumber = _orderDetail.orderNumber;
     vc.price = _orderDetail.price;
+    vc.isRedMoney=NO;
     vc.orderid = _orderDetail.orderId;
     vc.huoerbaoID = _orderDetail.grabOrderUser.userid;
     [self.navigationController pushViewController:vc animated:YES];

@@ -19,6 +19,11 @@ typedef void(^PaySuccessBlock)(BOOL success,NSString *errorStr);
 
 @property(strong,nonatomic)NSString * huoerbaoID;
 
+@property(strong,nonatomic)NSString * redEnvelopeId;
+
+@property(nonatomic) BOOL isRedMoney;
+
+
 @property(copy,nonatomic)PaySuccessBlock paySuccessBlock;
 
 - (id)initWithPaySuccessBlock:(PaySuccessBlock)block;

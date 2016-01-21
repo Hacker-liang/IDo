@@ -110,7 +110,7 @@
     [self.view addSubview:_hotOrderBtn];
     
     _sendMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _sendMoneyBtn.frame=CGRectMake(0.25*WIDTH+20, 0.25*HEIGHT+20,0.5*WIDTH , 0.08*HEIGHT);
+    _sendMoneyBtn.frame=CGRectMake(0.25*WIDTH+20, 0.25*HEIGHT+30,0.5*WIDTH , 0.08*HEIGHT);
     [_sendMoneyBtn setBackgroundImage:[UIImage imageNamed:@"SendMoneyImage"] forState:UIControlStateNormal];
     [_sendMoneyBtn addTarget:self action:@selector(sendMoney) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_sendMoneyBtn];
