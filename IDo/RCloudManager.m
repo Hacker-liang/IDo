@@ -10,7 +10,64 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "AFNetworking.h"
 
+@interface RCloudManager ()
+{
+    NSTimer *sendMessageTimer;  //向附近融云用户发送消息的 timer
+    NSInteger messageLeft2Send; //还剩下多少个未发送的用户
+}
+
+@property (nonatomic, copy) NSString *orderId;
+
+
+
+@end
+
 @implementation RCloudManager
+
+
+//向附近的融云客户端发送订单消息
+- (void)startSendOrder2NearbyUserWithOrderId:(NSString *)orderId
+{
+    if (sendMessageTimer) {
+        [sendMessageTimer invalidate];
+        sendMessageTimer = nil;
+    }
+    _orderId = orderId;
+    messageLeft2Send = _rongCloudUserList.count;
+    sendMessageTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(sendMessage2UserNearByAction) userInfo:nil repeats:YES];
+}
+
+- (void)sendMessage2UserNearByAction
+{
+    if (messageLeft2Send>0) {
+        NSNumber *userId = [_rongCloudUserList objectAtIndex:messageLeft2Send-1];
+        
+        RCCommandMessage *message = [[RCCommandMessage alloc] init];
+        message.name = @"NewOrder";
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic safeSetObject:_orderId forKey:@"orderid"];
+        [dic safeSetObject:@"gettzpersonnum" forKey:@"type"];
+        [dic safeSetObject:[NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]*1000] forKey:@"time"];
+        
+        NSString *str = [dic JSONString];
+        message.data = str;
+        
+        [[RCIMClient sharedRCIMClient] sendMessage:ConversationType_PRIVATE targetId:[NSString stringWithFormat:@"%@", userId] content:message pushContent:@"你收到一条推送消息" success:^(long messageId) {
+            NSLog(@"向融云用户:%@ 发送订单成功", userId);
+            
+        } error:^(RCErrorCode nErrorCode, long messageId) {
+            
+        }];
+        
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendRongCloudMessageOver" object:nil];
+        if (sendMessageTimer) {
+            [sendMessageTimer invalidate];
+            sendMessageTimer = nil;
+        }
+    }
+    messageLeft2Send--;
+}
 
 + (void)getRCloudTokenWithCompletionBlock:(void (^)(BOOL, NSString *))completion
 {
@@ -80,6 +137,17 @@
     for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
         [output appendFormat:@"%02x", digest[i]];
     return output;
+}
+
++ (RCloudManager *)shareInstance
+{
+    static RCloudManager *rcManager;
+    static dispatch_once_t token;
+    dispatch_once(&token,^{
+        //这里调用私有的initSingle方法
+        rcManager = [[RCloudManager alloc] init];
+    });
+    return rcManager;
 }
 
 @end

@@ -16,10 +16,10 @@
 #import "MyAnnotation.h"
 #import "OrderDetailViewController.h"
 #import "APService.h"
+#import "RCloudManager.h"
 
 @interface SendOrderDetailViewController () <UIActionSheetDelegate, ChangeLocationDelegate> {
-    NSTimer *sendMessageTimer;  //向附近融云用户发送消息的 timer
-    NSInteger messageLeft2Send; //还剩下多少个未发送的用户
+
 }
 
 @property (nonatomic ,strong) SendOrderDetailHeaderView *headerView;
@@ -27,7 +27,7 @@
 @property (nonatomic, strong) OrderDetailModel *orderDetail;
 @property (nonatomic, copy) NSString *showtime;
 @property (nonatomic, strong) NSMutableArray *userList;
-@property (nonatomic, strong) NSArray *rongCloudUserList;  //融云用户列表
+
 
 
 
@@ -54,7 +54,6 @@
     self.navigationItem.title = @"立即派单";
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderContentTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderContentCell"];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendRongCloudMessageOver) name:@"sendRongCloudMessageOver" object:nil];
     [self Time];
     [self setupTableViewFooterView];
     [self getWoGanUserdata];
@@ -147,14 +146,6 @@
     _orderDetail.tasktime = [NSString stringWithFormat:@"%d-%02d-%02d %02d:%02d:00",year,month,myday,myhour,minute];
     
     _showtime = [AppTools returnUploadTime:_orderDetail.tasktime isCurrentDay:YES];
-}
-
-//向附近的人发送融云消息成功
-- (void)sendRongCloudMessageOver
-{
-    [SVProgressHUD showSuccessWithStatus:@"派单成功"];
-    [self.navigationController popViewControllerAnimated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSendOrderSuccess object:nil];
 }
 
 #pragma mark - ChangeLocationDelegate
@@ -268,9 +259,12 @@
                 [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                     if ([[responseObject objectForKey:@"status"] integerValue] == 1) {
                         NSArray *userIdList = [responseObject objectForKey:@"data"];
-                        _rongCloudUserList = userIdList;
-                        [self startSendOrder2NearbyUser];
-                        
+                        [RCloudManager shareInstance].rongCloudUserList = userIdList;
+                        [[RCloudManager shareInstance] startSendOrder2NearbyUserWithOrderId:_orderDetail.orderId];
+                        [SVProgressHUD showSuccessWithStatus:@"派单成功"];
+                        [self.navigationController popViewControllerAnimated:YES];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kSendOrderSuccess object:nil];
+
                     } else {
                         [SVProgressHUD showErrorWithStatus:@"派单失败"];
                     }
@@ -420,51 +414,6 @@
         }
     }];
 
-}
-
-
-//向附近的融云客户端发送订单消息
-- (void)startSendOrder2NearbyUser
-{
-    if (sendMessageTimer) {
-        [sendMessageTimer invalidate];
-        sendMessageTimer = nil;
-    }
-    messageLeft2Send = _rongCloudUserList.count;
-    sendMessageTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(sendMessage2UserNearByAction) userInfo:nil repeats:YES];
-
-}
-
-- (void)sendMessage2UserNearByAction
-{
-    if (messageLeft2Send>0) {
-        NSNumber *userId = [_rongCloudUserList objectAtIndex:messageLeft2Send-1];
-
-        RCCommandMessage *message = [[RCCommandMessage alloc] init];
-        message.name = @"NewOrder";
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic safeSetObject:_orderDetail.orderId forKey:@"orderid"];
-        [dic safeSetObject:@"gettzpersonnum" forKey:@"type"];
-        [dic safeSetObject:[NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]*1000] forKey:@"time"];
-
-        NSString *str = [dic JSONString];
-        message.data = str;
-        
-        [[RCIMClient sharedRCIMClient] sendMessage:ConversationType_PRIVATE targetId:[NSString stringWithFormat:@"%@", userId] content:message pushContent:@"你收到一条推送消息" success:^(long messageId) {
-            NSLog(@"向融云用户:%@ 发送订单成功", userId);
-            
-        } error:^(RCErrorCode nErrorCode, long messageId) {
-            
-        }];
-        
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendRongCloudMessageOver" object:nil];
-        if (sendMessageTimer) {
-            [sendMessageTimer invalidate];
-            sendMessageTimer = nil;
-        }
-    }
-    messageLeft2Send--;
 }
 
 //获取附近的抢单人

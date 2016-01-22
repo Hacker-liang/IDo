@@ -12,4 +12,12 @@
 @interface RCloudManager : NSObject
 
 + (void)getRCloudTokenWithCompletionBlock:(void (^) (BOOL isSuccess, NSString *token))completion;
+
++ (RCloudManager *)shareInstance;
+
+@property (nonatomic, strong) NSArray *rongCloudUserList;  //融云用户列表
+
+- (void)startSendOrder2NearbyUserWithOrderId:(NSString *)orderId;
+
+
 @end
