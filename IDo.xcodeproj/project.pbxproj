@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB63DCDD1C50CF5300CB2D22 /* RedRuleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB63DCDC1C50CF5300CB2D22 /* RedRuleVC.m */; };
 		BB981B851C45E03500388E1C /* KenanImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB981B841C45E03500388E1C /* KenanImage.xcassets */; };
 		BB981B8C1C45F7D400388E1C /* SendMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */; };
 		BBB83A241C4C7C0800D3C9D0 /* SendRedMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */; };
@@ -406,6 +407,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB63DCDB1C50CF5300CB2D22 /* RedRuleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedRuleVC.h; sourceTree = "<group>"; };
+		BB63DCDC1C50CF5300CB2D22 /* RedRuleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedRuleVC.m; sourceTree = "<group>"; };
 		BB981B841C45E03500388E1C /* KenanImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KenanImage.xcassets; sourceTree = "<group>"; };
 		BB981B8A1C45F7D400388E1C /* SendMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMoneyVC.h; sourceTree = "<group>"; };
 		BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMoneyVC.m; sourceTree = "<group>"; };
@@ -1135,6 +1138,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB63DCD71C50CF0E00CB2D22 /* redRule */ = {
+			isa = PBXGroup;
+			children = (
+				BB63DCDB1C50CF5300CB2D22 /* RedRuleVC.h */,
+				BB63DCDC1C50CF5300CB2D22 /* RedRuleVC.m */,
+			);
+			name = redRule;
+			sourceTree = "<group>";
+		};
 		BB981B861C45E44A00388E1C /* kenanVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1147,6 +1159,7 @@
 				BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */,
 				BBB83A281C4C87D700D3C9D0 /* SendRedMoneyModel.h */,
 				BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */,
+				BB63DCD71C50CF0E00CB2D22 /* redRule */,
 			);
 			path = kenanVC;
 			sourceTree = "<group>";
@@ -2982,6 +2995,7 @@
 				D92B5C0F1BB8F3B600E3AC93 /* base64.m in Sources */,
 				D96EAA8C1BB5964F00360ED8 /* MJRefreshAutoFooter.m in Sources */,
 				D9B2F6AE1BB2838300ED7DDF /* UIView+REFrostedViewController.m in Sources */,
+				BB63DCDD1C50CF5300CB2D22 /* RedRuleVC.m in Sources */,
 				D96EAA8F1BB5964F00360ED8 /* MJRefreshFooter.m in Sources */,
 				D947D6671BC2EEDC0061D609 /* FYAnnotationView.m in Sources */,
 			);

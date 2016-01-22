@@ -8,6 +8,8 @@
 
 #import "PayViewController.h"
 #import "AliPayTool.h"
+#import "MyOrderRootViewController.h"
+#import "HomeViewController.h"
 
 @interface PayViewController ()
 
@@ -40,6 +42,8 @@
     // Do any additional setup after loading the view.
     self.title = @"支付";
 //    Appdelegate.viewisWhere = PiePayView;
+    
+    NSLog(@"redEnvelopeId :%@",self.redEnvelopeId);
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backAfterPayed) name:@"paySuccessNotification" object:nil];
@@ -262,11 +266,12 @@
     NSString *url = [NSString stringWithFormat:@"%@payByWallet",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     if (self.isRedMoney==YES) {
-        [mDict setObject:_redEnvelopeId forKey:@"redEnvelopeId"];
+        [mDict setObject:_redEnvelopeId forKey:@"redId"];
     }else
     {
         [mDict setObject:orderid forKey:@"orderId"];
     }
+      NSLog(@"余额支付%@%@",url,mDict);
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
@@ -307,13 +312,13 @@
     NSString *url = [NSString stringWithFormat:@"%@alipay",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     if (self.isRedMoney==YES) {
-        [mDict setObject:_redEnvelopeId forKey:@"redEnvelopeId"];
+        [mDict setObject:_redEnvelopeId forKey:@"redId"];
     }else
     {
         [mDict setObject:orderid forKey:@"orderId"];
     }
 
-    
+    NSLog(@"支付宝%@%@",url,mDict);
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
         {
@@ -430,7 +435,17 @@
 // xuebao start
 -(void)backAfterPayed
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.isRedMoney==YES) {
+        MyOrderRootViewController *myorder=[[MyOrderRootViewController alloc]init];
+        myorder.isGrabOrder=NO;
+        
+        HomeViewController *home=[[HomeViewController alloc]init];
+        [self.navigationController pushViewController:home animated:NO];
+    }else{
+       [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    
     if(self.paySuccessBlock)
     {
         self.paySuccessBlock (YES,nil);

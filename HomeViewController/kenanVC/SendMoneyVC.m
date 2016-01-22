@@ -19,6 +19,7 @@
 #import "APService.h"
 #import "PayViewController.h"
 
+#import "RedRuleVC.h"
 @interface SendMoneyVC ()<UIActionSheetDelegate, ChangeLocationDelegate>
 
 @property (nonatomic ,strong) SendOrderDetailHeaderView *headerView;
@@ -109,6 +110,7 @@
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIcon"] forState:UIControlStateNormal];
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIconCh"] forState:UIControlStateHighlighted];
 //    moneyRuleBtn.backgroundColor=[UIColor yellowColor];
+    [moneyRuleBtn addTarget:self action:@selector(redRule) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:moneyRuleBtn];
     
     UIButton *logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0.1*HEIGHT, footerView.bounds.size.width-20, 40)];
@@ -120,6 +122,13 @@
     [logoutBtn addTarget:self action:@selector(sendMoney:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:logoutBtn];
     self.tableView.tableFooterView = footerView;
+}
+
+#pragma mark 红包派发规则
+-(void)redRule
+{
+    RedRuleVC *redRule=[[RedRuleVC alloc]init];
+    [self.navigationController pushViewController:redRule animated:NO];
 }
 
 - (void)setupAddress
@@ -183,7 +192,9 @@
         return;
     }
     
-    if ([_moneyTotal floatValue] == 0) {
+//    NSLog(@"[_moneyTotal floatValue] %f",[_moneyTotal doubleValue]);
+    
+    if ([_moneyTotal doubleValue] < 0.010000) {
         [SVProgressHUD showErrorWithStatus:@"红包总金额不得低于0.01元"];
         return;
     }
@@ -192,8 +203,9 @@
         [SVProgressHUD showErrorWithStatus:@"红包总个数不得低于1"];
         return;
     }
+    NSLog(@"[_moneyTotal floatValue]/[_moneyCount intValue] %f",[_moneyTotal doubleValue]/[_moneyCount intValue]);
     
-    if ([_moneyTotal floatValue]/[_moneyCount floatValue] >=0.01 == NO ) {
+    if ([_moneyTotal doubleValue]/[_moneyCount intValue] <0.010000 == YES ) {
         [SVProgressHUD showErrorWithStatus:@"红包单个金额不得低于0.01"];
         return;
     }
@@ -207,12 +219,12 @@
     if (_headerView.vipContentView.hidden) {
         url = [NSString stringWithFormat:@"%@sendRedEnvelope",baseUrl];
         [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"publisherMemberId"];
+        [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.longitude] forKey:@"lng"];
+        [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.latitude] forKey:@"lat"];
         [mDict safeSetObject:_moneyTotal forKey:@"money"];
         [mDict safeSetObject:_moneyCount forKey:@"totalCount"];
-        [mDict safeSetObject:_moneyContent forKey:@"content"];
-        //        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
+        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
         [mDict safeSetObject:_orderDetail.address forKey:@"address"];
-        //        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
 
 
     } else {
@@ -222,7 +234,7 @@
         [mDict safeSetObject:[NSString stringWithFormat:@"%lf", _headerView.missionLocation.latitude] forKey:@"lat"];
         [mDict safeSetObject:_moneyTotal forKey:@"money"];
         [mDict safeSetObject:_moneyCount forKey:@"totalCount"];
-        [mDict safeSetObject:_moneyContent forKey:@"content"];
+        [mDict safeSetObject:_orderDetail.content forKey:@"content"];
         //        [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
         [mDict safeSetObject:_orderDetail.address forKey:@"address"];
         //        [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];
@@ -231,13 +243,15 @@
     
 //    [mDict safeSetObject:_orderDetail.distance forKey:@"distance_range"];
     
+    NSLog(@"0121%@%@",url,mDict);
+    
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response)
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
             NSLog(@"kenan kenan %@",dict);
-            _RedMoneyID=[dict objectForKey:@"data"][@"id"];
+            _RedMoneyID=[dict objectForKey:@"data"][@"redId"];
 
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
@@ -255,7 +269,7 @@
                 if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];
 //                    [self.navigationController popViewControllerAnimated:YES];
-                    
+                    NSLog(@"红包发送成功");
                     [self payRedMoney];
                     [[NSNotificationCenter defaultCenter] postNotificationName:kSendOrderSuccess object:nil];
                 }
