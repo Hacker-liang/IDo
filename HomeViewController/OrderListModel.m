@@ -13,6 +13,7 @@
 - (id)initWithJson:(id)json andIsSendOrder:(BOOL)isSendOrder
 {
     if (self = [super init]) {
+        
         _isSendOrder = isSendOrder;
         _content = [json objectForKey:@"content"];
         _orderId = [json objectForKey:@"id"];

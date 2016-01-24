@@ -13,7 +13,6 @@
 #import "OrderListEmptyView.h"
 #import "MissOrderListViewController.h"
 #import "OrderManager.h"
-#import "SendRedMoneyCell.h"
 
 @interface GrabOrderListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -155,22 +154,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (@"") {
-        OrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderListCell" forIndexPath:indexPath];
-        OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
-        cell.isGrabOrder = YES;
-        cell.orderDetail = model;
-        
-        return cell;
-    } else {
-        OrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderListCell" forIndexPath:indexPath];
-        OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
-        cell.isGrabOrder = YES;
-        cell.orderDetail = model;
-        
-        return cell;
-    }
-
+    OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
+    OrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderListCell" forIndexPath:indexPath];
+    
+    cell.isGrabOrder = YES;
+    cell.orderDetail = model;
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

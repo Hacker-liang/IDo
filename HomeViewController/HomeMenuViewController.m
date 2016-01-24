@@ -20,6 +20,8 @@
 #import "ShareViewController.h"
 #import "PushMessageCenterViewController.h"
 
+#import "MyRedMoneyVC.h"
+
 @interface HomeMenuViewController ()
 
 @property (nonatomic, strong) HomeMenuTableViewHeaderView *headerView;
@@ -37,7 +39,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     _headerView = [HomeMenuTableViewHeaderView homeMenuTableViewHeaderView];
     _headerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 210);
-    [_headerView.headerBtn addTarget:self action:@selector(gotoMyProfile) forControlEvents:UIControlEventTouchUpInside];
+    [_headerView.headerBtn addTarget:self action:@selector(gotoPersonInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"homeMenuCell"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
@@ -87,7 +89,7 @@
 {
     if (!_dataSource) {
         _dataSource = @[@{@"icon": @"icon_menu_wallet.png", @"title": @"我的钱包"},
-                        @{@"icon": @"icon_menu_mine.png", @"title": @"个人中心"},
+                        @{@"icon": @"icon_menu_mine.png", @"title": @"我的红包"},
                         @{@"icon": @"icon_menu_message.png", @"title": @"信息中心"},@{@"icon": @"help", @"title": @"帮助中心"},
                         @{@"icon": @"icon_menu_setting.png", @"title": @"关于我们"},
 //                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
@@ -130,6 +132,13 @@
 
 #pragma mark - IBAction Methods
 
+-(void)gotoPersonInfo
+{
+    [self.frostedViewController hideMenuViewController];
+    MyProfileTableViewController *person=[[MyProfileTableViewController alloc]init];
+    [_mainViewController.navigationController pushViewController:person animated:YES];
+}
+
 - (void)shareApp
 {
     [self.frostedViewController hideMenuViewController];
@@ -150,9 +159,10 @@
 
 - (void)gotoMyProfile
 {
+    MyRedMoneyVC *myRed=[[MyRedMoneyVC alloc]init];
     [self.frostedViewController hideMenuViewController];
-    MyProfileTableViewController *ctl = [[MyProfileTableViewController alloc] init];
-    [_mainViewController.navigationController pushViewController:ctl animated:YES];
+    
+    [_mainViewController.navigationController pushViewController:myRed animated:YES];
 }
 
 - (void)gotoMessageCenter

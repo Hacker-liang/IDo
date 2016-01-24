@@ -10,12 +10,16 @@
 		BB63DCDD1C50CF5300CB2D22 /* RedRuleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB63DCDC1C50CF5300CB2D22 /* RedRuleVC.m */; };
 		BB981B851C45E03500388E1C /* KenanImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB981B841C45E03500388E1C /* KenanImage.xcassets */; };
 		BB981B8C1C45F7D400388E1C /* SendMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */; };
+		BBB1F7681C546DD6006C74B8 /* GainRedMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB1F7671C546DD6006C74B8 /* GainRedMoneyVC.m */; };
+		BBB1F76B1C546E09006C74B8 /* SendRedMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB1F76A1C546E09006C74B8 /* SendRedMoneyVC.m */; };
+		BBB1F76E1C547359006C74B8 /* GainRedMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB1F76D1C547359006C74B8 /* GainRedMoneyCell.m */; };
+		BBB1F7711C5473C8006C74B8 /* GainRedMoneyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB1F7701C5473C8006C74B8 /* GainRedMoneyModel.m */; };
 		BBB83A241C4C7C0800D3C9D0 /* SendRedMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */; };
-		BBB83A271C4C878300D3C9D0 /* SendMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A261C4C878300D3C9D0 /* SendMoneyView.m */; };
 		BBB83A2A1C4C87D800D3C9D0 /* SendRedMoneyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */; };
 		BBB83A2E1C4CBBA700D3C9D0 /* RedMoneyTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A2D1C4CBBA700D3C9D0 /* RedMoneyTableVC.m */; };
 		BBB83A311C4CC09C00D3C9D0 /* RedMoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A301C4CC09C00D3C9D0 /* RedMoneyDetailCell.m */; };
 		BBB83A341C4CC91300D3C9D0 /* RedMoneyDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A331C4CC91300D3C9D0 /* RedMoneyDetailModel.m */; };
+		BBBA6AA21C522A0F00A36DD6 /* MyRedMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBBA6AA11C522A0F00A36DD6 /* MyRedMoneyVC.m */; };
 		BBC687251C48CBE300AE4FD1 /* HelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC687241C48CBE300AE4FD1 /* HelpVC.m */; };
 		BBC687271C48D03800AE4FD1 /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBC687261C48D03800AE4FD1 /* help@2x.png */; };
 		D903A62A1BFA121400F814F7 /* icon_sendOrder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D903A6281BFA121400F814F7 /* icon_sendOrder@2x.png */; };
@@ -412,10 +416,16 @@
 		BB981B841C45E03500388E1C /* KenanImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KenanImage.xcassets; sourceTree = "<group>"; };
 		BB981B8A1C45F7D400388E1C /* SendMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMoneyVC.h; sourceTree = "<group>"; };
 		BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMoneyVC.m; sourceTree = "<group>"; };
+		BBB1F7661C546DD6006C74B8 /* GainRedMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GainRedMoneyVC.h; sourceTree = "<group>"; };
+		BBB1F7671C546DD6006C74B8 /* GainRedMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GainRedMoneyVC.m; sourceTree = "<group>"; };
+		BBB1F7691C546E09006C74B8 /* SendRedMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendRedMoneyVC.h; sourceTree = "<group>"; };
+		BBB1F76A1C546E09006C74B8 /* SendRedMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyVC.m; sourceTree = "<group>"; };
+		BBB1F76C1C547359006C74B8 /* GainRedMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GainRedMoneyCell.h; sourceTree = "<group>"; };
+		BBB1F76D1C547359006C74B8 /* GainRedMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GainRedMoneyCell.m; sourceTree = "<group>"; };
+		BBB1F76F1C5473C8006C74B8 /* GainRedMoneyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GainRedMoneyModel.h; sourceTree = "<group>"; };
+		BBB1F7701C5473C8006C74B8 /* GainRedMoneyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GainRedMoneyModel.m; sourceTree = "<group>"; };
 		BBB83A221C4C7C0800D3C9D0 /* SendRedMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendRedMoneyCell.h; sourceTree = "<group>"; };
 		BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyCell.m; sourceTree = "<group>"; };
-		BBB83A251C4C878300D3C9D0 /* SendMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMoneyView.h; sourceTree = "<group>"; };
-		BBB83A261C4C878300D3C9D0 /* SendMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMoneyView.m; sourceTree = "<group>"; };
 		BBB83A281C4C87D700D3C9D0 /* SendRedMoneyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendRedMoneyModel.h; sourceTree = "<group>"; };
 		BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyModel.m; sourceTree = "<group>"; };
 		BBB83A2C1C4CBBA700D3C9D0 /* RedMoneyTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedMoneyTableVC.h; sourceTree = "<group>"; };
@@ -424,6 +434,8 @@
 		BBB83A301C4CC09C00D3C9D0 /* RedMoneyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedMoneyDetailCell.m; sourceTree = "<group>"; };
 		BBB83A321C4CC91300D3C9D0 /* RedMoneyDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedMoneyDetailModel.h; sourceTree = "<group>"; };
 		BBB83A331C4CC91300D3C9D0 /* RedMoneyDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedMoneyDetailModel.m; sourceTree = "<group>"; };
+		BBBA6AA01C522A0F00A36DD6 /* MyRedMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRedMoneyVC.h; sourceTree = "<group>"; };
+		BBBA6AA11C522A0F00A36DD6 /* MyRedMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRedMoneyVC.m; sourceTree = "<group>"; };
 		BBC687231C48CBE300AE4FD1 /* HelpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVC.h; sourceTree = "<group>"; };
 		BBC687241C48CBE300AE4FD1 /* HelpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpVC.m; sourceTree = "<group>"; };
 		BBC687261C48D03800AE4FD1 /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
@@ -1150,15 +1162,10 @@
 		BB981B861C45E44A00388E1C /* kenanVC */ = {
 			isa = PBXGroup;
 			children = (
+				BBBA6A9F1C5229D900A36DD6 /* MyRedMoney */,
 				BBB83A2B1C4CBA9200D3C9D0 /* RedMoneyDetail */,
 				BB981B8A1C45F7D400388E1C /* SendMoneyVC.h */,
 				BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */,
-				BBB83A251C4C878300D3C9D0 /* SendMoneyView.h */,
-				BBB83A261C4C878300D3C9D0 /* SendMoneyView.m */,
-				BBB83A221C4C7C0800D3C9D0 /* SendRedMoneyCell.h */,
-				BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */,
-				BBB83A281C4C87D700D3C9D0 /* SendRedMoneyModel.h */,
-				BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */,
 				BB63DCD71C50CF0E00CB2D22 /* redRule */,
 			);
 			path = kenanVC;
@@ -1175,6 +1182,27 @@
 				BBB83A331C4CC91300D3C9D0 /* RedMoneyDetailModel.m */,
 			);
 			name = RedMoneyDetail;
+			sourceTree = "<group>";
+		};
+		BBBA6A9F1C5229D900A36DD6 /* MyRedMoney */ = {
+			isa = PBXGroup;
+			children = (
+				BBBA6AA01C522A0F00A36DD6 /* MyRedMoneyVC.h */,
+				BBBA6AA11C522A0F00A36DD6 /* MyRedMoneyVC.m */,
+				BBB1F7661C546DD6006C74B8 /* GainRedMoneyVC.h */,
+				BBB1F7671C546DD6006C74B8 /* GainRedMoneyVC.m */,
+				BBB1F76C1C547359006C74B8 /* GainRedMoneyCell.h */,
+				BBB1F76D1C547359006C74B8 /* GainRedMoneyCell.m */,
+				BBB1F76F1C5473C8006C74B8 /* GainRedMoneyModel.h */,
+				BBB1F7701C5473C8006C74B8 /* GainRedMoneyModel.m */,
+				BBB1F7691C546E09006C74B8 /* SendRedMoneyVC.h */,
+				BBB1F76A1C546E09006C74B8 /* SendRedMoneyVC.m */,
+				BBB83A221C4C7C0800D3C9D0 /* SendRedMoneyCell.h */,
+				BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */,
+				BBB83A281C4C87D700D3C9D0 /* SendRedMoneyModel.h */,
+				BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */,
+			);
+			name = MyRedMoney;
 			sourceTree = "<group>";
 		};
 		D90E2E291BB626A200C2E6F3 /* MySendOrder */ = {
@@ -2821,9 +2849,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB1F7681C546DD6006C74B8 /* GainRedMoneyVC.m in Sources */,
 				D916A5B91BC3815E005F5286 /* ConvertMethods.m in Sources */,
 				D96EAA8E1BB5964F00360ED8 /* MJRefreshComponent.m in Sources */,
 				D92B5C121BB8F3B600E3AC93 /* MD5DataSigner.m in Sources */,
+				BBBA6AA21C522A0F00A36DD6 /* MyRedMoneyVC.m in Sources */,
 				D96EAA911BB5964F00360ED8 /* MJRefreshAutoGifFooter.m in Sources */,
 				D96EAA961BB5964F00360ED8 /* MJRefreshBackStateFooter.m in Sources */,
 				D96EA9241BB2A39300360ED8 /* GrabOrderSegmentedViewController.m in Sources */,
@@ -2837,7 +2867,6 @@
 				D9B2F6AB1BB2838300ED7DDF /* REFrostedContainerViewController.m in Sources */,
 				D9DB6EE41C39620200077E49 /* ShareViewController.m in Sources */,
 				D92B5C161BB8F3B600E3AC93 /* RSADataVerifier.m in Sources */,
-				BBB83A271C4C878300D3C9D0 /* SendMoneyView.m in Sources */,
 				D96EAAA11BB59C2B00360ED8 /* OrderListModel.m in Sources */,
 				D96EA92B1BB2D54B00360ED8 /* SenderOrderViewController.m in Sources */,
 				D96EA9D21BB3D24700360ED8 /* UIImage+GIF.m in Sources */,
@@ -2880,6 +2909,7 @@
 				D969DA0E1BCCB22A00281D02 /* SVWebViewControllerActivity.m in Sources */,
 				D96EA9D71BB3D24700360ED8 /* UIView+WebCacheOperation.m in Sources */,
 				D96EAA8D1BB5964F00360ED8 /* MJRefreshBackFooter.m in Sources */,
+				BBB1F76B1C546E09006C74B8 /* SendRedMoneyVC.m in Sources */,
 				D96EA99D1BB3D22100360ED8 /* AFHTTPRequestOperation.m in Sources */,
 				D92B5C111BB8F3B600E3AC93 /* DataVerifier.m in Sources */,
 				D96EAA501BB55DAC00360ED8 /* OrderContentTableViewCell.m in Sources */,
@@ -2896,6 +2926,7 @@
 				D96EAA481BB53A5400360ED8 /* OrderDetailModel.m in Sources */,
 				D96EA9D31BB3D24700360ED8 /* UIImage+MultiFormat.m in Sources */,
 				D998F6B91C337C1D00AB9F76 /* PushMessageWebViewController.m in Sources */,
+				BBB1F7711C5473C8006C74B8 /* GainRedMoneyModel.m in Sources */,
 				D96EA97B1BB3D13000360ED8 /* AppTools.m in Sources */,
 				D953951A1BB26B0200CB6746 /* HomeViewController.m in Sources */,
 				D96EA9D41BB3D24700360ED8 /* UIImage+WebP.m in Sources */,
@@ -2922,6 +2953,7 @@
 				D96EA99E1BB3D22100360ED8 /* AFHTTPRequestOperationManager.m in Sources */,
 				D91F2F1D1BC21179002CE690 /* GrabSettingPushTableViewCell.m in Sources */,
 				D90E2E351BB6271C00C2E6F3 /* MyOrderHistoryTableViewController.m in Sources */,
+				BBB1F76E1C547359006C74B8 /* GainRedMoneyCell.m in Sources */,
 				D92B5AD51BB8106F00E3AC93 /* PayViewController.m in Sources */,
 				D916A5A21BC3627A005F5286 /* MyPageControl.m in Sources */,
 				BBB83A341C4CC91300D3C9D0 /* RedMoneyDetailModel.m in Sources */,

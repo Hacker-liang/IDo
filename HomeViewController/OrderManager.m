@@ -17,15 +17,17 @@
     [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
     [mDict setObject:[NSNumber numberWithInteger:size] forKey:@"pageSize"];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
-    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+
+    [mDict setObject:@"39.7634" forKey:@"lat"];
+    [mDict setObject:@"116.331" forKey:@"lng"];
     
-    
-    NSLog(@"url %@  mdic %@",url,mDict);
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
+            NSLog(@"柯南附近订单%@",dict);
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
                     [UserManager shareUserManager].userInfo = nil;
@@ -36,14 +38,22 @@
                 }
                 return;
             }
+            
             NSArray *tempList = dict[@"data"];
+            NSLog(@"%lu",(unsigned long)tempList.count);
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if((NSNull *)tempStatus != [NSNull null] && ![tempStatus isEqualToString:@"0"]) {
                 NSMutableArray *retArray = [[NSMutableArray alloc] init];
-                for (NSDictionary *dic in tempList) {
-                    OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:NO];
-                    [retArray addObject:order];
-                }
+                
+                
+            for (NSDictionary *dic in tempList) {
+               
+                OrderListModel *order = [[OrderListModel alloc] initWithJson:dic andIsSendOrder:NO];
+                [retArray addObject:order];
+            }
+                
+                
+                
                 completion(YES, retArray);
 
             } else {

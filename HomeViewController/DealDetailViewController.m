@@ -125,7 +125,7 @@
     NSString *typeStr;
     
     if ([self.titleStr isEqualToString:@"收支明细"]) {
-        //1支出 2收入 4退款
+        //1支出 2收入 3退款
         switch ([dic[@"type"]intValue]) {
             case 1:
                 typeStr = @"支出";
@@ -135,6 +135,14 @@
                 break;
             case 3:
                 typeStr = @"退款";
+                break;
+                
+            case 4:
+                typeStr = @"红包支出";
+                break;
+                
+            case 5:
+                typeStr = @"红包退款";
                 break;
                 
             default:
