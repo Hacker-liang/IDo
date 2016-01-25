@@ -1,25 +1,30 @@
 //
-//  HelpVC.m
+//  RedMoneyGainDetailVC.m
 //  IDo
 //
-//  Created by 柯南 on 16/1/15.
+//  Created by 柯南 on 16/1/24.
 //  Copyright © 2016年 com.Yinengxin.xianne. All rights reserved.
 //
 
-#import "HelpVC.h"
-#import "HomeViewController.h"
-@interface HelpVC ()
+#import "RedMoneyGainDetailVC.h"
+
+@interface RedMoneyGainDetailVC ()
 
 @end
 
-@implementation HelpVC
+@implementation RedMoneyGainDetailVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=APP_PAGE_COLOR;
-    self.navigationItem.title = @"帮助中心";
+    self.navigationItem.title = @"红包领取详情";
     self.edgesForExtendedLayout=0;
+    [self initNav];
+}
+
+-(void)initNav
+{
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_normal.png"] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_hilighted.png"] forState:UIControlStateHighlighted];
@@ -29,20 +34,15 @@
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = barButton;
-    
-    UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
-//    自动缩放页面和自动检测电话
-    webView.scalesPageToFit=YES;
-//    webView.detectsPhoneNumbers=YES;
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://m.bjwogan.com/83/68/p300704865ccbe8"]];
-    [self.view addSubview:webView];
-    [webView loadRequest:request];
-    
 }
+
 - (void)gotoBack
 {
-    HomeViewController *home=[[HomeViewController alloc]init];
-    [self.navigationController pushViewController:home animated:NO];
+    if (self.navigationController.childViewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

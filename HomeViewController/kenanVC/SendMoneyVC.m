@@ -250,7 +250,7 @@
         {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
-            NSLog(@"kenan kenan %@",dict);
+//            NSLog(@"kenan kenan %@",dict);
             _RedMoneyID=[dict objectForKey:@"data"][@"redId"];
 
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];

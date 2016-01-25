@@ -14,6 +14,7 @@
 #import "MissOrderListViewController.h"
 #import "OrderManager.h"
 
+#import "RedGainDetailVC.h"
 @interface GrabOrderListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -21,6 +22,16 @@
 @property (nonatomic) NSInteger currentPage;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *missOrderBtn;
+@property (nonatomic,strong) UIButton *gainRedMoneyBtn;
+@property (nonatomic,strong) UILabel *redNumLab;
+
+@property (nonatomic,strong) NSMutableArray *redIdList;
+
+
+#pragma mark 开始抢红包信息
+@property (nonatomic,strong) UIView *bgView;
+@property (nonatomic,strong) UIView *redBgView;
+@property (nonatomic,strong) UIImageView *bgImageView;
 
 @end
 
@@ -28,6 +39,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initData];
+    
+    _gainRedMoneyBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+    _gainRedMoneyBtn.frame=CGRectMake(WIDTH-80, 0.1*HEIGHT, 67, 81);
+    [_gainRedMoneyBtn setBackgroundImage:[UIImage imageNamed:@"GainRedMoneyIcon"] forState:UIControlStateNormal];
+    [_gainRedMoneyBtn addTarget:self action:@selector(gainRedMoneyOrder) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_gainRedMoneyBtn];
+    
+    _redNumLab=[[UILabel alloc]initWithFrame:CGRectMake(WIDTH-80, 0.1*HEIGHT+85, 75, 20)];
+    _redNumLab.adjustsFontSizeToFitWidth = YES;
+    [self.view addSubview:_redNumLab];
     _currentPage = 1;
     _dataSource = [[NSMutableArray alloc] init];
     self.tableView.dataSource = self;
@@ -55,7 +78,124 @@
     _missOrderBtn.layer.cornerRadius = 20;
     
 //    _missOrderBtn.hidden = YES;
+    
 }
+
+-(void)initData
+{
+    NSString *url1 = [NSString stringWithFormat:@"%@nearRedList",baseUrl];
+    NSMutableDictionary*mDict1 = [NSMutableDictionary dictionary];
+    [mDict1 safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+    //    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+    //    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+    
+    [mDict1 setObject:@"39.7634" forKey:@"lat"];
+    [mDict1 setObject:@"116.331" forKey:@"lng"];
+    [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response) {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            NSLog(@"附近红包%@",dict);
+            NSArray *redList=dict[@"data"];
+            _redIdList =[NSMutableArray array];
+            [_redIdList addObjectsFromArray:redList];
+             NSLog(@"_redIdList %@",_redIdList);
+            NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",redList.count ];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+            
+            [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(2,str.length-5)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(2,str.length-5)];
+            _redNumLab.attributedText = attStr;
+        }
+    }];
+    
+
+}
+
+-(void)gainRedMoneyOrder
+{
+    if (_redIdList.count==0) {
+        
+    }else
+    {
+        
+        _bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
+        _bgView.backgroundColor=[UIColor blackColor];
+        _bgView.alpha=0.7;
+        [self.navigationController.view addSubview:_bgView];
+        
+        _redBgView=[[UIView alloc]initWithFrame:CGRectMake(0.1*WIDTH, 0.15*HEIGHT, 0.8*WIDTH, 0.7*HEIGHT)];
+        _redBgView.backgroundColor=[UIColor whiteColor];
+        [self.navigationController.view addSubview:_redBgView];
+        
+        _bgImageView=[[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 0.8*WIDTH+20, 0.7*HEIGHT+20)];
+        _bgImageView.image=[UIImage imageNamed:@"RedBg"];
+        [_redBgView addSubview:_bgImageView];
+        
+        UIButton *backBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        backBtn.frame=CGRectMake(10, 10, 20, 20);
+        [backBtn setBackgroundImage:[UIImage imageNamed:@"Close"] forState:UIControlStateNormal];
+        [backBtn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
+        [_redBgView addSubview:backBtn];
+        
+        UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.3*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
+        //    headImage.backgroundColor=[UIColor yellowColor];
+        //    headImage.image=[UIImage imageNamed:@"ic_avatar_default.png"];
+        headImage.layer.cornerRadius=0.1*WIDTH;
+        headImage.layer.masksToBounds=YES;
+        [headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",headURL,_redIdList[0][@"picture"]]] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
+        [_redBgView addSubview:headImage];
+        
+        UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.3*HEIGHT-50, 0.8*WIDTH, 30)];
+        nameLab.text=_redIdList[0][@"name"];
+        nameLab.textAlignment=1;
+        nameLab.textColor=[UIColor whiteColor];
+        [_redBgView addSubview:nameLab];
+        
+        UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.3*HEIGHT, 0.8*WIDTH, 0.2*HEIGHT)];
+        contentLab.text=_redIdList[0][@"content"];
+        contentLab.numberOfLines=0;
+        contentLab.textAlignment=1;
+        contentLab.textColor=[UIColor whiteColor];
+        [_redBgView addSubview:contentLab];
+        
+        
+        UIButton *openRedBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        openRedBtn.frame=CGRectMake(0.25*WIDTH, 0.5*HEIGHT, 0.3*WIDTH, 0.3*WIDTH);
+        openRedBtn.layer.cornerRadius=0.15*WIDTH;
+        openRedBtn.layer.masksToBounds=YES;
+        [openRedBtn setBackgroundImage:[UIImage imageNamed:@"OpenRedMoney"] forState:UIControlStateNormal];
+        [openRedBtn addTarget:self action:@selector(openRedMoney) forControlEvents:UIControlEventTouchUpInside];
+        [_redBgView addSubview:openRedBtn];
+        
+  
+    }
+}
+
+-(void)openRedMoney
+{
+    
+    NSString *url=[NSString stringWithFormat:@"%@grabRed",baseUrl];
+    NSDictionary *dic=@{@"redId":_redIdList[0][@"redId"],@"memberId":[UserManager shareUserManager].userInfo.userid};
+    [SVHTTPRequest POST:url parameters:dic completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response) {
+            NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+            [self closeView];
+            RedGainDetailVC *redGainVC=[[RedGainDetailVC alloc]init];
+            redGainVC.redResultDic=resultDic[@"data"];
+            [self.navigationController pushViewController:redGainVC animated:NO];
+        }
+    }];
+
+//        [self initData];
+}
+
+-(void)closeView
+{
+    [_bgView removeFromSuperview];
+    [_redBgView removeFromSuperview];
+}
+
 
 - (NSMutableArray *)dataSource
 {
@@ -77,6 +217,7 @@
 {
     [super viewWillAppear:animated];
     [self.tableView.header beginRefreshing];
+    [self initData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -181,5 +322,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kGrabShouldSroll2Top object:nil];
     }
 }
+
 
 @end

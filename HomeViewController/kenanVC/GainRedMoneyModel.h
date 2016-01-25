@@ -15,5 +15,4 @@
 @property (nonatomic,strong) NSString *moneyLab;
 @property (nonatomic,strong) NSString *timeLab;
 
--(id)initWithJson:(id)json ;
 @end

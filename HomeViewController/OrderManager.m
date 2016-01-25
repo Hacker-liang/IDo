@@ -13,6 +13,8 @@
 + (void)asyncLoadNearByOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
 {
     NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
+    
+    
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
     [mDict setObject:[NSNumber numberWithInteger:size] forKey:@"pageSize"];
@@ -23,11 +25,13 @@
     [mDict setObject:@"39.7634" forKey:@"lat"];
     [mDict setObject:@"116.331" forKey:@"lng"];
     
+    
+    
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
-            NSLog(@"柯南附近订单%@",dict);
+//            NSLog(@"柯南附近订单%@",dict);
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
                 if ([UserManager shareUserManager].isLogin) {
                     [UserManager shareUserManager].userInfo = nil;
