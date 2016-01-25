@@ -52,7 +52,7 @@
         NSString *str = [dic JSONString];
         message.data = str;
         
-        [[RCIMClient sharedRCIMClient] sendMessage:ConversationType_PRIVATE targetId:[NSString stringWithFormat:@"%@", userId] content:message pushContent:@"你收到一条推送消息" success:^(long messageId) {
+        [[RCIMClient sharedRCIMClient] sendMessage:ConversationType_PRIVATE targetId:[NSString stringWithFormat:@"%@", @"1099"] content:message pushContent:@"你收到一条推送消息" success:^(long messageId) {
             NSLog(@"向融云用户:%@ 发送订单成功", userId);
             
         } error:^(RCErrorCode nErrorCode, long messageId) {

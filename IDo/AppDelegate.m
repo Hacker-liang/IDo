@@ -85,6 +85,27 @@
 
     }
     
+    /**
+     * 推送处理1
+     */
+    if ([application
+         respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        //注册推送, 用于iOS8以及iOS8之后的系统
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings
+                                                settingsForTypes:(UIUserNotificationTypeBadge |
+                                                                  UIUserNotificationTypeSound |
+                                                                  UIUserNotificationTypeAlert)
+                                                categories:nil];
+        [application registerUserNotificationSettings:settings];
+    } else {
+        //注册推送，用于iOS8之前的系统
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeAlert |
+        UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
+    }
+
+    
     // Required
     [APService setupWithOption:launchOptions];
     [APService crashLogON];
@@ -240,6 +261,35 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPushUnreadNotiCacheKey];
     }
     [APService handleRemoteNotification:userInfo];
+    
+    /**
+     * 统计推送打开率2
+     */
+    [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
+    /**
+     * 获取融云推送服务扩展字段2
+     */
+    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
+    if (pushServiceData) {
+        NSLog(@"该远程推送包含来自融云的推送服务");
+        for (id key in [pushServiceData allKeys]) {
+            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
+        }
+    } else {
+        NSLog(@"该远程推送不包含来自融云的推送服务");
+    }
+}
+
+- (void)application:(UIApplication *)application
+didReceiveLocalNotification:(UILocalNotification *)notification {
+    /**
+     * 统计推送打开率3
+     */
+    [[RCIMClient sharedRCIMClient] recordLocalNotificationEvent:notification];
+    
+    //震动
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSound(1007);
 }
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
