@@ -106,7 +106,7 @@
 //    footerView.backgroundColor=[UIColor yellowColor];
     
     UIButton *moneyRuleBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    moneyRuleBtn.frame=CGRectMake(0.3*WIDTH, 20, 0.4*WIDTH, 0.04*HEIGHT);
+    moneyRuleBtn.frame=CGRectMake(0.35*WIDTH, 20, 0.3*WIDTH, 0.05*WIDTH);
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIcon"] forState:UIControlStateNormal];
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIconCh"] forState:UIControlStateHighlighted];
 //    moneyRuleBtn.backgroundColor=[UIColor yellowColor];
@@ -203,6 +203,9 @@
         [SVProgressHUD showErrorWithStatus:@"红包总个数不得低于1"];
         return;
     }
+    
+    
+    
     NSLog(@"[_moneyTotal floatValue]/[_moneyCount intValue] %f",[_moneyTotal doubleValue]/[_moneyCount intValue]);
     
     if ([_moneyTotal doubleValue]/[_moneyCount intValue] <0.010000 == YES ) {
@@ -265,7 +268,7 @@
                 return;
             }
             if([tempStatus integerValue] == 1) {
-//                [self sendOrderPushWithOrderId:[[dict objectForKey:@"data"] objectForKey:@"id"]];
+                [self sendOrderPushWithRedId:_RedMoneyID];
                 if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];
 //                    [self.navigationController popViewControllerAnimated:YES];
@@ -284,10 +287,41 @@
     }];
 }
 
+- (void)sendOrderPushWithRedId:(NSString *)redId
+{
+    NSString *url = [NSString stringWithFormat:@"%@gettzpersonnum", baseUrl];
+    
+    [SVHTTPRequest POST:url parameters:@{@"redId": redId, @"devnumber": [APService registrationID]} completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if([tempStatus integerValue] == 1) {
+                
+            } else {
+            }
+        } else {
+        }
+    }];
+    
+}
+
 #pragma mark 红包支付
 - (void)payRedMoney
 {
     PayViewController *vc = [[PayViewController alloc] init];
+    vc.fatherC=@"RedMoney";
     vc.price = _moneyTotal;
     vc.redEnvelopeId=_RedMoneyID;
     vc.isRedMoney=YES;
@@ -436,7 +470,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.view endEditing:YES];
     if (indexPath.row == 0 && indexPath.section == 0) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"悬赏金额" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"红包总金额" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
         if (_moneyTotal == 0) {
@@ -444,7 +478,7 @@
         } else {
             tf.text = _moneyTotal;
         }
-        tf.keyboardType = UIKeyboardTypeNumberPad;
+        tf.keyboardType = UIKeyboardTypeDefault;
         
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if (buttonIndex == 1) {
@@ -460,7 +494,7 @@
         }];
         
     } else if (indexPath.row == 0 && indexPath.section == 1) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"悬赏个数" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"红包总数" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
         if ([_moneyCount intValue] == 0) {

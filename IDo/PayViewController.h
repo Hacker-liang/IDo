@@ -11,6 +11,7 @@
 typedef void(^PaySuccessBlock)(BOOL success,NSString *errorStr);
 
 @interface PayViewController : TZViewController <UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic,strong) NSString *fatherC;
 
 @property(strong,nonatomic)UITableView *payTab;
 @property(strong,nonatomic)NSString *price;

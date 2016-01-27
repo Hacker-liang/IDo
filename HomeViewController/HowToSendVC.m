@@ -42,14 +42,13 @@
 
 -(void)creatUI
 {
-    UIScrollView *ADscrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
-    ADscrollView.delegate=self;
-    ADscrollView.contentSize=CGSizeMake(WIDTH, HEIGHT*5);
-    [self.view addSubview:ADscrollView];
-    
-    UIImageView *image=[[UIImageView alloc]initWithFrame:ADscrollView.frame];
-    image.image=[UIImage imageNamed:@"howtosend.jpg"];
-    [ADscrollView addSubview:image];
+    UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
+    //    自动缩放页面和自动检测电话
+    webView.scalesPageToFit=YES;
+    //    webView.detectsPhoneNumbers=YES;
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://m.bjwogan.com/pc/?url=/7/13/p3078779498fd0f"]];
+    [self.view addSubview:webView];
+    [webView loadRequest:request];
     
 }
 

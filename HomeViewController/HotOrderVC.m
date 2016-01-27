@@ -27,6 +27,7 @@
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = barButton;
+    [self creatUI];
 }
 
 - (void)goBack
@@ -36,6 +37,17 @@
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+-(void)creatUI
+{
+    UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
+    //    自动缩放页面和自动检测电话
+    webView.scalesPageToFit=YES;
+    //    webView.detectsPhoneNumbers=YES;
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://m.bjwogan.com/pc/?url=/25/2/p3078759847346d"]];
+    [self.view addSubview:webView];
+    [webView loadRequest:request];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -291,7 +291,13 @@
             NSString *status = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([status isEqualToString:@"1"]) {
                 [[UserManager shareUserManager] userInfo].wallet.remainingMoney = [NSString stringWithFormat:@"%f", ([[[UserManager shareUserManager] userInfo].wallet.remainingMoney floatValue] - [price floatValue])];
-                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                if ([self.fatherC isEqualToString:@"RedMoney"]) {
+                    [SVProgressHUD showSuccessWithStatus:@"恭喜您，红包已成功派出，系统会随时通知能最新进展。"];
+                }
+                else{
+                    [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                }
+                
                 [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
             }
             else{
