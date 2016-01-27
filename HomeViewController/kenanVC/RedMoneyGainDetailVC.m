@@ -66,6 +66,15 @@
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [self.view addSubview:image];
     
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame=CGRectMake(10, 25, 150, 34);
+    [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setTitle:@"红包领取详情" forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
     UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
     headImage.backgroundColor=[UIColor yellowColor];
     headImage.layer.cornerRadius=0.1*WIDTH;

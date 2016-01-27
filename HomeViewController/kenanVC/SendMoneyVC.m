@@ -59,6 +59,7 @@
 
     _orderDetail.distance = @"10";
     self.navigationItem.title = @"派红包";
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderContentTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderContentCell"];
     [self Time];

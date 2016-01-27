@@ -27,12 +27,12 @@
     
     _infoLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, 0.06*HEIGHT, 0.6*WIDTH, 0.04*HEIGHT)];
     _infoLab.textColor=[UIColor lightGrayColor];
-    _infoLab.font=[UIFont systemFontOfSize:0.02*HEIGHT];
+    _infoLab.font=[UIFont systemFontOfSize:0.025*HEIGHT];
     [self.contentView addSubview:_infoLab];
     
     _timeLab=[[UILabel alloc]initWithFrame:CGRectMake(0.6*WIDTH-5, 0.06*HEIGHT, 0.4*WIDTH, 0.04*HEIGHT)];
     _timeLab.textAlignment=2;
-    _timeLab.font=[UIFont systemFontOfSize:0.02*HEIGHT];
+    _timeLab.font=[UIFont systemFontOfSize:0.025*HEIGHT];
     _timeLab.textColor=[UIColor lightGrayColor];
     [self.contentView addSubview:_timeLab];
 }

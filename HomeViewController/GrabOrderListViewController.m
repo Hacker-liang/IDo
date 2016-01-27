@@ -198,7 +198,8 @@
             [self closeView];
             RedGainDetailVC *redGainVC=[[RedGainDetailVC alloc]init];
             redGainVC.redResultDic=resultDic[@"data"];
-            [self.navigationController pushViewController:redGainVC animated:NO];
+//            [self.navigationController pushViewController:redGainVC animated:NO];
+            [self presentViewController:redGainVC animated:NO completion:nil];
         }
     }];
 

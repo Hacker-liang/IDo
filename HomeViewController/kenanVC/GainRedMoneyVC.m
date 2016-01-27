@@ -28,7 +28,7 @@
     self.view.backgroundColor=APP_PAGE_COLOR;
     self.navigationItem.title = @"收到的红包";
     self.edgesForExtendedLayout=0;
-    [self initNav];
+//    [self initNav];
     [self initArr];
     [self postGainRedMoey];
 }
@@ -36,14 +36,13 @@
 -(void)initNav
 {
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_normal.png"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_hilighted.png"] forState:UIControlStateHighlighted];
-    
+    button.frame=CGRectMake(10, 25, 100, 34);
+    [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [button setTitle:@"收到的红包" forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -20)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(0, 0, 30, 30)];
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = barButton;
+    [self.view addSubview:button];
 }
 
 - (void)gotoBack
@@ -65,9 +64,9 @@
 -(void)postGainRedMoey
 {
     NSString *gainRedListUrl=[NSString stringWithFormat:@"%@redGrabList",baseUrl];
-    NSDictionary *gainRedListDic=@{@"memberId":@"21722"};
     
-//    NSString *me= [UserManager shareUserManager].userInfo.userid ;
+    NSString *memberId= [UserManager shareUserManager].userInfo.userid ;
+    NSDictionary *gainRedListDic=@{@"memberId":memberId};
     
     [SVHTTPRequest POST:gainRedListUrl parameters:gainRedListDic completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         _resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
@@ -88,9 +87,19 @@
     _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.45*HEIGHT)];
     _headView.backgroundColor=APP_PAGE_COLOR;
     
+    
     UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [_headView addSubview:image];
+    
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame=CGRectMake(10, 25, 150, 34);
+    [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setTitle:@"收到的红包" forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
+    [_headView addSubview:button];
     
     UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
     headImage.backgroundColor=[UIColor yellowColor];
@@ -132,9 +141,10 @@
 
 -(void)creatUI
 {
-    _gainRedMoneyTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
+    _gainRedMoneyTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
     _gainRedMoneyTab.delegate=self;
     _gainRedMoneyTab.dataSource=self;
+    _gainRedMoneyTab.separatorStyle=0;
     [self.view addSubview:_gainRedMoneyTab];
 }
 
@@ -177,7 +187,8 @@
 {
     RedMoneyGainDetailVC *redMoneyVC=[[RedMoneyGainDetailVC alloc]init];
     redMoneyVC.detailModel=[_modelArr objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:redMoneyVC animated:NO];
+//    [self.navigationController pushViewController:redMoneyVC animated:NO];
+    [self presentViewController:redMoneyVC animated:NO completion:nil];
 }
 
 #pragma mark SYSTEM

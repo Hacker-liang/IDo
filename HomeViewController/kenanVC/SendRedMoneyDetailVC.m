@@ -33,7 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=APP_PAGE_COLOR;
-    self.navigationItem.title = @"红包领取详情";
+//    self.navigationItem.title = @"红包领取详情";
     self.edgesForExtendedLayout=0;
     [self initNav];
     [self initArr];
@@ -112,6 +112,15 @@
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [_headView addSubview:image];
     
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame=CGRectMake(10, 25, 150, 34);
+    [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setTitle:@"红包发放详情" forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
+    [_headView addSubview:button];
+    
     UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
     headImage.backgroundColor=[UIColor yellowColor];
     headImage.layer.cornerRadius=0.1*WIDTH;
@@ -141,7 +150,7 @@
             break;
         
         case 1:
-            statu=@"已过期,剩余金额已退回。领取";
+            statu=[NSString stringWithFormat:@"已过期,剩余金额%@已退回。领取",_redMoney];
             break;
             
         case 2:
@@ -151,7 +160,8 @@
             break;
     }
     
-    UILabel *infoLab=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.45*HEIGHT-50, WIDTH-10, 40)];
+    UILabel *infoLab=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.45*HEIGHT-60, WIDTH-10, 50)];
+    infoLab.numberOfLines=0;
     infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%@/%@元",statu,_DetailGrabCount,_count,_moneyGrab,_totalMoney];
     infoLab.textColor=UIColorFromRGB(0xa4a4a4);
     [_headView addSubview:infoLab];
@@ -160,9 +170,10 @@
 
 -(void)creatUI
 {
-    _sendRedMoneyTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStyleGrouped];
+    _sendRedMoneyTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
     _sendRedMoneyTab.delegate=self;
     _sendRedMoneyTab.dataSource=self;
+    _sendRedMoneyTab.separatorStyle=0;
     [self.view addSubview:_sendRedMoneyTab];
 }
 

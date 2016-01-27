@@ -29,6 +29,7 @@
         [self.contentView addSubview:_nameLab];
         
         _timeLab=[[UILabel alloc]initWithFrame:CGRectMake(0.1*HEIGHT, 0.06*HEIGHT, WIDTH-0.1*HEIGHT-10, 0.04*HEIGHT)];
+        _timeLab.font=[UIFont systemFontOfSize:0.025*HEIGHT];
         [self.contentView addSubview:_timeLab];
         
         _moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0.8*WIDTH, 0.01*HEIGHT, 0.2*WIDTH-10, 0.04*HEIGHT)];

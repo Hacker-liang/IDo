@@ -137,6 +137,7 @@
 {
     SendMoneyVC *sendMoneyVC=[[SendMoneyVC alloc]init];
     [self.navigationController pushViewController:sendMoneyVC animated:NO];
+//    [self presentViewController:sendMoneyVC animated:NO completion:nil];
 }
 
 @end

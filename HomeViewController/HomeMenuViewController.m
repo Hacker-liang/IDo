@@ -160,9 +160,7 @@
 - (void)gotoMyProfile
 {
     MyRedMoneyVC *myRed=[[MyRedMoneyVC alloc]init];
-    [self.frostedViewController hideMenuViewController];
-    
-    [_mainViewController.navigationController pushViewController:myRed animated:YES];
+    [self presentViewController:myRed animated:NO completion:nil];
 }
 
 - (void)gotoMessageCenter

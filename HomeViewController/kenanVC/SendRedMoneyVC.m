@@ -30,7 +30,7 @@
     self.navigationItem.title = @"派出的红包";
     self.edgesForExtendedLayout=0;
     _userInfo = [UserManager shareUserManager].userInfo;
-    [self initNav];
+//    [self initNav];
     [self initArr];
     [self postSendRedMoey];
 }
@@ -38,14 +38,13 @@
 -(void)initNav
 {
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_normal.png"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_hilighted.png"] forState:UIControlStateHighlighted];
-    
+    button.frame=CGRectMake(10, 25, 100, 34);
+    [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [button setTitle:@"派出的红包" forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -20)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(0, 0, 30, 30)];
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = barButton;
+    [self.view addSubview:button];
 }
 
 - (void)gotoBack
@@ -97,6 +96,14 @@
     UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [_headView addSubview:image];
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame=CGRectMake(10, 25, 150, 34);
+    [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setTitle:@"派出的红包" forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
+    [_headView addSubview:button];
     
     UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
     headImage.backgroundColor=[UIColor yellowColor];
@@ -136,9 +143,10 @@
 
 -(void)creatUI
 {
-    _sendRedTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
+    _sendRedTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
     _sendRedTab.delegate=self;
     _sendRedTab.dataSource=self;
+    _sendRedTab.separatorStyle=0;
     [self.view addSubview:_sendRedTab];
 }
 
@@ -183,7 +191,8 @@
     SendRedMoneyDetailVC *sendRedMoneyVC=[[SendRedMoneyDetailVC alloc]init];
     _model=[_modelArr objectAtIndex:indexPath.row];
     sendRedMoneyVC.redId=_model.redId;
-    [self.navigationController pushViewController:sendRedMoneyVC animated:NO];
+//    [self.navigationController pushViewController:sendRedMoneyVC animated:NO];
+    [self presentViewController:sendRedMoneyVC animated:NO completion:nil];
 }
 
 #pragma mark SYSTEM

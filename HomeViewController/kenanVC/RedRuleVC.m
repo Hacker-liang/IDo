@@ -67,7 +67,7 @@
     lab1.text=@"红包派发规则";
     lab1.numberOfLines=0;
     lab1.textColor=UIColorFromRGB(0xf89d46);
-    lab1.font=[UIFont systemFontOfSize:20];
+//    lab1.font=[UIFont systemFontOfSize:20];
     [self.view addSubview:lab1];
     
     

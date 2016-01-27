@@ -36,15 +36,6 @@
 
 -(void)initNav
 {
-    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_normal.png"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"common_icon_navigation_back_hilighted.png"] forState:UIControlStateHighlighted];
-    
-    [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(0, 0, 30, 30)];
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = barButton;
 }
 
 -(void)creatUI
@@ -52,6 +43,15 @@
     UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [self.view addSubview:image];
+    
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame=CGRectMake(10, 25, 150, 34);
+    [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setTitle:@"红包领取详情" forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
     
     UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.1*HEIGHT, 0.1*HEIGHT)];
     headImage.backgroundColor=[UIColor yellowColor];
@@ -87,10 +87,16 @@
     nothingLab.text=@"很遗憾红包已被抢光!";
     nothingLab.textAlignment=1;
     int status=[[NSString stringWithFormat:@"%@",_redResultDic[@"status"]] intValue];
+    UIButton *gainMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    gainMoneyBtn.frame=CGRectMake(0.5*WIDTH-110, HEIGHT-160, 220, 20);
+    [gainMoneyBtn setTitle:@"已存入钱包，可直接提现" forState:UIControlStateNormal];
+    [gainMoneyBtn setTitleColor:UIColorFromRGB(0x456d98) forState:UIControlStateNormal];
+    [gainMoneyBtn addTarget:self action:@selector(GainCash) forControlEvents:UIControlEventTouchUpInside];
     switch (status) {
         case 0:
             moneyLab.attributedText = attStr;
             [self.view addSubview:moneyLab];
+            [self.view addSubview:gainMoneyBtn];
             break;
         
         case 1:
@@ -109,19 +115,13 @@
     }
     
     
-    UIButton *gainMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    gainMoneyBtn.frame=CGRectMake(0.5*WIDTH-110, HEIGHT-160, 220, 20);
-    [gainMoneyBtn setTitle:@"已存入钱包，可直接提现" forState:UIControlStateNormal];
-    [gainMoneyBtn setTitleColor:UIColorFromRGB(0x456d98) forState:UIControlStateNormal];
-    [gainMoneyBtn addTarget:self action:@selector(GainCash) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:gainMoneyBtn];
-    
 }
 
 -(void)GainCash
 {
     MyWalletViewController *myWslletVC=[[MyWalletViewController alloc]init];
-    [self.navigationController pushViewController:myWslletVC animated:NO];
+    UINavigationController *myWslletNav=[[UINavigationController alloc]initWithRootViewController:myWslletVC];
+    [self.navigationController pushViewController:myWslletNav animated:NO];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

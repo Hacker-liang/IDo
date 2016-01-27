@@ -387,21 +387,48 @@
                     } else {
                         SendRedMoneyDetailVC *ctl = [[SendRedMoneyDetailVC alloc] init];
                         ctl.redId = redId;
-                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                        ctl.isGameOver=NO;
+                        [self.homeViewController presentViewController:ctl animated:YES completion:nil];
                     }
                 } else {
                     SendRedMoneyDetailVC *ctl = [[SendRedMoneyDetailVC alloc] init];
                     ctl.redId = redId;
-                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                    ctl.isGameOver=NO;
+                    [self.homeViewController presentViewController:ctl animated:YES completion:nil];
                 }
             }
         }];
     }
     
-//    if ([notificationType isEqualToString:@"redPayback"]) {
-//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包已过期" message:@"您的红包已过期，退回余额" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"知道啦", nil];
-//        [alert show];
-//    }
+    if ([notificationType isEqualToString:@"redPayback"]) {
+        NSString *redMoney = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"money"]];
+        NSString *message=[NSString stringWithFormat:@"您的红包已过期，退回余额%@元。快去看看吧。",redMoney];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包已过期" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"知道啦", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex==0) {
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[SendRedMoneyDetailVC class]]) {
+                    NSString *redId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"redId"]];
+                    if ([((SendRedMoneyDetailVC *)ctl).redId isEqualToString:redId]) {
+                        
+                    } else {
+                        SendRedMoneyDetailVC *ctl = [[SendRedMoneyDetailVC alloc] init];
+                        ctl.redId = redId;
+                        ctl.redMoney=redMoney;
+                        ctl.isGameOver=YES;
+                        [self.homeViewController presentViewController:ctl animated:YES completion:nil];
+                    }
+                } else {
+                    SendRedMoneyDetailVC *ctl = [[SendRedMoneyDetailVC alloc] init];
+                    ctl.redId = redId;
+                    ctl.redMoney=redMoney;
+                    ctl.isGameOver=YES;
+                    [self.homeViewController presentViewController:ctl animated:YES completion:nil];
+                }
+            }
+        }];
+
+    }
     
 //    if ([notificationType isEqualToString:@"hasRed"]) {
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包来了" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"知道啦", nil];
