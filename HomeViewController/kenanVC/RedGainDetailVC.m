@@ -78,10 +78,36 @@
     
     [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:35.0] range:NSMakeRange(5,str.length-6)];
     [attStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0xBC4E3F) range:NSMakeRange(5,str.length-6)];
-    moneyLab.attributedText = attStr;
     moneyLab.numberOfLines=0;
     moneyLab.textAlignment=1;
-    [self.view addSubview:moneyLab];
+    
+    UIImageView *nothingImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.3*WIDTH, 0.5*HEIGHT, 0.4*WIDTH, 0.2*WIDTH)];
+    nothingImage.image=[UIImage imageNamed:@"NothingRed"];
+    UILabel *nothingLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nothingImage.frame)+10, WIDTH, 30)];
+    nothingLab.text=@"很遗憾红包已被抢光!";
+    nothingLab.textAlignment=1;
+    int status=[[NSString stringWithFormat:@"%@",_redResultDic[@"status"]] intValue];
+    switch (status) {
+        case 0:
+            moneyLab.attributedText = attStr;
+            [self.view addSubview:moneyLab];
+            break;
+        
+        case 1:
+            break;
+            
+        case 2:
+            [self.view addSubview:nothingImage];
+            [self.view addSubview:nothingLab];
+            break;
+            
+        case 3:
+            
+            break;
+        default:
+            break;
+    }
+    
     
     UIButton *gainMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     gainMoneyBtn.frame=CGRectMake(0.5*WIDTH-110, HEIGHT-160, 220, 20);
