@@ -9,7 +9,7 @@
 #import "SendRedMoneyDetailVC.h"
 #import "SendRedMoneyDetailCell.h"
 #import "SendMoneyDetailModel.h"
-@interface SendRedMoneyDetailVC ()
+@interface SendRedMoneyDetailVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *sendRedMoneyTab;
 @property (nonatomic,strong) UIView *headView;
 @property (nonatomic,strong) NSDictionary *sendRedMoneyResultDic;
@@ -136,12 +136,48 @@
     infoLab.text=[NSString stringWithFormat:@"已领取%@/%@个,共%@/%@元",_DetailGrabCount,_count,_moneyGrab,_totalMoney];
     infoLab.textColor=UIColorFromRGB(0xa4a4a4);
     [_headView addSubview:infoLab];
-    [self.view addSubview:_headView];
+//    [self.view addSubview:_headView];
 }
 
 -(void)creatUI
 {
-    
+    _sendRedMoneyTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStyleGrouped];
+    _sendRedMoneyTab.delegate=self;
+    _sendRedMoneyTab.dataSource=self;
+    [self.view addSubview:_sendRedMoneyTab];
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _modelList.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _model =[_modelArr objectAtIndex:indexPath.row];
+    static NSString *sendRedDetailID=@"sendRedDetailID";
+    SendRedMoneyDetailCell *cell=[tableView dequeueReusableCellWithIdentifier:sendRedDetailID];
+    if (!cell) {
+        cell=[[SendRedMoneyDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sendRedDetailID];
+        
+    }
+    cell.sendRedMDetail=_model;
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 0.1*HEIGHT;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.45*HEIGHT;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return _headView;
 }
 
 - (void)didReceiveMemoryWarning {
