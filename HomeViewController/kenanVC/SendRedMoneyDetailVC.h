@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SendRedMoneyModel.h"
 @interface SendRedMoneyDetailVC : UIViewController
-@property (nonatomic,strong) SendRedMoneyModel *detaileModel;
+@property (nonatomic, copy) NSString *redId;
+//@property (nonatomic,strong) SendRedMoneyModel *detaileModel;
 @end

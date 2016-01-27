@@ -13,18 +13,16 @@
 + (void)asyncLoadNearByOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
 {
     NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
-    
-    
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     [mDict setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
     [mDict setObject:[NSNumber numberWithInteger:size] forKey:@"pageSize"];
     [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
-//    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+    [mDict setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
 
-    [mDict setObject:@"39.7634" forKey:@"lat"];
-    [mDict setObject:@"116.331" forKey:@"lng"];
-    
+//    [mDict setObject:@"39.7634" forKey:@"lat"];
+//    [mDict setObject:@"116.331" forKey:@"lng"];
+//    
     
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -69,6 +67,27 @@
 
         }
     }];
+    
+//    NSString *url1 = [NSString stringWithFormat:@"%@nearRedList",baseUrl];
+//    NSMutableDictionary*mDict1 = [NSMutableDictionary dictionary];
+//    [mDict1 safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
+//    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+//    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+    
+//    [mDict1 setObject:@"39.7634" forKey:@"lat"];
+//    [mDict1 setObject:@"116.331" forKey:@"lng"];
+//    
+//    [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+//        NSLog(@"还有多少个红包没有抢");
+//        NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"还有多少个红包没有抢,%@",resultDic);
+//        NSArray *RedMoneyList=resultDic[@"data"];
+//        NSUserDefaults *redDefaults=[NSUserDefaults standardUserDefaults];
+//        NSString *redCount=[NSString stringWithFormat:@"%lu",(unsigned long)RedMoneyList.count];
+//        [redDefaults setObject:redCount forKey:@"REDCOUNT"];
+//        
+//    }];
+    
 }
 
 + (void)asyncLoadMyGrabHistoryOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion

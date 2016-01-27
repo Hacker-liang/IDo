@@ -15,6 +15,7 @@
 @property (nonatomic,strong) NSString *totalCount;
 @property (nonatomic,strong) NSString *moneyGrab;
 @property (nonatomic,strong) NSString *createTime;
+@property (nonatomic,strong) NSString *status;
 
 -(id)initWithJson:(id)json;
 @end

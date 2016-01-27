@@ -21,6 +21,8 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 
+#import "SendRedMoneyDetailVC.h"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) HomeViewController *homeViewController;
@@ -308,6 +310,7 @@
     NSLog(@"userInfo = %@",userInfo);
     NSString *notificationType = [userInfo[@"extras"] objectForKey:@"type"];
     NSString *orderId = userInfo[@"extras"][@"orderid"];
+    NSString *redId = userInfo[@"extras"][@"redId"];
     
     if ((![UserManager shareUserManager].userInfo.isMute && ![UserManager shareUserManager].userInfo.isSendingOrder) || ![notificationType isEqualToString:@"gettzpersonnum"]) {
         SystemSoundID myAlertSound;
@@ -371,6 +374,40 @@
             }
         }];
     }
+    
+    if ([notificationType isEqualToString:@"grabRed"]) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包已被抢" message:@"您的红包被抢啦，快去看看吧" delegate:self cancelButtonTitle:@"红包详情" otherButtonTitles:@"知道啦", nil];
+        [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex==0) {
+                UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+                if ([ctl isKindOfClass:[SendRedMoneyDetailVC class]]) {
+                    NSString *redId = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"redId"]];
+                    if ([((SendRedMoneyDetailVC *)ctl).redId isEqualToString:redId]) {
+                        
+                    } else {
+                        SendRedMoneyDetailVC *ctl = [[SendRedMoneyDetailVC alloc] init];
+                        ctl.redId = redId;
+                        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                    }
+                } else {
+                    SendRedMoneyDetailVC *ctl = [[SendRedMoneyDetailVC alloc] init];
+                    ctl.redId = redId;
+                    [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+                }
+            }
+        }];
+    }
+    
+//    if ([notificationType isEqualToString:@"redPayback"]) {
+//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包已过期" message:@"您的红包已过期，退回余额" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"知道啦", nil];
+//        [alert show];
+//    }
+    
+//    if ([notificationType isEqualToString:@"hasRed"]) {
+//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包来了" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"知道啦", nil];
+//        [alert show];
+//    }
+    
     if ([notificationType isEqualToString:@"gettzpersonnum"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewOrderNoti object:nil];

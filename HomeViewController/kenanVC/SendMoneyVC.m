@@ -444,7 +444,7 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"红包总金额" message:nil delegate:nil cancelButtonTitle:@"取消"otherButtonTitles:@"确定", nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         UITextField *tf=[alert textFieldAtIndex:0];
-        if (_moneyTotal == 0) {
+        if ([_moneyTotal isEqualToString:@"0"]) {
             tf.text = @"";
         } else {
             tf.text = _moneyTotal;

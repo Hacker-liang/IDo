@@ -106,10 +106,17 @@
     [_headView addSubview:nameLab];
     
     UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame), WIDTH, 0.15*WIDTH)];
-    moneyLab.text=[NSString stringWithFormat:@"%@",_resultDic[@"data"][@"totalMoney"]];
-    moneyLab.textColor=UIColorFromRGB(0xe85946);
+    NSString *moneyStr =[NSString stringWithFormat:@"%@ 元",_resultDic[@"data"][@"totalMoney"]];
+    NSMutableAttributedString *attmoneyStr = [[NSMutableAttributedString alloc] initWithString:moneyStr];
+    
+    [attmoneyStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:0.15*WIDTH] range:NSMakeRange(0,moneyStr.length-2)];
+    [attmoneyStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(0,moneyStr.length-2)];
+    //    moneyLab.text=[NSString stringWithFormat:@"%@元",_sendRedResultDic[@"data"][@"totalMoney"]];
+    moneyLab.attributedText=attmoneyStr;
+//    moneyLab.text=[NSString stringWithFormat:@"%@元",_resultDic[@"data"][@"totalMoney"]];
+//    moneyLab.textColor=UIColorFromRGB(0xe85946);
     moneyLab.textAlignment=1;
-    moneyLab.font=[UIFont systemFontOfSize:0.15*WIDTH];
+//    moneyLab.font=[UIFont systemFontOfSize:0.15*WIDTH];
     [_headView addSubview:moneyLab];
 
     UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.45*HEIGHT-50, WIDTH, 40)];

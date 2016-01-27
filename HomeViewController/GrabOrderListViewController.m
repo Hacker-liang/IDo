@@ -47,6 +47,16 @@
     [_gainRedMoneyBtn setBackgroundImage:[UIImage imageNamed:@"GainRedMoneyIcon"] forState:UIControlStateNormal];
     [_gainRedMoneyBtn addTarget:self action:@selector(gainRedMoneyOrder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_gainRedMoneyBtn];
+//    NSUserDefaults *redDefaults=[NSUserDefaults standardUserDefaults];
+//    NSString *redCount=[redDefaults objectForKey:@"REDCOUNT"];
+//    
+//
+//    NSString *str = [NSString stringWithFormat:@"还有%@个未抢",redCount];
+//    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+//    
+//    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(2,str.length-5)];
+//    [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(2,str.length-5)];
+//    _redNumLab.attributedText = attStr;
     
     _redNumLab=[[UILabel alloc]initWithFrame:CGRectMake(WIDTH-80, 0.1*HEIGHT+85, 75, 20)];
     _redNumLab.adjustsFontSizeToFitWidth = YES;
@@ -86,13 +96,12 @@
     NSString *url1 = [NSString stringWithFormat:@"%@nearRedList",baseUrl];
     NSMutableDictionary*mDict1 = [NSMutableDictionary dictionary];
     [mDict1 safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-    //    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
-    //    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
-    
+//    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+//    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+//
     [mDict1 setObject:@"39.7634" forKey:@"lat"];
     [mDict1 setObject:@"116.331" forKey:@"lng"];
     
-    NSLog(@"李立松柯南%@%@",url1,mDict1);
     [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
@@ -104,7 +113,9 @@
             NSLog(@"李立松柯南redList 柯南%@",resultDic);
             
             _redIdList =[NSMutableArray array];
-            [_redIdList addObjectsFromArray:redList];
+
+           [_redIdList addObjectsFromArray:redList];
+            
 //             NSLog(@"_redIdList %@",_redIdList);
             NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",(unsigned long)redList.count ];
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
@@ -173,7 +184,6 @@
         [openRedBtn addTarget:self action:@selector(openRedMoney) forControlEvents:UIControlEventTouchUpInside];
         [_redBgView addSubview:openRedBtn];
         
-  
     }
 }
 

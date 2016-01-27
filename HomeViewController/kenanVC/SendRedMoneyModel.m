@@ -14,11 +14,28 @@
 {
     self=[super init];
     if (self) {
+        NSLog(@"派出的红包信息%@",json);
+        
         _redId=[json objectForKey:@"redId"];
         _money=[json objectForKey:@"money"];
         _grabCount=[json objectForKey:@"grabCount"];
         _totalCount=[json objectForKey:@"totalCount"];
         _moneyGrab=[json objectForKey:@"moneyGrab"];
+        int redStatus=[[json objectForKey:@"status"] intValue];
+        switch (redStatus) {
+            case 0:
+                _status=@"已领取";
+                break;
+            case 1:
+                _status=@"已过期";
+                break;
+            case 2:
+                _status=@"已完成";
+                break;
+                
+            default:
+                break;
+        }
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];

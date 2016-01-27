@@ -74,7 +74,7 @@
 -(void)postSendRedDetail
 {
     NSString *sendRedDetailUrl=[NSString stringWithFormat:@"%@redGrabDetail",baseUrl];
-    NSDictionary *sendRedDetailDic=@{@"redId":_detaileModel.redId};
+    NSDictionary *sendRedDetailDic=@{@"redId":_redId};
     
     
     [SVHTTPRequest POST:sendRedDetailUrl  parameters:sendRedDetailDic completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -132,8 +132,27 @@
     contentLab.numberOfLines=0;
     [_headView addSubview:contentLab];
     
+    int redStatus=[_sendRedMoneyResultDic[@"data"][@"status"]intValue];
+    NSString *gameOverStr=_sendRedMoneyResultDic[@"data"][@"timeStr"];
+    NSString *statu;
+    switch (redStatus) {
+        case 0:
+            statu=@"已领取";
+            break;
+        
+        case 1:
+            statu=@"已过期,剩余金额已退回。领取";
+            break;
+            
+        case 2:
+            statu=[NSString stringWithFormat:@"历时%@,",gameOverStr];
+            break;
+        default:
+            break;
+    }
+    
     UILabel *infoLab=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.45*HEIGHT-50, WIDTH-10, 40)];
-    infoLab.text=[NSString stringWithFormat:@"已领取%@/%@个,共%@/%@元",_DetailGrabCount,_count,_moneyGrab,_totalMoney];
+    infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%@/%@元",statu,_DetailGrabCount,_count,_moneyGrab,_totalMoney];
     infoLab.textColor=UIColorFromRGB(0xa4a4a4);
     [_headView addSubview:infoLab];
 //    [self.view addSubview:_headView];
