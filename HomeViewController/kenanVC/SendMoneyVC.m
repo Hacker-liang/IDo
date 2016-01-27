@@ -268,7 +268,7 @@
                 return;
             }
             if([tempStatus integerValue] == 1) {
-                [self sendOrderPushWithRedId:_RedMoneyID];
+//                [self sendOrderPushWithRedId:_RedMoneyID];
                 if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];
 //                    [self.navigationController popViewControllerAnimated:YES];
@@ -287,35 +287,6 @@
     }];
 }
 
-- (void)sendOrderPushWithRedId:(NSString *)redId
-{
-    NSString *url = [NSString stringWithFormat:@"%@gettzpersonnum", baseUrl];
-    
-    [SVHTTPRequest POST:url parameters:@{@"redId": redId, @"devnumber": [APService registrationID]} completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (response)
-        {
-            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            NSDictionary *dict = [jsonString objectFromJSONString];
-            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
-                if ([UserManager shareUserManager].isLogin) {
-                    [UserManager shareUserManager].userInfo = nil;
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
-                    }];
-                }
-                return;
-            }
-            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
-            if([tempStatus integerValue] == 1) {
-                
-            } else {
-            }
-        } else {
-        }
-    }];
-    
-}
 
 #pragma mark 红包支付
 - (void)payRedMoney

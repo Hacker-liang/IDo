@@ -10,7 +10,7 @@
 #import "AliPayTool.h"
 #import "MyOrderRootViewController.h"
 #import "HomeViewController.h"
-
+#import "APService.h"
 @interface PayViewController ()
 
 @property (nonatomic) BOOL isPayWithAccountRemainingMoney;  //通过账户余额支付
@@ -293,6 +293,7 @@
                 [[UserManager shareUserManager] userInfo].wallet.remainingMoney = [NSString stringWithFormat:@"%f", ([[[UserManager shareUserManager] userInfo].wallet.remainingMoney floatValue] - [price floatValue])];
                 if ([self.fatherC isEqualToString:@"RedMoney"]) {
                     [SVProgressHUD showSuccessWithStatus:@"恭喜您，红包已成功派出，系统会随时通知能最新进展。"];
+                    [self sendRedPushWithRedId:_redEnvelopeId];
                 }
                 else{
                     [SVProgressHUD showSuccessWithStatus:@"支付成功"];
@@ -311,6 +312,37 @@
     }];
 
 }
+
+- (void)sendRedPushWithRedId:(NSString *)redId
+{
+    NSString *url = [NSString stringWithFormat:@"%@gettzpersonnum", baseUrl];
+    
+    [SVHTTPRequest POST:url parameters:@{@"redId": redId, @"devnumber": [APService registrationID]} completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if([tempStatus integerValue] == 1) {
+                
+            } else {
+            }
+        } else {
+        }
+    }];
+    
+}
+
 
 -(void)getAlipayInfoFromServer
 {
