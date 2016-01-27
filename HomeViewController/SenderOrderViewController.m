@@ -12,6 +12,8 @@
 
 //kenan start
 #import "SendMoneyVC.h"
+#import "HowToSendVC.h"
+#import "HotOrderVC.h"
 //kenan end
 
 @interface SenderOrderViewController ()
@@ -98,23 +100,37 @@
 -(void)creatUI
 {
     _sendOrderDecBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _sendOrderDecBtn.frame=CGRectMake(0.5*WIDTH-100, 0.25*HEIGHT,86 , 16);
+    _sendOrderDecBtn.frame=CGRectMake(0.5*WIDTH-100, 0.33*HEIGHT,86 , 16);
     [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrder"] forState:UIControlStateNormal];
     [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrderCh"] forState:UIControlStateHighlighted];
+    [_sendOrderDecBtn addTarget:self action:@selector(HowToSendOrder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_sendOrderDecBtn];
     
     _hotOrderBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _hotOrderBtn.frame=CGRectMake(0.5*WIDTH+37, 0.25*HEIGHT,63, 16);
+    _hotOrderBtn.frame=CGRectMake(0.5*WIDTH+37, 0.33*HEIGHT,63, 16);
     [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIcon"] forState:UIControlStateNormal];
     [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIconCh"] forState:UIControlStateHighlighted];
+    [_hotOrderBtn addTarget:self action:@selector(HotOrder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_hotOrderBtn];
     
     _sendMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _sendMoneyBtn.frame=CGRectMake(0.25*WIDTH+20, 0.25*HEIGHT+30,0.5*WIDTH , 0.08*HEIGHT);
+    _sendMoneyBtn.frame=CGRectMake(0.5*WIDTH-75, 0.23*HEIGHT, 150, 35);
     [_sendMoneyBtn setBackgroundImage:[UIImage imageNamed:@"SendMoneyImage"] forState:UIControlStateNormal];
     [_sendMoneyBtn addTarget:self action:@selector(sendMoney) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_sendMoneyBtn];
 
+}
+
+-(void)HowToSendOrder
+{
+    HowToSendVC *howtoVC=[[HowToSendVC alloc]init];
+    [self.navigationController pushViewController:howtoVC animated:NO];
+}
+
+-(void)HotOrder
+{
+    HotOrderVC *hotOrderVC=[[HotOrderVC alloc]init];
+    [self.navigationController pushViewController:hotOrderVC animated:NO];
 }
 
 -(void)sendMoney

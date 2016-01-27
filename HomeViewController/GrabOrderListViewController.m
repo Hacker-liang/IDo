@@ -91,16 +91,22 @@
     
     [mDict1 setObject:@"39.7634" forKey:@"lat"];
     [mDict1 setObject:@"116.331" forKey:@"lng"];
+    
+    NSLog(@"李立松柯南%@%@",url1,mDict1);
     [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
-            NSLog(@"附近红包%@",dict);
+//            NSLog(@"附近红包%@",dict);
             NSArray *redList=dict[@"data"];
+            NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"李立松柯南redList 柯南%@",resultDic);
+            
             _redIdList =[NSMutableArray array];
             [_redIdList addObjectsFromArray:redList];
-             NSLog(@"_redIdList %@",_redIdList);
-            NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",redList.count ];
+//             NSLog(@"_redIdList %@",_redIdList);
+            NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",(unsigned long)redList.count ];
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
             
             [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(2,str.length-5)];
@@ -118,7 +124,6 @@
         
     }else
     {
-        
         _bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
         _bgView.backgroundColor=[UIColor blackColor];
         _bgView.alpha=0.7;
@@ -187,7 +192,6 @@
         }
     }];
 
-//        [self initData];
 }
 
 -(void)closeView

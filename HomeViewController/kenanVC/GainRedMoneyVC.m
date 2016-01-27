@@ -9,13 +9,15 @@
 #import "GainRedMoneyVC.h"
 #import "GainRedMoneyCell.h"
 #import "RedMoneyGainDetailVC.h"
-#import "GainRedMoneyModel.h"
 @interface GainRedMoneyVC ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) UserInfo *userInfo;
-@property (nonatomic, strong) UITableView *gainRedTab;
-@property (nonatomic, strong) NSDictionary *gainRedResultDic;
-@property (nonatomic, strong) NSMutableArray *modelList;
+@property (nonatomic,strong) UITableView *gainRedMoneyTab;
+@property (nonatomic,strong) UIView *headView;
+@property (nonatomic,strong) NSDictionary *resultDic;
+@property (nonatomic,strong) NSMutableArray *modelArr;
+@property (nonatomic,strong) NSArray *modelList;
+
 @property (nonatomic,strong) GainRedMoneyModel *model;
+@property (nonatomic, strong) UserInfo *userInfo;
 @end
 
 @implementation GainRedMoneyVC
@@ -26,18 +28,9 @@
     self.view.backgroundColor=APP_PAGE_COLOR;
     self.navigationItem.title = @"收到的红包";
     self.edgesForExtendedLayout=0;
-    [self initModelList];
-     _userInfo = [UserManager shareUserManager].userInfo;
-    NSString *gainRedListUrl=[NSString stringWithFormat:@"%@redGrabList",baseUrl];
-    NSDictionary *gainRedListDic=@{@"memberId":@"2655"};
-//    [UserManager shareUserManager].userInfo.userid
-    [SVHTTPRequest POST:gainRedListUrl parameters:gainRedListDic completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        _gainRedResultDic =[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
-        [self setModel];
-        [self creatUI];
-        NSLog(@"_gainRedResultDic %@",_gainRedResultDic);
-    }];
     [self initNav];
+    [self initArr];
+    [self postGainRedMoey];
 }
 
 -(void)initNav
@@ -62,85 +55,105 @@
     }
 }
 
-#pragma mark 数据匹配
--(void)initModelList
+-(void)initArr
 {
-    _modelList=[NSMutableArray array];
+    _userInfo=[UserManager shareUserManager].userInfo;
+    _modelArr =[NSMutableArray array];
+    
 }
--(void)setModel
+
+-(void)postGainRedMoey
 {
-    _modelList=_gainRedResultDic[@"data"][@"list"];
-    for (int i=0; i<_modelList.count; i++) {
-        _model=[[GainRedMoneyModel alloc]init];
-        _model.headImage=[NSString stringWithFormat:@"%@%@",headURL,_modelList[i][@"picture"]];
-        _model.sexImage=[NSString stringWithFormat:@"%@%@",baseUrl,_modelList[i][@"sex"]];
-        _model.nameLab=[NSString stringWithFormat:@"%@%@",baseUrl,_modelList[i][@"name"]];
-        _model.moneyLab=[NSString stringWithFormat:@"%@%@",baseUrl,_modelList[i][@"money"]];
-        
-    }
+    NSString *gainRedListUrl=[NSString stringWithFormat:@"%@redGrabList",baseUrl];
+    NSDictionary *gainRedListDic=@{@"memberId":@"21722"};
+    
+//    NSString *me= [UserManager shareUserManager].userInfo.userid ;
+    
+    [SVHTTPRequest POST:gainRedListUrl parameters:gainRedListDic completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        _resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"_resultDic _resultDic%@",_resultDic);
+        _modelList=_resultDic[@"data"][@"list"];
+        _modelArr=[NSMutableArray array];
+        for (int i=0; i<_modelList.count; i++) {
+            _model=[[GainRedMoneyModel alloc]initWithJson:_modelList[i]];
+            [_modelArr addObject:_model];
+        }
+        [self creatHeadView];
+        [self creatUI];
+    }];
+}
+
+-(void)creatHeadView
+{
+    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.45*HEIGHT)];
+    _headView.backgroundColor=APP_PAGE_COLOR;
+    
+    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
+    image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
+    [_headView addSubview:image];
+    
+    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
+    headImage.backgroundColor=[UIColor yellowColor];
+    headImage.layer.cornerRadius=0.1*WIDTH;
+    headImage.layer.masksToBounds=YES;
+    [headImage sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
+    [_headView addSubview:headImage];
+    
+    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.11*HEIGHT+0.2*WIDTH, WIDTH, 30)];
+    nameLab.text=[NSString stringWithFormat:@"%@共收到",_userInfo.nickName];
+    nameLab.textAlignment=1;
+    nameLab.textColor=[UIColor blackColor];
+    [_headView addSubview:nameLab];
+    
+    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame), WIDTH, 0.15*WIDTH)];
+    moneyLab.text=[NSString stringWithFormat:@"%@",_resultDic[@"data"][@"totalMoney"]];
+    moneyLab.textColor=UIColorFromRGB(0xe85946);
+    moneyLab.textAlignment=1;
+    moneyLab.font=[UIFont systemFontOfSize:0.15*WIDTH];
+    [_headView addSubview:moneyLab];
+
+    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.45*HEIGHT-50, WIDTH, 40)];
+    moneyNumLab.textAlignment=1;
+    NSString *str = [NSString stringWithFormat:@"收到的红包总数%@个",_resultDic[@"data"][@"count"]];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+    
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(7,str.length-8)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(7,str.length-8)];
+    moneyNumLab.attributedText=attStr;
+    [_headView addSubview:moneyNumLab];
 }
 
 -(void)creatUI
 {
-    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
-    image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
-    [self.view addSubview:image];
-    
-    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.1*HEIGHT, 0.1*HEIGHT)];
-    headImage.backgroundColor=[UIColor yellowColor];
-    //    headImage.image=[UIImage imageNamed:@"ic_avatar_default.png"];
-    headImage.layer.cornerRadius=0.05*HEIGHT;
-    headImage.layer.masksToBounds=YES;
-    [headImage sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
-    [self.view addSubview:headImage];
-    
-    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.22*HEIGHT, WIDTH, 30)];
-    nameLab.text=[NSString stringWithFormat:@"%@共收到",_userInfo.nickName];
-    nameLab.textAlignment=1;
-    [self.view addSubview:nameLab];
-    
-    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.25*HEIGHT, WIDTH, 0.15*HEIGHT)];
-    moneyLab.text=[NSString stringWithFormat:@"%@元",_gainRedResultDic[@"data"][@"totalMoney"]];
-    moneyLab.textAlignment=1;
-    moneyLab.font=[UIFont systemFontOfSize:0.1*HEIGHT];
-    moneyLab.textColor=UIColorFromRGB(0xe85946);
-    [self.view addSubview:moneyLab];
-    
-    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.4*HEIGHT, WIDTH, 0.05*HEIGHT)];
-    NSString *str = [NSString stringWithFormat:@"收到的红包总数%@个",_gainRedResultDic[@"data"][@"count"] ];
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
-    
-    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:0.03*HEIGHT] range:NSMakeRange(7,str.length-8)];
-    [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(7,str.length-8)];
-    moneyNumLab.attributedText = attStr;
-    moneyNumLab.adjustsFontSizeToFitWidth = YES;
-//    moneyNumLab.text=[NSString stringWithFormat:@"收到的红包总数222个",_userInfo.nickName];
-    moneyNumLab.textAlignment=1;
-    [self.view addSubview:moneyNumLab];
-    
-    _gainRedTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0.5*HEIGHT, WIDTH, 0.5*HEIGHT-64) style:UITableViewStylePlain];
-    _gainRedTab.delegate=self;
-    _gainRedTab.dataSource=self;
-    _gainRedTab.separatorStyle=0;
-    [self.view addSubview:_gainRedTab];
+    _gainRedMoneyTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
+    _gainRedMoneyTab.delegate=self;
+    _gainRedMoneyTab.dataSource=self;
+    [self.view addSubview:_gainRedMoneyTab];
 }
 
-
-#pragma mark UITableView DELEGATE
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 10;
-}
+#pragma mark TABLEVIEW Delegate
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    _model=[_modelArr objectAtIndex:indexPath.row];
     static NSString *cellID=@"gainRedMoneyCell";
     GainRedMoneyCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
         cell =[[GainRedMoneyCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         
     }
+    cell.gainRedMoneyModel=_model;
     return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _modelList.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.45*HEIGHT;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -148,9 +161,15 @@
     return 0.11*HEIGHT;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return _headView;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RedMoneyGainDetailVC *redMoneyVC=[[RedMoneyGainDetailVC alloc]init];
+    redMoneyVC.detailModel=[_modelArr objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:redMoneyVC animated:NO];
 }
 
@@ -158,9 +177,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [_gainRedTab reloadData];
+    [_gainRedMoneyTab reloadData];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

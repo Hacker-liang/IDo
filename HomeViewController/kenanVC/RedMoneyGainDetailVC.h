@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GainRedMoneyModel.h"
 @interface RedMoneyGainDetailVC : UIViewController
-
+@property (nonatomic,strong) GainRedMoneyModel *detailModel;
 @end

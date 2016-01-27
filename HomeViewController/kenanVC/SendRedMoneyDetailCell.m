@@ -1,14 +1,14 @@
 //
-//  GainRedMoneyCell.m
+//  SendRedMoneyDetailCell.m
 //  IDo
 //
-//  Created by 柯南 on 16/1/24.
+//  Created by 柯南 on 16/1/26.
 //  Copyright © 2016年 com.Yinengxin.xianne. All rights reserved.
 //
 
-#import "GainRedMoneyCell.h"
+#import "SendRedMoneyDetailCell.h"
 
-@implementation GainRedMoneyCell
+@implementation SendRedMoneyDetailCell
 
 -(instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -42,16 +42,16 @@
     return self;
 }
 
--(void)setGainRedMoneyModel:(GainRedMoneyModel *)gainRedMoneyModel
+-(void)setSendRedMDetail:(SendMoneyDetailModel *)sendRedMDetail
 {
-        _gainRedMoneyModel=gainRedMoneyModel;
+    _sendRedMDetail=sendRedMDetail;
     
-        [_headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_gainRedMoneyModel.headImage]] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
+    [_headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_sendRedMDetail.headImage]] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     
-        _sexImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@",_gainRedMoneyModel.sexImage]];
-        _nameLab.text=[NSString stringWithFormat:@"%@",_gainRedMoneyModel.name];
-        _moneyLab.text=[NSString stringWithFormat:@"%@元",_gainRedMoneyModel.money];
-        _timeLab.text=[NSString stringWithFormat:@"%@",_gainRedMoneyModel.time];
+    _sexImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@",_sendRedMDetail.sexImage]];
+    _nameLab.text=[NSString stringWithFormat:@"%@",_sendRedMDetail.name];
+    _moneyLab.text=[NSString stringWithFormat:@"%@元",_sendRedMDetail.money];
+    _timeLab.text=[NSString stringWithFormat:@"%@",_sendRedMDetail.time];
 }
 
 - (void)awakeFromNib {

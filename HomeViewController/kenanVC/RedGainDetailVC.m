@@ -7,7 +7,7 @@
 //
 
 #import "RedGainDetailVC.h"
-
+#import "MyWalletViewController.h"
 @interface RedGainDetailVC ()
 
 @end
@@ -83,12 +83,19 @@
     moneyLab.textAlignment=1;
     [self.view addSubview:moneyLab];
     
-    UILabel *downLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.75*HEIGHT, WIDTH, 0.05*HEIGHT)];
-    downLab.text=[NSString stringWithFormat:@"已存入钱包，可直接提现"];
-    downLab.textAlignment=1;
-    downLab.textColor=UIColorFromRGB(0x456d9b);
-    [self.view addSubview:downLab];
+    UIButton *gainMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    gainMoneyBtn.frame=CGRectMake(0.5*WIDTH-110, HEIGHT-160, 220, 20);
+    [gainMoneyBtn setTitle:@"已存入钱包，可直接提现" forState:UIControlStateNormal];
+    [gainMoneyBtn setTitleColor:UIColorFromRGB(0x456d98) forState:UIControlStateNormal];
+    [gainMoneyBtn addTarget:self action:@selector(GainCash) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:gainMoneyBtn];
     
+}
+
+-(void)GainCash
+{
+    MyWalletViewController *myWslletVC=[[MyWalletViewController alloc]init];
+    [self.navigationController pushViewController:myWslletVC animated:NO];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

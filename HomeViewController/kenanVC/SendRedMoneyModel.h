@@ -9,20 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface SendRedMoneyModel : NSObject
-@property (nonatomic,strong) NSString *headImage;
-@property (nonatomic,strong) NSString *sexImage;
-@property (nonatomic,strong) NSString *titleLab;
-@property (nonatomic,strong) NSString *sendNumLab;
-
-
-@property (nonatomic,strong) NSString *timeLab;
-@property (nonatomic,strong) NSString *contentLab;
-@property (nonatomic,strong) NSString *redMoneyImage;
-
-@property (nonatomic,strong) NSString *addressImage;
-@property (nonatomic,strong) NSString *addressLab;
-
-@property (nonatomic,strong) NSString *status;
+@property (nonatomic,strong) NSString *redId;
+@property (nonatomic,strong) NSString *money;
+@property (nonatomic,strong) NSString *grabCount;
+@property (nonatomic,strong) NSString *totalCount;
+@property (nonatomic,strong) NSString *moneyGrab;
+@property (nonatomic,strong) NSString *createTime;
 
 -(id)initWithJson:(id)json;
 @end
