@@ -22,14 +22,17 @@
 -(void)creteUI
 {
     _moneyTotalLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, 0.01*HEIGHT, 0.6*WIDTH, 0.04*HEIGHT)];
+    _moneyTotalLab.font=[UIFont systemFontOfSize:0.03*HEIGHT];
     [self.contentView addSubview:_moneyTotalLab];
     
     _infoLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, 0.06*HEIGHT, 0.6*WIDTH, 0.04*HEIGHT)];
     _infoLab.textColor=[UIColor lightGrayColor];
+    _infoLab.font=[UIFont systemFontOfSize:0.02*HEIGHT];
     [self.contentView addSubview:_infoLab];
     
     _timeLab=[[UILabel alloc]initWithFrame:CGRectMake(0.6*WIDTH-5, 0.06*HEIGHT, 0.4*WIDTH, 0.04*HEIGHT)];
     _timeLab.textAlignment=2;
+    _timeLab.font=[UIFont systemFontOfSize:0.02*HEIGHT];
     _timeLab.textColor=[UIColor lightGrayColor];
     [self.contentView addSubview:_timeLab];
 }

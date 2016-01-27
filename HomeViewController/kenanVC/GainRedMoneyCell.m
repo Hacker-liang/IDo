@@ -26,12 +26,16 @@
         [self.contentView addSubview:_sexImage];
         
         _nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0.1*HEIGHT, 0.01*HEIGHT, 0.4*WIDTH, 0.04*HEIGHT)];
+        _nameLab.font=[UIFont systemFontOfSize:0.03*HEIGHT];
         [self.contentView addSubview:_nameLab];
         
         _timeLab=[[UILabel alloc]initWithFrame:CGRectMake(0.1*HEIGHT, 0.06*HEIGHT, WIDTH-0.1*HEIGHT-10, 0.04*HEIGHT)];
+        _timeLab.textColor=[UIColor lightGrayColor];
+        _timeLab.font=[UIFont systemFontOfSize:0.02*HEIGHT];
         [self.contentView addSubview:_timeLab];
         
-        _moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0.8*WIDTH, 0.01*HEIGHT, 0.2*WIDTH-10, 0.04*HEIGHT)];
+        _moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0.8*WIDTH, 0.02*HEIGHT, 0.2*WIDTH-10, 0.04*HEIGHT)];
+        _moneyLab.font=[UIFont systemFontOfSize:0.03*HEIGHT];
         [self.contentView addSubview:_moneyLab];
         
         UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0.1*WIDTH, 0.11*HEIGHT-1, 0.9*WIDTH, 1)];
