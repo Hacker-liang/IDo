@@ -122,7 +122,8 @@
     [_headView addSubview:nameLab];
     
     UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+40*HEIGHT/960, WIDTH, 88*HEIGHT/960)];
-    NSString *moneyStr =[NSString stringWithFormat:@"%@ 元",_sendRedResultDic[@"data"][@"totalMoney"]];
+    double money=[_sendRedResultDic[@"data"][@"totalMoney"] doubleValue];
+    NSString *moneyStr =[NSString stringWithFormat:@"%0.2f 元",money];
     NSMutableAttributedString *attmoneyStr = [[NSMutableAttributedString alloc] initWithString:moneyStr];
     
     [attmoneyStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:80*HEIGHT/960] range:NSMakeRange(0,moneyStr.length-2)];
