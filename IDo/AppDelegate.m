@@ -403,7 +403,7 @@
     if ([notificationType isEqualToString:@"redPayback"]) {
         NSString *redMoney = [NSString stringWithFormat:@"%@",userInfo[@"extras"][@"money"]];
         NSString *message=[NSString stringWithFormat:@"您的红包已过期，退回余额%@元。快去看看吧。",redMoney];
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包已过期" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"知道啦", nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包已过期" message:message delegate:self cancelButtonTitle:@"红包详情" otherButtonTitles:@"知道啦", nil];
         [alert showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
             if (buttonIndex==0) {
                 UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
@@ -430,10 +430,13 @@
 
     }
     
-//    if ([notificationType isEqualToString:@"hasRed"]) {
+    if ([notificationType isEqualToString:@"hasRed"]) {
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"红包来了" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"知道啦", nil];
 //        [alert show];
-//    }
+//       UIViewController *ctl = _homeViewController.navigationController.viewControllers.lastObject;
+//        [self.homeViewController.navigationController pushViewController:ctl animated:YES];
+    }
+    
     
     if ([notificationType isEqualToString:@"gettzpersonnum"])
     {

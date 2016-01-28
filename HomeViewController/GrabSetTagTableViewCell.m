@@ -103,7 +103,7 @@
 
 - (CGFloat)tzcollectionLayoutWidth
 {
-    NSLog(@"%f", self.bounds.size.width);
+//    NSLog(@"%f", self.bounds.size.width);
     return self.bounds.size.width-40;
 }
 

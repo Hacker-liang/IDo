@@ -40,7 +40,7 @@
 
 -(void)creatUI
 {
-    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
+    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 229*HEIGHT/960)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [self.view addSubview:image];
     
@@ -53,62 +53,75 @@
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
-    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.1*HEIGHT, 0.1*HEIGHT)];
+    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(244*WIDTH/640, 137*HEIGHT/960, 152*WIDTH/640, 152*WIDTH/640)];
     headImage.backgroundColor=[UIColor yellowColor];
 //        headImage.image=[UIImage imageNamed:@"ic_avatar_default.png"];
-    headImage.layer.cornerRadius=0.05*HEIGHT;
+    headImage.layer.cornerRadius=76*WIDTH/640;
     headImage.layer.masksToBounds=YES;
     [headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",headURL,_redResultDic[@"picture"]]] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     [self.view addSubview:headImage];
     
-    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.22*HEIGHT, WIDTH, 30)];
+    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headImage.frame)+20*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     nameLab.text=[NSString stringWithFormat:@"%@的红包",_redResultDic[@"name"]];
     nameLab.textAlignment=1;
+    nameLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     [self.view addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0.1*WIDTH, 0.25*HEIGHT, 0.8*WIDTH, 0.2*HEIGHT)];
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 62*HEIGHT/960)];
     contentLab.text=[NSString stringWithFormat:@"%@",_redResultDic[@"content"]];
     contentLab.numberOfLines=0;
+    contentLab.font=[UIFont systemFontOfSize:28*HEIGHT/960];
     contentLab.textAlignment=1;
     [self.view addSubview:contentLab];
     
-    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0.1*WIDTH, 0.5*HEIGHT, 0.8*WIDTH, 0.2*HEIGHT)];
-    NSString *str = [NSString stringWithFormat:@"恭喜您获得\n%@元",_redResultDic[@"currMoney"]];
+    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(contentLab.frame)+78*HEIGHT/960, WIDTH, 38*HEIGHT/960)];
+    moneyLab.text=@"恭喜您，获得";
+    moneyLab.textAlignment=1;
+//    moneyLab.font=[UIFont systemFontOfSize:20*HEIGHT/960];
+
+    
+    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+40*HEIGHT/960, WIDTH, 80*HEIGHT/960)];
+    NSString *str = [NSString stringWithFormat:@"%@元",_redResultDic[@"currMoney"]];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     
-    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:35.0] range:NSMakeRange(5,str.length-6)];
-    [attStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0xBC4E3F) range:NSMakeRange(5,str.length-6)];
-    moneyLab.numberOfLines=0;
-    moneyLab.textAlignment=1;
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:60*HEIGHT/960] range:NSMakeRange(0,str.length-1)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0xBC4E3F) range:NSMakeRange(0,str.length-1)];
+    moneyNumLab.numberOfLines=0;
+    moneyNumLab.textAlignment=1;
     
     UIImageView *nothingImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.3*WIDTH, 0.5*HEIGHT, 0.4*WIDTH, 0.2*WIDTH)];
     nothingImage.image=[UIImage imageNamed:@"NothingRed"];
     UILabel *nothingLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nothingImage.frame)+10, WIDTH, 30)];
-    nothingLab.text=@"很遗憾红包已被抢光!";
     nothingLab.textAlignment=1;
     int status=[[NSString stringWithFormat:@"%@",_redResultDic[@"status"]] intValue];
     UIButton *gainMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    gainMoneyBtn.frame=CGRectMake(0.5*WIDTH-110, HEIGHT-160, 220, 20);
+    gainMoneyBtn.frame=CGRectMake(0.5*WIDTH-110, HEIGHT-80, 220, 20);
     [gainMoneyBtn setTitle:@"已存入钱包，可直接提现" forState:UIControlStateNormal];
     [gainMoneyBtn setTitleColor:UIColorFromRGB(0x456d98) forState:UIControlStateNormal];
-    [gainMoneyBtn addTarget:self action:@selector(GainCash) forControlEvents:UIControlEventTouchUpInside];
+    [gainMoneyBtn addTarget:self action:@selector(GainCash1) forControlEvents:UIControlEventTouchUpInside];
     switch (status) {
         case 0:
-            moneyLab.attributedText = attStr;
+            moneyNumLab.attributedText = attStr;
             [self.view addSubview:moneyLab];
+            [self.view addSubview:moneyNumLab];
             [self.view addSubview:gainMoneyBtn];
             break;
         
         case 1:
+            nothingLab.text=@"很遗憾红包已被抢光!";
+            [self.view addSubview:nothingImage];
+            [self.view addSubview:nothingLab];
             break;
             
         case 2:
+             nothingLab.text=@"很遗憾红包已被抢光!";
             [self.view addSubview:nothingImage];
             [self.view addSubview:nothingLab];
             break;
             
         case 3:
-            
+            nothingLab.text=@"您已抢过!";
+            [self.view addSubview:nothingLab];
             break;
         default:
             break;
@@ -117,11 +130,14 @@
     
 }
 
--(void)GainCash
+-(void)GainCash1
 {
+    NSLog(@"3434");
+    
     MyWalletViewController *myWslletVC=[[MyWalletViewController alloc]init];
     UINavigationController *myWslletNav=[[UINavigationController alloc]initWithRootViewController:myWslletVC];
-    [self.navigationController pushViewController:myWslletNav animated:NO];
+//    [self.navigationController pushViewController:myWslletNav animated:NO];
+    [self presentViewController:myWslletNav animated:NO completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

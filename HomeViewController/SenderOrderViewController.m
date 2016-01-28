@@ -50,12 +50,12 @@
     _dataSource = @[messag, @"把琐事交给别人去做\n自己去做更有价值的事情",messag1];
     _sendOrderBtn.titleLabel.numberOfLines = 2.0;
     self.view.backgroundColor = APP_PAGE_COLOR;
-    _mainView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-100, kWindowWidth, 80) animationDuration:3];
+    _mainView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(0, HEIGHT-55, kWindowWidth, 55) animationDuration:3];
     [self.view addSubview:_mainView];
     
     NSMutableArray *viewsArray = [@[] mutableCopy];
     for (int i = 0; i < _dataSource.count; ++i) {
-        UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 80)];
+        UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 70)];
         tempLabel.textAlignment = NSTextAlignmentCenter;
         tempLabel.numberOfLines = 0;
         tempLabel.textColor = [UIColor grayColor];
@@ -81,7 +81,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _mainView.frame = CGRectMake(0, self.view.bounds.size.height-100, kWindowWidth, 80);
+    _mainView.frame = CGRectMake(0, self.view.bounds.size.height-55, kWindowWidth, 55);
 
 }
 
@@ -99,25 +99,33 @@
 
 -(void)creatUI
 {
+    _sendMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    _sendMoneyBtn.frame=CGRectMake(260*WIDTH/640, CGRectGetMaxY(_sendOrderBtn.frame)+11*HEIGHT/960, 119*WIDTH/640, 119*WIDTH/640);
+    [_sendMoneyBtn setBackgroundImage:[UIImage imageNamed:@"SendMoneyImage"] forState:UIControlStateNormal];
+    [_sendMoneyBtn addTarget:self action:@selector(sendMoney) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_sendMoneyBtn];
+    
     _sendOrderDecBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _sendOrderDecBtn.frame=CGRectMake(0.5*WIDTH-100, 0.33*HEIGHT,86 , 16);
-    [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrder"] forState:UIControlStateNormal];
-    [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrderCh"] forState:UIControlStateHighlighted];
+    _sendOrderDecBtn.frame=CGRectMake(0.5*WIDTH-70, CGRectGetMaxY(_sendMoneyBtn.frame)+11*HEIGHT/960,60 , 16);
+//    [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrder"] forState:UIControlStateNormal];
+//    [_sendOrderDecBtn setBackgroundImage:[UIImage imageNamed:@"HowSendOrderCh"] forState:UIControlStateHighlighted];
+    [_sendOrderDecBtn setTitle:@"如何派单" forState:UIControlStateNormal];
+    [_sendOrderDecBtn setTitleColor:UIColorFromRGB(0x909090) forState:UIControlStateNormal];
+    [_sendOrderDecBtn setTitleColor:UIColorFromRGB(0xfe7f00) forState:UIControlStateHighlighted];
+    _sendOrderDecBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     [_sendOrderDecBtn addTarget:self action:@selector(HowToSendOrder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_sendOrderDecBtn];
     
     _hotOrderBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _hotOrderBtn.frame=CGRectMake(0.5*WIDTH+37, 0.33*HEIGHT,63, 16);
-    [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIcon"] forState:UIControlStateNormal];
-    [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIconCh"] forState:UIControlStateHighlighted];
+    _hotOrderBtn.frame=CGRectMake(0.5*WIDTH+10, CGRectGetMaxY(_sendMoneyBtn.frame)+11*HEIGHT/960,60, 16);
+//    [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIcon"] forState:UIControlStateNormal];
+//    [_hotOrderBtn setBackgroundImage:[UIImage imageNamed:@"HotOrderIconCh"] forState:UIControlStateHighlighted];
+    [_hotOrderBtn setTitle:@"热门任务" forState:UIControlStateNormal];
+    [_hotOrderBtn setTitleColor:UIColorFromRGB(0x909090) forState:UIControlStateNormal];
+     [_hotOrderBtn setTitleColor:UIColorFromRGB(0xfe7f00) forState:UIControlStateHighlighted];
+    _hotOrderBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     [_hotOrderBtn addTarget:self action:@selector(HotOrder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_hotOrderBtn];
-    
-    _sendMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    _sendMoneyBtn.frame=CGRectMake(0.5*WIDTH-75, 0.23*HEIGHT, 150, 35);
-    [_sendMoneyBtn setBackgroundImage:[UIImage imageNamed:@"SendMoneyImage"] forState:UIControlStateNormal];
-    [_sendMoneyBtn addTarget:self action:@selector(sendMoney) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_sendMoneyBtn];
 
 }
 

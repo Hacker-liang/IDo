@@ -13,7 +13,7 @@
 
 +(void)asyncLoadNearByAllListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *, NSDictionary *))completion
 {
-    NSLog(@"刷新1次");
+//    NSLog(@"刷新1次");
     
     NSDictionary *redResultDic=[[NSDictionary alloc]init];
         NSString *url1 = [NSString stringWithFormat:@"%@nearRedList",baseUrl];
@@ -26,9 +26,9 @@
 //        [mDict1 setObject:@"116.331" forKey:@"lng"];
     
         [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-            NSLog(@"还有多少个红包没有抢");
+//            NSLog(@"还有多少个红包没有抢");
             NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"还有多少个红包没有抢,%@",resultDic);
+//            NSLog(@"还有多少个红包没有抢,%@",resultDic);
             NSArray *RedMoneyList=resultDic[@"data"];
             NSUserDefaults *redDefaults=[NSUserDefaults standardUserDefaults];
             NSString *redCount=[NSString stringWithFormat:@"%lu",(unsigned long)RedMoneyList.count];
@@ -97,7 +97,7 @@
 
 + (void)asyncLoadNearByOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^)(BOOL, NSArray *))completion
 {
-    NSLog(@"刷新2次");
+//    NSLog(@"刷新2次");
     
     NSString *url = [NSString stringWithFormat:@"%@getorderlist",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
@@ -165,9 +165,9 @@
 //    [mDict1 setObject:@"116.331" forKey:@"lng"];
     
     [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSLog(@"还有多少个红包没有抢");
+//        NSLog(@"还有多少个红包没有抢");
         NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"还有多少个红包没有抢,%@",resultDic);
+//        NSLog(@"还有多少个红包没有抢,%@",resultDic);
         NSArray *RedMoneyList=resultDic[@"data"];
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults setObject:RedMoneyList forKey:@"RedMoneyList"];

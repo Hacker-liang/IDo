@@ -105,10 +105,10 @@
 
 -(void)creatHeadView
 {
-    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.45*HEIGHT)];
+    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 500*HEIGHT/960)];
     _headView.backgroundColor=APP_PAGE_COLOR;
     
-    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
+    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 229*HEIGHT/960)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [_headView addSubview:image];
     
@@ -121,20 +121,22 @@
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [_headView addSubview:button];
     
-    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
+    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(244*WIDTH/640, 137*HEIGHT/960, 152*WIDTH/640, 152*WIDTH/640)];
     headImage.backgroundColor=[UIColor yellowColor];
-    headImage.layer.cornerRadius=0.1*WIDTH;
+    headImage.layer.cornerRadius=76*WIDTH/640;
     headImage.layer.masksToBounds=YES;
     [headImage sd_setImageWithURL:[NSURL URLWithString:_headImage] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     [_headView addSubview:headImage];
     
-    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.11*HEIGHT+0.2*WIDTH, WIDTH, 30)];
+    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headImage.frame)+20*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     nameLab.text=[NSString stringWithFormat:@"%@的红包",_name];
     nameLab.textAlignment=1;
+    nameLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     nameLab.textColor=[UIColor blackColor];
     [_headView addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame), WIDTH, 0.15*WIDTH)];
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 62*HEIGHT/960)];
+    contentLab.font=[UIFont systemFontOfSize:28*HEIGHT/960];
     contentLab.text=[NSString stringWithFormat:@"%@",_content];
     contentLab.textColor=[UIColor lightGrayColor];
     contentLab.textAlignment=1;
@@ -150,7 +152,13 @@
             break;
         
         case 1:
-            statu=[NSString stringWithFormat:@"已过期,剩余金额%@已退回。领取",_redMoney];
+            if ([_fromC isEqualToString:@"sendRedMoney"]) {
+                NSInteger money=[_detaileModel.money integerValue]-[_detaileModel.moneyGrab integerValue];
+                statu=[NSString stringWithFormat:@"已过期,剩余金额%ld元已退回。领取",(long)money];
+            } else {
+                statu=[NSString stringWithFormat:@"已过期,剩余金额%@元已退回。领取",_redMoney];
+            }
+            
             break;
             
         case 2:
@@ -160,8 +168,9 @@
             break;
     }
     
-    UILabel *infoLab=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.45*HEIGHT-60, WIDTH-10, 50)];
+    UILabel *infoLab=[[UILabel alloc]initWithFrame:CGRectMake(10, 420*HEIGHT/960, WIDTH-20, 80*HEIGHT/960)];
     infoLab.numberOfLines=0;
+    infoLab.font=[UIFont systemFontOfSize:25*HEIGHT/960];
     infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%@/%@元",statu,_DetailGrabCount,_count,_moneyGrab,_totalMoney];
     infoLab.textColor=UIColorFromRGB(0xa4a4a4);
     [_headView addSubview:infoLab];
@@ -202,7 +211,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.45*HEIGHT;
+    return 500*HEIGHT/960;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

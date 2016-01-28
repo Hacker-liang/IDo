@@ -62,7 +62,7 @@
 
 -(void)creatUI
 {
-    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
+    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 229*HEIGHT/960)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [self.view addSubview:image];
     
@@ -75,55 +75,61 @@
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
-    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
+    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(244*WIDTH/640, 137*HEIGHT/960, 152*WIDTH/640, 152*WIDTH/640)];
     headImage.backgroundColor=[UIColor yellowColor];
-    headImage.layer.cornerRadius=0.1*WIDTH;
+    headImage.layer.cornerRadius=76*WIDTH/640;
     headImage.layer.masksToBounds=YES;
 
     [headImage sd_setImageWithURL:[NSURL URLWithString:_headStr] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     [self.view addSubview:headImage];
     
-    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.25*HEIGHT, WIDTH, 0.05*HEIGHT)];
+    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(headImage.frame)+20*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     nameLab.text=_nameStr;
     nameLab.textAlignment=1;
+    nameLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     nameLab.textColor=[UIColor blackColor];
     [self.view addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.3*HEIGHT, WIDTH, 0.2*HEIGHT)];
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 62*HEIGHT/960)];
     contentLab.text=_contentStr;
     contentLab.textAlignment=1;
+    contentLab.font=[UIFont systemFontOfSize:28*HEIGHT/960];
     contentLab.textColor=[UIColor blackColor];
     [self.view addSubview:contentLab];
     
-    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0.2*WIDTH, 0.5*HEIGHT, 0.6*WIDTH, 0.05*HEIGHT)];
+    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(contentLab.frame)+78*HEIGHT/960, WIDTH, 0.05*HEIGHT)];
     moneyLab.text=@"恭喜您，获得";
     moneyLab.textAlignment=1;
-    moneyLab.font=[UIFont systemFontOfSize:0.04*HEIGHT];
+    moneyLab.font=[UIFont systemFontOfSize:0.03*HEIGHT];
     [self.view addSubview:moneyLab];
     
-    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0.2*WIDTH, 0.55*HEIGHT, 0.6*WIDTH, 0.15*HEIGHT)];
+    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+40*HEIGHT/960, WIDTH, 80*HEIGHT/960)];
+//    moneyNumLab.font=[UIFont systemFontOfSize:80*HEIGHT/960];
     NSString *str =_moneyStr;
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     
-    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30.0] range:NSMakeRange(0,str.length-1)];
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:80*HEIGHT/960] range:NSMakeRange(0,str.length-1)];
     [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(0,str.length-1)];
     moneyNumLab.attributedText=attStr;
     moneyNumLab.textAlignment=1;
     [self.view addSubview:moneyNumLab];
     
     UIButton *gainMoneyBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    gainMoneyBtn.frame=CGRectMake(0.5*WIDTH-110, HEIGHT-160, 220, 20);
+    gainMoneyBtn.frame=CGRectMake(0, 848*HEIGHT/960, WIDTH, 30*HEIGHT/960);
     [gainMoneyBtn setTitle:@"已存入钱包，可直接提现" forState:UIControlStateNormal];
     [gainMoneyBtn setTitleColor:UIColorFromRGB(0x456d98) forState:UIControlStateNormal];
-    [gainMoneyBtn addTarget:self action:@selector(GainCash) forControlEvents:UIControlEventTouchUpInside];
+    gainMoneyBtn.titleLabel.font=[UIFont systemFontOfSize:28*HEIGHT/960];
+    [gainMoneyBtn addTarget:self action:@selector(GainCash2) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:gainMoneyBtn];
     
 }
 
--(void)GainCash
+-(void)GainCash2
 {
     MyWalletViewController *myWslletVC=[[MyWalletViewController alloc]init];
-    [self.navigationController pushViewController:myWslletVC animated:NO];
+//    [self.navigationController pushViewController:myWslletVC animated:NO];
+    UINavigationController *myWslletNav=[[UINavigationController alloc]initWithRootViewController:myWslletVC];
+    [self presentViewController:myWslletNav animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

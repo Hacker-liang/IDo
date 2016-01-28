@@ -90,10 +90,12 @@
 
 -(void)creatHeadView
 {
-    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.45*HEIGHT)];
+    //    (70*WIDTH/640, 541*HEIGHT/960, 501*WIDTH/640, 90*HEIGHT/960)
+
+    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 636*HEIGHT/960)];
     _headView.backgroundColor=APP_PAGE_COLOR;
     
-    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 0.15*HEIGHT)];
+    UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 229*HEIGHT/960)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [_headView addSubview:image];
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -105,24 +107,25 @@
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [_headView addSubview:button];
     
-    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.4*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
+    UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(244*WIDTH/640, 137*HEIGHT/960, 152*WIDTH/640, 152*WIDTH/640)];
     headImage.backgroundColor=[UIColor yellowColor];
-    headImage.layer.cornerRadius=0.1*WIDTH;
+    headImage.layer.cornerRadius=76*WIDTH/640;
     headImage.layer.masksToBounds=YES;
     [headImage sd_setImageWithURL:[NSURL URLWithString:_userInfo.avatar] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     [_headView addSubview:headImage];
     
-    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.11*HEIGHT+0.2*WIDTH, WIDTH, 30)];
+    UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headImage.frame)+20*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     nameLab.text=[NSString stringWithFormat:@"%@共派出",_userInfo.nickName];
     nameLab.textAlignment=1;
+    nameLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     nameLab.textColor=[UIColor blackColor];
     [_headView addSubview:nameLab];
     
-    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame), WIDTH, 0.15*WIDTH)];
+    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+40*HEIGHT/960, WIDTH, 88*HEIGHT/960)];
     NSString *moneyStr =[NSString stringWithFormat:@"%@ 元",_sendRedResultDic[@"data"][@"totalMoney"]];
     NSMutableAttributedString *attmoneyStr = [[NSMutableAttributedString alloc] initWithString:moneyStr];
     
-    [attmoneyStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:0.15*WIDTH] range:NSMakeRange(0,moneyStr.length-2)];
+    [attmoneyStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:80*HEIGHT/960] range:NSMakeRange(0,moneyStr.length-2)];
     [attmoneyStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(0,moneyStr.length-2)];
 //    moneyLab.text=[NSString stringWithFormat:@"%@元",_sendRedResultDic[@"data"][@"totalMoney"]];
     moneyLab.attributedText=attmoneyStr;
@@ -130,12 +133,13 @@
     moneyLab.textAlignment=1;
     [_headView addSubview:moneyLab];
     
-    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.45*HEIGHT-50, WIDTH, 40)];
+    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+72*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     moneyNumLab.textAlignment=1;
+    moneyNumLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     NSString *str = [NSString stringWithFormat:@"派出红包总数%@个",_sendRedResultDic[@"data"][@"count"]];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     
-    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(6,str.length-7)];
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:34*HEIGHT/960] range:NSMakeRange(6,str.length-7)];
     [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(6,str.length-7)];
     moneyNumLab.attributedText=attStr;
     [_headView addSubview:moneyNumLab];
@@ -173,7 +177,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.45*HEIGHT;
+    return 636*HEIGHT/960;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -191,6 +195,8 @@
     SendRedMoneyDetailVC *sendRedMoneyVC=[[SendRedMoneyDetailVC alloc]init];
     _model=[_modelArr objectAtIndex:indexPath.row];
     sendRedMoneyVC.redId=_model.redId;
+    sendRedMoneyVC.fromC=@"sendRedMoney";
+    sendRedMoneyVC.detaileModel=_model;
 //    [self.navigationController pushViewController:sendRedMoneyVC animated:NO];
     [self presentViewController:sendRedMoneyVC animated:NO completion:nil];
 }

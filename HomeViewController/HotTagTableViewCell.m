@@ -22,12 +22,12 @@
         
         if (offsetX + itemSize.width > (kWindowWidth-40)) {
             offsetX = itemSize.width;
-            NSLog(@"offsetX: %lf", offsetX);
+//            NSLog(@"offsetX: %lf", offsetX);
             
             line++;
         } else {
             offsetX += itemSize.width;
-            NSLog(@"offsetX: %lf", offsetX);
+//            NSLog(@"offsetX: %lf", offsetX);
             
         }
     }

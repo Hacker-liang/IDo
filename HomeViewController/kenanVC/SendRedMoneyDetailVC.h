@@ -12,5 +12,6 @@
 @property (nonatomic, copy) NSString *redId;
 @property (nonatomic, copy) NSString *redMoney;
 @property (nonatomic) BOOL isGameOver;
-//@property (nonatomic,strong) SendRedMoneyModel *detaileModel;
+@property (nonatomic,strong) NSString *fromC;
+@property (nonatomic,strong) SendRedMoneyModel *detaileModel;
 @end

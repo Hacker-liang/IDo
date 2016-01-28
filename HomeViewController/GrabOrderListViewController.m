@@ -110,7 +110,7 @@
             NSArray *redList=dict[@"data"];
             NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
             
-            NSLog(@"李立松柯南redList 柯南%@",resultDic);
+//            NSLog(@"李立松柯南redList 柯南%@",resultDic);
             
             _redIdList =[NSMutableArray array];
 
@@ -140,11 +140,11 @@
         _bgView.alpha=0.7;
         [self.navigationController.view addSubview:_bgView];
         
-        _redBgView=[[UIView alloc]initWithFrame:CGRectMake(0.1*WIDTH, 0.15*HEIGHT, 0.8*WIDTH, 0.7*HEIGHT)];
+        _redBgView=[[UIView alloc]initWithFrame:CGRectMake(60*WIDTH/640, 125*HEIGHT/960, 520*WIDTH/640, 710*HEIGHT/960)];
         _redBgView.backgroundColor=[UIColor whiteColor];
         [self.navigationController.view addSubview:_redBgView];
         
-        _bgImageView=[[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 0.8*WIDTH+20, 0.7*HEIGHT+20)];
+        _bgImageView=[[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 520*WIDTH/640+20, 710*HEIGHT/960+20)];
         _bgImageView.image=[UIImage imageNamed:@"RedBg"];
         [_redBgView addSubview:_bgImageView];
         
@@ -154,31 +154,33 @@
         [backBtn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
         [_redBgView addSubview:backBtn];
         
-        UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.3*WIDTH, 0.1*HEIGHT, 0.2*WIDTH, 0.2*WIDTH)];
+        UIImageView *headImage=[[UIImageView alloc]initWithFrame:CGRectMake(213*WIDTH/640, 61*HEIGHT/960, 94*WIDTH/640, 94*WIDTH/640)];
         //    headImage.backgroundColor=[UIColor yellowColor];
         //    headImage.image=[UIImage imageNamed:@"ic_avatar_default.png"];
-        headImage.layer.cornerRadius=0.1*WIDTH;
+        headImage.layer.cornerRadius=47*WIDTH/640;
         headImage.layer.masksToBounds=YES;
         [headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",headURL,_redIdList[0][@"picture"]]] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
         [_redBgView addSubview:headImage];
         
-        UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.3*HEIGHT-50, 0.8*WIDTH, 30)];
+        UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 176*HEIGHT/960, 520*WIDTH/640, 36*HEIGHT/960)];
         nameLab.text=_redIdList[0][@"name"];
         nameLab.textAlignment=1;
+        nameLab.font=[UIFont systemFontOfSize:25*HEIGHT/960];
         nameLab.textColor=[UIColor whiteColor];
         [_redBgView addSubview:nameLab];
         
-        UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0.3*HEIGHT, 0.8*WIDTH, 0.2*HEIGHT)];
+        UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, 257*HEIGHT/960, 520*WIDTH/640-0.1*WIDTH, 70*HEIGHT/960)];
         contentLab.text=_redIdList[0][@"content"];
         contentLab.numberOfLines=0;
         contentLab.textAlignment=1;
+        contentLab.font=[UIFont systemFontOfSize:25*HEIGHT/960];
         contentLab.textColor=[UIColor whiteColor];
         [_redBgView addSubview:contentLab];
         
         
         UIButton *openRedBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        openRedBtn.frame=CGRectMake(0.25*WIDTH, 0.5*HEIGHT, 0.3*WIDTH, 0.3*WIDTH);
-        openRedBtn.layer.cornerRadius=0.15*WIDTH;
+        openRedBtn.frame=CGRectMake(174*WIDTH/640, 440*HEIGHT/960, 175*HEIGHT/960, 175*HEIGHT/960);
+        openRedBtn.layer.cornerRadius=88*HEIGHT/960;
         openRedBtn.layer.masksToBounds=YES;
         [openRedBtn setBackgroundImage:[UIImage imageNamed:@"OpenRedMoney"] forState:UIControlStateNormal];
         [openRedBtn addTarget:self action:@selector(openRedMoney) forControlEvents:UIControlEventTouchUpInside];
@@ -196,6 +198,13 @@
         if (response) {
             NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
             [self closeView];
+            
+            NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",(unsigned long)_redIdList.count ];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+            
+            [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(2,str.length-5)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(2,str.length-5)];
+            _redNumLab.attributedText = attStr;
             RedGainDetailVC *redGainVC=[[RedGainDetailVC alloc]init];
             redGainVC.redResultDic=resultDic[@"data"];
 //            [self.navigationController pushViewController:redGainVC animated:NO];
@@ -238,6 +247,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self.tableView.header beginRefreshing];
 }
 
 - (void)dealloc
@@ -276,7 +286,7 @@
             [_dataSource addObjectsFromArray:orderList];
             NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
             _redIdList=[userDefaults objectForKey:@"RedMoneyList"];
-            NSLog(@"柯南RedMoneyList %@",_redIdList);
+//            NSLog(@"柯南RedMoneyList %@",_redIdList);
             NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",(unsigned long)_redIdList.count ];
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
             
