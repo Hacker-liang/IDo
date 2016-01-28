@@ -17,6 +17,8 @@
  *  @param size
  *  @param completion 
  */
++ (void)asyncLoadNearByAllListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^) (BOOL isSuccess, NSArray *orderList,NSDictionary *redDic))completion;
+
 + (void)asyncLoadNearByOrderListWithPage:(NSInteger)page pageSize:(NSInteger)size completionBlock:(void (^) (BOOL isSuccess, NSArray *orderList))completion;
 
 /**

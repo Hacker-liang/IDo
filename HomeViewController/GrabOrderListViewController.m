@@ -39,8 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initData];
+     _redIdList =[NSMutableArray array];
+//    [self initData];
     
     _gainRedMoneyBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     _gainRedMoneyBtn.frame=CGRectMake(WIDTH-80, 0.1*HEIGHT, 67, 81);
@@ -96,11 +96,11 @@
     NSString *url1 = [NSString stringWithFormat:@"%@nearRedList",baseUrl];
     NSMutableDictionary*mDict1 = [NSMutableDictionary dictionary];
     [mDict1 safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"memberid"];
-//    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
-//    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
+    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lng] forKey:@"lng"];
+    [mDict1 setObject:[NSString stringWithFormat:@"%f",[UserManager shareUserManager].userInfo.lat] forKey:@"lat"];
 //
-    [mDict1 setObject:@"39.7634" forKey:@"lat"];
-    [mDict1 setObject:@"116.331" forKey:@"lng"];
+//    [mDict1 setObject:@"39.7634" forKey:@"lat"];
+//    [mDict1 setObject:@"116.331" forKey:@"lng"];
     
     [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
@@ -274,6 +274,15 @@
                 [_dataSource removeAllObjects];
             }
             [_dataSource addObjectsFromArray:orderList];
+            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+            _redIdList=[userDefaults objectForKey:@"RedMoneyList"];
+            NSLog(@"柯南RedMoneyList %@",_redIdList);
+            NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",(unsigned long)_redIdList.count ];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+            
+            [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(2,str.length-5)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(2,str.length-5)];
+            _redNumLab.attributedText = attStr;
         }
         [self setupEmptyView];
         
@@ -281,6 +290,23 @@
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
     }];
+    
+//    [OrderManager asyncLoadNearByAllListWithPage:page pageSize:200 completionBlock:^(BOOL isSuccess, NSArray *orderList, NSDictionary *redDic) {
+//        if (isSuccess) {
+//            NSLog(@"主页测试%@",orderList);
+//            _currentPage = page;
+//            if (_currentPage == 1) {
+//                [_dataSource removeAllObjects];
+//            }
+//            [_dataSource addObjectsFromArray:orderList];
+//        }
+//        [self setupEmptyView];
+//        
+//        [self.tableView reloadData];
+//        [self.tableView.header endRefreshing];
+//        [self.tableView.footer endRefreshing];
+//        
+//    }];
 }
 
 

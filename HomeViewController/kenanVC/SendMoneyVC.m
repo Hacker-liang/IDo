@@ -205,6 +205,11 @@
         return;
     }
     
+    if ([_moneyCount intValue] > 50) {
+        [SVProgressHUD showErrorWithStatus:@"红包总个数不得大于50"];
+        return;
+    }
+    
     
     
     NSLog(@"[_moneyTotal floatValue]/[_moneyCount intValue] %f",[_moneyTotal doubleValue]/[_moneyCount intValue]);
