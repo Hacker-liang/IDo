@@ -3162,7 +3162,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9063ae1d-b8db-40c8-ab63-a32762ec40bf";
+				PROVISIONING_PROFILE = "cd6124b2-4993-4f9e-a3eb-72c8af60f3ab";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3240,7 +3240,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cd6124b2-4993-4f9e-a3eb-72c8af60f3ab";
 			};
 			name = Debug;
 		};

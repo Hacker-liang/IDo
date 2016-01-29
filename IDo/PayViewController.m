@@ -350,7 +350,7 @@
     NSString *url = [NSString stringWithFormat:@"%@alipay",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
     if (self.isRedMoney==YES) {
-        [mDict setObject:_redEnvelopeId forKey:@"redId"];
+        [mDict setObject:_redEnvelopeId forKey:@"redEnvelopeId"];
     }else
     {
         [mDict setObject:orderid forKey:@"orderId"];
