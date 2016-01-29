@@ -188,7 +188,6 @@
         contentLab.textColor=[UIColor whiteColor];
         [_redBgView addSubview:contentLab];
         
-        
         UIButton *openRedBtn=[UIButton buttonWithType:UIButtonTypeCustom];
         openRedBtn.frame=CGRectMake(174*WIDTH/640, 440*HEIGHT/960, 175*HEIGHT/960, 175*HEIGHT/960);
         openRedBtn.layer.cornerRadius=88*HEIGHT/960;
@@ -202,7 +201,6 @@
 
 -(void)openRedMoney
 {
-    
     NSString *url=[NSString stringWithFormat:@"%@grabRed",baseUrl];
     NSDictionary *dic=@{@"redId":_redIdList[0][@"redId"],@"memberId":[UserManager shareUserManager].userInfo.userid};
     [SVHTTPRequest POST:url parameters:dic completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
