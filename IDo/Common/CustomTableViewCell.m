@@ -11,7 +11,7 @@
 @implementation CustomTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    _indicateImageView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

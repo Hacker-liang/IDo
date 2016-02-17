@@ -55,7 +55,7 @@
     _headStr=[NSString stringWithFormat:@"%@",_detailModel.headImage];
     _nameStr=[NSString stringWithFormat:@"%@的红包",_detailModel.name];
     _contentStr=[NSString stringWithFormat:@"%@",_detailModel.content];
-    _moneyStr=[NSString stringWithFormat:@"%@元",_detailModel.money];
+    _moneyStr=[NSString stringWithFormat:@"%.2f元",[_detailModel.money floatValue]];
     
     NSLog(@"_detailDic %@\n%@\n%@\n%@\n",_headStr,_nameStr,_contentStr,_moneyStr);
 }

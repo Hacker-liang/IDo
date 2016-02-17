@@ -81,7 +81,7 @@
 
     
     UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+40*HEIGHT/960, WIDTH, 80*HEIGHT/960)];
-    NSString *str = [NSString stringWithFormat:@"%@元",_redResultDic[@"currMoney"]];
+    NSString *str = [NSString stringWithFormat:@"%.2f元",[_redResultDic[@"currMoney"] floatValue]];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     
     [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:60*HEIGHT/960] range:NSMakeRange(0,str.length-1)];

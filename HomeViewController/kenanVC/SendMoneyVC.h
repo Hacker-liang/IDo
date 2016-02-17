@@ -8,6 +8,6 @@
 
 #import "TZTableViewController.h"
 
-@interface SendMoneyVC : TZTableViewController
+@interface SendMoneyVC : UITableViewController
 
 @end

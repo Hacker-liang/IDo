@@ -132,19 +132,19 @@
 -(void)HowToSendOrder
 {
     HowToSendVC *howtoVC=[[HowToSendVC alloc]init];
-    [self.navigationController pushViewController:howtoVC animated:NO];
+    [self.navigationController pushViewController:howtoVC animated:YES];
 }
 
 -(void)HotOrder
 {
     HotOrderVC *hotOrderVC=[[HotOrderVC alloc]init];
-    [self.navigationController pushViewController:hotOrderVC animated:NO];
+    [self.navigationController pushViewController:hotOrderVC animated:YES];
 }
 
 -(void)sendMoney
 {
     SendMoneyVC *sendMoneyVC=[[SendMoneyVC alloc]init];
-    [self.navigationController pushViewController:sendMoneyVC animated:NO];
+    [self.navigationController pushViewController:sendMoneyVC animated:YES];
 //    [self presentViewController:sendMoneyVC animated:NO completion:nil];
 }
 

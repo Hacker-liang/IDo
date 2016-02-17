@@ -71,6 +71,7 @@
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _currentPage = 0;
         [self getOrderWithPage:_currentPage+1];
+        [self initData];
     }];
     
     //    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
@@ -89,6 +90,28 @@
     
 //    _missOrderBtn.hidden = YES;
     
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView.header beginRefreshing];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.tableView.header beginRefreshing];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 -(void)initData
@@ -246,27 +269,6 @@
     return _emptyView;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.tableView.header beginRefreshing];
-    [self initData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.tableView.header beginRefreshing];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 - (void)setupEmptyView
 {
@@ -293,15 +295,15 @@
                 [_dataSource removeAllObjects];
             }
             [_dataSource addObjectsFromArray:orderList];
-            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-            _redIdList=[userDefaults objectForKey:@"RedMoneyList"];
-//            NSLog(@"柯南RedMoneyList %@",_redIdList);
-            NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",(unsigned long)_redIdList.count ];
-            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
-            
-            [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(2,str.length-5)];
-            [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(2,str.length-5)];
-            _redNumLab.attributedText = attStr;
+//            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+//            _redIdList=[userDefaults objectForKey:@"RedMoneyList"];
+////            NSLog(@"柯南RedMoneyList %@",_redIdList);
+//            NSString *str = [NSString stringWithFormat:@"还有%lu个未抢",(unsigned long)_redIdList.count ];
+//            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+//            
+//            [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20.0] range:NSMakeRange(2,str.length-5)];
+//            [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(2,str.length-5)];
+//            _redNumLab.attributedText = attStr;
         }
         [self setupEmptyView];
         
