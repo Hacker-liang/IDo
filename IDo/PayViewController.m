@@ -292,14 +292,14 @@
             if ([status isEqualToString:@"1"]) {
                 [[UserManager shareUserManager] userInfo].wallet.remainingMoney = [NSString stringWithFormat:@"%f", ([[[UserManager shareUserManager] userInfo].wallet.remainingMoney floatValue] - [price floatValue])];
                 if ([self.fatherC isEqualToString:@"RedMoney"]) {
-                    [SVProgressHUD showSuccessWithStatus:@"恭喜您，红包已成功派出，系统会随时通知能最新进展。"];
                     [self sendRedPushWithRedId:_redEnvelopeId];
                 }
                 else{
                     [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                    [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
+
                 }
                 
-                [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
             }
             else{
                 [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
@@ -334,10 +334,14 @@
             }
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if([tempStatus integerValue] == 1) {
-                
+                [SVProgressHUD showSuccessWithStatus:@"恭喜您，红包已成功派出，系统会随时通知能最新进展。"];
+                [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
+
             } else {
+                [SVProgressHUD dismiss];
             }
         } else {
+            [SVProgressHUD dismiss];
         }
     }];
     
@@ -349,7 +353,7 @@
     [SVProgressHUD showWithStatus:@"正在付款"];
     NSString *url = [NSString stringWithFormat:@"%@alipay",baseUrl];
     NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
-    if (self.isRedMoney==YES) {
+    if (self.isRedMoney) {
         [mDict setObject:_redEnvelopeId forKey:@"redEnvelopeId"];
     }else
     {
@@ -395,8 +399,12 @@
         NSString *status=[NSString stringWithFormat:@"%@",resultDic[@"resultStatus"]];
         if ([status isEqualToString:@"9000"])
         {
-            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-            [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
+            if (_isRedMoney) {
+                [self sendRedPushWithRedId:_redEnvelopeId];
+            } else {
+                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                [self performSelector:@selector(backAfterPayed) withObject:nil afterDelay:0.3];
+            }
         }
         else{
             [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];

@@ -67,6 +67,24 @@
     [self getWoGanUserdata];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0xBC4E3F);
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -115,7 +133,7 @@
     [footerView addSubview:moneyRuleBtn];
     
     UIButton *logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0.1*HEIGHT, footerView.bounds.size.width-20, 40)];
-    logoutBtn.backgroundColor = APP_THEME_COLOR;
+    logoutBtn.backgroundColor = UIColorFromRGB(0xBC4E3F);
     logoutBtn.layer.cornerRadius = 5.0;
     [logoutBtn setTitle:@"立即派红包" forState:UIControlStateNormal];
     [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -197,6 +215,11 @@
     
     if ([_moneyTotal doubleValue] < 0.010000) {
         [SVProgressHUD showErrorWithStatus:@"红包总金额不得低于0.01元"];
+        return;
+    }
+    
+    if ([_moneyTotal doubleValue] >200) {
+        [SVProgressHUD showErrorWithStatus:@"红包总金额不许大于200元"];
         return;
     }
     
