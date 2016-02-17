@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB32CFF01C7449EE0095A1D5 /* ServicesHttpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB32CFEF1C7449EE0095A1D5 /* ServicesHttpVC.m */; };
 		BB63DCDD1C50CF5300CB2D22 /* RedRuleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB63DCDC1C50CF5300CB2D22 /* RedRuleVC.m */; };
 		BB981B851C45E03500388E1C /* KenanImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB981B841C45E03500388E1C /* KenanImage.xcassets */; };
 		BB981B8C1C45F7D400388E1C /* SendMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB981B8B1C45F7D400388E1C /* SendMoneyVC.m */; };
@@ -416,6 +417,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB32CFEE1C7449EE0095A1D5 /* ServicesHttpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesHttpVC.h; sourceTree = "<group>"; };
+		BB32CFEF1C7449EE0095A1D5 /* ServicesHttpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesHttpVC.m; sourceTree = "<group>"; };
 		BB63DCDB1C50CF5300CB2D22 /* RedRuleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedRuleVC.h; sourceTree = "<group>"; };
 		BB63DCDC1C50CF5300CB2D22 /* RedRuleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedRuleVC.m; sourceTree = "<group>"; };
 		BB981B841C45E03500388E1C /* KenanImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KenanImage.xcassets; sourceTree = "<group>"; };
@@ -1861,6 +1864,8 @@
 				D96EA9E51BB3D9E300360ED8 /* LoginViewController.h */,
 				D96EA9E61BB3D9E300360ED8 /* LoginViewController.m */,
 				D96EA9E71BB3D9E300360ED8 /* LoginViewController.xib */,
+				BB32CFEE1C7449EE0095A1D5 /* ServicesHttpVC.h */,
+				BB32CFEF1C7449EE0095A1D5 /* ServicesHttpVC.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -3014,6 +3019,7 @@
 				D96EAA931BB5964F00360ED8 /* MJRefreshAutoStateFooter.m in Sources */,
 				D96EA9191BB2980E00360ED8 /* SendOrderRootViewController.m in Sources */,
 				D96EA9A31BB3D22100360ED8 /* AFURLRequestSerialization.m in Sources */,
+				BB32CFF01C7449EE0095A1D5 /* ServicesHttpVC.m in Sources */,
 				D9ADC4011BBA670A00B1B7E1 /* CWStarRateView.m in Sources */,
 				BBB83A2A1C4C87D800D3C9D0 /* SendRedMoneyModel.m in Sources */,
 				D96EA9D11BB3D24700360ED8 /* UIButton+WebCache.m in Sources */,

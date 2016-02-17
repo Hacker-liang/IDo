@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import "APService.h"
-
+#import "ServicesHttpVC.h"
 @interface LoginViewController () {
     NSTimer *timer;
     NSInteger count;
@@ -21,6 +21,10 @@
 @property(nonatomic,strong) NSString *codeNumY;
 @property (weak, nonatomic) IBOutlet UIButton *captchaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+
+@property (nonatomic,strong) UILabel *serviceLab;
+@property (nonatomic,strong) UIButton *serviceBtn;
+
 
 @property (nonatomic, copy) LoginCompletionBlock completionBlock;
 
@@ -48,6 +52,34 @@
     [_captchaBtn addTarget:self action:@selector(getVerCode) forControlEvents:UIControlEventTouchUpInside];
     [_loginBtn addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
     [self updateUserLogation:nil];
+    
+    [self creatUI];
+}
+
+#pragma mark 柯南添加协议内容
+
+-(void)creatUI
+{
+    _serviceLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, CGRectGetMaxY(_loginBtn.frame)+0.65*HEIGHT, 0.45*WIDTH, 0.06*HEIGHT)];
+//    _serviceLab.backgroundColor=[UIColor yellowColor];
+    _serviceLab.text=@"点击-登录,即表示同意";
+    _serviceLab.font=[UIFont systemFontOfSize:0.45*WIDTH/10];
+    _serviceLab.textColor=[UIColor lightGrayColor];
+    [self.view addSubview:_serviceLab];
+    
+    _serviceBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    _serviceBtn.frame=CGRectMake(0.5*WIDTH, CGRectGetMaxY(_loginBtn.frame)+0.65*HEIGHT, 0.45*WIDTH, 0.06*HEIGHT);
+    [_serviceBtn setTitle:@"《我干APP服务协议》" forState:UIControlStateNormal];
+    [_serviceBtn setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateNormal];
+    [_serviceBtn addTarget:self action:@selector(serviceHttp) forControlEvents:UIControlEventTouchUpInside];
+    _serviceBtn.titleLabel.font=[UIFont systemFontOfSize:0.45*WIDTH/10];
+    [self.view addSubview:_serviceBtn];
+}
+
+-(void)serviceHttp
+{
+    ServicesHttpVC *serviceVC=[[ServicesHttpVC alloc]init];
+    [self.navigationController pushViewController:serviceVC animated:NO];
 }
 
 - (IBAction)updateUserLogation:(id)sender {

@@ -89,13 +89,27 @@
     
     UIButton *gainBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     gainBtn.frame=CGRectMake(70*WIDTH/640, 389*HEIGHT/960, 501*WIDTH/640, 90*HEIGHT/960);
-    [gainBtn setBackgroundImage:[UIImage imageNamed:@"MyRedMoneyGainMoney"] forState:UIControlStateNormal];
+//    [gainBtn setBackgroundImage:[UIImage imageNamed:@"MyRedMoneyGainMoney"] forState:UIControlStateNormal];
+    gainBtn.backgroundColor=UIColorFromRGB(0xffb22e);
+    gainBtn.layer.cornerRadius=5;
+    gainBtn.layer.masksToBounds=YES;
+    [gainBtn setTitle:@"收到的红包" forState:UIControlStateNormal];
+    [gainBtn setTitleColor:UIColorFromRGB(0xfefefe) forState:UIControlStateNormal];
+    gainBtn.titleLabel.font=[UIFont systemFontOfSize:30*HEIGHT/960];
+    
     [gainBtn addTarget:self action:@selector(gainRedMoney) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:gainBtn];
     
     UIButton *sendBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     sendBtn.frame=CGRectMake(70*WIDTH/640, 541*HEIGHT/960, 501*WIDTH/640, 90*HEIGHT/960);
-    [sendBtn setBackgroundImage:[UIImage imageNamed:@"MyRedMoneySendMoney"] forState:UIControlStateNormal];
+//    [sendBtn setBackgroundImage:[UIImage imageNamed:@"MyRedMoneySendMoney"] forState:UIControlStateNormal];
+    sendBtn.backgroundColor=UIColorFromRGB(0xf9f7de);
+    sendBtn.layer.cornerRadius=5;
+    sendBtn.layer.masksToBounds=YES;
+    [sendBtn setTitle:@"发出的红包" forState:UIControlStateNormal];
+    [sendBtn setTitleColor:UIColorFromRGB(0xef4232) forState:UIControlStateNormal];
+    sendBtn.titleLabel.font=[UIFont systemFontOfSize:30*HEIGHT/960];
+    
     [sendBtn addTarget:self action:@selector(sendRedMoney) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sendBtn];
     
