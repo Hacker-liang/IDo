@@ -127,11 +127,11 @@
     UIButton *moneyRuleBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     moneyRuleBtn.frame=CGRectMake(0.35*WIDTH, 20, 0.3*WIDTH, 0.05*WIDTH);
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIcon"] forState:UIControlStateNormal];
-    [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIconCh"] forState:UIControlStateHighlighted];
-    [moneyRuleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -30)];
+//    [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIconCh"] forState:UIControlStateHighlighted];
+    [moneyRuleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
     [moneyRuleBtn setTitle:@"红包派发规则" forState:UIControlStateNormal];
     [moneyRuleBtn setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateNormal];
-    [moneyRuleBtn setTitleColor:APP_THEME_COLOR forState:UIControlStateHighlighted];
+//    [moneyRuleBtn setTitleColor:APP_THEME_COLOR forState:UIControlStateHighlighted];
 //    moneyRuleBtn.backgroundColor=[UIColor yellowColor];
     [moneyRuleBtn addTarget:self action:@selector(redRule) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:moneyRuleBtn];
