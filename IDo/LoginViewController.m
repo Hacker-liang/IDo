@@ -70,7 +70,7 @@
     _serviceBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     _serviceBtn.frame=CGRectMake(0.5*WIDTH, CGRectGetMaxY(_loginBtn.frame)+0.65*HEIGHT, 0.45*WIDTH, 0.06*HEIGHT);
     [_serviceBtn setTitle:@"《我干APP服务协议》" forState:UIControlStateNormal];
-    [_serviceBtn setTitleColor:UIColorFromRGB(0x43b0d1) forState:UIControlStateNormal];
+    [_serviceBtn setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateNormal];
     [_serviceBtn addTarget:self action:@selector(serviceHttp) forControlEvents:UIControlEventTouchUpInside];
     _serviceBtn.titleLabel.font=[UIFont systemFontOfSize:0.45*WIDTH/10];
     [self.view addSubview:_serviceBtn];
