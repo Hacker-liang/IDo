@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUJ-Lg-5VM">
-                        <rect key="frame" x="41" y="11" width="269" height="21"/>
+                        <rect key="frame" x="46" y="11" width="264" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="PFJ-Fx-pSD"/>
                         </constraints>
@@ -24,10 +24,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Yj-p3-OB8">
-                        <rect key="frame" x="8" y="14" width="15" height="15"/>
+                        <rect key="frame" x="8" y="12" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="1vw-T1-HPj"/>
-                            <constraint firstAttribute="height" constant="15" id="ffo-4x-o9q"/>
+                            <constraint firstAttribute="width" constant="20" id="1vw-T1-HPj"/>
+                            <constraint firstAttribute="height" constant="20" id="ffo-4x-o9q"/>
                         </constraints>
                     </imageView>
                 </subviews>
