@@ -121,8 +121,8 @@
     NSString *moneyStr =[NSString stringWithFormat:@"%0.2f 元",money];
     NSMutableAttributedString *attmoneyStr = [[NSMutableAttributedString alloc] initWithString:moneyStr];
     
-    [attmoneyStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:80*HEIGHT/960] range:NSMakeRange(0,moneyStr.length-2)];
-    [attmoneyStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(0,moneyStr.length-2)];
+    [attmoneyStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:60*HEIGHT/960] range:NSMakeRange(0,moneyStr.length-2)];
+    [attmoneyStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0XBC4E3F) range:NSMakeRange(0,moneyStr.length-2)];
     //    moneyLab.text=[NSString stringWithFormat:@"%@元",_sendRedResultDic[@"data"][@"totalMoney"]];
     moneyLab.attributedText=attmoneyStr;
 //    moneyLab.text=[NSString stringWithFormat:@"%@元",_resultDic[@"data"][@"totalMoney"]];
@@ -139,7 +139,7 @@
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     
     [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:38*HEIGHT/960] range:NSMakeRange(7,str.length-8)];
-    [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(7,str.length-8)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0XBC4E3F) range:NSMakeRange(7,str.length-8)];
     moneyNumLab.attributedText=attStr;
     [_headView addSubview:moneyNumLab];
     
@@ -168,6 +168,7 @@
         cell =[[GainRedMoneyCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         
     }
+//    cell.selectionStyle=0;
     cell.gainRedMoneyModel=_model;
     return cell;
 }
@@ -185,7 +186,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 0.11*HEIGHT;
+    return 0.13*HEIGHT;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

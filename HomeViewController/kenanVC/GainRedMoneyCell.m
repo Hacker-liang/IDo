@@ -14,6 +14,11 @@
 {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
+        _FlineView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 1)];
+        _FlineView.backgroundColor=APP_PAGE_COLOR;
+        [self.contentView addSubview:_FlineView];
+        
         _headImage=[[UIImageView alloc]initWithFrame:CGRectMake(0.01*HEIGHT, 0.01*HEIGHT, 0.08*HEIGHT, 0.08*HEIGHT)];
         _headImage.backgroundColor=[UIColor lightGrayColor];
         _headImage.layer.cornerRadius=0.04*HEIGHT;

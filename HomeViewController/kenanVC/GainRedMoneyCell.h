@@ -10,6 +10,7 @@
 #import "GainRedMoneyModel.h"
 @interface GainRedMoneyCell : UITableViewCell
 
+@property (nonatomic,strong) UIView *FlineView;
 @property (nonatomic,strong) UIImageView *headImage;
 @property (nonatomic,strong) UIImageView *sexImage;
 @property (nonatomic,strong) UILabel *nameLab;
