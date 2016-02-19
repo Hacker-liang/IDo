@@ -38,7 +38,7 @@
         _moneyLab.font=[UIFont systemFontOfSize:0.03*HEIGHT];
         [self.contentView addSubview:_moneyLab];
         
-        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0.1*WIDTH, 0.11*HEIGHT-1, 0.9*WIDTH, 1)];
+        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 0.11*HEIGHT-1, WIDTH, 1)];
         lineView.backgroundColor=APP_PAGE_COLOR;
         [self.contentView addSubview:lineView];
         

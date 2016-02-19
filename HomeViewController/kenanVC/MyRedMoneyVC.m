@@ -52,7 +52,7 @@
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-30, 30, 20, 20)];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-50, 30, 25, 25)];
 //    [btn setTitle:@"Rule" forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"RedRuleHelp"] forState:UIControlStateNormal];
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

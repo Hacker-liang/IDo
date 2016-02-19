@@ -92,8 +92,8 @@
 {
     //    (70*WIDTH/640, 541*HEIGHT/960, 501*WIDTH/640, 90*HEIGHT/960)
 
-    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 636*HEIGHT/960)];
-    _headView.backgroundColor=APP_PAGE_COLOR;
+    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 520*HEIGHT/960)];
+    _headView.backgroundColor=UIColorFromRGB(0xffffff);
     
     UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 229*HEIGHT/960)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
@@ -121,7 +121,7 @@
     nameLab.textColor=[UIColor blackColor];
     [_headView addSubview:nameLab];
     
-    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+40*HEIGHT/960, WIDTH, 88*HEIGHT/960)];
+    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 88*HEIGHT/960)];
     double money=[_sendRedResultDic[@"data"][@"totalMoney"] doubleValue];
     NSString *moneyStr =[NSString stringWithFormat:@"%0.2f 元",money];
     NSMutableAttributedString *attmoneyStr = [[NSMutableAttributedString alloc] initWithString:moneyStr];
@@ -134,7 +134,7 @@
     moneyLab.textAlignment=1;
     [_headView addSubview:moneyLab];
     
-    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+72*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
+    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+22*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     moneyNumLab.textAlignment=1;
     moneyNumLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     NSString *str = [NSString stringWithFormat:@"派出红包总数%@个",_sendRedResultDic[@"data"][@"count"]];
@@ -144,6 +144,10 @@
     [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(6,str.length-7)];
     moneyNumLab.attributedText=attStr;
     [_headView addSubview:moneyNumLab];
+    
+    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0,  518*HEIGHT/960, WIDTH, 1)];
+    lineView.backgroundColor=APP_PAGE_COLOR;
+    [_headView addSubview:lineView];
 }
 
 -(void)creatUI
@@ -178,7 +182,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 636*HEIGHT/960;
+    return 520*HEIGHT/960;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

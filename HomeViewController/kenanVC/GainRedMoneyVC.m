@@ -85,8 +85,8 @@
 -(void)creatHeadView
 {
 //    (70*WIDTH/640, 541*HEIGHT/960, 501*WIDTH/640, 90*HEIGHT/960)
-    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 636*HEIGHT/960)];
-    _headView.backgroundColor=APP_PAGE_COLOR;
+    _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 520*HEIGHT/960)];
+    _headView.backgroundColor=UIColorFromRGB(0xffffff);
     
     
     UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 229*HEIGHT/960)];
@@ -116,7 +116,7 @@
     nameLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     [_headView addSubview:nameLab];
     
-    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+40*HEIGHT/960, WIDTH,88*HEIGHT/960)];
+    UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH,88*HEIGHT/960)];
     double money=[_resultDic[@"data"][@"totalMoney"] doubleValue];
     NSString *moneyStr =[NSString stringWithFormat:@"%0.2f 元",money];
     NSMutableAttributedString *attmoneyStr = [[NSMutableAttributedString alloc] initWithString:moneyStr];
@@ -131,8 +131,9 @@
 //    moneyLab.font=[UIFont systemFontOfSize:0.15*WIDTH];
     [_headView addSubview:moneyLab];
 
-    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+72*HEIGHT/960, WIDTH, 38*HEIGHT/960)];
-    moneyNumLab.font=[UIFont systemFontOfSize:38*HEIGHT/960];
+    UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+22*HEIGHT/960, WIDTH, 38*HEIGHT/960)];
+    moneyNumLab.textColor=[UIColor lightGrayColor];
+    moneyNumLab.font=[UIFont systemFontOfSize:28*HEIGHT/960];
     moneyNumLab.textAlignment=1;
     NSString *str = [NSString stringWithFormat:@"收到的红包总数%@个",_resultDic[@"data"][@"count"]];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
@@ -141,6 +142,10 @@
     [attStr addAttribute:NSForegroundColorAttributeName value:APP_THEME_COLOR range:NSMakeRange(7,str.length-8)];
     moneyNumLab.attributedText=attStr;
     [_headView addSubview:moneyNumLab];
+    
+    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0,  518*HEIGHT/960, WIDTH, 1)];
+    lineView.backgroundColor=APP_PAGE_COLOR;
+    [_headView addSubview:lineView];
 }
 
 -(void)creatUI
@@ -174,8 +179,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 636*HEIGHT/960;
+    return 520*HEIGHT/960;
 }
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
