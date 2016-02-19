@@ -131,6 +131,7 @@
     [moneyRuleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
     [moneyRuleBtn setTitle:@"红包派发规则" forState:UIControlStateNormal];
     [moneyRuleBtn setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateNormal];
+    moneyRuleBtn.titleLabel.font=[UIFont systemFontOfSize:0.05*WIDTH];
 //    [moneyRuleBtn setTitleColor:APP_THEME_COLOR forState:UIControlStateHighlighted];
 //    moneyRuleBtn.backgroundColor=[UIColor yellowColor];
     [moneyRuleBtn addTarget:self action:@selector(redRule) forControlEvents:UIControlEventTouchUpInside];
