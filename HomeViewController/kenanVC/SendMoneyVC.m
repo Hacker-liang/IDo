@@ -70,7 +70,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0xBC4E3F);
+    self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0xb73725);
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:
      [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
@@ -122,15 +122,15 @@
 - (void)setupTableViewFooterView
 {
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
-//    footerView.backgroundColor=[UIColor yellowColor];
+    footerView.backgroundColor=APP_PAGE_COLOR;
     
     UIButton *moneyRuleBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    moneyRuleBtn.frame=CGRectMake(0.35*WIDTH, 20, 0.3*WIDTH, 0.05*WIDTH);
+    moneyRuleBtn.frame=CGRectMake(0.33*WIDTH, 20, 0.3*WIDTH, 0.05*WIDTH);
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIcon"] forState:UIControlStateNormal];
 //    [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIconCh"] forState:UIControlStateHighlighted];
     [moneyRuleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
     [moneyRuleBtn setTitle:@"红包派发规则" forState:UIControlStateNormal];
-    [moneyRuleBtn setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateNormal];
+    [moneyRuleBtn setTitleColor:UIColorFromRGB(0x606060) forState:UIControlStateNormal];
     moneyRuleBtn.titleLabel.font=[UIFont systemFontOfSize:0.05*WIDTH];
 //    [moneyRuleBtn setTitleColor:APP_THEME_COLOR forState:UIControlStateHighlighted];
 //    moneyRuleBtn.backgroundColor=[UIColor yellowColor];
@@ -400,11 +400,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, WIDTH-70, 30)];
         label.backgroundColor = APP_PAGE_COLOR;
-        label.text = @"*单个红包金额将根据您设定的总数随机生成*";
+        label.text = @"            *单个红包金额将根据您设定的总数随机生成*";
         label.font = [UIFont systemFontOfSize:11.0];
-        label.textAlignment = NSTextAlignmentCenter;
+//        label.textAlignment = 1;
+        label.textAlignment=0;
         label.textColor = UIColorFromRGB(0x858585);
         return label;
     }
@@ -427,7 +428,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 1 && indexPath.section == 1) {
-        return 100;
+        return 90;
     }
 //    if (indexPath.row == 2 && indexPath.section == 1) {
 //        return 0.1;

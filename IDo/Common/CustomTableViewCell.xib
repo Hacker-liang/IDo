@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUJ-Lg-5VM">
-                        <rect key="frame" x="41" y="11" width="269" height="21"/>
+                        <rect key="frame" x="51" y="11" width="259" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="PFJ-Fx-pSD"/>
                         </constraints>
@@ -23,11 +23,11 @@
                         <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Yj-p3-OB8">
-                        <rect key="frame" x="8" y="14" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Yj-p3-OB8">
+                        <rect key="frame" x="8" y="10" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="1vw-T1-HPj"/>
-                            <constraint firstAttribute="height" constant="15" id="ffo-4x-o9q"/>
+                            <constraint firstAttribute="width" constant="25" id="1vw-T1-HPj"/>
+                            <constraint firstAttribute="height" constant="25" id="ffo-4x-o9q"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -43,7 +43,7 @@
                 <outlet property="indicateImageView" destination="9Yj-p3-OB8" id="gNu-sB-bxq"/>
                 <outlet property="titleLabel" destination="PUJ-Lg-5VM" id="Mok-aM-IZR"/>
             </connections>
-            <point key="canvasLocation" x="108" y="224"/>
+            <point key="canvasLocation" x="-44" y="201"/>
         </tableViewCell>
     </objects>
 </document>

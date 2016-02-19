@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     _contentTextView.layer.borderColor = LineColor.CGColor;
-    _contentTextView.layer.borderWidth = 0.5;
+    _contentTextView.layer.borderWidth = 1;
     _contentTextView.layer.cornerRadius = 3.0;
     _contentTextView.delegate = self;
     _contentTextView.returnKeyType = UIReturnKeyDone;
