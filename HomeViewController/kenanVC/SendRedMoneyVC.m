@@ -99,11 +99,11 @@
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [_headView addSubview:image];
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(10, 25, 150, 34);
+    button.frame=CGRectMake(0, 25, 120, 34);
     [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
     [button setTitle:@"派出的红包" forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [_headView addSubview:button];
     
@@ -187,7 +187,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 0.1*HEIGHT;
+    return 0.12*HEIGHT;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

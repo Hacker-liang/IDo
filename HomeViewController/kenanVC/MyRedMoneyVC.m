@@ -44,20 +44,21 @@
     [self.view addSubview:_image];
     
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(10, 25, 100, 34);
+    button.frame=CGRectMake(0, 25, 100, 34);
     [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
     [button setTitle:@"我的红包" forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -20)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-50, 30, 25, 25)];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-35, 30, 20, 20)];
 //    [btn setTitle:@"Rule" forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"RedRuleHelp"] forState:UIControlStateNormal];
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     btn.titleLabel.font  = [UIFont systemFontOfSize:15.0];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    btn.backgroundColor=[UIColor yellowColor];
     [btn addTarget:self action:@selector(rule) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
 }

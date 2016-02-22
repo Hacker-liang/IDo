@@ -14,7 +14,7 @@
 {
     self=[super init];
     if (self) {
-        NSLog(@"派出的红包信息%@",json);
+//        NSLog(@"派出的红包信息%@",json);
         
         _redId=[json objectForKey:@"redId"];
         _money=[json objectForKey:@"money"];

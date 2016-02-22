@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SendRedMoneyModel.h"
 @interface SendRedMoneyCell : UITableViewCell
-
+@property (nonatomic,strong) UIView *FlineView;
 @property (nonatomic,strong)UILabel *moneyTotalLab;
 @property (nonatomic,strong)UILabel *infoLab;
 @property (nonatomic,strong)UILabel *timeLab;

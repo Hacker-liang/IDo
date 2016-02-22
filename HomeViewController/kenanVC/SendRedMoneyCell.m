@@ -21,6 +21,10 @@
 
 -(void)creteUI
 {
+    _FlineView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 1)];
+    _FlineView.backgroundColor=APP_PAGE_COLOR;
+    [self.contentView addSubview:_FlineView];
+    
     _moneyTotalLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, 0.01*HEIGHT, 0.6*WIDTH, 0.04*HEIGHT)];
     _moneyTotalLab.font=[UIFont systemFontOfSize:0.03*HEIGHT];
     [self.contentView addSubview:_moneyTotalLab];
@@ -35,6 +39,11 @@
     _timeLab.font=[UIFont systemFontOfSize:0.025*HEIGHT];
     _timeLab.textColor=[UIColor lightGrayColor];
     [self.contentView addSubview:_timeLab];
+    
+    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_timeLab.frame), WIDTH, 1)];
+    lineView.backgroundColor=APP_PAGE_COLOR;
+    [self.contentView addSubview:lineView];
+    
 }
 -(void)setSendRedModel:(SendRedMoneyModel *)sendRedModel
 {

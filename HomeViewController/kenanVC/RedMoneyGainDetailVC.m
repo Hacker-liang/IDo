@@ -23,7 +23,7 @@
     self.view.backgroundColor=APP_PAGE_COLOR;
     self.navigationItem.title = @"红包领取详情";
     self.edgesForExtendedLayout=0;
-    [self initNav];
+//    [self initNav];
     [self initData];
     [self creatUI];
 }
@@ -67,11 +67,11 @@
     [self.view addSubview:image];
     
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(10, 25, 150, 34);
+    button.frame=CGRectMake(0, 25, 140, 34);
     [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
     [button setTitle:@"红包领取详情" forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     

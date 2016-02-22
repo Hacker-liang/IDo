@@ -106,18 +106,18 @@
 -(void)creatHeadView
 {
     _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 500*HEIGHT/960)];
-    _headView.backgroundColor=APP_PAGE_COLOR;
+    _headView.backgroundColor=[UIColor whiteColor];
     
     UIImageView *image=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, 229*HEIGHT/960)];
     image.image=[UIImage imageNamed:@"RedMoneyBgIcon"];
     [_headView addSubview:image];
     
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(10, 25, 150, 34);
+    button.frame=CGRectMake(0, 25, 140, 34);
     [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
     [button setTitle:@"红包发放详情" forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [_headView addSubview:button];
     
@@ -175,6 +175,10 @@
     infoLab.textColor=UIColorFromRGB(0xa4a4a4);
     [_headView addSubview:infoLab];
 //    [self.view addSubview:_headView];
+    
+    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0,  498*HEIGHT/960, WIDTH, 1)];
+    lineView.backgroundColor=APP_PAGE_COLOR;
+    [_headView addSubview:lineView];
 }
 
 -(void)creatUI

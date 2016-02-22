@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=APP_PAGE_COLOR;
-    self.navigationItem.title = @"收到的红包";
+    self.navigationItem.title = @"收";
     self.edgesForExtendedLayout=0;
 //    [self initNav];
     [self initArr];
@@ -36,13 +36,13 @@
 -(void)initNav
 {
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(10, 25, 100, 34);
+    button.frame=CGRectMake(0, 25, 100, 34);
     [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
     [button setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [button setTitle:@"收到的红包" forState:UIControlStateNormal];
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -20)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+//    [self.view addSubview:button];
 }
 
 - (void)gotoBack
@@ -94,11 +94,11 @@
     [_headView addSubview:image];
     
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(10, 25, 150, 34);
+    button.frame=CGRectMake(0, 25, 120, 34);
     [button setImage:[UIImage imageNamed:@"RedMoneyBackIcon"] forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
     [button setTitle:@"收到的红包" forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
     [button addTarget:self action:@selector(gotoBack)forControlEvents:UIControlEventTouchUpInside];
     [_headView addSubview:button];
     
