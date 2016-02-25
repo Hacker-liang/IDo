@@ -38,7 +38,7 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor whiteColor];
     _headerView = [HomeMenuTableViewHeaderView homeMenuTableViewHeaderView];
-    _headerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 210);
+    _headerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 358*HEIGHT/1136);
     [_headerView.headerBtn addTarget:self action:@selector(gotoPersonInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"homeMenuCell"];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -67,8 +67,8 @@
 - (UIView *)footerView
 {
     if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 190)];
-        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectMake((_footerView.bounds.size.width-120)/2, 0, 120, 25)];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 352*HEIGHT/1136)];
+        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectMake((_footerView.bounds.size.width-120)/2, 30*HEIGHT/1136, 120, 43*HEIGHT/1136)];
         [shareBtn setTitle:@"分享我干给好友" forState:UIControlStateNormal];
         shareBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         shareBtn.layer.borderColor = LineColor.CGColor;
@@ -102,7 +102,7 @@
 {
     _adArray = adArray;
     
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-105, 275-20, 100) animationDuration:5];
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-180*HEIGHT/1136, 275-20, 172*HEIGHT/1136) animationDuration:5];
 //    _galleryView.backgroundColor=[UIColor yellowColor];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
@@ -110,7 +110,7 @@
     NSMutableArray *viewsArray = [[NSMutableArray alloc] init];
     for (NSDictionary *dic in _adArray) {
         NSString *imageUrl = [dic objectForKey:@"img"];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _galleryView.bounds.size.width, 100)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _galleryView.bounds.size.width, 172*HEIGHT/1136)];
         imageView.contentMode = UIViewContentModeScaleToFill;
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"nil"]];
         [viewsArray addObject:imageView];
@@ -247,7 +247,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 210;
+    return 358*HEIGHT/1136;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -268,7 +268,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 83*HEIGHT/1136;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

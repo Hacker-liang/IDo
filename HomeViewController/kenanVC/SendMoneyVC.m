@@ -59,7 +59,7 @@
 
     _orderDetail.distance = @"10";
     self.navigationItem.title = @"派红包";
-    
+    self.view.backgroundColor=APP_PAGE_COLOR;
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderContentTableViewCell" bundle:nil] forCellReuseIdentifier:@"orderContentCell"];
     [self Time];
@@ -125,7 +125,7 @@
     footerView.backgroundColor=APP_PAGE_COLOR;
     
     UIButton *moneyRuleBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    moneyRuleBtn.frame=CGRectMake(0.33*WIDTH, 20, 0.3*WIDTH, 0.05*WIDTH);
+    moneyRuleBtn.frame=CGRectMake(0.33*WIDTH, 20, 0.3*WIDTH, 30);
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIcon"] forState:UIControlStateNormal];
 //    [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIconCh"] forState:UIControlStateHighlighted];
     [moneyRuleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
@@ -137,7 +137,7 @@
     [moneyRuleBtn addTarget:self action:@selector(redRule) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:moneyRuleBtn];
     
-    UIButton *logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0.1*HEIGHT, footerView.bounds.size.width-20, 40)];
+    UIButton *logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,90, footerView.bounds.size.width-20, 40)];
     logoutBtn.backgroundColor = UIColorFromRGB(0xBC4E3F);
     logoutBtn.layer.cornerRadius = 5.0;
     [logoutBtn setTitle:@"立即派红包" forState:UIControlStateNormal];
