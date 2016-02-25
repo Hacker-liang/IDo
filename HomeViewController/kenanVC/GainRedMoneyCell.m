@@ -59,7 +59,8 @@
     
         _sexImage.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@",_gainRedMoneyModel.sexImage]];
         _nameLab.text=[NSString stringWithFormat:@"%@",_gainRedMoneyModel.name];
-        _moneyLab.text=[NSString stringWithFormat:@"%@元",_gainRedMoneyModel.money];
+    double money=[_gainRedMoneyModel.money doubleValue];
+        _moneyLab.text=[NSString stringWithFormat:@"%0.2f元",money];
         _timeLab.text=[NSString stringWithFormat:@"%@",_gainRedMoneyModel.time];
 }
 

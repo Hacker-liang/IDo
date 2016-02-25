@@ -112,7 +112,7 @@
         [UserLocationManager shareInstance].districtid = @"110108";
         
         [self loginWithApple];
-        [APPTittleDefaults setObject:@"我干"forKey:@"APPTittle"];
+        [APPTittleDefaults setObject:@"我干活儿"forKey:@"APPTittle"];
         return;
     }
     

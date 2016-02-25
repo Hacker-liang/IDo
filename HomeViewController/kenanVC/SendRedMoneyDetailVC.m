@@ -171,7 +171,9 @@
     UILabel *infoLab=[[UILabel alloc]initWithFrame:CGRectMake(10, 420*HEIGHT/960, WIDTH-20, 80*HEIGHT/960)];
     infoLab.numberOfLines=0;
     infoLab.font=[UIFont systemFontOfSize:25*HEIGHT/960];
-    infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%@/%@元",statu,_DetailGrabCount,_count,_moneyGrab,_totalMoney];
+    double moneyGrab=[_moneyGrab doubleValue];
+    double totalMoney=[_totalMoney doubleValue];
+    infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%0.2f/%0.2f元",statu,_DetailGrabCount,_count,moneyGrab,totalMoney];
     infoLab.textColor=UIColorFromRGB(0xa4a4a4);
     [_headView addSubview:infoLab];
 //    [self.view addSubview:_headView];

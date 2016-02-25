@@ -121,11 +121,29 @@
 
 - (void)setupTableViewFooterView
 {
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
-    footerView.backgroundColor=APP_PAGE_COLOR;
+    UIView *footerView;
+    UIButton *logoutBtn;
+    if (IS_IPHONE_6P) {
+         footerView= [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 190)];
+        footerView.backgroundColor=APP_PAGE_COLOR;
+        logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,140, footerView.bounds.size.width-20, 40)];
+
+    }
+    
+    if (IS_IPHONE_6) {
+        footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
+        footerView.backgroundColor=APP_PAGE_COLOR;
+        logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,footerView.frame.size.height-60, footerView.bounds.size.width-20, 40)];
+    }
+    
+    if (IS_IPHONE_5) {
+        footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
+        footerView.backgroundColor=APP_PAGE_COLOR;
+        logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,footerView.frame.size.height-90, footerView.bounds.size.width-20, 40)];
+    }
     
     UIButton *moneyRuleBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    moneyRuleBtn.frame=CGRectMake(0.33*WIDTH, 20, 0.3*WIDTH, 30);
+    moneyRuleBtn.frame=CGRectMake(0.33*WIDTH, 20, 0.3*WIDTH, 30*HEIGHT/1136);
     [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIcon"] forState:UIControlStateNormal];
 //    [moneyRuleBtn setBackgroundImage:[UIImage imageNamed:@"MoneyRoalIconCh"] forState:UIControlStateHighlighted];
     [moneyRuleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, -20)];
@@ -137,7 +155,9 @@
     [moneyRuleBtn addTarget:self action:@selector(redRule) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:moneyRuleBtn];
     
-    UIButton *logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,90, footerView.bounds.size.width-20, 40)];
+    
+    
+    
     logoutBtn.backgroundColor = UIColorFromRGB(0xBC4E3F);
     logoutBtn.layer.cornerRadius = 5.0;
     [logoutBtn setTitle:@"立即派红包" forState:UIControlStateNormal];
