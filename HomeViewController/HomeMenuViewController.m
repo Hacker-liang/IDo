@@ -103,7 +103,7 @@
     _adArray = adArray;
     
     _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-190*HEIGHT/1136, 275-20, 172*HEIGHT/1136) animationDuration:5];
-    _galleryView.backgroundColor=[UIColor yellowColor];
+//    _galleryView.backgroundColor=APP_PAGE_COLOR;
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };
