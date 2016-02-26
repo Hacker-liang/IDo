@@ -17,7 +17,7 @@
         
         _headImage =[NSString stringWithFormat:@"%@%@",headURL,[json objectForKey:@"picture"]];
         _sexImage=[NSString stringWithFormat:@"%@",[json objectForKey:@"sex"]];
-        if ([_sexImage isEqualToString:@"1"]) {
+        if ([_sexImage isEqualToString:@"2"]) {
            _sexImage=@"icon_orderDetail_address@2x";
         } else {
             _sexImage=@"nan@2x";
