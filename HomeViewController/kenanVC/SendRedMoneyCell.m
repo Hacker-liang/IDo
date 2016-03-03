@@ -50,10 +50,10 @@
     _sendRedModel=sendRedModel;
     
     double moneyTotal=[_sendRedModel.money doubleValue];
-
+    
     _moneyTotalLab.text=[NSString stringWithFormat:@"红包金额:%0.2f元",moneyTotal];
     
-    _infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%@/%0.2f元",_sendRedModel.status,_sendRedModel.grabCount,_sendRedModel.totalCount,_sendRedModel.grabCount,moneyTotal];
+    _infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%@/%0.2f元",_sendRedModel.status,_sendRedModel.grabCount,_sendRedModel.totalCount,_sendRedModel.moneyGrab,moneyTotal];
     _timeLab.text=[NSString stringWithFormat:@"%@",_sendRedModel.createTime];
 }
 

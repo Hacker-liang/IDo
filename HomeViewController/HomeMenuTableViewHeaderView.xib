@@ -12,14 +12,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ClT-ht-MEf">
-                    <rect key="frame" x="210" y="41" width="70" height="70"/>
+                    <rect key="frame" x="210" y="21" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="J43-0r-XxM"/>
                         <constraint firstAttribute="width" constant="70" id="jxS-3u-V3D"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH7-oX-lGU">
-                    <rect key="frame" x="8" y="121" width="474" height="21"/>
+                    <rect key="frame" x="8" y="101" width="474" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="NuM-xE-AXM"/>
                     </constraints>
@@ -28,7 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1K-P3-hj7" customClass="CWStarRateView">
-                    <rect key="frame" x="180" y="172" width="131" height="21"/>
+                    <rect key="frame" x="180" y="179" width="131" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="amN-JS-b1P"/>
                         <constraint firstAttribute="width" constant="131" id="fsW-Wm-YY4"/>
@@ -46,11 +46,11 @@
                 <constraint firstItem="rH7-oX-lGU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="UE6-Wl-hBN"/>
                 <constraint firstItem="WY9-zI-61g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bO8-gk-JRz"/>
                 <constraint firstItem="WY9-zI-61g" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gTF-XX-Fho"/>
-                <constraint firstItem="ClT-ht-MEf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="oCa-rJ-fvV"/>
+                <constraint firstItem="ClT-ht-MEf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="21" id="oCa-rJ-fvV"/>
                 <constraint firstItem="o1K-P3-hj7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pNq-dv-ovC"/>
                 <constraint firstAttribute="bottom" secondItem="WY9-zI-61g" secondAttribute="bottom" id="rgj-Hj-zeq"/>
                 <constraint firstItem="rH7-oX-lGU" firstAttribute="top" secondItem="ClT-ht-MEf" secondAttribute="bottom" constant="10" id="t8t-1w-vvZ"/>
-                <constraint firstAttribute="bottom" secondItem="o1K-P3-hj7" secondAttribute="bottom" constant="17" id="thC-Lq-Cub"/>
+                <constraint firstAttribute="bottom" secondItem="o1K-P3-hj7" secondAttribute="bottom" constant="10" id="thC-Lq-Cub"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

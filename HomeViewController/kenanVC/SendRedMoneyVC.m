@@ -137,11 +137,11 @@
     UILabel *moneyNumLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(moneyLab.frame)+22*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     moneyNumLab.textAlignment=1;
     moneyNumLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
-    NSString *str = [NSString stringWithFormat:@"派出红包总数%@个",_sendRedResultDic[@"data"][@"count"]];
+    NSString *str = [NSString stringWithFormat:@"派发红包总次数%@次",_sendRedResultDic[@"data"][@"count"]];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     
-    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:34*HEIGHT/960] range:NSMakeRange(6,str.length-7)];
-    [attStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0XBC4E3F) range:NSMakeRange(6,str.length-7)];
+    [attStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:34*HEIGHT/960] range:NSMakeRange(7,str.length-8)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0XBC4E3F) range:NSMakeRange(7,str.length-8)];
     moneyNumLab.attributedText=attStr;
     [_headView addSubview:moneyNumLab];
     

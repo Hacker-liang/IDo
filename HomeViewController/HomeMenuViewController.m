@@ -268,7 +268,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 83*HEIGHT/1136;
+//    return 83*HEIGHT/1136;
+//    if (IS_IPHONE_4) {
+////        return 73*HEIGHT/1136;
+//    }
+    return 93*HEIGHT/1136;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -277,6 +281,10 @@
     NSDictionary *dic = self.dataSource[indexPath.row];
     cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:@"icon"]];
     cell.titleLabel.text = [dic objectForKey:@"title"];
+    
+    if (IS_IPHONE_4) {
+        cell.titleLabel.font=[UIFont systemFontOfSize:35*HEIGHT/1136];
+    }
     for (UIView *view in cell.subviews) {
         if (view.tag == 101) {
             [view removeFromSuperview];
@@ -298,6 +306,8 @@
         NSString *versionNum =[infoDict objectForKey:@"CFBundleShortVersionString"];
         NSString *text =[NSString stringWithFormat:@"v%@",versionNum];
         cell.subtitleLabel.text = text;
+        cell.subtitleLabel.font=[UIFont systemFontOfSize:35*HEIGHT/1136];
+
     }
     return cell;
 }
