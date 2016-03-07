@@ -153,8 +153,10 @@
         
         case 1:
             if ([_fromC isEqualToString:@"sendRedMoney"]) {
-                NSInteger money=[_detaileModel.money integerValue]-[_detaileModel.moneyGrab integerValue];
-                statu=[NSString stringWithFormat:@"已过期,剩余金额%ld元已退回。领取",(long)money];
+//                NSInteger money=[_detaileModel.money integerValue]-[_detaileModel.moneyGrab integerValue];
+                float money = [_detaileModel.money floatValue] - [_detaileModel.moneyGrab floatValue];
+//                statu=[NSString stringWithFormat:@"已过期,剩余金额%ld元已退回。领取",(long)money];
+                statu = [NSString stringWithFormat:@"已过期,剩余金额%.2f元已退回。领取", money];
             } else {
                 statu=[NSString stringWithFormat:@"已过期,剩余金额%@元已退回。领取",_redMoney];
             }
