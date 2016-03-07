@@ -28,7 +28,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEs-jf-RK0">
-                        <rect key="frame" x="46" y="14" width="79" height="22"/>
+                        <rect key="frame" x="46" y="12" width="79" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="79" id="Ah5-qY-N2v"/>
                         </constraints>
@@ -38,7 +38,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="FEs-jf-RK0" secondAttribute="bottom" constant="13.5" id="0SR-RE-kox"/>
+                    <constraint firstAttribute="bottom" secondItem="FEs-jf-RK0" secondAttribute="bottom" constant="12" id="0SR-RE-kox"/>
                     <constraint firstAttribute="bottom" secondItem="uFM-Aa-n5G" secondAttribute="bottom" constant="13.5" id="D3f-XR-msc"/>
                     <constraint firstItem="4Kr-Ae-D2b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="FGC-rJ-ULp"/>
                     <constraint firstItem="FEs-jf-RK0" firstAttribute="leading" secondItem="4Kr-Ae-D2b" secondAttribute="trailing" constant="13" id="NcM-o2-In7"/>
@@ -46,7 +46,7 @@
                     <constraint firstAttribute="trailing" secondItem="uFM-Aa-n5G" secondAttribute="trailing" constant="16" id="U4A-a6-gWe"/>
                     <constraint firstItem="4Kr-Ae-D2b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="UuE-qv-EWp"/>
                     <constraint firstItem="uFM-Aa-n5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="hsB-UZ-Rx0"/>
-                    <constraint firstItem="FEs-jf-RK0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="p9C-7d-93p"/>
+                    <constraint firstItem="FEs-jf-RK0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="p9C-7d-93p"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

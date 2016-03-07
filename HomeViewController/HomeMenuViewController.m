@@ -90,7 +90,8 @@
     if (!_dataSource) {
         _dataSource = @[@{@"icon": @"icon_menu_wallet.png", @"title": @"我的钱包"},
                         @{@"icon": @"icon_menu_mine.png", @"title": @"我的红包"},
-                        @{@"icon": @"icon_menu_message.png", @"title": @"信息中心"},@{@"icon": @"help", @"title": @"帮助中心"},
+                        @{@"icon": @"icon_menu_message.png", @"title": @"信息中心"},
+                        @{@"icon": @"help", @"title": @"帮助中心"},
                         @{@"icon": @"icon_menu_setting.png", @"title": @"关于我们"},
 //                        @{@"icon": @"icon_menu_setting.png", @"title": @"检查更新"}
                         ];
@@ -268,9 +269,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    return 83*HEIGHT/1136;
+//    return 93*HEIGHT/1136;
 //    if (IS_IPHONE_4) {
-////        return 73*HEIGHT/1136;
+//        return 73*HEIGHT/1136;
 //    }
     return 93*HEIGHT/1136;
 }
@@ -283,7 +284,7 @@
     cell.titleLabel.text = [dic objectForKey:@"title"];
     
     if (IS_IPHONE_4) {
-        cell.titleLabel.font=[UIFont systemFontOfSize:35*HEIGHT/1136];
+        cell.titleLabel.font = [UIFont systemFontOfSize:35 * HEIGHT/1136];
     }
     for (UIView *view in cell.subviews) {
         if (view.tag == 101) {
