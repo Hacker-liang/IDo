@@ -252,6 +252,9 @@
     
     int num=arc4random()%9000+1000;
     NSLog(@"验证码是: %d", num);
+    
+//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"验证码是: %d", num] message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil] show];
+    
     self.codeNumY = [NSString stringWithFormat:@"%d",num];
     
     NSString *url = [NSString stringWithFormat:@"%@?tel=%@&yzm=%@",kYzmURL,self.phoneTextField.text,self.codeNumY];
@@ -271,12 +274,11 @@
             }];
 }
 
-
 #pragma mark - Private Methods
 
 - (void)startTimer
 {
-    count = 60;
+    count = 59;
     if (timer != nil) {
         [self stopTimer];
     }

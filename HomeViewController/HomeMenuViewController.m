@@ -68,7 +68,7 @@
 {
     if (!_footerView) {
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 275, 352*HEIGHT/1136)];
-        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectMake((_footerView.bounds.size.width-120)/2, 30*HEIGHT/1136, 120, 43*HEIGHT/1136)];
+        UIButton *shareBtn = [[UIButton alloc] initWithFrame:CGRectMake((_footerView.bounds.size.width-120)/2, 25*HEIGHT/1136, 120, 43*HEIGHT/1136)];
         [shareBtn setTitle:@"分享我干给好友" forState:UIControlStateNormal];
         shareBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         shareBtn.layer.borderColor = LineColor.CGColor;
@@ -103,8 +103,7 @@
 {
     _adArray = adArray;
     
-    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-190*HEIGHT/1136, 275-20, 172*HEIGHT/1136) animationDuration:5];
-//    _galleryView.backgroundColor=APP_PAGE_COLOR;
+    _galleryView = [[AutoSlideScrollView alloc] initWithFrame:CGRectMake(10, self.footerView.bounds.size.height-190*HEIGHT/1136-30, 275-20, 172*HEIGHT/1136) animationDuration:5];
     _galleryView.totalPagesCount = ^NSInteger(void){
         return adArray.count;
     };

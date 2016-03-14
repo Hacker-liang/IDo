@@ -67,16 +67,16 @@
     nameLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     [self.view addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 62*HEIGHT/960)];
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(8, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH-16, 40)];
     contentLab.text=[NSString stringWithFormat:@"%@",_redResultDic[@"content"]];
     contentLab.numberOfLines=0;
-    contentLab.font=[UIFont systemFontOfSize:28*HEIGHT/960];
-    contentLab.textAlignment=1;
+    contentLab.font=[UIFont systemFontOfSize:16];
+    contentLab.textAlignment=NSTextAlignmentCenter;
     [self.view addSubview:contentLab];
     
     UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(contentLab.frame)+78*HEIGHT/960, WIDTH, 38*HEIGHT/960)];
     moneyLab.text=@"恭喜您，获得";
-    moneyLab.textAlignment=1;
+    moneyLab.textAlignment=NSTextAlignmentCenter;
 //    moneyLab.font=[UIFont systemFontOfSize:20*HEIGHT/960];
 
     

@@ -128,15 +128,11 @@
         footerView.backgroundColor=APP_PAGE_COLOR;
         logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,140, footerView.bounds.size.width-20, 40)];
 
-    }
-    
-    if (IS_IPHONE_6) {
+    } else if (IS_IPHONE_6) {
         footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
         footerView.backgroundColor=APP_PAGE_COLOR;
         logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,footerView.frame.size.height-60, footerView.bounds.size.width-20, 40)];
-    }
-    
-    if (IS_IPHONE_5) {
+    } else {
         footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 140)];
         footerView.backgroundColor=APP_PAGE_COLOR;
         logoutBtn = [[UIButton alloc] initWithFrame:CGRectMake(10,footerView.frame.size.height-90, footerView.bounds.size.width-20, 40)];
@@ -228,6 +224,10 @@
     self.orderDetail.content = cell.contentTextView.text;
     if (self.orderDetail.content.length < 1) {
         [SVProgressHUD showErrorWithStatus:@"请输入红包寄语"];
+        return;
+    }
+    if (self.orderDetail.content.length > 80) {
+        [SVProgressHUD showErrorWithStatus:@"最多输入80个文字"];
         return;
     }
     

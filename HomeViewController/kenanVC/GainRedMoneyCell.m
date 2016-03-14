@@ -39,7 +39,8 @@
         _timeLab.font=[UIFont systemFontOfSize:0.025*HEIGHT];
         [self.contentView addSubview:_timeLab];
         
-        _moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0.8*WIDTH, 0.02*HEIGHT, 0.2*WIDTH-10, 0.04*HEIGHT)];
+        _moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0.7*WIDTH, 0.02*HEIGHT, 0.3*WIDTH-10, 0.04*HEIGHT)];
+        _moneyLab.adjustsFontSizeToFitWidth = YES;
         _moneyLab.font=[UIFont systemFontOfSize:0.03*HEIGHT];
         [self.contentView addSubview:_moneyLab];
         

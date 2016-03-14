@@ -141,7 +141,7 @@
     self.textView.keyboardType = UIKeyboardTypeDefault;
     self.textView.returnKeyType = UIReturnKeyDone;
     self.textView.editable = YES;
-    self.textView.textColor = COLOR(98, 98, 98);
+    self.textView.textColor = [UIColor blackColor];
     self.textView.font = [UIFont systemFontOfSize:16];
     [_scrollView addSubview:self.textView];
     _scrollView.contentSize = CGSizeMake(_scrollView.bounds.size.width, _scrollView.bounds.size.height+10);

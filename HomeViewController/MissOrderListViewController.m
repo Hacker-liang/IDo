@@ -67,9 +67,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MissOrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderListCell" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     OrderListModel *model = [self.dataSource objectAtIndex:indexPath.section];
     cell.orderDetail = model;
-    
     return cell;
 }
 
