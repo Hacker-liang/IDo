@@ -54,7 +54,7 @@
     
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-35, 30, 20, 20)];
 //    [btn setTitle:@"Rule" forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageNamed:@"RedRuleHelp"] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage imageNamed:@"redRuleHelp"] forState:UIControlStateNormal];
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     btn.titleLabel.font  = [UIFont systemFontOfSize:15.0];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
