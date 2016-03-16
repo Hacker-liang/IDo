@@ -207,6 +207,7 @@
         contentLab.text=_redIdList[0][@"content"];
         contentLab.numberOfLines=0;
         contentLab.textAlignment=1;
+        contentLab.adjustsFontSizeToFitWidth = YES;
         contentLab.font=[UIFont systemFontOfSize:16];
         contentLab.textColor=[UIColor whiteColor];
         [_redBgView addSubview:contentLab];

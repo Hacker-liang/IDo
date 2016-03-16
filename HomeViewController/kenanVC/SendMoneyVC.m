@@ -20,7 +20,7 @@
 #import "PayViewController.h"
 
 #import "RedRuleVC.h"
-@interface SendMoneyVC ()<UIActionSheetDelegate, ChangeLocationDelegate>
+@interface SendMoneyVC ()<UIActionSheetDelegate, ChangeLocationDelegate, UITextViewDelegate>
 
 @property (nonatomic ,strong) SendOrderDetailHeaderView *headerView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -224,10 +224,6 @@
     self.orderDetail.content = cell.contentTextView.text;
     if (self.orderDetail.content.length < 1) {
         [SVProgressHUD showErrorWithStatus:@"请输入红包寄语"];
-        return;
-    }
-    if (self.orderDetail.content.length > 80) {
-        [SVProgressHUD showErrorWithStatus:@"最多输入80个文字"];
         return;
     }
     
@@ -462,7 +458,8 @@
     if (indexPath.row == 1 && indexPath.section == 1) {
         OrderContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderContentCell" forIndexPath:indexPath];
         cell.indicateImageView.image = [UIImage imageNamed: imageName];
-        cell.placeholderTextField.text=@"请输入您的红包寄语...";
+        cell.placeholderTextField.text = @"请输入您的红包寄语...";
+        cell.isSendRed = YES;
         cell.accessoryType = UITableViewCellAccessoryNone;
         
         return cell;

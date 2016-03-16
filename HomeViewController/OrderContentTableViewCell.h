@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *indicateImageView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 
+@property (nonatomic) BOOL isSendRed;  //是否是发送红包
 @end

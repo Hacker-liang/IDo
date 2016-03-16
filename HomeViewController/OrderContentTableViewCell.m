@@ -48,12 +48,30 @@
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
 {
-    if ([text isEqualToString:@"\n"]) {
+    if (_isSendRed) {
+        if ([text isEqualToString:@"\n"]) {
+            
+            [self.contentTextView resignFirstResponder];
+            return NO;
+        }
+        if (textView.text.length > 100 && text.length) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"红包寄语最多输入100个字" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                
+            }];
+            return NO;
+        }
+        return YES;
         
-        [self.contentTextView resignFirstResponder];
-        return NO;
+    } else {
+        if ([text isEqualToString:@"\n"]) {
+            
+            [self.contentTextView resignFirstResponder];
+            return NO;
+        }
+        return YES;
     }
-    return YES;
+    
 }
 
 

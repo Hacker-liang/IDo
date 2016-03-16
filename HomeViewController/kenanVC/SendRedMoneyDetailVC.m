@@ -135,11 +135,12 @@
     nameLab.textColor=[UIColor blackColor];
     [_headView addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 62*HEIGHT/960)];
-    contentLab.font=[UIFont systemFontOfSize:28*HEIGHT/960];
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 60)];
+    contentLab.font=[UIFont systemFontOfSize:15];
     contentLab.text=[NSString stringWithFormat:@"%@",_content];
     contentLab.textColor=[UIColor lightGrayColor];
     contentLab.textAlignment=1;
+    contentLab.adjustsFontSizeToFitWidth = YES;
     contentLab.numberOfLines=0;
     [_headView addSubview:contentLab];
     
@@ -188,6 +189,7 @@
 -(void)creatUI
 {
     _sendRedMoneyTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
+    _sendRedMoneyTab.allowsSelection = NO;
     _sendRedMoneyTab.delegate=self;
     _sendRedMoneyTab.dataSource=self;
     _sendRedMoneyTab.separatorStyle=0;

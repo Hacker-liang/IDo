@@ -72,6 +72,7 @@
     contentLab.numberOfLines=0;
     contentLab.font=[UIFont systemFontOfSize:16];
     contentLab.textAlignment=NSTextAlignmentCenter;
+    contentLab.adjustsFontSizeToFitWidth = YES;
     [self.view addSubview:contentLab];
     
     UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(contentLab.frame)+78*HEIGHT/960, WIDTH, 38*HEIGHT/960)];
