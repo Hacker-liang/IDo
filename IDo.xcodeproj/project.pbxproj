@@ -2624,7 +2624,7 @@
 				TargetAttributes = {
 					D95394E11BB2694900CB6746 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = D8ME4YHUXS;
+						DevelopmentTeam = 938EMAYW6W;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -3160,7 +3160,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9d090e72-559d-48c6-b1aa-d6880427fb96";
+				PROVISIONING_PROFILE = "552007c5-5131-411a-86fc-8c208513f8f4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3198,7 +3198,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "cef79648-34e2-420b-863d-e3dc475580db";
+				PROVISIONING_PROFILE = "117fbb33-0460-4584-a2db-92c5178c9995";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3236,9 +3236,9 @@
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
+				PRODUCT_BUNDLE_IDENTIFIER = COM.ACEEASYG.XIAOYIXIU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9d090e72-559d-48c6-b1aa-d6880427fb96";
+				PROVISIONING_PROFILE = "552007c5-5131-411a-86fc-8c208513f8f4";
 			};
 			name = Debug;
 		};
@@ -3274,9 +3274,9 @@
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
+				PRODUCT_BUNDLE_IDENTIFIER = COM.ACEEASYG.XIAOYIXIU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cef79648-34e2-420b-863d-e3dc475580db";
+				PROVISIONING_PROFILE = "117fbb33-0460-4584-a2db-92c5178c9995";
 			};
 			name = Release;
 		};
