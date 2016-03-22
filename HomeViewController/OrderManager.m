@@ -166,12 +166,13 @@
     
     [SVHTTPRequest POST:url1 parameters:mDict1 completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 //        NSLog(@"还有多少个红包没有抢");
-        NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"还有多少个红包没有抢,%@",resultDic);
-        NSArray *RedMoneyList=resultDic[@"data"];
-        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-        [userDefaults setObject:RedMoneyList forKey:@"RedMoneyList"];
-        
+        if (response) {
+            NSDictionary *resultDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
+            //        NSLog(@"还有多少个红包没有抢,%@",resultDic);
+            NSArray *RedMoneyList=resultDic[@"data"];
+            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:RedMoneyList forKey:@"RedMoneyList"];
+        }
     }];
     
 }

@@ -11,9 +11,13 @@
 #import "MyOrderRootViewController.h"
 #import "HomeViewController.h"
 #import "APService.h"
+#import "WXApi.h"
+
 @interface PayViewController ()
 
 @property (nonatomic) BOOL isPayWithAccountRemainingMoney;  //通过账户余额支付
+@property (nonatomic) BOOL isPayWithAliPay;  //通过支付宝支付
+
 @property (nonatomic, strong) UIButton *remainMoneyButton;
 
 @end
@@ -39,6 +43,7 @@
             [self.payTab reloadData];
         }
     }];
+    _isPayWithAliPay = YES;
     // Do any additional setup after loading the view.
     self.title = @"支付";
 //    Appdelegate.viewisWhere = PiePayView;
@@ -114,9 +119,9 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if ([price floatValue]<=[[UserManager shareUserManager].userInfo.wallet.remainingMoney floatValue]) {
-        return 2;
+        return 3;
     }
-    return 1;
+    return 2;
 }
 
 
@@ -157,7 +162,7 @@
         titleLab.backgroundColor = [UIColor clearColor];
         [cell addSubview:titleLab];
         
-        if (indexPath.section == 1) {
+        if (indexPath.section == 2) {
             UIButton *checkBox = [[UIButton alloc] initWithFrame:CGRectMake(kWindowWidth-30, 15, 15, 15)];
             checkBox.tag = 100;
             checkBox.userInteractionEnabled = NO;
@@ -179,7 +184,7 @@
     }
     
     if (indexPath.section == 0) {
-        if (!_isPayWithAccountRemainingMoney) {
+        if (_isPayWithAliPay) {
             cell.accessoryType=UITableViewCellAccessoryCheckmark;
         } else {
             cell.accessoryType=UITableViewCellAccessoryNone;
@@ -189,6 +194,18 @@
         imageView.image = [UIImage imageNamed:@"ali_pay.png"];
         UILabel *titleLab = (UILabel*)[cell viewWithTag:991];
         titleLab.text = @"使用支付宝支付";
+        
+    } else if (indexPath.section == 1) {
+        if (!_isPayWithAliPay && !_isPayWithAccountRemainingMoney) {
+            cell.accessoryType=UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType=UITableViewCellAccessoryNone;
+        }
+        
+        UIImageView *imageView = (UIImageView*)[cell viewWithTag:990];
+        imageView.image = [UIImage imageNamed:@"icon_pay_wechat.png"];
+        UILabel *titleLab = (UILabel*)[cell viewWithTag:991];
+        titleLab.text = @"使用微信支付";
         
     } else {
         cell.accessoryType=UITableViewCellAccessoryNone;
@@ -239,13 +256,19 @@
 
 - (void)tableView:(UITableView *)tableViews didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         _remainMoneyButton.selected = !_remainMoneyButton.selected;
         _isPayWithAccountRemainingMoney = _remainMoneyButton.isSelected;
         [self.payTab reloadData];
     }
     if (indexPath.section == 0) {
         _isPayWithAccountRemainingMoney = NO;
+        _isPayWithAliPay = YES;
+        [self.payTab reloadData];
+    }
+    if (indexPath.section == 1) {
+        _isPayWithAccountRemainingMoney = NO;
+        _isPayWithAliPay = NO;
         [self.payTab reloadData];
     }
 }
@@ -254,8 +277,10 @@
 {
     if (_isPayWithAccountRemainingMoney) {
         [self payWithAccountWallet];
-    } else {
+    } else if (_isPayWithAliPay){
         [self getAlipayInfoFromServer];
+    } else {
+        [self getWechatPayInfoFromServer];
     }
 }
 
@@ -347,6 +372,65 @@
     
 }
 
+-(void)getWechatPayInfoFromServer
+{
+    [SVProgressHUD showWithStatus:@"正在付款"];
+    NSString *url = [NSString stringWithFormat:@"%@unifiedorder",baseUrl];
+    NSMutableDictionary*mDict = [NSMutableDictionary dictionary];
+    if (self.isRedMoney) {
+        [mDict setObject:_redEnvelopeId forKey:@"redEnvelopeId"];
+    }else
+    {
+        [mDict setObject:orderid forKey:@"orderId"];
+    }
+    
+    NSLog(@"微信支付%@%@",url,mDict);
+    [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (response)
+        {
+            NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [jsonString objectFromJSONString];
+            if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
+                if ([UserManager shareUserManager].isLogin) {
+                    [UserManager shareUserManager].userInfo = nil;
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"info"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                    [alertView showAlertViewWithCompleteBlock:^(NSInteger buttonIndex) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoError" object:nil];
+                    }];
+                }
+                return;
+            }
+            NSString *status = [NSString stringWithFormat:@"%@",dict[@"status"]];
+            if ([status isEqualToString:@"1"]) {
+                [self sendWechatPayRequest:dict[@"data"]];
+            }
+            else{
+                [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"支付失败，请稍后再试"];
+        }
+    }];
+}
+
+- (void)sendWechatPayRequest:(NSDictionary *)payInfo
+{
+    if (![WXApi isWXAppInstalled]) {
+        [SVProgressHUD showErrorWithStatus:@"您没有安装微信，请选择其他支付方式"];
+        return;
+    }
+    PayReq *request = [[PayReq alloc] init];
+    request.openID = [payInfo objectForKey:@"appid"];
+    request.partnerId = [payInfo objectForKey:@"partnerid"];
+    request.prepayId= [payInfo objectForKey:@"prepayid"];
+    request.package = [payInfo objectForKey:@"package_alia"];
+    request.nonceStr= [payInfo objectForKey:@"noncestr"];
+    request.timeStamp= (UInt32)[[payInfo objectForKey:@"timestamp"] longLongValue];
+    request.sign= [payInfo objectForKey:@"sign"];
+    [WXApi sendReq: request];
+}
 
 -(void)getAlipayInfoFromServer
 {

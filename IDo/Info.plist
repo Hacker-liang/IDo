@@ -60,6 +60,16 @@
 				<string>QQ41D85BA9</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wxpay</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wxa95578382cc9a58a</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>3</string>

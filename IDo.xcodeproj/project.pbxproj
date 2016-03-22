@@ -391,6 +391,11 @@
 		D9DB6EF71C3A186C00077E49 /* MissOrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DB6EF51C3A186C00077E49 /* MissOrderListTableViewCell.xib */; };
 		D9DB6EFB1C3A1F1000077E49 /* GrabOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB6EF91C3A1F1000077E49 /* GrabOrderListViewController.m */; };
 		D9DB6EFC1C3A1F1000077E49 /* GrabOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DB6EFA1C3A1F1000077E49 /* GrabOrderListViewController.xib */; };
+		D9F19FC81C9A617B00083848 /* icon_pay_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F19FC61C9A617B00083848 /* icon_pay_wechat@2x.png */; };
+		D9F19FCA1C9A61A600083848 /* icon_pay_wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F19FC91C9A61A600083848 /* icon_pay_wechat@3x.png */; };
+		D9F19FD01C9A837400083848 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F19FCC1C9A837400083848 /* libWeChatSDK.a */; };
+		D9F19FD11C9A837400083848 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = D9F19FCD1C9A837400083848 /* read_me.txt */; };
+		D9F19FD31C9A84C800083848 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F19FD21C9A84C800083848 /* libsqlite3.0.tbd */; };
 		D9FFD1DD1BE8E984001F2D94 /* pay_wogan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */; };
 		D9FFD1DE1BE8E984001F2D94 /* pay_wogan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */; };
 		D9FFD1E11BE8FBDE001F2D94 /* ic_pay_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */; };
@@ -1103,6 +1108,13 @@
 		D9DB6EF81C3A1F1000077E49 /* GrabOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabOrderListViewController.h; sourceTree = "<group>"; };
 		D9DB6EF91C3A1F1000077E49 /* GrabOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabOrderListViewController.m; sourceTree = "<group>"; };
 		D9DB6EFA1C3A1F1000077E49 /* GrabOrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrabOrderListViewController.xib; sourceTree = "<group>"; };
+		D9F19FC61C9A617B00083848 /* icon_pay_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pay_wechat@2x.png"; sourceTree = "<group>"; };
+		D9F19FC91C9A61A600083848 /* icon_pay_wechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pay_wechat@3x.png"; sourceTree = "<group>"; };
+		D9F19FCC1C9A837400083848 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		D9F19FCD1C9A837400083848 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		D9F19FCE1C9A837400083848 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		D9F19FCF1C9A837400083848 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		D9F19FD21C9A84C800083848 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@2x.png"; sourceTree = "<group>"; };
 		D9FFD1DC1BE8E984001F2D94 /* pay_wogan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay_wogan@3x.png"; sourceTree = "<group>"; };
 		D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_pay_check@2x.png"; sourceTree = "<group>"; };
@@ -1114,6 +1126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9F19FD31C9A84C800083848 /* libsqlite3.0.tbd in Frameworks */,
 				D9A15E7C1C26C090008CE530 /* libiconv.tbd in Frameworks */,
 				D9A15EC31C26D755008CE530 /* TencentOpenAPI.framework in Frameworks */,
 				D9A15E7A1C26B5D2008CE530 /* libsqlite3.tbd in Frameworks */,
@@ -1128,6 +1141,7 @@
 				D946C9211BC2CC6200AAD3A3 /* AMapSearchKit.framework in Frameworks */,
 				D9A15EB81C26D755008CE530 /* libUMSocial_Sdk_4.4.a in Frameworks */,
 				D953959F1BB273DA00CB6746 /* Security.framework in Frameworks */,
+				D9F19FD01C9A837400083848 /* libWeChatSDK.a in Frameworks */,
 				D9B28A001BBD811700FB97E5 /* UIKit.framework in Frameworks */,
 				D9A15EC21C26D755008CE530 /* libSocialQQ.a in Frameworks */,
 				D9B289FE1BBD810F00FB97E5 /* Foundation.framework in Frameworks */,
@@ -1393,6 +1407,8 @@
 		D92B5AD61BB8122A00E3AC93 /* Pay */ = {
 			isa = PBXGroup;
 			children = (
+				D9F19FC91C9A61A600083848 /* icon_pay_wechat@3x.png */,
+				D9F19FC61C9A617B00083848 /* icon_pay_wechat@2x.png */,
 				D9FFD1DF1BE8FBDE001F2D94 /* ic_pay_check@2x.png */,
 				D9FFD1E01BE8FBDE001F2D94 /* ic_pay_uncheck@2x.png */,
 				D9FFD1DB1BE8E984001F2D94 /* pay_wogan@2x.png */,
@@ -1539,6 +1555,7 @@
 		D95394D91BB2694900CB6746 = {
 			isa = PBXGroup;
 			children = (
+				D9F19FD21C9A84C800083848 /* libsqlite3.0.tbd */,
 				D9A15E7B1C26C090008CE530 /* libiconv.tbd */,
 				D9A15E791C26B5D2008CE530 /* libsqlite3.tbd */,
 				D95394E41BB2694900CB6746 /* IDo */,
@@ -1631,6 +1648,7 @@
 		D953951B1BB26D7F00CB6746 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D9F19FCB1C9A837400083848 /* WeChatSDK_1.5 */,
 				D9A15E901C26D755008CE530 /* UMSocial_Sdk_4.4 */,
 				D9A15EAB1C26D755008CE530 /* UMSocial_Sdk_Extra_Frameworks */,
 				D969D9D61BCCB22A00281D02 /* SVWebViewController */,
@@ -2557,6 +2575,18 @@
 			name = MissOrderList;
 			sourceTree = "<group>";
 		};
+		D9F19FCB1C9A837400083848 /* WeChatSDK_1.5 */ = {
+			isa = PBXGroup;
+			children = (
+				D9F19FCC1C9A837400083848 /* libWeChatSDK.a */,
+				D9F19FCD1C9A837400083848 /* read_me.txt */,
+				D9F19FCE1C9A837400083848 /* WXApi.h */,
+				D9F19FCF1C9A837400083848 /* WXApiObject.h */,
+			);
+			name = WeChatSDK_1.5;
+			path = ../../HomeViewController/WeChatSDK_1.5;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2769,6 +2799,7 @@
 				D969D9FD1BCCB22A00281D02 /* h5_labar_brush_default@3x.png in Resources */,
 				D96042C31BEA40F600E8EA93 /* icon_setting_rul_bg@3x.png in Resources */,
 				D969D9FF1BCCB22A00281D02 /* h5_labar_left_default@3x.png in Resources */,
+				D9F19FD11C9A837400083848 /* read_me.txt in Resources */,
 				D9DB6EEE1C396D2000077E49 /* MissOrderListViewController.xib in Resources */,
 				D916A5D41BC5684E005F5286 /* OtherUserProfileTableViewController.xib in Resources */,
 				D96EAA441BB5377100360ED8 /* icon_time@3x.png in Resources */,
@@ -2816,6 +2847,8 @@
 				D946C8FC1BC23B8200AAD3A3 /* remenbiaoqian01@2x.png in Resources */,
 				D9A15E8D1C26CA83008CE530 /* 分享04.png in Resources */,
 				D91F2F351BC21965002CE690 /* icon_setting_2@3x.png in Resources */,
+				D9F19FC81C9A617B00083848 /* icon_pay_wechat@2x.png in Resources */,
+				D9F19FCA1C9A61A600083848 /* icon_pay_wechat@3x.png in Resources */,
 				D96CC3A01BE04BDB00BDBCDD /* ChangeAlipayViewController.xib in Resources */,
 				D92B5C0A1BB8F3B600E3AC93 /* AlipaySDK.bundle in Resources */,
 				D998F6B61C335DAC00AB9F76 /* PushMessageTableViewCell.xib in Resources */,
@@ -3160,7 +3193,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9d090e72-559d-48c6-b1aa-d6880427fb96";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3234,11 +3267,12 @@
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_4.4",
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/HomeViewController/WeChatSDK_1.5",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9d090e72-559d-48c6-b1aa-d6880427fb96";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -3272,6 +3306,7 @@
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_4.4",
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/IDo/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/HomeViewController/WeChatSDK_1.5",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;

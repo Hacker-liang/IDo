@@ -11,24 +11,24 @@
 
 #ifdef __OBJC__
 
-//#define baseServer @"http://apitest.bjwogan.com/"
-//#define baseUrl @"http://apitest.bjwogan.com/?action="
+#define baseServer @"http://apitest.bjwogan.com/"
+#define baseUrl @"http://apitest.bjwogan.com/?action="
+
+#define kYzmURL @"http://apitest.bjwogan.com/SMS.php"
+#define severURL @"http://apitest.bjwogan.com/"
+
+#define uploadheadImgURL @"http://phototest.bjwogan.com/upload/upload.php"
+#define headURL @"http://phototest.bjwogan.com/image"
+
+
+//#define baseServer @"http://api.bjwogan.com/"
+//#define baseUrl @"http://api.bjwogan.com/?action="
 //
-//#define kYzmURL @"http://apitest.bjwogan.com/SMS.php"
-//#define severURL @"http://apitest.bjwogan.com/"
+//#define kYzmURL @"http://api.bjwogan.com/SMS.php"
+//#define severURL @"http://api.bjwogan.com/"
 //
-//#define uploadheadImgURL @"http://phototest.bjwogan.com/upload/upload.php"
-//#define headURL @"http://phototest.bjwogan.com/image"
-
-
-#define baseServer @"http://api.bjwogan.com/"
-#define baseUrl @"http://api.bjwogan.com/?action="
-
-#define kYzmURL @"http://api.bjwogan.com/SMS.php"
-#define severURL @"http://api.bjwogan.com/"
-
-#define uploadheadImgURL @"http://photo.bjwogan.com/upload/upload.php"
-#define headURL @"http://photo.bjwogan.com/image"
+//#define uploadheadImgURL @"http://photo.bjwogan.com/upload/upload.php"
+//#define headURL @"http://photo.bjwogan.com/image"
 
 /***** 设备信息 *****/
 
@@ -76,6 +76,8 @@
 #define SHARE_QQ_KEY            @ "pzZ3kvbtjCDdtQhL"
 
 #define LoginInfoMark @"LoginInfoMark"  //登录信息相关
+
+#define kOrderPayResultNoti @"orderPayResultNoti"  //微信支付结果
 
 #define OrderStatusChange @"OrderStatusChangeMark"  //订单状态改变
 #define OrderPieStatusChange @"OrderPieStatusChange"  ///派单状态改变

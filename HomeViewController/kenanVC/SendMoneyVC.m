@@ -304,7 +304,6 @@
             NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             NSDictionary *dict = [jsonString objectFromJSONString];
 //            NSLog(@"kenan kenan %@",dict);
-            _RedMoneyID=[dict objectForKey:@"data"][@"redId"];
 
             NSString *tempStatus = [NSString stringWithFormat:@"%@",dict[@"status"]];
             if ([[dict objectForKey:@"status"] integerValue] == 30001 || [[dict objectForKey:@"status"] integerValue] == 30002) {
@@ -318,6 +317,7 @@
                 return;
             }
             if([tempStatus integerValue] == 1) {
+                _RedMoneyID=[dict objectForKey:@"data"][@"redId"];
 //                [self sendOrderPushWithRedId:_RedMoneyID];
                 if (_headerView.vipContentView.hidden) {
                     [SVProgressHUD showSuccessWithStatus:@"派单成功"];

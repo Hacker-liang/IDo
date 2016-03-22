@@ -20,7 +20,7 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
-
+#import "WXApi.h"
 #import "SendRedMoneyDetailVC.h"
 
 @interface AppDelegate ()
@@ -47,10 +47,16 @@
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"payErrorNotification" object:nil];
             }
         }];
-    }
-    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
+    } else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
         }];
+    } else {
+        BOOL result = [UMSocialSnsService handleOpenURL:url];
+        if (!result) {
+            result = [WXApi handleOpenURL:url delegate:self];
+        }
+        
+        return  result;
     }
     
     return YES;
@@ -104,7 +110,8 @@
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:SHARE_WEIXIN_APPID appSecret:SHARE_WEIXIN_SECRET url:@"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&"];
     [UMSocialQQHandler setQQWithAppId:SHARE_QQ_APPID appKey:SHARE_QQ_KEY url:@"http://m.bjwogan.com/pc/?url=/88/69/p273666462a14ab&"];
-
+    
+    [WXApi registerApp:@"wxa95578382cc9a58a" withDescription:@"wogan"];
     
     return YES;
 }
@@ -246,7 +253,6 @@
         
         NSMutableDictionary *mDict=  [[NSMutableDictionary alloc] init];
         [mDict safeSetObject:_userId forKey:@"memberid"];
-        [mDict setObject:@"0" forKey:@"content"];
         
         [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
             if (response) {
@@ -733,6 +739,30 @@
         }];
     }
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (!result) {
+        result = [WXApi handleOpenURL:url delegate:self];
+    }
+    return  result;
+}
+
+// WXApiDelegate的代理方法
+- (void)onResp:(BaseResp *)resp
+{
+    //微信支付信息，，
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *payResp = (PayResp *)resp;
+        if (payResp.errCode == 0) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"paySuccessNotification" object:nil];
+        }else{
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"payErrorNotification" object:nil];
+        }
+    }
+}
+
 
 
 @end
