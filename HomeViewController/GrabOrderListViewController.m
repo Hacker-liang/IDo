@@ -203,12 +203,11 @@
         nameLab.textColor=[UIColor whiteColor];
         [_redBgView addSubview:nameLab];
         
-        UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, 257*HEIGHT/960, 520*WIDTH/640-0.1*WIDTH, 60)];
+        UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0.05*WIDTH, 257*HEIGHT/960, 520*WIDTH/640-0.1*WIDTH, 90)];
         contentLab.text=_redIdList[0][@"content"];
         contentLab.numberOfLines=0;
         contentLab.textAlignment=1;
-        contentLab.adjustsFontSizeToFitWidth = YES;
-        contentLab.font=[UIFont systemFontOfSize:16];
+        contentLab.font=[UIFont systemFontOfSize:15];
         contentLab.textColor=[UIColor whiteColor];
         [_redBgView addSubview:contentLab];
         
