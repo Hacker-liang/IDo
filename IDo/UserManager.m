@@ -84,7 +84,6 @@
 
     NSMutableDictionary *mDict=  [[NSMutableDictionary alloc] init];
     [mDict safeSetObject:_userInfo.userid forKey:@"memberid"];
-    [mDict setObject:@"0" forKey:@"content"];
     
     [SVHTTPRequest POST:url parameters:mDict completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (response) {
