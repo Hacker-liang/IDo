@@ -67,7 +67,7 @@
     nameLab.font=[UIFont systemFontOfSize:34*HEIGHT/960];
     [self.view addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(8, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH-16, 80)];
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(8, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH-16, 90)];
     contentLab.text=[NSString stringWithFormat:@"%@",_redResultDic[@"content"]];
     contentLab.numberOfLines=0;
     contentLab.font=[UIFont systemFontOfSize:15];

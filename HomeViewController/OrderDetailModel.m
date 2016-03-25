@@ -124,6 +124,10 @@
                 _orderStatus = kOrderCancelGrabTimeOut;
                 _orderStatusDesc = @"无人抢单,已取消";
 
+            } else  if ([[json objectForKey:@"tomemberid"] intValue] == 1) {
+                _orderStatus = kOrderCancelGrabTimeOut;
+                _orderStatusDesc = @"发单人已取消任务";
+                
             } else  if ([[json objectForKey:@"haspay"] intValue] == 1) {
                 _orderStatus = kOrderCancelDispute;
                 _orderStatusDesc = @"订单纠纷,已取消";

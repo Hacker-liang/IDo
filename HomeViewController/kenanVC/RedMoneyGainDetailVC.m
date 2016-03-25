@@ -90,12 +90,13 @@
     nameLab.textColor=[UIColor blackColor];
     [self.view addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(8, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH-16, 80)];
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(8, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH-16, 90)];
     contentLab.text=_contentStr;
     contentLab.textAlignment=1;
     contentLab.numberOfLines = 0;
     contentLab.font=[UIFont systemFontOfSize:15];
     contentLab.textColor=[UIColor blackColor];
+    contentLab.adjustsFontSizeToFitWidth = YES;
     [self.view addSubview:contentLab];
     
     UILabel *moneyLab=[[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(contentLab.frame)+78*HEIGHT/960, WIDTH, 0.05*HEIGHT)];
