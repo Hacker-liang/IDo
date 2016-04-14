@@ -257,6 +257,7 @@
 - (void)tableView:(UITableView *)tableViews didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 2) {
+        _isPayWithAliPay = NO;
         _remainMoneyButton.selected = !_remainMoneyButton.selected;
         _isPayWithAccountRemainingMoney = _remainMoneyButton.isSelected;
         [self.payTab reloadData];

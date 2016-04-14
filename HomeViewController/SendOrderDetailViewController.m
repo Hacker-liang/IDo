@@ -184,7 +184,7 @@
         url = [NSString stringWithFormat:@"%@surepublishorder",baseUrl];
         [mDict safeSetObject:[UserManager shareUserManager].userInfo.userid forKey:@"frommemberid"];
         [mDict safeSetObject:_orderDetail.content forKey:@"content"];
-        [mDict safeSetObject:@"0.01" forKey:@"money"];
+        [mDict safeSetObject:_orderDetail.price forKey:@"money"];
         [mDict safeSetObject:_orderDetail.tasktime forKey:@"timelength"];
         [mDict safeSetObject:_orderDetail.address forKey:@"serviceaddress"];
         [mDict safeSetObject:[UserManager shareUserManager].userInfo.districtid forKey:@"districtid"];

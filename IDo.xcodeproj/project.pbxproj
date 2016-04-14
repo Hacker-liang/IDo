@@ -20,7 +20,6 @@
 		BBB5995E1C57676B00F77E2E /* HowToSendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB5995D1C57676B00F77E2E /* HowToSendVC.m */; };
 		BBB599611C57678600F77E2E /* HotOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB599601C57678600F77E2E /* HotOrderVC.m */; };
 		BBB599631C576B0D00F77E2E /* howtosend.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBB599621C576B0D00F77E2E /* howtosend.jpg */; };
-		BBB599661C57948400F77E2E /* SendRedMoneyDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB599651C57948400F77E2E /* SendRedMoneyDetailVC.m */; };
 		BBB599691C57994600F77E2E /* SendRedMoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB599681C57994600F77E2E /* SendRedMoneyDetailCell.m */; };
 		BBB5996C1C57996100F77E2E /* SendMoneyDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB5996B1C57996100F77E2E /* SendMoneyDetailModel.m */; };
 		BBB83A241C4C7C0800D3C9D0 /* SendRedMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB83A231C4C7C0800D3C9D0 /* SendRedMoneyCell.m */; };
@@ -346,6 +345,7 @@
 		D9A15EC61C26D755008CE530 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A15EB31C26D755008CE530 /* libWeChatSDK.a */; };
 		D9ADC3F91BBA603100B1B7E1 /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ADC3F61BBA603100B1B7E1 /* RatingBar.m */; };
 		D9ADC4011BBA670A00B1B7E1 /* CWStarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ADC3FE1BBA670A00B1B7E1 /* CWStarRateView.m */; };
+		D9ADFA8A1CB7553E0010296F /* SendRedMoneyDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ADFA891CB7553E0010296F /* SendRedMoneyDetailVC.m */; };
 		D9B289D21BBCDBA800FB97E5 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B289D11BBCDBA800FB97E5 /* WalletModel.m */; };
 		D9B289D51BBCE39400FB97E5 /* DealDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B289D41BBCE39400FB97E5 /* DealDetailViewController.m */; };
 		D9B289D81BBCE3E500FB97E5 /* UIPullRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B289D71BBCE3E500FB97E5 /* UIPullRefreshViewController.m */; };
@@ -445,7 +445,6 @@
 		BBB599601C57678600F77E2E /* HotOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotOrderVC.m; sourceTree = "<group>"; };
 		BBB599621C576B0D00F77E2E /* howtosend.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = howtosend.jpg; sourceTree = "<group>"; };
 		BBB599641C57948400F77E2E /* SendRedMoneyDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendRedMoneyDetailVC.h; sourceTree = "<group>"; };
-		BBB599651C57948400F77E2E /* SendRedMoneyDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyDetailVC.m; sourceTree = "<group>"; };
 		BBB599671C57994600F77E2E /* SendRedMoneyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendRedMoneyDetailCell.h; sourceTree = "<group>"; };
 		BBB599681C57994600F77E2E /* SendRedMoneyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyDetailCell.m; sourceTree = "<group>"; };
 		BBB5996A1C57996100F77E2E /* SendMoneyDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMoneyDetailModel.h; sourceTree = "<group>"; };
@@ -1042,6 +1041,7 @@
 		D9ADC3F61BBA603100B1B7E1 /* RatingBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingBar.m; sourceTree = "<group>"; };
 		D9ADC3FD1BBA670A00B1B7E1 /* CWStarRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStarRateView.h; sourceTree = "<group>"; };
 		D9ADC3FE1BBA670A00B1B7E1 /* CWStarRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStarRateView.m; sourceTree = "<group>"; };
+		D9ADFA891CB7553E0010296F /* SendRedMoneyDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendRedMoneyDetailVC.m; sourceTree = "<group>"; };
 		D9B289D01BBCDBA800FB97E5 /* WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
 		D9B289D11BBCDBA800FB97E5 /* WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
 		D9B289D31BBCE39400FB97E5 /* DealDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealDetailViewController.h; sourceTree = "<group>"; };
@@ -1227,7 +1227,7 @@
 				BBB83A281C4C87D700D3C9D0 /* SendRedMoneyModel.h */,
 				BBB83A291C4C87D800D3C9D0 /* SendRedMoneyModel.m */,
 				BBB599641C57948400F77E2E /* SendRedMoneyDetailVC.h */,
-				BBB599651C57948400F77E2E /* SendRedMoneyDetailVC.m */,
+				D9ADFA891CB7553E0010296F /* SendRedMoneyDetailVC.m */,
 				BBB599671C57994600F77E2E /* SendRedMoneyDetailCell.h */,
 				BBB599681C57994600F77E2E /* SendRedMoneyDetailCell.m */,
 				BBB5996A1C57996100F77E2E /* SendMoneyDetailModel.h */,
@@ -2990,7 +2990,6 @@
 				D946C8F01BC2228300AAD3A3 /* CityCardReusableView.m in Sources */,
 				D916A5BC1BC4E77D005F5286 /* ComplaintViewController.m in Sources */,
 				D96EA9CF1BB3D24700360ED8 /* SDWebImageManager.m in Sources */,
-				BBB599661C57948400F77E2E /* SendRedMoneyDetailVC.m in Sources */,
 				D96EA9CA1BB3D24700360ED8 /* SDImageCache.m in Sources */,
 				D998F6B51C335DAC00AB9F76 /* PushMessageTableViewCell.m in Sources */,
 				D99EAD0A1BBA8213005A02D3 /* ASIFormDataRequest.m in Sources */,
@@ -3026,6 +3025,7 @@
 				D946C8F91BC23B2900AAD3A3 /* HotTagTableViewCell.m in Sources */,
 				D96EA9FE1BB3F46C00360ED8 /* SVHTTPClient.m in Sources */,
 				D96EAA2B1BB5230000360ED8 /* SendOrderDetailViewController.m in Sources */,
+				D9ADFA8A1CB7553E0010296F /* SendRedMoneyDetailVC.m in Sources */,
 				D96EAA2E1BB523D900360ED8 /* SendOrderDetailHeaderView.m in Sources */,
 				D9B289D51BBCE39400FB97E5 /* DealDetailViewController.m in Sources */,
 				D969DA051BCCB22A00281D02 /* SVWebViewController.m in Sources */,
@@ -3231,7 +3231,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "7624c60d-1d67-445f-b0ec-966d98dde0e6";
+				PROVISIONING_PROFILE = "2b20d314-de23-4e81-865f-2ea850b21ca2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3311,7 +3311,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Yinengxing.xianne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7624c60d-1d67-445f-b0ec-966d98dde0e6";
+				PROVISIONING_PROFILE = "2b20d314-de23-4e81-865f-2ea850b21ca2";
 			};
 			name = Release;
 		};

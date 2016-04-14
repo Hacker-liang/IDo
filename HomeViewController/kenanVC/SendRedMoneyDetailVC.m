@@ -128,6 +128,7 @@
     [headImage sd_setImageWithURL:[NSURL URLWithString:_headImage] placeholderImage:[UIImage imageNamed:@"ic_avatar_default.png"]];
     [_headView addSubview:headImage];
     
+    
     UILabel *nameLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headImage.frame)+20*HEIGHT/960, WIDTH, 34*HEIGHT/960)];
     nameLab.text=[NSString stringWithFormat:@"%@的红包",_name];
     nameLab.textAlignment=1;
@@ -135,8 +136,9 @@
     nameLab.textColor=[UIColor blackColor];
     [_headView addSubview:nameLab];
     
-    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(nameLab.frame)+20*HEIGHT/960, WIDTH, 60)];
-    contentLab.font=[UIFont systemFontOfSize:15];
+    
+    UILabel *contentLab=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headImage.frame)+20*HEIGHT/960+34*HEIGHT/960+1, WIDTH, 60)];
+    contentLab.font=[UIFont systemFontOfSize:11];
     contentLab.text=[NSString stringWithFormat:@"%@",_content];
     contentLab.textColor=[UIColor lightGrayColor];
     contentLab.textAlignment=1;
@@ -171,9 +173,10 @@
             break;
     }
     
+
     UILabel *infoLab=[[UILabel alloc]initWithFrame:CGRectMake(10, 420*HEIGHT/960, WIDTH-20, 80*HEIGHT/960)];
     infoLab.numberOfLines=0;
-    infoLab.font=[UIFont systemFontOfSize:25*HEIGHT/960];
+    infoLab.font=[UIFont systemFontOfSize:23*HEIGHT/960];
     double moneyGrab=[_moneyGrab doubleValue];
     double totalMoney=[_totalMoney doubleValue];
     infoLab.text=[NSString stringWithFormat:@"%@%@/%@个,共%0.2f/%0.2f元",statu,_DetailGrabCount,_count,moneyGrab,totalMoney];
